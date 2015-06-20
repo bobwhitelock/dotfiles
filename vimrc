@@ -1,9 +1,12 @@
+" Load pathogen and plugins.
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+
 :set expandtab
 :set tabstop=2
 :set background=dark
 :colorscheme default
 
-"call pathogen#infect() " TODO add back in this highlighting
 syntax enable
 filetype plugin indent on
 

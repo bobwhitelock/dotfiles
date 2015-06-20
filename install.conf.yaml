@@ -8,6 +8,9 @@
     ~/.bash_aliases: bash_aliases
     ~/.gitconfig: gitconfig
     ~/.vimrc: vimrc
+    ~/.vim:
+        path: vim/
+        create: true
     ~/.conkyrc: conkyrc
     ~/.screenrc: screenrc
     ~/bin:
