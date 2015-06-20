@@ -19,5 +19,7 @@
     ~/.config/tint2:
         path: config/tint2/
         create: true
-
+    ~/.config/sublime-text-2/Packages/User:
+        path: config/sublime-text-2/Packages/User
+        create: true
 

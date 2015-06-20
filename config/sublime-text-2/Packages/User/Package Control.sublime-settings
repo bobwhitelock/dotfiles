@@ -1,0 +1,13 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Better CoffeeScript",
+		"Haml",
+		"Package Control",
+		"Ruby Debugger",
+		"SCSS"
+	]
+}
