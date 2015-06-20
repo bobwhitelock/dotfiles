@@ -1,0 +1,20 @@
+- clean: ['~']
+
+- link:
+    ~/.profile: profile
+    ~/.bash_profile: bash_profile
+    ~/.bashrc: bashrc
+    ~/.bash_logout: bash_logout
+    ~/.gitconfig: gitconfig
+    ~/.vimrc: vimrc
+    ~/bin:
+        path: bin/
+        create: true
+    ~/.config/openbox:
+        path: config/openbox/
+        create: true
+    ~/.config/tint2:
+        path: config/tint2/
+        create: true
+
+
