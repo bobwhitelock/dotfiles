@@ -1,11 +1,13 @@
+
+
 - clean: ['~']
 
 - link:
-    ~/.profile: profile
-    ~/.bash_profile: bash_profile
-    ~/.bashrc: bashrc
-    ~/.bash_logout: bash_logout
-    ~/.bash_aliases: bash_aliases
+    ~/.profile: profile.sh
+    ~/.bash_profile: bash_profile.sh
+    ~/.bashrc: bashrc.sh
+    ~/.bash_logout: bash_logout.sh
+    ~/.bash_aliases: bash_aliases.sh
     ~/.gitconfig: gitconfig
     ~/.vimrc: vimrc
     ~/.vim:
