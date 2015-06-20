@@ -13,6 +13,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+# Dotfiles aliases.
+alias dot='~/.dotfiles/install'
+alias dotconf='vim ~/.dotfiles/install.conf.yaml'
+
 function launch() {
   ("$@" &> /dev/null &)
 }
