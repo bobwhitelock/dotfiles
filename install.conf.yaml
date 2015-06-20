@@ -9,6 +9,7 @@
     ~/.gitconfig: gitconfig
     ~/.vimrc: vimrc
     ~/.conkyrc: conkyrc
+    ~/.screenrc: screenrc
     ~/bin:
         path: bin/
         create: true

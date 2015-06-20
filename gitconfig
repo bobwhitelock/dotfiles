@@ -1,3 +1,7 @@
 [user]
 	email = bob.whitelock1@gmail.com
 	name = Bob Whitelock
+[core]
+  editor = vim
+[push]
+  default = simple
