@@ -106,5 +106,7 @@ fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+export PATH="$PATH:$HOME/bin"
+
 # Let git find repos split across filesystems.
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
