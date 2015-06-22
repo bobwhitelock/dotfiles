@@ -9,3 +9,5 @@
 	helper = cache --timeout=3600
 [alias]
 	amend = commit --amend -C HEAD
+[color]
+	ui = true
