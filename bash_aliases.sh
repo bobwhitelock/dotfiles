@@ -18,16 +18,19 @@ alias dot='~/.dotfiles/install'
 alias dotconf='vim ~/.dotfiles/install.conf.yaml'
 
 # Git aliases (copied from holman dot files, TODO look at.
-alias gl='git pull --prune'
+alias g='git'
+alias gp='git push'
+alias gpl='git pull --prune'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-alias gp='git push origin HEAD'
 alias gd='git diff'
 alias gg='git grep'
+alias gbl='git blame'
+alias gst='git stash'
 alias gc='git commit'
 alias gca='git commit -a'
 alias ga='git add'
 alias gco='git checkout'
-alias gcb='git copy-branch-name'
+alias gcb='git copy-branch-name' # TODO does not exist
 alias gb='git branch'
 alias gs='git status -sb'
 
