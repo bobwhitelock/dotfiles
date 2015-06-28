@@ -1,5 +1,7 @@
 {
+	"auto_complete_commit_on_tab": true,
 	"color_scheme": "Packages/Color Scheme - Default/Cobalt.tmTheme",
+	"font_size": 10,
 	"ignored_packages":
 	[
 		"Vintage"
@@ -9,6 +11,5 @@
 		80
 	],
 	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true,
-	"auto_complete_commit_on_tab" : true
+	"trim_trailing_white_space_on_save": true
 }
