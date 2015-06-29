@@ -1,6 +1,7 @@
 {
 	"extensions":
 	[
-		"xhaml"
+		"xhaml",
+		"erb"
 	]
 }
