@@ -16,3 +16,6 @@
 [submodule "vim/bundle/vim-sensible"]
 	path = vim/bundle/vim-sensible
 	url = git://github.com/tpope/vim-sensible.git
+[submodule "vim/bundle/vim-io"]
+	path = vim/bundle/vim-io
+	url = https://github.com/andreimaxim/vim-io
