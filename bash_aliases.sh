@@ -13,6 +13,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+function cl() {
+    cd "$@" && l
+}
+
 # Dotfiles aliases.
 alias dot='~/.dotfiles/install'
 alias dotconf='vim ~/.dotfiles/install.conf.yaml'
