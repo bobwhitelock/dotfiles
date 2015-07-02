@@ -17,6 +17,8 @@ function cl() {
     cd "$@" && l
 }
 
+alias tf='tail -f'
+
 # Dotfiles aliases.
 alias dot='~/.dotfiles/install'
 alias dotconf='vim ~/.dotfiles/install.conf.yaml'
