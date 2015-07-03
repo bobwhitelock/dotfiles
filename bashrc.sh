@@ -108,3 +108,6 @@ export PATH="$PATH:$HOME/bin"
 
 # Let git find repos split across filesystems.
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
+
+setxkbmap gb
+
