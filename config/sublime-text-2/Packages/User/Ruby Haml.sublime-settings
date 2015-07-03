@@ -3,5 +3,6 @@
 	[
 		"xhaml",
 		"erb"
-	]
+	],
+    "tab_size": 2
 }
