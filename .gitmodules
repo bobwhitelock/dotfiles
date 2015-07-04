@@ -19,3 +19,6 @@
 [submodule "vim/bundle/vim-io"]
 	path = vim/bundle/vim-io
 	url = https://github.com/andreimaxim/vim-io
+[submodule "vim/bundle/nerdcommenter"]
+	path = vim/bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter
