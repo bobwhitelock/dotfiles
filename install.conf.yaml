@@ -15,6 +15,7 @@
         create: true
     ~/.conkyrc: conkyrc
     ~/.screenrc: screenrc
+    ~/.psqlrc: psqlrc
     ~/bin:
         path: bin/
         create: true
