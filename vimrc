@@ -4,8 +4,11 @@ call pathogen#infect()
 
 :set expandtab
 :set tabstop=2
+:set shiftwidth=2
 :set background=dark
 :colorscheme default
+
+autocmd Filetype sh setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 syntax enable
 filetype plugin indent on
