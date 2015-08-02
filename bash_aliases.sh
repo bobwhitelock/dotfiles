@@ -3,6 +3,7 @@ alias pyserver="python -m SimpleHTTPServer 8000"
 
 alias pvm='sshpass -p alces ssh portalvm'
 
+complete -A command ds
 function ds() {
   # for 'detached screen'; launches screen for command with same name as command
   screen -d -m -S "$@" "$@"
