@@ -42,6 +42,13 @@ alias gcb='git copy-branch-name' # TODO does not exist
 alias gb='git branch'
 alias gs='git status -sb'
 
+# Portal aliases.
+alias pscreen='cd ~/alces-portal && screen -dr portal'
+alias plog='cd ~/alces-portal && tail -f log/development.log'
+alias pconsole='cd ~/alces-portal && bin/rails console'
+alias ppostgres='cd ~/alces-portal && psql portal'
+alias pdir='cd ~/alces-portal'
+
 function launch() {
   ("$@" &> /dev/null &)
 }
