@@ -22,3 +22,6 @@
 [submodule "vim/bundle/nerdcommenter"]
 	path = vim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter
+[submodule "vim/bundle/nginx-vim-syntax"]
+	path = vim/bundle/nginx-vim-syntax
+	url = https://github.com/evanmiller/nginx-vim-syntax
