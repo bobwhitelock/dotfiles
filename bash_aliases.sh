@@ -49,6 +49,10 @@ alias pconsole='cd ~/alces-portal && bin/rails console'
 alias ppostgres='cd ~/alces-portal && psql portal'
 alias pdir='cd ~/alces-portal'
 
+# Alces aliases.
+alias portal='cd ~/projects/alces/alces-portal-vm'
+alias pegacluster='cd ~/projects/alces/pegacluster'
+
 function launch() {
   ("$@" &> /dev/null &)
 }
