@@ -1,8 +1,8 @@
 {
-	"extensions":
-	[
-		"xhaml",
-		"erb"
-	],
-    "tab_size": 2
+  "extensions":
+    [
+        "xhaml",
+        "erb"
+    ],
+  "tab_size": 2
 }

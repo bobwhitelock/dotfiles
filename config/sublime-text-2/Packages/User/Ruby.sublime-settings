@@ -1,3 +1,7 @@
 {
+  "extensions":
+    [
+        "ru"
+    ],
   "tab_size": 2
 }
