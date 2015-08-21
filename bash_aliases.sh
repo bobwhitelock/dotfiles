@@ -41,6 +41,7 @@ alias gco='git checkout'
 alias gcb='git copy-branch-name' # TODO does not exist
 alias gb='git branch'
 alias gs='git status -sb'
+alias gsh='git show'
 
 # Portal aliases.
 alias pscreen='cd ~/alces-portal && screen -dr portal'
