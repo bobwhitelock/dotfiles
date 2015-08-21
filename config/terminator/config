@@ -1,0 +1,37 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  title_transmit_bg_color = "#000000"
+  title_inactive_bg_color = "#000000"
+  handle_size = 3
+  focus = mouse
+[keybindings]
+  hide_window = <Shift><Control>a
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
+    background_darkness = 0.9
+    scrollback_lines = 5000
+    background_type = transparent
+    background_image = None
+    cursor_color = "#d8d8d8"
+    foreground_color = "#ffffff"
+    scroll_on_output = False
+    show_titlebar = False
+    color_scheme = custom
+    font = Monospace 10
+    scrollback_infinite = True
+  [[portal]]
+    use_custom_command = True
+    background_image = None
+    custom_command = sshpass -p alces ssh portalvm
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
