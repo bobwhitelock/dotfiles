@@ -45,7 +45,7 @@ alias gsh='git show'
 
 # Portal aliases.
 alias pscreen='cd ~/alces-portal && screen -dr portal'
-alias plog='cd ~/alces-portal && tail -f log/development.log'
+alias plog='cd ~/alces-portal && less log/development.log'
 alias pconsole='cd ~/alces-portal && bin/rails console'
 alias ppostgres='cd ~/alces-portal && psql portal'
 alias pdir='cd ~/alces-portal'
