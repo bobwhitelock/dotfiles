@@ -28,7 +28,7 @@ alias dotconf='vim ~/.dotfiles/install.conf.yaml'
 alias g='git'
 alias gp='git push'
 alias gpl='git pull --prune'
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%ar / %cr)%Creset' --abbrev-commit --date=relative"
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gg='git grep'
