@@ -8,6 +8,8 @@ case $- in
       *) return;;
 esac
 
+DOTFILES="$HOME/.dotfiles"
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -83,13 +85,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+. "$DOTFILES/bash_aliases.sh"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -103,7 +99,7 @@ if ! shopt -oq posix; then
 fi
 
 # Enable completion for aliases.
-. ~/.dotfiles/alias_completion.sh
+. "$DOTFILES/alias_completion.sh"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
@@ -113,4 +109,3 @@ export PATH="$PATH:$HOME/bin"
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 setxkbmap gb
-

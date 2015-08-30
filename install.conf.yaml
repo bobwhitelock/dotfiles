@@ -7,7 +7,6 @@
     ~/.bash_profile: bash_profile.sh
     ~/.bashrc: bashrc.sh
     ~/.bash_logout: bash_logout.sh
-    ~/.bash_aliases: bash_aliases.sh
     ~/.gitconfig: gitconfig
     ~/.vimrc: vimrc
     ~/.vim:
