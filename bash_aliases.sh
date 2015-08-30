@@ -18,12 +18,6 @@ function cl() {
     cd "$@" && l
 }
 
-alias tf='tail -f'
-
-# Dotfiles aliases.
-alias dot='~/.dotfiles/install'
-alias dotconf='vim ~/.dotfiles/install.conf.yaml'
-
 # Git aliases (copied from holman dot files, TODO look at.
 alias g='git'
 alias gp='git push'
@@ -94,4 +88,3 @@ function extract()      # Handy Extract Program
         echo "'$1' is not a valid file!"
     fi
 }
-
