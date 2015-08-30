@@ -3,13 +3,13 @@ alias pyserver="python -m SimpleHTTPServer 8000"
 
 alias pvm='sshpass -p alces ssh portalvm'
 
+# For 'detached screen'; launches screen for command with same name as command.
 complete -A command ds
 function ds() {
-  # for 'detached screen'; launches screen for command with same name as command
-  screen -d -m -S "$*" $@
+    screen -d -m -S "$*" $@
 }
 
-# some ls aliases
+# Some ls aliases.
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -49,12 +49,12 @@ alias portal='cd ~/projects/alces/alces-portal-vm'
 alias pegacluster='cd ~/projects/alces/pegacluster'
 
 function launch() {
-  ("$@" &> /dev/null &)
+    ("$@" &> /dev/null &)
 }
 
-# from http://tldp.org/LDP/abs/html/sample-bashrc.html
-function swap()
-{ # Swap 2 filenames around, if they exist (from Uzi's bashrc).
+# Swap 2 filenames around, if they exist (from Uzi's bashrc).
+# From http://tldp.org/LDP/abs/html/sample-bashrc.html.
+function swap() {
     local TMPFILE=tmp.$$
 
     [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
@@ -66,9 +66,9 @@ function swap()
     mv $TMPFILE "$2"
 }
 
-# from http://tldp.org/LDP/abs/html/sample-bashrc.html
-function extract()      # Handy Extract Program
-{
+# Handy Extract Program.
+# From http://tldp.org/LDP/abs/html/sample-bashrc.html.
+function extract() {
     if [ -f $1 ] ; then
         case $1 in
             *.tar.bz2)   tar xvjf $1     ;;
