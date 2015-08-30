@@ -102,6 +102,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Enable completion for aliases.
+. ~/.dotfiles/alias_completion.sh
+
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH="$PATH:$HOME/bin"
