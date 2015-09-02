@@ -15,6 +15,10 @@
     ~/.conkyrc: conkyrc
     ~/.screenrc: screenrc
     ~/.psqlrc: psqlrc
+    ~/.zshrc: zshrc
+    ~/.oh-my-zsh:
+      path: oh-my-zsh/
+      create: true
     ~/bin:
         path: bin/
         create: true
