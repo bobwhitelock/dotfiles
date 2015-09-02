@@ -53,7 +53,6 @@ plugins=(git)
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -85,8 +84,6 @@ source $ZSH/oh-my-zsh.sh
 
 DOTFILES="$HOME/.dotfiles"
 
-source $DOTFILES/aliases.sh
-
-# From existing zshrc
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+source "$DOTFILES/env.sh"
+source "$DOTFILES/aliases.sh"
 

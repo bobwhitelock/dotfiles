@@ -10,6 +10,9 @@ esac
 
 DOTFILES="$HOME/.dotfiles"
 
+# Load shell/environment variables.
+. "$DOTFILES/env.sh"
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -100,12 +103,5 @@ fi
 
 # Enable completion for aliases.
 . "$DOTFILES/alias_completion.sh"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-export PATH="$PATH:$HOME/bin"
-
-# Let git find repos split across filesystems.
-export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 setxkbmap gb
