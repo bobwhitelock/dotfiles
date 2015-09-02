@@ -85,7 +85,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Alias definitions.
-. "$DOTFILES/bash_aliases.sh"
+. "$DOTFILES/aliases.sh"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
