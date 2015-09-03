@@ -2,10 +2,10 @@
 	name = Bob Whitelock
 	email = "(none)"
 [core]
-  editor = vim
+    editor = vim
 	pager = less -FRSX
 [push]
-  default = current
+    default = current
 [credential]
 	helper = cache --timeout=3600
 [alias]
