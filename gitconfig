@@ -3,6 +3,7 @@
 	email = "(none)"
 [core]
   editor = vim
+	pager = less -FRSX
 [push]
   default = current
 [credential]
