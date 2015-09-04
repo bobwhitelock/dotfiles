@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+import argparse
+import subprocess
+import sys
+import os
+
+
+def main():
+    drop_dir = os.getenv('DROP')
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file', type=str)
+    parser.add_argument('drop_path', type=str, nargs='?')
+    parser.add_argument('-f', '--force', action='store_true')
+
+    args = parser.parse_args()
+    if not os.path.exists(args.file):
+        sys.exit("drop: file '{}' does not exist".format(args.file))
+    if not args.drop_path:
+        args.drop_path = args.file
+
+    destination_path = os.path.join(drop_dir, args.drop_path)
+
+    can_drop = args.force or not os.path.exists(destination_path)
+    if can_drop:
+        destination_dir_path = os.path.dirname(destination_path)
+        if not os.path.exists(destination_dir_path):
+            os.makedirs(destination_dir_path)
+        os.rename(args.file, destination_path)
+        os.symlink(destination_path, args.file)
+    else:
+        sys.exit("drop: destination_path '{}'' already exists".format(destination_path))
+
+
+if __name__ == '__main__':
+    main()

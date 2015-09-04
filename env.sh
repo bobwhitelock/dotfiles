@@ -7,3 +7,4 @@ export VISUAL="vim"
 # Let git find repos split across filesystems.
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
+export DROP="$HOME/Dropbox"
