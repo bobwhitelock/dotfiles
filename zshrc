@@ -85,6 +85,7 @@ source $ZSH/oh-my-zsh.sh
 DOTFILES="$HOME/.dotfiles"
 
 setxkbmap gb
+unsetopt share_history
 
 source "$DOTFILES/env.sh"
 source "$DOTFILES/aliases.sh"
