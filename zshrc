@@ -84,6 +84,8 @@ source $ZSH/oh-my-zsh.sh
 
 DOTFILES="$HOME/.dotfiles"
 
+setxkbmap gb
+
 source "$DOTFILES/env.sh"
 source "$DOTFILES/aliases.sh"
 
