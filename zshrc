@@ -87,6 +87,10 @@ DOTFILES="$HOME/.dotfiles"
 setxkbmap gb
 unsetopt share_history
 
+# Allow interactive comments and alt-#, as in bash.
+setopt interactive_comments
+bindkey -M emacs '\e#' pound-insert
+
 source "$DOTFILES/env.sh"
 source "$DOTFILES/aliases.sh"
 
