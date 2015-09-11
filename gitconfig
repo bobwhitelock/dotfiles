@@ -4,6 +4,7 @@
 [core]
     editor = vim
 	pager = less -FRSX
+	excludesfile = /home/alces/.gitignore
 [push]
     default = current
 [credential]
