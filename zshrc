@@ -84,7 +84,10 @@ source $ZSH/oh-my-zsh.sh
 
 DOTFILES="$HOME/.dotfiles"
 
-setxkbmap gb
+if [ command setxkbmap >/dev/null 2>&1 ]; then
+  setxkbmap gb
+fi
+
 unsetopt share_history
 
 # Allow interactive comments and alt-#, as in bash.
