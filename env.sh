@@ -8,3 +8,11 @@ export VISUAL="vim"
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 export DROP="$HOME/Dropbox"
+
+# Set history file for current shell to be stored within dropbox directory path
+# by hostname, then year/month/day of date, in file with name including current
+# time and pid (to avoid collisions). Allows searching all history from
+# anywhere (with dotfiles and dropbox).
+export HISTDIR="$DROP/history/$(hostname)/$(date +%Y/%m/%d)"
+mkdir -p $HISTDIR # Zsh won't create path automatically.
+export HISTFILE="$HISTDIR/$(date +%T)-$$"
