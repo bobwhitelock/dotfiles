@@ -12,7 +12,12 @@ export DROP="$HOME/Dropbox"
 # Set history file for current shell to be stored within dropbox directory path
 # by hostname, then year/month/day of date, in file with name including current
 # time and pid (to avoid collisions). Allows searching all history from
-# anywhere (with dotfiles and dropbox).
-export HISTDIR="$DROP/history/$(hostname)/$(date +%Y/%m/%d)"
-mkdir -p $HISTDIR # Zsh won't create path automatically.
-export HISTFILE="$HISTDIR/$(date +%T)-$$"
+# anywhere (with dotfiles and dropbox). Only do this for zsh to avoid mixing up
+# files if in bash etc for some reason.
+if [ -n "$ZSH_VERSION" ]; then
+    export HISTDIR="$DROP/history/$(hostname)/$(date +%Y/%m/%d)"
+    mkdir -p $HISTDIR # Zsh won't create path automatically.
+    export HISTFILE="$HISTDIR/$(date +%T)-$$"
+else
+    export HISTFILE="$HOME/.bash_history"
+fi
