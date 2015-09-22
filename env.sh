@@ -9,15 +9,13 @@ export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 export DROP="$HOME/Dropbox"
 
-# Set history file for current shell to be stored within dropbox directory path
-# by hostname, then year/month/day of date, in file with name including current
-# time and pid (to avoid collisions). Allows searching all history from
-# anywhere (with dotfiles and dropbox). Only do this for zsh to avoid mixing up
-# files if in bash etc for some reason.
+export EH_DATABASE="$DROP/${HOST}.db"
+
+# Set history file depending on if zsh or bash (although bash file will be used
+# if in anything other than zsh; doesn't happen currently and don't really care
+# about).
 if [ -n "$ZSH_VERSION" ]; then
-    export HISTDIR="$DROP/history/$(hostname)/$(date +%Y/%m/%d)"
-    mkdir -p $HISTDIR # Zsh won't create path automatically.
-    export HISTFILE="$HISTDIR/$(date +%T)-$$"
+    export HISTFILE="$HOME/.zsh_history"
 else
     export HISTFILE="$HOME/.bash_history"
 fi

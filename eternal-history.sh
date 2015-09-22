@@ -1,6 +1,4 @@
 
-export EH_DATABASE="$DROP/${HOST}.db"
-
 function eh_create_history_database() {
         sqlite3 "$EH_DATABASE" <<- SQL
 create table history (
