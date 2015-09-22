@@ -97,3 +97,4 @@ bindkey -M emacs '\e#' pound-insert
 source "$DOTFILES/env.sh"
 source "$DOTFILES/aliases.sh"
 
+source "$DOTFILES/eternal-history.sh"
