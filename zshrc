@@ -97,4 +97,7 @@ bindkey -M emacs '\e#' pound-insert
 source "$DOTFILES/env.sh"
 source "$DOTFILES/aliases.sh"
 
-source "$DOTFILES/eternal-history.sh"
+
+# For advanced shell history.
+export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
+source /usr/lib/advanced_shell_history/zsh
