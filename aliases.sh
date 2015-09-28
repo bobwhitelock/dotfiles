@@ -2,6 +2,7 @@
 alias pyserver="python -m SimpleHTTPServer 8000"
 
 alias pvm='sshpass -p alces ssh portalvm'
+alias vacsvm='ssh bob@127.0.0.1 -p 9322'
 
 # For 'detached screen'; launches screen for command with same name as command.
 #complete -A command ds TODO: commented for moment as errors in zsh
