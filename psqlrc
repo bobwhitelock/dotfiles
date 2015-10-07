@@ -4,7 +4,6 @@
 
 -- Improve appearance of results.
 \pset linestyle unicode
-\pset border 2
 
 -- Display nulls differently to empty strings.
 \pset null [NULL]
