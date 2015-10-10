@@ -11,6 +11,6 @@
 	helper = cache --timeout=3600
 [alias]
 	amend = commit --amend -C HEAD
-  sed = ! git grep -z --full-name -l '.' | xargs -0 woooooo -i -e
+  sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
 [color]
 	ui = true
