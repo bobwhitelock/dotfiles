@@ -31,3 +31,6 @@
 [submodule "vim/bundle/vim-eunuch"]
 	path = vim/bundle/vim-eunuch
 	url = https://github.com/tpope/vim-eunuch
+[submodule "vim/bundle/vim-multiple-cursors"]
+	path = vim/bundle/vim-multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors.git
