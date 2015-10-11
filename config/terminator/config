@@ -1,7 +1,9 @@
 [global_config]
   handle_size = 3
-  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  custom_url_handler = chromium
+  enabled_plugins = APTURLHandler, LaunchpadBugURLHandler
   focus = mouse
+  use_custom_url_handler = True
   title_transmit_bg_color = "#000000"
   inactive_color_offset = 0.61
   title_inactive_bg_color = "#000000"
