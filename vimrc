@@ -6,10 +6,6 @@ call pathogen#infect()
 :colorscheme default
 
 :set hlsearch " Highlight search results.
-" Clear search highlighting with C-L (from tpope's vimrc).
-if exists(":nohls")
-  nnoremap <silent> <C-L> :nohls<CR><C-L>
-endif
 
 syntax enable
 filetype plugin indent on
