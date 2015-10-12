@@ -18,3 +18,10 @@ au BufReadPost *.pscss set syntax=scss
 au BufReadPost *.xhaml set syntax=haml
 
 let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
+
+" shift-tab indents left in insert mode.
+imap <S-Tab> <C-o><<
+
+" tab/shift-tab to indent/unindent in visual mode.
+vmap <Tab> >gv
+vmap <S-Tab> <gv
