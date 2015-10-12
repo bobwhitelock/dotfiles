@@ -13,6 +13,13 @@ filetype plugin indent on
 set undofile   " Maintain undo history between sessions.
 set undodir=~/.vim/undodir " Dir for undo history.
 
+" Watch and reload vimrc when changes, as well as common alternate names
+" (see http://stackoverflow.com/a/2403926/2620402).
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
 " Highlighting for Portal Sass and XHtml Haml templates (see lib/alces/action_view/templates.rb).
 au BufReadPost *.pscss set syntax=scss
 au BufReadPost *.xhaml set syntax=haml
