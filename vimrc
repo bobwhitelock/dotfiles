@@ -2,14 +2,14 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
-:set background=dark
-:colorscheme default
+set background=dark
+colorscheme default
 
-:set hlsearch " Highlight search results.
+set hlsearch " Highlight search results.
 
-:set relativenumber " Show line numbers relative to current line.
-:set number " Show current line number (would be all lines without above).
-:set numberwidth=8 " Spacing always given to these numbers.
+set relativenumber " Show line numbers relative to current line.
+set number " Show current line number (would be all lines without above).
+set numberwidth=8 " Spacing always given to these numbers.
 
 syntax enable
 filetype plugin indent on
