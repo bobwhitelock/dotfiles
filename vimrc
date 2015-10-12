@@ -25,3 +25,9 @@ imap <S-Tab> <C-o><<
 " tab/shift-tab to indent/unindent in visual mode.
 vmap <Tab> >gv
 vmap <S-Tab> <gv
+
+" `,e`, `,t`, `,s` opens file/in new tab/in new split screen window relative
+" to current file.
+map ,e :e <C-R>=expand("%:p:h") . "/" <CR>
+map ,t :tabe <C-R>=expand("%:p:h") . "/" <CR>
+map ,s :split <C-R>=expand("%:p:h") . "/" <CR>
