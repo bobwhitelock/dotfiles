@@ -43,3 +43,6 @@
 [submodule "vim/bundle/vim-javascript"]
 	path = vim/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
+[submodule "/home/bob/.dotfiles/vim/bundle/vim-jsx"]
+	path = /home/bob/.dotfiles/vim/bundle/vim-jsx
+	url = https://github.com/mxw/vim-jsx.git

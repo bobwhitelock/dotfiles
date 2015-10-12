@@ -16,3 +16,5 @@ set undodir=~/.vim/undodir " Dir for undo history.
 " Highlighting for Portal Sass and XHtml Haml templates (see lib/alces/action_view/templates.rb).
 au BufReadPost *.pscss set syntax=scss
 au BufReadPost *.xhaml set syntax=haml
+
+let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
