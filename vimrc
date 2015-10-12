@@ -37,6 +37,9 @@ imap <S-Tab> <C-o><<
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+" `//` in visual mode to search for current selection.
+vnoremap // y/<C-R>"<CR>
+
 " `,e`, `,t`, `,s` opens file/in new tab/in new split screen window relative
 " to current file.
 map ,e :e <C-R>=expand("%:p:h") . "/" <CR>
