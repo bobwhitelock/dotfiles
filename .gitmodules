@@ -49,3 +49,6 @@
 [submodule "/home/bob/.dotfiles/vim/bundle/vim-commentary"]
 	path = /home/bob/.dotfiles/vim/bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
