@@ -58,3 +58,6 @@
 [submodule "vim/bundle/vim-rabl"]
 	path = vim/bundle/vim-rabl
 	url = https://github.com/yaymukund/vim-rabl.git
+[submodule "vim/bundle/vim-indexed-search"]
+	path = vim/bundle/vim-indexed-search
+	url = https://github.com/henrik/vim-indexed-search.git
