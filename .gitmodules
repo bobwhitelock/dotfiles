@@ -61,3 +61,9 @@
 [submodule "vim/bundle/vim-indexed-search"]
 	path = vim/bundle/vim-indexed-search
 	url = https://github.com/henrik/vim-indexed-search.git
+[submodule "vim/bundle/vim-textobj-user"]
+	path = vim/bundle/vim-textobj-user
+	url = https://github.com/kana/vim-textobj-user.git
+[submodule "vim/bundle/vim-textobj-rubyblock"]
+	path = vim/bundle/vim-textobj-rubyblock
+	url = https://github.com/nelstrom/vim-textobj-rubyblock.git
