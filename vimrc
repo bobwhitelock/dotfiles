@@ -53,6 +53,10 @@ set numberwidth=8 " Spacing always given to these numbers.
 set undofile " Maintain undo history between sessions.
 set undodir=~/.vim/undodir " Dir for undo history.
 
+" Add new splits on right/below existing.
+set splitbelow
+set splitright
+
 " Watch and reload vimrc when changes, as well as common alternate names
 " (see http://stackoverflow.com/a/2403926/2620402).
 augroup myvimrc
@@ -81,6 +85,10 @@ vnoremap // y/<C-R>"<CR>
 map ,e :e <C-R>=expand("%:p:h") . "/" <CR>
 map ,t :tabe <C-R>=expand("%:p:h") . "/" <CR>
 map ,s :split <C-R>=expand("%:p:h") . "/" <CR>
+
+" ,h/,v for horizontal/vertical splits.
+noremap ,h :wincmd s<CR>
+noremap ,v :wincmd v<CR>
 
 " Arrow keys navigate split screens.
 noremap <silent> <Up> :wincmd k<CR>
