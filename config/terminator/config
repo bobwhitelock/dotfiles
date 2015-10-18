@@ -14,7 +14,7 @@
     scrollbar_position = hidden
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
     login_shell = True
-    background_darkness = 0.9
+    background_darkness = 0.98
     scrollback_lines = 5000
     background_type = transparent
     background_image = None
