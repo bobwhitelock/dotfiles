@@ -4,6 +4,9 @@ export PATH="$PATH:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin"
 export EDITOR="vim"
 export VISUAL="vim"
 
+# Enable 256 terminal colours (not sure if this will always work).
+export TERM='xterm-256color'
+
 # Let git find repos split across filesystems.
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
