@@ -43,6 +43,9 @@ colorscheme default
 
 set hlsearch " Highlight search results.
 
+" Highlight settings.
+highlight Search ctermfg=black
+
 set relativenumber " Show line numbers relative to current line.
 set number " Show current line number (would be all lines without above).
 set numberwidth=8 " Spacing always given to these numbers.
