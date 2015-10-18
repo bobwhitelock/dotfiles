@@ -34,6 +34,7 @@ Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock' " Add Ruby 
 
 " Passive features.
 Plug 'tpope/vim-sleuth' " Automatic indent settings.
+Plug 'tpope/vim-repeat' " Make '.' work with mappings.
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
 call plug#end()
