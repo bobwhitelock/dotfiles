@@ -1,6 +1,27 @@
-" Load pathogen and plugins.
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
+
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'kchmck/vim-coffee-script'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-sensible'
+Plug 'andreimaxim/vim-io'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'tpope/vim-eunuch'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-sleuth'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'yaymukund/vim-rabl'
+Plug 'henrik/vim-indexed-search'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+call plug#end()
 
 set background=dark
 colorscheme default
