@@ -20,6 +20,8 @@ def main():
     if not args.drop_path:
         args.drop_path = args.file
 
+    # TODO: this won't work if args.drop_path is an absolute path, as drop_dir
+    # will be thrown away destination_path will just be args.drop_path
     destination_path = os.path.join(drop_dir, args.drop_path)
 
     can_drop = args.force or not os.path.exists(destination_path)
