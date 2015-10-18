@@ -47,9 +47,6 @@ set relativenumber " Show line numbers relative to current line.
 set number " Show current line number (would be all lines without above).
 set numberwidth=8 " Spacing always given to these numbers.
 
-syntax enable
-filetype plugin indent on
-
 set undofile " Maintain undo history between sessions.
 set undodir=~/.vim/undodir " Dir for undo history.
 
