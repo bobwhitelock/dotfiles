@@ -46,11 +46,11 @@ map ,e :e <C-R>=expand("%:p:h") . "/" <CR>
 map ,t :tabe <C-R>=expand("%:p:h") . "/" <CR>
 map ,s :split <C-R>=expand("%:p:h") . "/" <CR>
 
-" Disable arrow keys to break bad habits.
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" Arrow keys navigate split screens.
+noremap <silent> <Up> :wincmd k<CR>
+noremap <silent> <Down> :wincmd j<CR>
+noremap <silent> <Left> :wincmd h<CR>
+noremap <silent> <Right> :wincmd l<CR>
 
 " Open NERDTree if no file specified.
 autocmd StdinReadPre * let s:std_in=1
