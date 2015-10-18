@@ -1,26 +1,41 @@
 
 call plug#begin()
+" Sensible defaults.
 Plug 'tpope/vim-sensible'
+
+" Handle surroundings (ys/cs/ds).
+Plug 'tpope/vim-surround'
+
+" Comment and uncomment (gc*)
+Plug 'tpope/vim-commentary'
+
+" Unix command helpers (e.g. SudoWrite).
+Plug 'tpope/vim-eunuch'
+
+" Git command helpers (:G*)
+Plug 'tpope/vim-fugitive'
+
+" Sublime-like multiple cursors (C-n).
+Plug 'terryma/vim-multiple-cursors'
+
+" Project window.
+Plug 'scrooloose/nerdtree'
+
+" Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
-Plug 'tpope/vim-sensible'
 Plug 'andreimaxim/vim-io'
-Plug 'evanmiller/nginx-vim-syntax'
-Plug 'tpope/vim-eunuch'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-sleuth'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'ntpeters/vim-better-whitespace'
+Plug 'evanmiller/nginx-vim-syntax'
 Plug 'yaymukund/vim-rabl'
-Plug 'henrik/vim-indexed-search'
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-rails'
+Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock' " Add Ruby text object (r).
+
+" Passive features.
+Plug 'tpope/vim-sleuth' " Automatic indent settings.
+Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
+Plug 'henrik/vim-indexed-search' " Show number of search results.
 call plug#end()
 
 set background=dark
