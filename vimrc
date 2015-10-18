@@ -15,6 +15,9 @@ Plug 'tpope/vim-eunuch'
 " Git command helpers (:G*)
 Plug 'tpope/vim-fugitive'
 
+" Various paired bracket mappings.
+Plug 'tpope/vim-unimpaired'
+
 " Sublime-like multiple cursors (C-n).
 Plug 'terryma/vim-multiple-cursors'
 
