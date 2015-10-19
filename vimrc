@@ -21,8 +21,8 @@ Plug 'tpope/vim-unimpaired'
 " Sublime-like multiple cursors (C-n).
 Plug 'terryma/vim-multiple-cursors'
 
-" Project window.
-Plug 'scrooloose/nerdtree'
+" Improved netrw.
+Plug 'tpope/vim-vinegar'
 
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
@@ -100,13 +100,6 @@ noremap <silent> <Up> :wincmd k<CR>
 noremap <silent> <Down> :wincmd j<CR>
 noremap <silent> <Left> :wincmd h<CR>
 noremap <silent> <Right> :wincmd l<CR>
-
-" Open NERDTree if no file specified.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Toggle NERDTree with C-f.
-map <C-f> :NERDTreeToggle<CR>
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within
