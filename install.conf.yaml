@@ -15,6 +15,7 @@
         create: true
     ~/.conkyrc: conkyrc
     ~/.screenrc: screenrc
+    ~/.xinitrc: xinitrc
     ~/.psqlrc: psqlrc
     ~/.zshrc: zshrc
     ~/.oh-my-zsh:
