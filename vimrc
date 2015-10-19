@@ -41,10 +41,12 @@ Plug 'tpope/vim-sleuth' " Automatic indent settings.
 Plug 'tpope/vim-repeat' " Make '.' work with mappings.
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
+
+" Colorschemes.
+Plug 'tomasr/molokai'
 call plug#end()
 
-set background=dark
-colorscheme default
+colorscheme molokai
 
 set hlsearch " Highlight search results.
 
