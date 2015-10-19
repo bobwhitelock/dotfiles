@@ -24,6 +24,9 @@ Plug 'terryma/vim-multiple-cursors'
 " Improved netrw.
 Plug 'tpope/vim-vinegar'
 
+" Show git changes (]c/[c to jump between).
+Plug 'airblade/vim-gitgutter'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
