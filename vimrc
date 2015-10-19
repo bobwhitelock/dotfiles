@@ -44,6 +44,7 @@ Plug 'tpope/vim-sleuth' " Automatic indent settings.
 Plug 'tpope/vim-repeat' " Make '.' work with mappings.
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
+Plug 'bling/vim-airline' " Status line.
 
 " Colorschemes.
 Plug 'tomasr/molokai'
