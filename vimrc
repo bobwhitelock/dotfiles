@@ -45,6 +45,7 @@ Plug 'tpope/vim-repeat' " Make '.' work with mappings.
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
 Plug 'bling/vim-airline' " Status line.
+Plug 'Yggdroot/indentLine' " Indentation lines.
 
 " Colorschemes.
 Plug 'tomasr/molokai'
@@ -71,8 +72,8 @@ set splitright
 " Watch and reload vimrc when changes, as well as common alternate names
 " (see http://stackoverflow.com/a/2403926/2620402).
 augroup myvimrc
-    au!
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+  au!
+  au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 
 " Highlighting for Portal Sass and XHtml Haml templates (see lib/alces/action_view/templates.rb).
@@ -80,6 +81,8 @@ au BufReadPost *.pscss set syntax=scss
 au BufReadPost *.xhaml set syntax=haml
 
 let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
+
+let g:indentLine_char = '│' " indentLine character.
 
 " shift-tab indents left in insert mode.
 imap <S-Tab> <C-o><<
