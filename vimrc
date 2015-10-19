@@ -15,17 +15,20 @@ Plug 'tpope/vim-eunuch'
 " Git command helpers (:G*)
 Plug 'tpope/vim-fugitive'
 
+" Improved netrw.
+Plug 'tpope/vim-vinegar'
+
 " Various paired bracket mappings.
 Plug 'tpope/vim-unimpaired'
 
 " Sublime-like multiple cursors (C-n).
 Plug 'terryma/vim-multiple-cursors'
 
-" Improved netrw.
-Plug 'tpope/vim-vinegar'
-
 " Show git changes (]c/[c to jump between).
 Plug 'airblade/vim-gitgutter'
+
+" Fuzzy file/buffer/mru etc. finder (C-p, obviously).
+Plug 'kien/ctrlp.vim'
 
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
