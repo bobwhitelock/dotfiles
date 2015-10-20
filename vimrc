@@ -135,6 +135,11 @@ noremap <silent> <Down> :wincmd j<CR>
 noremap <silent> <Left> :wincmd h<CR>
 noremap <silent> <Right> :wincmd l<CR>
 
+" C-s to save in different modes.
+nnoremap <silent> <C-s> :update<CR>
+inoremap <silent> <C-s> <Esc>:update<CR>
+vnoremap <silent> <C-s> <Esc>:update<CR>gv
+
 " Format Json and set filetype (adapted from
 " coderwall.com/p/faceag/format-json-in-vim)
 nmap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>

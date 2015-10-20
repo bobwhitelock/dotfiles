@@ -49,6 +49,12 @@ alias pdir='cd ~/alces-portal'
 alias portal='cd ~/projects/alces/alces-portal-vm'
 alias pegacluster='cd ~/projects/alces/pegacluster'
 
+# Let vim interpret commands which would be interpreted by the terminal
+# otherwise; not quite sure of purpose of ttyctl here (from
+# http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files).
+alias vim="stty stop '' -ixoff ; vim"
+ttyctl -f
+
 function launch() {
     ("$@" &> /dev/null &)
 }
