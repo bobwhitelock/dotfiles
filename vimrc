@@ -125,6 +125,10 @@ noremap <silent> <Down> :wincmd j<CR>
 noremap <silent> <Left> :wincmd h<CR>
 noremap <silent> <Right> :wincmd l<CR>
 
+" Format Json and set filetype (adapted from
+" coderwall.com/p/faceag/format-json-in-vim)
+nmap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
+
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within
 " Tmux).
