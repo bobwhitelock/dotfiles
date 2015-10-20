@@ -49,13 +49,6 @@ alias pdir='cd ~/alces-portal'
 alias portal='cd ~/projects/alces/alces-portal-vm'
 alias pegacluster='cd ~/projects/alces/pegacluster'
 
-function vimplugin() {
-    (
-     cd "$DOTFILES" &&
-     git submodule add "https://github.com/$@.git" "vim/bundle/$(basename $@)"
-    )
-}
-
 function launch() {
     ("$@" &> /dev/null &)
 }
