@@ -150,3 +150,6 @@ function! XTermPasteBegin()
   set paste
   return ""
 endfunction
+
+" Highlight word under cursor (see stackoverflow.com/a/1552193/2620402).
+:autocmd CursorMoved * exe printf('match ColorColumn /\V\<%s\>/', escape(expand('<cword>'), '/\'))
