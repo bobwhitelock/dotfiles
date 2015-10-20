@@ -80,12 +80,6 @@ set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 
-" Watch and reload vimrc when changes, as well as common alternate names
-" (see http://stackoverflow.com/a/2403926/2620402).
-augroup myvimrc
-  au!
-  au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
 
 " Highlighting for Portal Sass and XHtml Haml templates (see lib/alces/action_view/templates.rb).
 au BufReadPost *.pscss set syntax=scss
