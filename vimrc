@@ -49,6 +49,7 @@ Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
 Plug 'bling/vim-airline' " Status line.
 Plug 'Yggdroot/indentLine' " Indentation lines.
+Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
 
 " Colorschemes.
 Plug 'tomasr/molokai'
@@ -93,6 +94,14 @@ au BufReadPost *.xhaml set syntax=haml
 let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
 
 let g:indentLine_char = '│' " indentLine character.
+
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'javascript.jsx' : 1,
+    \}
 
 " shift-tab indents left in insert mode.
 imap <S-Tab> <C-o><<
