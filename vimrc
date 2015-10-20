@@ -30,6 +30,9 @@ Plug 'airblade/vim-gitgutter'
 " Fuzzy file/buffer/mru etc. finder (C-p, obviously).
 Plug 'kien/ctrlp.vim'
 
+" Add :Bdelete command to close buffer without changing layout.
+Plug 'moll/vim-bbye'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -75,6 +78,8 @@ set splitright
 
 set nowrap " Don't wrap lines.
 
+set hidden " Allow hidden buffers with unsaved content.
+
 " Start scrolling when certain distance from edges of window.
 set scrolloff=8
 set sidescrolloff=15
@@ -108,6 +113,11 @@ vmap <S-Tab> <gv
 
 " `//` in visual mode to search for current selection.
 vnoremap // y/<C-R>"<CR>
+
+" Search, delete, and list buffers.
+map <C-b> :CtrlPBuffer<CR>
+map <C-c> :Bdelete<CR>
+map ,b :buffers<CR>
 
 " `,e`, `,t`, `,s` opens file/in new tab/in new split screen window relative
 " to current file.
