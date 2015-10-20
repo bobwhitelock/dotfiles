@@ -89,6 +89,8 @@ let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
 
 let g:indentLine_char = '│' " indentLine character.
 
+let g:ctrlp_custom_ignore = 'node_modules'
+
 let g:mta_filetypes = {
     \ 'html' : 1,
     \ 'xhtml' : 1,
