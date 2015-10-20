@@ -72,6 +72,13 @@ set undodir=~/.vim/undodir " Dir for undo history.
 set splitbelow
 set splitright
 
+set nowrap " Don't wrap lines.
+
+" Start scrolling when certain distance from edges of window.
+set scrolloff=8
+set sidescrolloff=15
+set sidescroll=1
+
 " Watch and reload vimrc when changes, as well as common alternate names
 " (see http://stackoverflow.com/a/2403926/2620402).
 augroup myvimrc
