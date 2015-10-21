@@ -33,6 +33,9 @@ Plug 'kien/ctrlp.vim'
 " Add :Bdelete command to close buffer without changing layout.
 Plug 'moll/vim-bbye'
 
+" Start screen and improved session management.
+Plug 'mhinz/vim-startify'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -103,6 +106,20 @@ let g:mta_filetypes = {
     \ 'jinja' : 1,
     \ 'javascript.jsx' : 1,
     \}
+
+let g:startify_bookmarks = ['~/.vimrc', '~/projects/alces/aviator', '~/projects/alces/exodus']
+let g:startify_session_persistence = 1 " Save Session.vim on quit or new session load (if exists already).
+let g:startify_change_to_vcs_root = 1 " Change to VCS root on file load.
+let g:startify_list_order = [
+    \ ['   MRU:'],
+    \ 'files',
+    \ ['   MRU in this directory:'],
+    \ 'dir',
+    \ ['   Sessions:'],
+    \ 'sessions',
+    \ ['   Bookmarks:'],
+    \ 'bookmarks',
+    \ ]
 
 " shift-tab indents left in insert mode.
 imap <S-Tab> <C-o><<
