@@ -17,3 +17,5 @@
 	tree = log --oneline --decorate --all --graph
 [color]
 	ui = true
+[color "diff"]
+	whitespace = red reverse
