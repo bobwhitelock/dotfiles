@@ -67,6 +67,8 @@ set hlsearch " Highlight search results.
 
 " Highlight settings.
 highlight Search ctermfg=black
+highlight CurrentWord term=reverse ctermbg=236 guibg=#232526
+highlight Visual ctermfg=233 ctermbg=67 guifg=#1b1d1e guibg=#465457
 
 set relativenumber " Show line numbers relative to current line.
 set number " Show current line number (would be all lines without above).
@@ -174,4 +176,4 @@ function! XTermPasteBegin()
 endfunction
 
 " Highlight word under cursor (see stackoverflow.com/a/1552193/2620402).
-:autocmd CursorMoved * exe printf('match ColorColumn /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+autocmd CursorMoved * exe printf('match CurrentWord /\V\<%s\>/', escape(expand('<cword>'), '/\'))
