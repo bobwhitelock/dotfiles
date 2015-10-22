@@ -36,6 +36,8 @@ Plug 'moll/vim-bbye'
 " Start screen and improved session management.
 Plug 'mhinz/vim-startify'
 
+Plug 'scrooloose/syntastic'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -122,6 +124,18 @@ let g:startify_list_order = [
     \ ['   Bookmarks:'],
     \ 'bookmarks',
     \ ]
+
+let g:syntastic_javascript_checkers = ['eslint']
+
+" TODO: Suggested Syntastic settings, read manual and adjust if needed.
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " shift-tab indents left in insert mode.
 imap <S-Tab> <C-o><<
