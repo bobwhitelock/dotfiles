@@ -101,6 +101,9 @@ set sidescroll=1
 au BufReadPost *.pscss set syntax=scss
 au BufReadPost *.xhaml set syntax=haml
 
+" eslintrc is Json (TODO: why difference between this and above?)
+au BufNewFile,BufRead .eslintrc set filetype=json
+
 let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
 
 let g:indentLine_char = '│' " indentLine character.
