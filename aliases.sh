@@ -49,6 +49,16 @@ alias pdir='cd ~/alces-portal'
 alias portal='cd ~/projects/alces/alces-portal-vm'
 alias pegacluster='cd ~/projects/alces/pegacluster'
 
+# Shortcuts for frequent xrandr commands.
+alias xrandr_laptop_dual='xrandr --output eDP1 --mode 1360x768 --left-of HDMI1 --output HDMI1 --auto && conkywonky'
+alias xrandr_laptop_single='xrandr --output eDP1 --auto --output HDMI1 --off && conkywonky'
+function xrandr_off() {
+    for output in "$(xrandr | cut -d ' '  -f 1 | grep -i "$@")"; do
+        xrandr --output "$output" --off
+    done
+    conkywonky
+}
+
 # Let vim interpret commands which would be interpreted by the terminal
 # otherwise; not quite sure of purpose of ttyctl here (from
 # http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files).
