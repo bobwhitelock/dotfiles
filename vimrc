@@ -36,6 +36,7 @@ Plug 'moll/vim-bbye'
 " Start screen and improved session management.
 Plug 'mhinz/vim-startify'
 
+" Syntax checking.
 Plug 'scrooloose/syntastic'
 
 " Single command for grabbing then swapping windows.
@@ -105,6 +106,7 @@ let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
 let g:indentLine_char = '│' " indentLine character.
 
 let g:ctrlp_custom_ignore = 'node_modules'
+let g:ctrlp_show_hidden = 1
 
 let g:mta_filetypes = {
     \ 'html' : 1,
@@ -116,11 +118,12 @@ let g:mta_filetypes = {
 
 let g:startify_bookmarks = ['~/.vimrc', '~/projects/alces/aviator', '~/projects/alces/exodus']
 let g:startify_session_persistence = 1 " Save Session.vim on quit or new session load (if exists already).
+let g:startify_session_autoload = 1 " Autoload Session.vim when start in dir.
 let g:startify_change_to_vcs_root = 1 " Change to VCS root on file load.
 let g:startify_list_order = [
     \ ['   MRU:'],
     \ 'files',
-    \ ['   MRU in this directory:'],
+    \ ['   MRU (dir)'],
     \ 'dir',
     \ ['   Sessions:'],
     \ 'sessions',
