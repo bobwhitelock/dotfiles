@@ -38,6 +38,9 @@ Plug 'mhinz/vim-startify'
 
 Plug 'scrooloose/syntastic'
 
+" Single command for grabbing then swapping windows.
+Plug 'wesQ3/vim-windowswap'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -137,6 +140,9 @@ set statusline+=%*
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:windowswap_map_keys = 0 " Prevent default bindings.
+nnoremap <silent> ,ww :call WindowSwap#EasyWindowSwap()<CR>
+
 " shift-tab indents left in insert mode.
 imap <S-Tab> <C-o><<
 
@@ -167,6 +173,12 @@ noremap <silent> <Up> :wincmd k<CR>
 noremap <silent> <Down> :wincmd j<CR>
 noremap <silent> <Left> :wincmd h<CR>
 noremap <silent> <Right> :wincmd l<CR>
+
+" C-arrow for resizing windows.
+noremap <C-Up> :wincmd +<CR>
+noremap <C-Down> :wincmd -<CR>
+noremap <C-Left> :wincmd <<CR>
+noremap <C-Right> :wincmd ><CR>
 
 " C-s to save in different modes.
 nnoremap <silent> <C-s> :update<CR>
