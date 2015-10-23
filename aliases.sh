@@ -19,11 +19,12 @@ function cl() {
     cd "$@" && l
 }
 
-# Git aliases (copied from holman dot files, TODO look at.
+# Git aliases.
 alias g='git'
 alias gp='git push'
 alias gpl='git pull --prune'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%ar / %cr)%Creset' --abbrev-commit --date=relative"
+alias glogall='glog --all'
 alias gd='git diff --color'
 alias gdc='git diff --cached'
 alias gg='git grep'
@@ -33,7 +34,6 @@ alias gc='git commit'
 alias gca='git commit -a'
 alias ga='git add'
 alias gco='git checkout'
-alias gcb='git copy-branch-name' # TODO does not exist
 alias gb='git branch'
 alias gs='git status -sb'
 alias gsh='git show'

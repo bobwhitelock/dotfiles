@@ -14,7 +14,6 @@
   sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
   home = config user.email 'bob.whitelock1@gmail.com'
   work = config user.email 'bob.whitelock@alces-software.com'
-	tree = log --oneline --decorate --all --graph
 [color]
 	ui = true
 [color "diff"]
