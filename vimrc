@@ -42,6 +42,12 @@ Plug 'scrooloose/syntastic'
 " Single command for grabbing then swapping windows.
 Plug 'wesQ3/vim-windowswap'
 
+" Autocompletion.
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+" Transition between single and multiline code (gS and gJ).
+Plug 'AndrewRadev/splitjoin.vim'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -62,6 +68,7 @@ Plug 'henrik/vim-indexed-search' " Show number of search results.
 Plug 'bling/vim-airline' " Status line.
 Plug 'Yggdroot/indentLine' " Indentation lines.
 Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
+Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
 
 " Colorschemes.
 Plug 'tomasr/molokai'
