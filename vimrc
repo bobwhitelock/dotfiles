@@ -159,6 +159,10 @@ let g:syntastic_check_on_wq = 0
 let g:windowswap_map_keys = 0 " Prevent default bindings.
 nnoremap <silent> ,ww :call WindowSwap#EasyWindowSwap()<CR>
 
+" Move by visual line.
+nnoremap j gj
+nnoremap k gk
+
 " shift-tab indents left in insert mode.
 imap <S-Tab> <C-o><<
 
