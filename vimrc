@@ -77,6 +77,7 @@ call plug#end()
 colorscheme molokai
 
 set hlsearch " Highlight search results.
+set cursorline " Highlight current line.
 
 " Highlight settings.
 highlight Search ctermfg=black
@@ -94,7 +95,9 @@ set undodir=~/.vim/undodir " Dir for undo history.
 set splitbelow
 set splitright
 
-set nowrap " Don't wrap lines.
+set lazyredraw " Redraw only when needed.
+
+set linebreak " Wrap lines at better places.
 
 set hidden " Allow hidden buffers with unsaved content.
 
