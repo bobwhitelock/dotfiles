@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Open all changed files in editor, so can fix conflicts.
+
+$EDITOR $(git diff --name-only | uniq)
