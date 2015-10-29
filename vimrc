@@ -220,6 +220,10 @@ vnoremap <silent> <C-s> <Esc>:update<CR>gv
 " coderwall.com/p/faceag/format-json-in-vim)
 nmap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
 
+" Make directory relative to current file.
+" TODO: make this a command instead e.g. MkdirRelative.
+noremap ,mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
+
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within
 " Tmux).
