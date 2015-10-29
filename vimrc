@@ -175,11 +175,12 @@ nnoremap j gj
 nnoremap k gk
 
 " shift-tab indents left in insert mode.
-imap <S-Tab> <C-o><<
+" TODO: some plugin seems to have broken this.
+inoremap <S-Tab> <C-o><<
 
 " tab/shift-tab to indent/unindent in visual mode.
-vmap <Tab> >gv
-vmap <S-Tab> <gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
 
 " Delete above/below current line.
 noremap [<Backspace> mzkdd`z
@@ -189,8 +190,8 @@ noremap ]<Backspace> mzjdd`z
 vnoremap // y/<C-R>"<CR>
 
 " Search and delete buffers.
-map <C-b> :CtrlPBuffer<CR>
-map <C-c> :Bdelete<CR>
+noremap <C-b> :CtrlPBuffer<CR>
+noremap <C-c> :Bdelete<CR>
 
 " Open file relative to current file.
 noremap <C-e> :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -218,7 +219,7 @@ vnoremap <silent> <C-s> <Esc>:update<CR>gv
 
 " Format Json and set filetype (adapted from
 " coderwall.com/p/faceag/format-json-in-vim)
-nmap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
+noremap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
 
 " Make directory relative to current file.
 " TODO: make this a command instead e.g. MkdirRelative.
