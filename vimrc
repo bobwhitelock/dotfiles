@@ -110,6 +110,8 @@ set linebreak " Wrap lines at better places.
 
 set hidden " Allow hidden buffers with unsaved content.
 
+set spell spelllang=en_gb " Enable spell checking (z= for corrections).
+
 " Start scrolling when certain distance from edges of window.
 set scrolloff=8
 set sidescrolloff=15
