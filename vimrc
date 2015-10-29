@@ -181,6 +181,10 @@ imap <S-Tab> <C-o><<
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+" Delete above/below current line.
+noremap [<Backspace> mzkdd`z
+noremap ]<Backspace> mzjdd`z
+
 " `//` in visual mode to search for current selection.
 vnoremap // y/<C-R>"<CR>
 
