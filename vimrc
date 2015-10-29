@@ -48,6 +48,15 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Transition between single and multiline code (gS and gJ).
 Plug 'AndrewRadev/splitjoin.vim'
 
+" Switch text with pre-defined replacements e.g. || <-> && (gs).
+Plug 'AndrewRadev/switch.vim'
+
+" Look up documentation for word under cursor (gK).
+Plug 'keith/investigate.vim'
+
+" Motions through camel-case/underscore-case words (',b', ',w', ',e')
+Plug 'bkad/CamelCaseMotion'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
