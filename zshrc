@@ -115,3 +115,6 @@ source "$DOTFILES/aliases.sh"
 # For advanced shell history.
 export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
 source /usr/lib/advanced_shell_history/zsh
+
+# Enable thefuck.
+eval "$(thefuck --alias)"
