@@ -166,7 +166,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:windowswap_map_keys = 0 " Prevent default bindings.
-nnoremap <silent> ,ww :call WindowSwap#EasyWindowSwap()<CR>
+nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>
 
 " Move by visual line.
 nnoremap j gj
@@ -182,16 +182,12 @@ vmap <S-Tab> <gv
 " `//` in visual mode to search for current selection.
 vnoremap // y/<C-R>"<CR>
 
-" Search, delete, and list buffers.
+" Search and delete buffers.
 map <C-b> :CtrlPBuffer<CR>
 map <C-c> :Bdelete<CR>
-map ,b :buffers<CR>
 
-" `,e`, `,t`, `,s` opens file/in new tab/in new split screen window relative
-" to current file.
-map ,e :e <C-R>=expand("%:p:h") . "/" <CR>
-map ,t :tabe <C-R>=expand("%:p:h") . "/" <CR>
-map ,s :split <C-R>=expand("%:p:h") . "/" <CR>
+" Open file relative to current file.
+noremap <C-e> :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " ,h/,v for horizontal/vertical splits.
 noremap ,h :wincmd s<CR>
