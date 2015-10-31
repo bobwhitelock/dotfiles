@@ -1,21 +1,27 @@
 [user]
 	name = Bob Whitelock
 	email = "(none)"
+
 [core]
-    editor = vim
+	editor = vim
 	pager = less -FRSX
 	excludesfile = ~/.gitignore
+
 [push]
-    default = current
+	default = current
+
 [credential]
 	helper = cache --timeout=3600
+
 [alias]
 	amend = commit --amend -C HEAD
-  sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
-  home = config user.email 'bob.whitelock1@gmail.com'
-  work = config user.email 'bob.whitelock@alces-software.com'
+	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
+	home = config user.email 'bob.whitelock1@gmail.com'
+	work = config user.email 'bob.whitelock@alces-software.com'
 	pull-submodules = submodule foreach git pull
+
 [color]
 	ui = true
+
 [color "diff"]
 	whitespace = red reverse
