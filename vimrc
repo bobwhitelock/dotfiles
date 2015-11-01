@@ -57,6 +57,9 @@ Plug 'keith/investigate.vim'
 " Motions through camel-case/underscore-case words (',b', ',w', ',e')
 Plug 'bkad/CamelCaseMotion'
 
+" Emacs-like handling of previously yanked text.
+Plug 'vim-scripts/YankRing.vim'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -171,6 +174,9 @@ let g:syntastic_check_on_wq = 0
 let g:windowswap_map_keys = 0 " Prevent default bindings.
 nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>
 
+let g:yankring_replace_n_pkey = '<C-a>'
+let g:yankring_replace_n_nkey = '<C-d>'
+
 " Move by visual line.
 nnoremap j gj
 nnoremap k gk
@@ -196,6 +202,8 @@ noremap <C-c> :Bdelete<CR>
 
 " Open file relative to current file.
 noremap <C-e> :e <C-R>=expand("%:p:h") . "/" <CR>
+
+nnoremap <silent> <C-y> :YRShow<CR>
 
 " ,h/,v for horizontal/vertical splits.
 noremap ,h :wincmd s<CR>
