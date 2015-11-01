@@ -81,6 +81,7 @@ Plug 'bling/vim-airline' " Status line.
 Plug 'Yggdroot/indentLine' " Indentation lines.
 Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
 Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
+Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
 
 " Colorschemes.
 Plug 'tomasr/molokai'
@@ -93,7 +94,6 @@ set cursorline " Highlight current line.
 
 " Highlight settings.
 highlight Search ctermfg=black
-highlight CurrentWord term=reverse ctermbg=236 guibg=#232526
 highlight Visual ctermfg=233 ctermbg=67 guifg=#1b1d1e guibg=#465457
 
 set relativenumber " Show line numbers relative to current line.
@@ -174,6 +174,8 @@ let g:syntastic_check_on_wq = 0
 let g:windowswap_map_keys = 0 " Prevent default bindings.
 nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>
 
+let g:HiCursorWords_delay = 100
+
 let g:yankring_replace_n_pkey = '<C-a>'
 let g:yankring_replace_n_nkey = '<C-d>'
 
@@ -246,5 +248,3 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
-" Highlight word under cursor (see stackoverflow.com/a/1552193/2620402).
-autocmd CursorMoved * exe printf('match CurrentWord /\V\<%s\>/', escape(expand('<cword>'), '/\'))
