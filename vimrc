@@ -65,6 +65,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
 Plug 'andreimaxim/vim-io'
 Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'yaymukund/vim-rabl'
@@ -132,6 +133,8 @@ au BufReadPost *.xhaml set syntax=haml
 au BufNewFile,BufRead .eslintrc set filetype=json
 au BufNewFile,BufRead gitconfig set filetype=gitconfig
 
+let g:vim_json_syntax_conceal = 0 " Don't hide Json syntax.
+
 let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
 
 let g:indentLine_char = '│' " indentLine character.
@@ -153,7 +156,6 @@ let g:mta_filetypes = {
 
 let g:startify_bookmarks = ['~/.vimrc', '~/projects/alces/aviator', '~/projects/alces/exodus']
 let g:startify_session_persistence = 1 " Save Session.vim on quit or new session load (if exists already).
-let g:startify_session_autoload = 1 " Autoload Session.vim when start in dir.
 let g:startify_change_to_vcs_root = 1 " Change to VCS root on file load.
 let g:startify_list_order = [
     \ ['   MRU:'],
@@ -185,6 +187,10 @@ let g:HiCursorWords_delay = 100
 
 let g:yankring_replace_n_pkey = '<C-a>'
 let g:yankring_replace_n_nkey = '<C-d>'
+
+" TODO: let jsx just use js URL.
+let g:investigate_url_for_javascript = "https://www.omniref.com/?language=javascript&q=^s"
+let g:investigate_url_for_javascriptjsx = "https://www.omniref.com/?language=javascript&q=^s"
 
 " Move by visual line.
 nnoremap j gj
