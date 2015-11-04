@@ -28,7 +28,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 
 " Fuzzy file/buffer/mru etc. finder (C-p, obviously).
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Add :Bdelete command to close buffer without changing layout.
 Plug 'moll/vim-bbye'
@@ -115,6 +115,9 @@ set hidden " Allow hidden buffers with unsaved content.
 
 set spell spelllang=en_gb " Enable spell checking (z= for corrections).
 
+" Ignore these, specifically so not included in CtrlP file list.
+set wildignore+=.git/*,*.swp,*.swo
+
 " Start scrolling when certain distance from edges of window.
 set scrolloff=8
 set sidescrolloff=15
@@ -135,6 +138,10 @@ let g:indentLine_char = '│' " indentLine character.
 
 let g:ctrlp_custom_ignore = 'node_modules'
 let g:ctrlp_show_hidden = 1
+
+" In git repos have CtrlP show files known to git (tracked and untracked but
+" not ignored).
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 let g:mta_filetypes = {
     \ 'html' : 1,
