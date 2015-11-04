@@ -261,3 +261,9 @@ function! XTermPasteBegin()
   return ""
 endfunction
 
+" Open quickfix window after any grep.
+autocmd QuickFixCmdPost *grep* cwindow
+
+" Fugitive mappings.
+nnoremap gb :Gblame<CR>
+nnoremap gr :Ggrep! <cword> <CR><CR>
