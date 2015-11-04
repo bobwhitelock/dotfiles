@@ -114,6 +114,8 @@ set linebreak " Wrap lines at better places.
 
 set hidden " Allow hidden buffers with unsaved content.
 
+set nostartofline " Don't move cursor to start of line after various commands.
+
 set spell spelllang=en_gb " Enable spell checking (z= for corrections).
 
 " Ignore these, specifically so not included in CtrlP file list.
