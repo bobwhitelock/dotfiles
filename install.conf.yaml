@@ -17,6 +17,7 @@
     ~/.screenrc: screenrc
     ~/.xinitrc: xinitrc
     ~/.psqlrc: psqlrc
+    ~/.sqliterc: sqliterc
     ~/.zshrc: zshrc
     ~/.oh-my-zsh:
       path: oh-my-zsh/
