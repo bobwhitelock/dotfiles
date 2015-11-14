@@ -60,6 +60,15 @@ Plug 'bkad/CamelCaseMotion'
 " Emacs-like handling of previously yanked text.
 Plug 'vim-scripts/YankRing.vim'
 
+" For custom text objects, needed for all vim-textobj plugins.
+Plug 'kana/vim-textobj-user'
+
+" Variable (CamelCase or underscore) segment text object (iv / av).
+Plug 'Julian/vim-textobj-variable-segment'
+
+" Comment text object (ic / ac / aC)
+Plug 'glts/vim-textobj-comment'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -70,7 +79,7 @@ Plug 'mxw/vim-jsx'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'yaymukund/vim-rabl'
 Plug 'tpope/vim-rails'
-Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock' " Add Ruby text object (r).
+Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
