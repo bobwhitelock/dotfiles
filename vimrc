@@ -186,10 +186,13 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-" let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Populate loc list with errors so can jump between with unimpaired's
+" `[l` / `]l` (see https://github.com/scrooloose/syntastic/issues/341).
+let g:syntastic_always_populate_loc_list = 1
 
 let g:windowswap_map_keys = 0 " Prevent default bindings.
 nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>
