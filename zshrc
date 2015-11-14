@@ -123,6 +123,7 @@ source "$DOTFILES/aliases.sh"
 # For advanced shell history.
 export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
 source /usr/lib/advanced_shell_history/zsh
+unset ASH_CFG_MOTD # Don't show message at shell start.
 
 # Enable thefuck.
 eval "$(thefuck --alias)"
