@@ -194,6 +194,8 @@ let g:yankring_replace_n_nkey = '<C-d>'
 let g:investigate_url_for_javascript = "https://www.omniref.com/?language=javascript&q=^s"
 let g:investigate_url_for_javascriptjsx = "https://www.omniref.com/?language=javascript&q=^s"
 
+let mapleader = ','
+
 " Move by visual line.
 nnoremap j gj
 nnoremap k gk
