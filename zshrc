@@ -84,8 +84,16 @@ source $ZSH/oh-my-zsh.sh
 
 DOTFILES="$HOME/.dotfiles"
 
-if [ command setxkbmap >/dev/null 2>&1 ]; then
+# Check existence of setxkbmap so doesn't break without X.
+if [ command -v setxkbmap >/dev/null 2>&1 ]; then
+
+  # Ensure correct keyboard layout.
   setxkbmap gb
+
+  # Map caps lock to escape when tapped and ctrl when held (see
+  # http://www.economyofeffort.com/2014/08/11/beyond-ctrl-remap-make-that-caps-lock-key-useful/).
+  setxkbmap -option 'caps:ctrl_modifier'
+  xcape -e 'Caps_Lock=Escape'
 fi
 
 unsetopt share_history
