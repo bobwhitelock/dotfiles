@@ -85,8 +85,8 @@ source $ZSH/oh-my-zsh.sh
 DOTFILES="$HOME/.dotfiles"
 
 # Check existence of setxkbmap so doesn't break without X.
-if [ command -v setxkbmap >/dev/null 2>&1 ]; then
-
+command -v setxkbmap >/dev/null 2>&1
+if [ $? ]; then
   # Ensure correct keyboard layout.
   setxkbmap gb
 
