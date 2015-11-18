@@ -69,6 +69,7 @@ Plug 'Julian/vim-textobj-variable-segment'
 " Comment text object (ic / ac / aC)
 Plug 'glts/vim-textobj-comment'
 
+Plug 'sjl/gundo.vim/'
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -260,6 +261,8 @@ vnoremap <silent> <C-s> <Esc>:update<CR>gv
 " Format Json and set filetype (adapted from
 " coderwall.com/p/faceag/format-json-in-vim)
 noremap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
+
+nnoremap gu :GundoToggle<CR>
 
 " Make directory relative to current file.
 " TODO: make this a command instead e.g. MkdirRelative.
