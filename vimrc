@@ -142,7 +142,7 @@ au BufReadPost *.pscss set syntax=scss
 au BufReadPost *.xhaml set syntax=haml
 
 " Set other file types. (TODO: why difference between this and above?)
-au BufNewFile,BufRead .eslintrc set filetype=json
+au BufNewFile,BufRead .babelrc,.eslintrc set filetype=json
 au BufNewFile,BufRead gitconfig set filetype=gitconfig
 
 let g:vim_json_syntax_conceal = 0 " Don't hide Json syntax.
