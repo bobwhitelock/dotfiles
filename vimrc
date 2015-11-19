@@ -258,6 +258,10 @@ nnoremap <silent> <C-s> :update<CR>
 inoremap <silent> <C-s> <Esc>:update<CR>
 vnoremap <silent> <C-s> <Esc>:update<CR>gv
 
+" Map page up/down to C-u/C-d so cursor stays in same position.
+nnoremap <PageUp> <C-u>
+nnoremap <PageDown> <C-d>
+
 " Format Json and set filetype (adapted from
 " coderwall.com/p/faceag/format-json-in-vim)
 noremap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
