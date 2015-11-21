@@ -15,7 +15,6 @@
         create: true
     ~/.conkyrc: conkyrc
     ~/.screenrc: screenrc
-    ~/.xinitrc: xinitrc
     ~/.psqlrc: psqlrc
     ~/.sqliterc: sqliterc
     ~/.zshrc: zshrc
