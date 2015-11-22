@@ -20,6 +20,7 @@
 	work = config user.email 'bob.whitelock@alces-software.com'
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
+	snapshot = ! git stash save $(date) && git stash apply
 
 [color]
 	ui = true
