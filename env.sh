@@ -16,7 +16,7 @@ export DROP="$HOME/Dropbox"
 # if in anything other than zsh; doesn't happen currently and don't really care
 # about).
 if [ -n "$ZSH_VERSION" ]; then
-    export HISTFILE="$HOME/.zsh_history"
+    export HISTFILE="$DROP/.zsh_history"
 else
-    export HISTFILE="$HOME/.bash_history"
+    export HISTFILE="$DROP/.bash_history"
 fi
