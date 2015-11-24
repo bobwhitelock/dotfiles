@@ -72,7 +72,12 @@ Plug 'Julian/vim-textobj-variable-segment'
 " Comment text object (ic / ac / aC)
 Plug 'glts/vim-textobj-comment'
 
+" View tree of all undos.
 Plug 'sjl/gundo.vim/'
+
+" Automatically close HTML/XML tags.
+Plug 'alvan/vim-closetag'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -81,6 +86,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'evanmiller/nginx-vim-syntax'
+Plug 'nvie/vim-flake8'
 Plug 'yaymukund/vim-rabl'
 Plug 'tpope/vim-rails'
 Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
@@ -169,6 +175,8 @@ let g:mta_filetypes = {
     \ 'jinja' : 1,
     \ 'javascript.jsx' : 1,
     \}
+
+let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.js"
 
 let g:startify_bookmarks = ['~/.vimrc', '~/projects/alces/aviator', '~/projects/alces/exodus']
 let g:startify_session_persistence = 1 " Save Session.vim on quit or new session load (if exists already).
