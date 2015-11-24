@@ -156,6 +156,7 @@ let g:indentLine_char = '│' " indentLine character.
 
 let g:ctrlp_custom_ignore = 'node_modules'
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_use_caching = 0
 
 " In git repos have CtrlP show files known to git (tracked and untracked but
 " not ignored).
@@ -232,8 +233,11 @@ vnoremap <S-Tab> <gv
 noremap [<Backspace> mzkdd`z
 noremap ]<Backspace> mzjdd`z
 
-" `//` in visual mode to search for current selection.
-vnoremap // y/<C-R>"<CR>
+" * in visual mode to search for current selection.
+vnoremap * y/<C-R>"<CR>
+
+" Don't go to next immediately when searching current word.
+nnoremap * *N
 
 " Search and delete buffers.
 noremap <C-b> :CtrlPBuffer<CR>
@@ -273,11 +277,18 @@ nnoremap <PageDown> <C-d>
 " coderwall.com/p/faceag/format-json-in-vim)
 noremap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
 
-nnoremap gu :GundoToggle<CR>
+nnoremap ,gu :GundoToggle<CR>
 
 " Make directory relative to current file.
 " TODO: make this a command instead e.g. MkdirRelative.
 noremap ,mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
+
+" Git mappings.
+nnoremap gb :Gblame<CR>
+nnoremap gr :Ggrep! <cword> <CR><CR>
+nmap ,gs <Plug>GitGutterStageHunk
+nmap ,gr <Plug>GitGutterRevertHunk
+" TODO: grep for visual selection
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within
@@ -293,7 +304,3 @@ endfunction
 
 " Open quickfix window after any grep.
 autocmd QuickFixCmdPost *grep* cwindow
-
-" Fugitive mappings.
-nnoremap gb :Gblame<CR>
-nnoremap gr :Ggrep! <cword> <CR><CR>
