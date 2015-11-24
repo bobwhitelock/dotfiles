@@ -36,4 +36,7 @@
     ~/.config/sublime-text-2/Packages/User:
         path: config/sublime-text-2/Packages/User
         create: true
+    /home/bob/projects/alces/aviator/.tern-project:
+        path: tern/aviator-tern-project.json
+        create: false
 

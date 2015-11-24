@@ -1,3 +1,4 @@
 *.sw?
 Session.vim
 .idea
+.tern-project

@@ -60,6 +60,9 @@ Plug 'bkad/CamelCaseMotion'
 " Emacs-like handling of previously yanked text.
 Plug 'vim-scripts/YankRing.vim'
 
+" Better JavaScript support.
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+
 " For custom text objects, needed for all vim-textobj plugins.
 Plug 'kana/vim-textobj-user'
 
@@ -206,6 +209,10 @@ let g:yankring_replace_n_nkey = '<C-d>'
 " TODO: let jsx just use js URL.
 let g:investigate_url_for_javascript = "https://www.omniref.com/?language=javascript&q=^s"
 let g:investigate_url_for_javascriptjsx = "https://www.omniref.com/?language=javascript&q=^s"
+
+" Set up tern maps, see http://usevim.com/2013/05/24/tern/ for details.
+let g:tern_map_prefix = ','
+let g:tern_map_keys=1
 
 let mapleader = ','
 
