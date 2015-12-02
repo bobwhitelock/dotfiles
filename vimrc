@@ -72,6 +72,9 @@ Plug 'Julian/vim-textobj-variable-segment'
 " Comment text object (ic / ac / aC)
 Plug 'glts/vim-textobj-comment'
 
+" Entire buffer text object (ie / ae).
+Plug 'kana/vim-textobj-entire'
+
 " View tree of all undos.
 Plug 'sjl/gundo.vim/'
 
