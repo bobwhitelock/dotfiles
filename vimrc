@@ -212,7 +212,7 @@ nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>
 
 let g:HiCursorWords_delay = 100
 
-let g:yankring_replace_n_pkey = '<C-a>'
+let g:yankring_replace_n_pkey = '<C-u>'
 let g:yankring_replace_n_nkey = '<C-d>'
 
 " TODO: let jsx just use js URL.
@@ -292,8 +292,12 @@ nnoremap ,gu :GundoToggle<CR>
 noremap ,mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 
 " Git mappings.
+" TODO: change to plug mappings?
+" TODO: need to use nmap not nnoremap?
+" TODO: grep for visual selection
 nnoremap gb :Gblame<CR>
 nnoremap gr :Ggrep! <cword> <CR><CR>
+nnoremap ,gd :Gdiff<CR>
 nmap ,gs <Plug>GitGutterStageHunk
 nmap ,gr <Plug>GitGutterRevertHunk
 " TODO: grep for visual selection
