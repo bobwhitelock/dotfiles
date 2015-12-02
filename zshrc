@@ -85,6 +85,8 @@ source $ZSH/oh-my-zsh.sh
 DOTFILES="$HOME/.dotfiles"
 
 # Check existence of setxkbmap so doesn't break without X.
+# TODO Doesn't actually work, get message about cannot open display default
+# display; is $DISPLAY set, on machine with X but not available
 command -v setxkbmap >/dev/null 2>&1
 if [ $? ]; then
   # Ensure correct keyboard layout.
