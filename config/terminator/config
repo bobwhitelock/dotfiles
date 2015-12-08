@@ -11,6 +11,8 @@
   hide_window = <Shift><Control>a
 [profiles]
   [[default]]
+    custom_command = TERM=xterm-256color zsh -l # Use 256 colours.
+    use_custom_command = True
     scrollbar_position = hidden
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
     login_shell = True
