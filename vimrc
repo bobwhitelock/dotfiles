@@ -81,6 +81,9 @@ Plug 'sjl/gundo.vim/'
 " Automatically close HTML/XML tags.
 Plug 'alvan/vim-closetag'
 
+" Improved navigation between vim and tmux panes (C-h/C-j/C-k/C-l).
+Plug 'christoomey/vim-tmux-navigator'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -250,8 +253,7 @@ vnoremap * y/<C-R>"<CR>
 " Don't go to next immediately when searching current word.
 nnoremap * *N
 
-" Search and delete buffers.
-noremap <C-b> :CtrlPBuffer<CR>
+" Delete current buffer while preserving layout.
 noremap <C-c> :Bdelete<CR>
 
 " Open file relative to current file.
@@ -264,6 +266,7 @@ noremap ,h :wincmd s<CR>
 noremap ,v :wincmd v<CR>
 
 " Arrow keys navigate split screens.
+" TODO: possibly remove in favour of C-j etc added with vim-tmux-navigator
 noremap <silent> <Up> :wincmd k<CR>
 noremap <silent> <Down> :wincmd j<CR>
 noremap <silent> <Left> :wincmd h<CR>
@@ -303,7 +306,6 @@ nnoremap gr :Ggrep! <cword> <CR><CR>
 nnoremap ,gd :Gdiff<CR>
 nmap ,gs <Plug>GitGutterStageHunk
 nmap ,gr <Plug>GitGutterRevertHunk
-" TODO: grep for visual selection
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within

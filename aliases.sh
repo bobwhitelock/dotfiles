@@ -71,6 +71,9 @@ function xrandr_off() {
 alias vim="stty stop '' -ixoff ; vim"
 ttyctl -f
 
+# Ease transition between shell and vim.
+alias :q="exit"
+
 function launch() {
     ("$@" &> /dev/null &)
 }
