@@ -3,7 +3,6 @@
 	email = "(none)"
 
 [core]
-	editor = vim
 	pager = less -FRSX
 	excludesfile = ~/.gitignore
 
@@ -21,9 +20,13 @@
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
 	snapshot = ! git stash save $(date) && git stash apply
+	revisions = log --oneline --follow
 
 [color]
 	ui = true
 
 [color "diff"]
 	whitespace = red reverse
+
+[diff]
+	tool = vimdiff
