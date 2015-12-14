@@ -1,0 +1,84 @@
+# ~/.tmuxinator/flight.yml
+
+name: flight
+root: ~/
+
+# TODO: Settings which may be useful:
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t flight
+
+startup_window: aviator
+
+# Don't forget to indent twice within windows!
+
+# TODO:
+# Elmo SSH possibly - ssh -R 10.101.0.33:3003:localhost:3000 bob.whitelock@elmo
+# ssh-add github key/ alces gitlab key?
+
+windows:
+  - openstack-vpn:
+      root: ~/vpn/symphony-office-openstack
+      panes:
+        - sudo openvpn client.conf
+
+  - notes:
+      root: ~/Dropbox/notes
+      panes:
+        - vim
+
+  - vacs:
+      root: ~/projects/alces/portal-vacs
+      panes:
+        - valet:
+          # Clean up any previous container (probably a bad way to do this).
+          - docker ps -a | grep portal | cut -d ' ' -f1 | xargs docker stop
+          - docker ps -a | grep portal | cut -d ' ' -f1 | xargs docker rm
+          - docker/start.sh
+          - sleep 1 # Wait for logs to exist.
+          - less -W +F /var/log/valet.log
+
+  - bellman:
+      root: ~/projects/alces/bellman
+      panes:
+        - DATABASE_URL=postgres://bob@localhost/exodus ./node_modules/coffee-script/bin/coffee app.coffee
+
+  - database:
+      root: ~/projects/alces/exodus
+      layout: even-horizontal
+      panes:
+      - psql exodus
+      - bin/rails console
+
+  - exodus:
+      root: ~/projects/alces/exodus
+      layout: even-horizontal
+      panes:
+        - bundle exec foreman start --env config/foreman/local.dev.env
+        - vim
+
+  - aviator:
+      root: ~/projects/alces/aviator
+      # Layout obtained with `list-windows`.
+      layout: '8615,274x70,0,0{137x70,0,0[137x23,0,0,11,137x22,0,24,16,137x23,0,47,15],136x70,138,0,13}'
+      panes:
+        - npm run docker-dev-server
+        -
+        - npm run docker-test:watch
+        - vim
+
+  - dotfiles:
+      root: ~/.dotfiles
+      layout: even-horizontal
+      panes:
+        -
+        - vim

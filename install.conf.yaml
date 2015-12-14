@@ -20,8 +20,11 @@
     ~/.zshrc: zshrc
     ~/.tmux.conf: tmux.conf
     ~/.oh-my-zsh:
-      path: oh-my-zsh/
-      create: true
+        path: oh-my-zsh/
+        create: true
+    ~/.tmuxinator:
+        path: tmuxinator/
+        create: true
     ~/bin:
         path: bin/
         create: true
