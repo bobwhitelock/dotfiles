@@ -279,9 +279,9 @@ noremap <C-Left> :wincmd <<CR>
 noremap <C-Right> :wincmd ><CR>
 
 " C-s to save in different modes.
-nnoremap <silent> <C-s> :update<CR>
-inoremap <silent> <C-s> <Esc>:update<CR>
-vnoremap <silent> <C-s> <Esc>:update<CR>gv
+nnoremap <silent> <C-s> :write<CR>
+inoremap <silent> <C-s> <Esc>:write<CR>
+vnoremap <silent> <C-s> <Esc>:write<CR>gv
 
 " Map page up/down to C-u/C-d so cursor stays in same position.
 nnoremap <PageUp> <C-u>
