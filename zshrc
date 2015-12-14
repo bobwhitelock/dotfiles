@@ -84,6 +84,10 @@ source $ZSH/oh-my-zsh.sh
 
 DOTFILES="$HOME/.dotfiles"
 
+# Disable Software Flow Control for when I accidentally hit C-s.
+# (see http://unix.stackexchange.com/a/72092).
+stty -ixon
+
 # Check existence of setxkbmap so doesn't break without X.
 # TODO Doesn't actually work, get message about cannot open display default
 # display; is $DISPLAY set, on machine with X but not available
