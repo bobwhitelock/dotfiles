@@ -84,6 +84,10 @@ Plug 'alvan/vim-closetag'
 " Improved navigation between vim and tmux panes (C-h/C-j/C-k/C-l).
 Plug 'christoomey/vim-tmux-navigator'
 
+" Adds commands to resize/create splits to/for current visual selection
+" (VSResize, VSSplit etc).
+Plug 'wellle/visual-split.vim'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -108,6 +112,7 @@ Plug 'Yggdroot/indentLine' " Indentation lines.
 Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
 Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
 Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
+Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
 
 " Colorschemes.
 Plug 'tomasr/molokai'
