@@ -335,3 +335,6 @@ endfunction
 
 " Open quickfix window after any grep.
 autocmd QuickFixCmdPost *grep* cwindow
+
+" Resize panes whenever containing window resized.
+autocmd VimResized * wincmd =
