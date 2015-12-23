@@ -236,6 +236,24 @@ let g:tern_map_keys=1
 
 let mapleader = ','
 
+" Tmux window is maximized if any pane has the 'Z' flag.
+function! TmuxMaximized()
+  call system('tmux list-panes -F "#{window_flags}" | head -n 1 | grep Z')
+  return !v:shell_error
+endfunction
+
+" Define custom vim-tmux-navigator mappings: if window is maximized only move
+" within Vim panes, so navigating doesn't break out of Vim unexpectedly,
+" otherwise navigate between Vim and Tmux as normal.
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <expr> <C-h> TmuxMaximized() ? ':wincmd h<CR>' : ':TmuxNavigateLeft<CR>'
+nnoremap <silent> <expr> <C-j> TmuxMaximized() ? ':wincmd j<CR>' : ':TmuxNavigateDown<CR>'
+nnoremap <silent> <expr> <C-k> TmuxMaximized() ? ':wincmd k<CR>' : ':TmuxNavigateUp<CR>'
+nnoremap <silent> <expr> <C-l> TmuxMaximized() ? ':wincmd l<CR>' : ':TmuxNavigateRight<CR>'
+
+" Normal previous pane mapping.
+nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
+
 " Move by visual line.
 nnoremap j gj
 nnoremap k gk
