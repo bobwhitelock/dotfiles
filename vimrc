@@ -254,6 +254,10 @@ nnoremap <silent> <expr> <C-l> TmuxMaximized() ? ':wincmd l<CR>' : ':TmuxNavigat
 " Normal previous pane mapping.
 nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 
+" Refresh screen and clear highlight with C-q C-l in Tmux, or just C-q
+" otherwise (Tmux will then send us C-q). Mapping adapted from vim-sensible.
+nnoremap <silent> <C-q> :nohlsearch<C-r>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-l>
+
 " Move by visual line.
 nnoremap j gj
 nnoremap k gk
