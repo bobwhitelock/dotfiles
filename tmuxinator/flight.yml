@@ -57,13 +57,17 @@ windows:
       layout: even-horizontal
       panes:
       - psql exodus
-      - bin/rails console
+      - console:
+        - cd .. && cd - # Hack to make rvm use correct ruby for directory.
+        - bin/rails console
 
   - exodus:
       root: ~/projects/alces/exodus
       layout: even-horizontal
       panes:
-        - bundle exec foreman start --env config/foreman/local.dev.env
+        - server:
+          - cd .. && cd - # Hack to make rvm use correct ruby for directory.
+          - bundle exec foreman start --env config/foreman/local.dev.env
         - vim
 
   - aviator:
