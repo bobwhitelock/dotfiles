@@ -55,6 +55,7 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'keith/investigate.vim'
 
 " Motions through camel-case/underscore-case words (',b', ',w', ',e')
+" TODO: broken at the moment fsr.
 Plug 'bkad/CamelCaseMotion'
 
 " Emacs-like handling of previously yanked text.
@@ -237,7 +238,12 @@ let g:investigate_url_for_javascriptjsx = "https://www.omniref.com/?language=jav
 let g:tern_map_prefix = ','
 let g:tern_map_keys=1
 
-let mapleader = ','
+" Map Space to Leader; don't use `mapleader` so something shows in `showcmd`
+" corner.
+map <Space> <Leader>
+
+" Explicitly map double-space to double-leader for vim-easymotion.
+map <Space><Space> <Leader><Leader>
 
 " Tmux window is maximized if any pane has the 'Z' flag.
 function! TmuxMaximized()
@@ -291,9 +297,9 @@ noremap <C-e> :e <C-R>=expand("%:p:h") . "/" <CR>
 
 nnoremap <silent> <C-y> :YRShow<CR>
 
-" ,h/,v for horizontal/vertical splits.
-noremap ,h :wincmd s<CR>
-noremap ,v :wincmd v<CR>
+" Easily create horizontal/vertical splits.
+noremap <leader>h :wincmd s<CR>
+noremap <leader>v :wincmd v<CR>
 
 " Arrow keys navigate split screens.
 " TODO: possibly remove in favour of C-j etc added with vim-tmux-navigator
@@ -321,11 +327,11 @@ nnoremap <PageDown> <C-d>
 " coderwall.com/p/faceag/format-json-in-vim)
 noremap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
 
-nnoremap ,gu :GundoToggle<CR>
+nnoremap <leader>gu :GundoToggle<CR>
 
 " Make directory relative to current file.
 " TODO: make this a command instead e.g. MkdirRelative.
-noremap ,mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
+noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 
 " Git mappings.
 " TODO: change to plug mappings?
@@ -333,9 +339,9 @@ noremap ,mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 " TODO: grep for visual selection
 nnoremap gb :Gblame<CR>
 nnoremap gr :Ggrep! <cword> <CR><CR>
-nnoremap ,gd :Gdiff<CR>
-nmap ,gs <Plug>GitGutterStageHunk
-nmap ,gr <Plug>GitGutterRevertHunk
+nnoremap <leader>gd :Gdiff<CR>
+nmap <leader>gs <Plug>GitGutterStageHunk
+nmap <leader>gr <Plug>GitGutterRevertHunk
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within
