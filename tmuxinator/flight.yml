@@ -40,7 +40,7 @@ windows:
       root: ~/projects/alces/portal-vacs
       panes:
         - valet:
-          # Clean up any previous container (probably a bad way to do this).
+          # Clean up any previous containers (probably a bad way to do this).
           - docker ps -a | grep portal | cut -d ' ' -f1 | xargs docker stop
           - docker ps -a | grep portal | cut -d ' ' -f1 | xargs docker rm
           - docker/start.sh
@@ -75,7 +75,11 @@ windows:
       # Layout obtained with `list-windows`.
       layout: '8615,274x70,0,0{137x70,0,0[137x23,0,0,11,137x22,0,24,16,137x23,0,47,15],136x70,138,0,13}'
       panes:
-        - npm run docker-dev-server
+        - server:
+          # Clean up any previous containers (probably a bad way to do this).
+          - docker ps -a | grep aviator | cut -d ' ' -f1 | xargs docker stop
+          - docker ps -a | grep aviator | cut -d ' ' -f1 | xargs docker rm
+          - npm run docker-dev-server
         -
         - npm run docker-test:watch
         - vim
