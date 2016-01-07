@@ -50,24 +50,21 @@ windows:
   - bellman:
       root: ~/projects/alces/bellman
       panes:
-        - DATABASE_URL=postgres://bob@localhost/exodus ./node_modules/coffee-script/bin/coffee app.coffee
+        - DATABASE_URL=postgres://bob@localhost/postgres ./node_modules/coffee-script/bin/coffee app.coffee
 
   - database:
       root: ~/projects/alces/exodus
       layout: even-horizontal
       panes:
-      - psql exodus
-      - console:
-        - cd .. && cd - # Hack to make rvm use correct ruby for directory.
-        - bin/rails console
+        # TODO: Clean up containers first?
+        - docker exec -it exodus_db_1 psql -U postgres exodus
+        - docker exec -it exodus_web_1 bin/rails console
 
   - exodus:
       root: ~/projects/alces/exodus
       layout: even-horizontal
       panes:
-        - server:
-          - cd .. && cd - # Hack to make rvm use correct ruby for directory.
-          - bundle exec foreman start --env config/foreman/local.dev.env
+        - docker-compose up
         - vim
 
   - aviator:
@@ -81,6 +78,7 @@ windows:
           - docker ps -a | grep aviator | cut -d ' ' -f1 | xargs docker rm
           - npm run docker-dev-server
         -
+        # TODO: Sleep before this so previous containers can be cleared?
         - npm run docker-test:watch
         - vim
 
