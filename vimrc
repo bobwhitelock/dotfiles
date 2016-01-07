@@ -76,6 +76,18 @@ Plug 'glts/vim-textobj-comment'
 " Entire buffer text object (ie / ae).
 Plug 'kana/vim-textobj-entire'
 
+" For custom operators, needed for all vim-operator plugins.
+Plug 'kana/vim-operator-user'
+
+" Operator to replace with register content.
+Plug 'kana/vim-operator-replace'
+map _  <Plug>(operator-replace)
+
+" Operator to search web.
+Plug 'kana/vim-wwwsearch'
+map gW <Plug>(operator-wwwsearch)
+let g:wwwsearch_command_to_open_uri = "xdg-open {uri}"
+
 " View tree of all undos.
 Plug 'sjl/gundo.vim/'
 
