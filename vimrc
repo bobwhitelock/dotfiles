@@ -21,6 +21,9 @@ Plug 'tpope/vim-vinegar'
 " Various paired bracket mappings.
 Plug 'tpope/vim-unimpaired'
 
+" Date/time handling for C-a and C-x.
+Plug 'tpope/vim-speeddating'
+
 " Sublime-like multiple cursors (C-n).
 Plug 'terryma/vim-multiple-cursors'
 
