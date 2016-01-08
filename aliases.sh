@@ -71,6 +71,10 @@ function xrandr_off() {
 alias vim="stty stop '' -ixoff ; vim"
 ttyctl -f
 
+# Listing and removing swp files within directory or children.
+alias swps="ls -l **/.*.sw?"
+alias swp_cleanup="rm -i **/.*sw?"
+
 # Ease transition between shell and vim.
 alias :q="exit"
 
