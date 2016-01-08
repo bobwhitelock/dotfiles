@@ -100,8 +100,8 @@ Plug 'alvan/vim-closetag'
 " Improved navigation between vim and tmux panes (C-h/C-j/C-k/C-l).
 Plug 'christoomey/vim-tmux-navigator'
 
-" More easily navigate buffer.
-Plug 'easymotion/vim-easymotion'
+" 2-character search motion (s/S).
+Plug 'justinmk/vim-sneak'
 
 " Adds commands to resize/create splits to/for current visual selection
 " (VSResize, VSSplit etc).
