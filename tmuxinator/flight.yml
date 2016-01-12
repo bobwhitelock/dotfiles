@@ -56,14 +56,18 @@ windows:
       root: ~/projects/alces/exodus
       layout: even-horizontal
       panes:
-        # TODO: Clean up containers first?
-        - docker exec -it exodus_db_1 psql -U postgres exodus
-        - docker exec -it exodus_web_1 bin/rails console
+        - database:
+          - sleep 5 # Wait for container to start.
+          - docker exec -it exodus_db_1 psql -U postgres exodus
+        - console:
+          - sleep 5 # Wait for container to start.
+          - docker exec -it exodus_web_1 bin/rails console
 
   - exodus:
       root: ~/projects/alces/exodus
       layout: even-horizontal
       panes:
+        # TODO: Clean up containers first?
         - docker-compose up
         - vim
 
@@ -78,8 +82,9 @@ windows:
           - docker ps -a | grep aviator | cut -d ' ' -f1 | xargs docker rm
           - npm run docker-dev-server
         -
-        # TODO: Sleep before this so previous containers can be cleared?
-        - npm run docker-test:watch
+        - tests:
+          - sleep 5 # Wait for any other containers to be removed.
+          - npm run docker-test:watch
         - vim
 
   - dotfiles:
