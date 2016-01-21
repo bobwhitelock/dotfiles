@@ -1,5 +1,9 @@
 
-export PATH="$PATH:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin:./node_modules/.bin"
+
+# As suggested to make Yeoman work in
+# https://github.com/creationix/nvm/issues/586#issuecomment-68220064.
+export NODE_PATH=$NODE_PATH:`npm root -g`
 
 export EDITOR="vim"
 export VISUAL="vim"
