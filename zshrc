@@ -136,3 +136,6 @@ unset ASH_CFG_MOTD # Don't show message at shell start.
 
 # Enable thefuck.
 eval "$(thefuck --alias)"
+
+export NVM_DIR="/home/bob/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
