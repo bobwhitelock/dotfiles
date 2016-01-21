@@ -78,6 +78,15 @@ alias swp_cleanup="rm -i **/.*sw?"
 # Ease transition between shell and vim.
 alias :q="exit"
 
+# Because I can never remember how to do this.
+function whats-blocking-port() {
+    if [ -z "$1" ]; then
+        sudo netstat -tulpn
+    else
+        sudo netstat -tulpn | grep ":$1[[:space:]]"
+    fi
+}
+
 function launch() {
     ("$@" &> /dev/null &)
 }
