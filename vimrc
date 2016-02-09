@@ -363,9 +363,7 @@ noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 " Git mappings.
 " TODO: change to plug mappings?
 " TODO: need to use nmap not nnoremap?
-" TODO: grep for visual selection
 nnoremap gb :Gblame<CR>
-nnoremap gr :Ggrep! <cword> <CR><CR>
 nnoremap <leader>gd :Gdiff<CR>
 nmap <leader>gs <Plug>GitGutterStageHunk
 nmap <leader>gr <Plug>GitGutterRevertHunk
