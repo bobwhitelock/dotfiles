@@ -370,6 +370,9 @@ nnoremap <leader>gd :Gdiff<CR>
 nmap <leader>gs <Plug>GitGutterStageHunk
 nmap <leader>gr <Plug>GitGutterRevertHunk
 
+" Resize to show entire buffer (or as much as possible).
+nmap <silent> gV vae:VSResize<CR>
+
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within
 " Tmux).
