@@ -150,7 +150,6 @@ call plug#end()
 
 colorscheme molokai
 
-set hlsearch " Highlight search results.
 set cursorline " Highlight current line.
 
 " Highlight settings.
