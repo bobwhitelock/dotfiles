@@ -21,6 +21,7 @@
 	pull-submodules = submodule foreach git pull
 	snapshot = ! git stash save $(date) && git stash apply
 	revisions = log --oneline --follow
+	add-deleted = ! git rm $(git ls-files --deleted)
 
 [color]
 	ui = true
