@@ -79,6 +79,9 @@ Plug 'glts/vim-textobj-comment'
 " Entire buffer text object (ie / ae).
 Plug 'kana/vim-textobj-entire'
 
+" HTML/XML attribute text object (ix / ax).
+Plug 'whatyouhide/vim-textobj-xmlattr'
+
 " For custom operators, needed for all vim-operator plugins.
 Plug 'kana/vim-operator-user'
 
