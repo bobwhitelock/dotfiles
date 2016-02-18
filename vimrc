@@ -125,7 +125,8 @@ Plug 'wellle/visual-split.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
 Plug 'andreimaxim/vim-io'
-Plug 'pangloss/vim-javascript'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'gavocanov/vim-js-indent'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'evanmiller/nginx-vim-syntax'
@@ -146,6 +147,7 @@ Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
 Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
 Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
 Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
+Plug 'ap/vim-css-color' " Highlight background of CSS colors.
 
 " Colorschemes.
 Plug 'tomasr/molokai'
