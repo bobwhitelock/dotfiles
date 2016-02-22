@@ -71,9 +71,11 @@ function xrandr_off() {
 alias vim="stty stop '' -ixoff ; vim"
 ttyctl -f
 
-# Listing and removing swp files within directory or children.
-alias swps="ls -l **/.*.sw?"
-alias swp_cleanup="rm -i **/.*sw?"
+# Listing and removing swp files.
+swps_path="~/.vim/swps/*sw?"
+alias swps="ls -l $swps_path"
+alias swp_cleanup="rm $swps_path"
+unset swps_path
 
 # Ease transition between shell and vim.
 alias :q="exit"
@@ -85,10 +87,6 @@ function whats-blocking-port() {
     else
         sudo netstat -tulpn | grep ":$1[[:space:]]"
     fi
-}
-
-function launch() {
-    ("$@" &> /dev/null &)
 }
 
 # Swap 2 filenames around, if they exist (from Uzi's bashrc).
