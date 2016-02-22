@@ -33,3 +33,5 @@
 	tool = vimdiff
 [merge]
 	ff = false
+[pull]
+	ff = true
