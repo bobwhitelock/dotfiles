@@ -127,3 +127,7 @@ function extract() {
         echo "'$1' is not a valid file!"
     fi
 }
+
+function yaml_validate() {
+    ruby -e "require 'yaml'; YAML.load_file('$1')"
+}
