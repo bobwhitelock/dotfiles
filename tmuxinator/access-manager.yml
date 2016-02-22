@@ -1,0 +1,41 @@
+# ~/.tmuxinator/access-manager.yml
+
+name: access-manager
+root: ~/
+
+windows:
+  - notes:
+      root: ~/Dropbox/notes
+      panes:
+        - vim
+
+  - client:
+      root: ~/projects/alces/alces-access-manager/client
+      layout: '4fa4,274x72,0,0{136x72,0,0[136x36,0,0,14,136x35,0,37,31],137x72,137,0,19}'
+      panes:
+        - npm start
+        -
+        - vim
+
+  - server:
+      root: ~/projects/alces/alces-access-manager/server
+      layout: '4fa4,274x72,0,0{136x72,0,0[136x36,0,0,14,136x35,0,37,31],137x72,137,0,19}'
+      panes:
+        - bin/rails server
+        -
+        - vim
+
+  - clusterware:
+      root: ~/projects/alces/alces-access-manager/dev/clusterware-el7
+      panes:
+        - vm:
+          - vagrant up
+          # Forward port daemon running on.
+          - ssh -L 25269:10.0.2.15:25269 -p 2222 vagrant@localhost
+
+  - dotfiles:
+      root: ~/.dotfiles
+      layout: even-horizontal
+      panes:
+        -
+        - vim
