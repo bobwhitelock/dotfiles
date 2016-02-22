@@ -1,4 +1,6 @@
 *.sw?
 Session.vim
+__LAST__
 .idea
 .tern-project
+.byebug_history
