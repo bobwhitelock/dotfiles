@@ -181,6 +181,9 @@ set hidden " Allow hidden buffers with unsaved content.
 
 set nostartofline " Don't move cursor to start of line after various commands.
 
+set ignorecase " Ignore case in searches...
+set smartcase " ...unless search includes a capital.
+
 set spell spelllang=en_gb " Enable spell checking (z= for corrections).
 
 " Ignore these, specifically so not included in CtrlP file list.
@@ -191,6 +194,8 @@ set scrolloff=8
 set sidescrolloff=15
 set sidescroll=1
 
+" Allow use of `gf` for relative imports in JS.
+set suffixesadd+=.js
 
 " Highlighting for Portal Sass and XHtml Haml templates (see lib/alces/action_view/templates.rb).
 au BufReadPost *.pscss set syntax=scss
@@ -267,7 +272,7 @@ let g:investigate_url_for_javascript = "https://www.omniref.com/?language=javasc
 let g:investigate_url_for_javascriptjsx = "https://www.omniref.com/?language=javascript&q=^s"
 
 " Set up tern maps, see http://usevim.com/2013/05/24/tern/ for details.
-let g:tern_map_prefix = ','
+let g:tern_map_prefix = '<leader>'
 let g:tern_map_keys=1
 
 " Map Space to Leader; don't use `mapleader` so something shows in `showcmd`
