@@ -4,3 +4,4 @@ __LAST__
 .idea
 .tern-project
 .byebug_history
+npm-debug.log
