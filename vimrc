@@ -121,6 +121,10 @@ Plug 'justinmk/vim-sneak'
 " (VSResize, VSSplit etc).
 Plug 'wellle/visual-split.vim'
 
+" Make syntastic use local rather than global eslint - means uses installed
+" eslint plugins as well.
+Plug 'pmsorhaindo/syntastic-local-eslint.vim'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
