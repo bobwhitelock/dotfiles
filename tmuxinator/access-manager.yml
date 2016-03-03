@@ -3,6 +3,8 @@
 name: access-manager
 root: ~/
 
+pre: cd ~/projects/alces/alces-access-manager/dev/clusterware-el7 && vagrant up
+
 windows:
   - notes:
       root: ~/Dropbox/notes
@@ -27,11 +29,13 @@ windows:
 
   - clusterware:
       root: ~/projects/alces/alces-access-manager/dev/clusterware-el7
+      layout: even-horizontal
       panes:
-        - vm:
-          - vagrant up
-          # Forward port daemon running on.
-          - ssh -L 25269:10.0.2.15:25269 -p 2222 vagrant@localhost
+        # Forward port daemon running on.
+        - ssh -L 25269:10.0.2.15:25269 -p 2222 vagrant@localhost
+
+        # Forward port first session will start on.
+        - ssh -L 41361:10.0.2.15:41361 -p 2222 vagrant@localhost
 
   - dotfiles:
       root: ~/.dotfiles
