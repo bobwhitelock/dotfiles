@@ -372,14 +372,22 @@ noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 
 " Git mappings.
 " TODO: change to plug mappings?
-" TODO: need to use nmap not nnoremap?
 nnoremap gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nmap <leader>gs <Plug>GitGutterStageHunk
 nmap <leader>gr <Plug>GitGutterRevertHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap ]h <Plug>GitGutterNextHunk
+
+" Quick JS logging.
+nnoremap gl oconsole.log() // eslint-disable-line no-console<esc>F)
+nnoremap gL Oconsole.log() // eslint-disable-line no-console<esc>F)
 
 " Resize to show entire buffer (or as much as possible).
-nmap <silent> gV vae:VSResize<CR>
+nmap <silent> gV mzvae:VSResize<CR>`z
+
+" Resize to visual selection.
+vmap <silent> gV mz:VSResize<CR>`z
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within
