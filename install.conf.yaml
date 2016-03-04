@@ -37,10 +37,9 @@
     ~/.config/tint2:
         path: config/tint2/
         create: true
-    ~/.config/sublime-text-2/Packages/User:
-        path: config/sublime-text-2/Packages/User
+    ~/.config/htop:
+        path: config/htop
         create: true
-    /home/bob/projects/alces/aviator/.tern-project:
+    ~/projects/alces/aviator/.tern-project:
         path: tern/aviator-tern-project.json
         create: false
-
