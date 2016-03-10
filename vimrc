@@ -145,13 +145,16 @@ Plug 'tpope/vim-sleuth' " Automatic indent settings.
 Plug 'tpope/vim-repeat' " Make '.' work with mappings.
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
-Plug 'bling/vim-airline' " Status line.
 Plug 'Yggdroot/indentLine' " Indentation lines.
 Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
 Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
 Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
 Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
 Plug 'ap/vim-css-color' " Highlight background of CSS colors.
+
+ " Status line. Currently pinned to old commit as colours broke on upgrade.
+ " TODO: Install patched font?
+Plug 'bling/vim-airline', { 'commit': 'ca6ab34' }
 
 " Colorschemes.
 Plug 'tomasr/molokai'
