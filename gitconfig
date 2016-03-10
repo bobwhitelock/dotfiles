@@ -22,6 +22,8 @@
 	snapshot = ! git stash save $(date) && git stash apply
 	revisions = log --oneline --follow
 	add-deleted = ! git rm $(git ls-files --deleted)
+	tracked-files = ls-tree --full-tree -r HEAD
+	ls-revisions = ls-revisions
 
 [color]
 	ui = true
