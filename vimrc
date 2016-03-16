@@ -363,10 +363,9 @@ noremap <C-Down> :wincmd -<CR>
 noremap <C-Left> :wincmd <<CR>
 noremap <C-Right> :wincmd ><CR>
 
-" C-s to save in different modes.
-nnoremap <silent> <C-s> :write<CR>
-inoremap <silent> <C-s> <Esc>:write<CR>
-vnoremap <silent> <C-s> <Esc>:write<CR>
+" C-s to save in all modes.
+noremap <silent> <C-s> <Esc>:write<CR>
+noremap! <silent> <C-s> <Esc>:write<CR>
 
 " Map page up/down to C-u/C-d so cursor stays in same position.
 nnoremap <PageUp> <C-u>
@@ -377,6 +376,8 @@ nnoremap <PageDown> <C-d>
 noremap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
 
 nnoremap <leader>gu :GundoToggle<CR>
+
+vnoremap gz :sort<CR>
 
 " Make directory relative to current file.
 " TODO: make this a command instead e.g. MkdirRelative.
@@ -392,8 +393,8 @@ nmap [h <Plug>GitGutterPrevHunk
 nmap ]h <Plug>GitGutterNextHunk
 
 " Quick JS logging.
-nnoremap gl oconsole.log() // eslint-disable-line no-console<esc>F)
-nnoremap gL Oconsole.log() // eslint-disable-line no-console<esc>F)
+nnoremap gl oconsole.log() // eslint-disable-line no-console<esc>F)i
+nnoremap gL Oconsole.log() // eslint-disable-line no-console<esc>F)i
 
 " Resize to show entire buffer (or as much as possible).
 nmap <silent> gV mzvae:VSResize<CR>`z
