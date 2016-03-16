@@ -213,6 +213,10 @@ au BufNewFile,BufRead .babelrc set filetype=javascript
 au BufNewFile,BufRead .eslintrc set filetype=json
 au BufNewFile,BufRead gitconfig set filetype=gitconfig
 
+" Low vim-plug timeout to get around issue where installing fails sometimes
+" and have to wait 60 seconds for timeout.
+let g:plug_timeout = 5
+
 let g:vim_json_syntax_conceal = 0 " Don't hide Json syntax.
 
 let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
@@ -222,6 +226,7 @@ let g:indentLine_char = '│' " indentLine character.
 let g:ctrlp_custom_ignore = 'node_modules'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_use_caching = 0
+let g:ctrlp_reuse_window = 'startify'
 
 " In git repos have CtrlP show files known to git (tracked and untracked but
 " not ignored).
