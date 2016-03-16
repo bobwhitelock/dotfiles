@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Map caps lock to escape when tapped and ctrl when held (see
+# http://www.economyofeffort.com/2014/08/11/beyond-ctrl-remap-make-that-caps-lock-key-useful/).
+setxkbmap -option 'caps:ctrl_modifier'
+xcape -e 'Caps_Lock=Escape'
+
+# TODO: This reverts back sometimes (after plugging in monitor or shutting
+# screen?) and need to rerun.

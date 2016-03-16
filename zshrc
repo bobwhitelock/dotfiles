@@ -95,14 +95,6 @@ command -v setxkbmap >/dev/null 2>&1
 if [ $? ]; then
   # Ensure correct keyboard layout.
   setxkbmap gb
-
-  # Map caps lock to escape when tapped and ctrl when held (see
-  # http://www.economyofeffort.com/2014/08/11/beyond-ctrl-remap-make-that-caps-lock-key-useful/).
-  # TODO: Having this here means caps lock sends another escape with every term
-  # opened, so caps lock is actually mapped to (escape * no terms opened).
-  # Which isn't ideal.
-  setxkbmap -option 'caps:ctrl_modifier'
-  xcape -e 'Caps_Lock=Escape'
 fi
 
 unsetopt share_history
