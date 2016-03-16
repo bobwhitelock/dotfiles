@@ -36,4 +36,4 @@
 [merge]
 	ff = false
 [pull]
-	ff = true
+	ff = only
