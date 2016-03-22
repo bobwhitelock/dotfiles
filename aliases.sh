@@ -4,12 +4,6 @@ alias pyserver="python -m SimpleHTTPServer 8000"
 alias pvm='sshpass -p alces ssh portalvm'
 alias vacsvm='ssh bob@127.0.0.1 -p 9322'
 
-# For 'detached screen'; launches screen for command with same name as command.
-#complete -A command ds TODO: commented for moment as errors in zsh
-function ds() {
-    screen -d -m -S "$*" $@
-}
-
 # Some ls aliases.
 alias ll='ls -alF'
 alias la='ls -A'
@@ -54,10 +48,42 @@ alias pdir='cd ~/alces-portal'
 # Alces aliases.
 alias portal='cd ~/projects/alces/alces-portal-vm'
 alias pegacluster='cd ~/projects/alces/pegacluster'
+function alces_kill_all_sessions() {
+    for i in $(alces session list | cut -d ' ' -f 2 | tail -n +4 | head -n -1); do
+        alces session kill $i
+    done
+    alces session clean
+}
 
 # Shortcuts for frequent xrandr commands.
-alias xrandr_laptop_dual='xrandr --output eDP1 --mode 1360x768 --left-of HDMI1 --output HDMI1 --auto && conkywonky'
-alias xrandr_laptop_single='xrandr --output eDP1 --auto --output HDMI1 --off && conkywonky'
+alias xrandr_laptop_single='xrandr \
+    --output DP2 --off \
+    --output DP1 --off \
+    --output HDMI3 --off \
+    --output HDMI2 --off \
+    --output HDMI1 --off \
+    --output eDP1 --mode 1360x768 --pos 80x900 --rotate normal \
+    --output VGA1 --off \
+    && conkywonky'
+alias xrandr_laptop_dual='xrandr \
+    --output DP2 --off \
+    --output DP1 --off \
+    --output HDMI3 --off \
+    --output HDMI2 --off \
+    --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal \
+    --output eDP1 --mode 1920x1080 --pos 0x0 --rotate normal \
+    --output VGA1 --off \
+    && conkywonky'
+alias xrandr_laptop_triple='xrandr \
+    --output DP2 --off \
+    --output DP1 --off \
+    --output HDMI3 --off \
+    --output HDMI2 --off \
+    --output HDMI1 --mode 1920x1080 --pos 1440x900 --rotate normal \
+    --output eDP1 --mode 1360x768 --pos 80x900 --rotate normal \
+    --output VGA1 --mode 1440x900 --pos 0x0 --rotate normal \
+    && conkywonky'
+
 function xrandr_off() {
     for output in "$(xrandr | cut -d ' '  -f 1 | grep -i "$@")"; do
         xrandr --output "$output" --off
