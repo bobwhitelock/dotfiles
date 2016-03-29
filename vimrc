@@ -121,6 +121,10 @@ Plug 'justinmk/vim-sneak'
 " (VSResize, VSSplit etc).
 Plug 'wellle/visual-split.vim'
 
+" Numerous extra text objects (see
+" https://github.com/wellle/targets.vim/blob/master/cheatsheet.md).
+Plug 'wellle/targets.vim'
+
 " Make syntastic use local rather than global eslint - means uses installed
 " eslint plugins as well.
 Plug 'pmsorhaindo/syntastic-local-eslint.vim'
