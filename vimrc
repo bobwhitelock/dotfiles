@@ -244,7 +244,7 @@ let g:mta_filetypes = {
     \ 'javascript.jsx' : 1,
     \}
 
-let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.js"
+let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.js,*.html.erb"
 
 let g:startify_bookmarks = ['~/.vimrc', '~/projects/alces/aviator', '~/projects/alces/exodus']
 let g:startify_session_persistence = 1 " Save Session.vim on quit or new session load (if exists already).
