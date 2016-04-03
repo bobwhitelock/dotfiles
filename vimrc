@@ -208,6 +208,9 @@ set sidescroll=1
 " Allow use of `gf` for relative imports in JS.
 set suffixesadd+=.js
 
+" Count '-' as part of a word; useful for CSS in particular.
+set iskeyword+=-
+
 " Highlighting for Portal Sass and XHtml Haml templates (see lib/alces/action_view/templates.rb).
 au BufReadPost *.pscss set syntax=scss
 au BufReadPost *.xhaml set syntax=haml
@@ -216,6 +219,7 @@ au BufReadPost *.xhaml set syntax=haml
 au BufNewFile,BufRead .babelrc set filetype=javascript
 au BufNewFile,BufRead .eslintrc set filetype=json
 au BufNewFile,BufRead gitconfig set filetype=gitconfig
+au BufNewFile,BufRead Vagrantfile set filetype=ruby
 
 " Low vim-plug timeout to get around issue where installing fails sometimes
 " and have to wait 60 seconds for timeout.
@@ -403,8 +407,16 @@ nnoremap gL Oconsole.log() // eslint-disable-line no-console<esc>F)i
 " Resize to show entire buffer (or as much as possible).
 nmap <silent> gV mzvae:VSResize<CR>`z
 
-" Resize to visual selection.
+" Resize to/split out visual selection.
 vmap <silent> gV mz:VSResize<CR>`z
+vmap <silent> gR mz:VSSplitAbove<CR>`z
+
+" Use X clipboard.
+" TODO: Have this switch back the other way to Vim clipboard too.
+nnoremap cox :set clipboard=unnamedplus<CR>
+
+" Join current line with line above.
+nnoremap K kJ
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within
