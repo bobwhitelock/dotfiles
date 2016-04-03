@@ -19,9 +19,6 @@
     ~/.sqliterc: sqliterc
     ~/.zshrc: zshrc
     ~/.tmux.conf: tmux.conf
-    ~/.oh-my-zsh:
-        path: oh-my-zsh/
-        create: true
     ~/.tmuxinator:
         path: tmuxinator/
         create: true
