@@ -62,7 +62,7 @@ alias xrandr_laptop_single='xrandr \
     --output HDMI3 --off \
     --output HDMI2 --off \
     --output HDMI1 --off \
-    --output eDP1 --mode 1360x768 --pos 80x900 --rotate normal \
+    --output eDP1 --mode 1920x1080 --pos 0x0 --rotate normal \
     --output VGA1 --off \
     && conkywonky'
 alias xrandr_laptop_dual='xrandr \
