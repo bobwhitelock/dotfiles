@@ -220,6 +220,7 @@ au BufReadPost *.xhaml set syntax=haml
 " Set other file types. (TODO: why difference between this and above?)
 au BufNewFile,BufRead .babelrc set filetype=javascript
 au BufNewFile,BufRead .eslintrc set filetype=json
+au BufNewFile,BufRead .reduxrc set filetype=json
 au BufNewFile,BufRead gitconfig set filetype=gitconfig
 au BufNewFile,BufRead Vagrantfile set filetype=ruby
 
