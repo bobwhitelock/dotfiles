@@ -13,6 +13,8 @@ function cl() {
     cd "$@" && l
 }
 
+alias tree="tree --filelimit 50" # Nicer default.
+
 # Git aliases.
 alias g='git'
 alias gp='git push'
