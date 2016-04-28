@@ -22,53 +22,68 @@ startup_window: aviator
 # Don't forget to indent twice within windows!
 
 # TODO:
-# Elmo SSH possibly - ssh -R 10.101.0.33:3003:localhost:3000 bob.whitelock@elmo
 # ssh-add github key/ alces gitlab key?
 
 windows:
-  - openstack-vpn:
-      root: ~/vpn/symphony-office-openstack
+  - services:
+      layout: tiled
       panes:
-        - sudo openvpn client.conf
+        - openstack-vpn:
+          - cd ~/vpn/symphony-office-openstack
+          - sudo openvpn client.conf
+
+        - bellman:
+          - cd ~/projects/alces/bellman
+          - DATABASE_URL=postgres://bob@localhost/postgres ./node_modules/coffee-script/bin/coffee app.coffee
+
+        - elmo:
+          # SSH port forward required to launch clusters, need to access Flight
+          # at `10.101.0.33:4567`.
+          - ssh -R 10.101.0.33:4567:localhost:3000 elmo
 
   - notes:
       root: ~/Dropbox/notes
       panes:
         - vim
 
-  - vacs:
+  - valet:
       root: ~/projects/alces/portal-vacs
+      layout: '6d51,274x72,0,0{136x72,0,0[136x36,0,0,2,136x35,0,37,17],137x72,137,0,8}'
       panes:
-        - valet:
+        - log:
           # Clean up any previous containers (probably a bad way to do this).
           - docker ps -a | grep portal | cut -d ' ' -f1 | xargs docker stop
           - docker ps -a | grep portal | cut -d ' ' -f1 | xargs docker rm
           - docker/start.sh
           - sleep 1 # Wait for logs to exist.
           - less -W +F /var/log/valet.log
+        - shell:
+          - sleep 5 # Wait for container to start.
+          - docker exec -it portal-vacs bash
+        - valet:
+          - cd ../valet
+          - vim
 
-  - bellman:
-      root: ~/projects/alces/bellman
-      panes:
-        - DATABASE_URL=postgres://bob@localhost/postgres ./node_modules/coffee-script/bin/coffee app.coffee
-
-  - database:
+  - database/shell:
       root: ~/projects/alces/exodus
-      layout: even-horizontal
+      layout: tiled
       panes:
         - database:
           - sleep 5 # Wait for container to start.
-          - docker exec -it exodus_db_1 psql -U postgres exodus
+          - bin/docker-psql.sh
         - console:
           - sleep 5 # Wait for container to start.
           - docker exec -it exodus_web_1 bin/rails console
+        - shell:
+          - sleep 5 # Wait for container to start.
+          - docker exec -it exodus_web_1 bash
 
   - exodus:
       root: ~/projects/alces/exodus
       layout: even-horizontal
       panes:
         # TODO: Clean up containers first?
-        - docker-compose up
+        - bin/docker-start.sh
         - vim
 
   - aviator:
