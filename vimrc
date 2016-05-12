@@ -24,6 +24,9 @@ Plug 'tpope/vim-unimpaired'
 " Date/time handling for C-a and C-x.
 Plug 'tpope/vim-speeddating'
 
+" Readline key bindings for Vim (C-a, C-e etc.).
+Plug 'tpope/vim-rsi'
+
 " Sublime-like multiple cursors (C-n).
 Plug 'terryma/vim-multiple-cursors'
 
