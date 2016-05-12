@@ -1,8 +1,4 @@
 
-alias pyserver="python -m SimpleHTTPServer 8000"
-
-alias pvm='sshpass -p alces ssh portalvm'
-alias vacsvm='ssh bob@127.0.0.1 -p 9322'
 
 # Some ls aliases.
 alias ll='ls -alF'
@@ -13,7 +9,9 @@ function cl() {
     cd "$@" && l
 }
 
-alias tree="tree --filelimit 50" # Nicer default.
+# Misc aliases.
+alias tree="tree -C --filelimit 50"
+alias pyserver="python -m SimpleHTTPServer 8000"
 
 # Git aliases.
 alias g='git'
@@ -40,16 +38,17 @@ alias gbir='git bisect reset'
 alias gbib='git bisect bad'
 alias gbig='git bisect good'
 
-# Portal aliases.
+# Alces aliases/functions.
 alias pscreen='cd ~/alces-portal && screen -dr portal'
 alias plog='cd ~/alces-portal && less log/development.log'
 alias pconsole='cd ~/alces-portal && bin/rails console'
 alias ppostgres='cd ~/alces-portal && psql portal'
 alias pdir='cd ~/alces-portal'
 
-# Alces aliases.
-alias portal='cd ~/projects/alces/alces-portal-vm'
-alias pegacluster='cd ~/projects/alces/pegacluster'
+alias pvm='sshpass -p alces ssh portalvm'
+alias vacsvm='ssh bob@127.0.0.1 -p 9322'
+
+# Kill/clean any running/leftover Clusterware sessions.
 function alces_kill_all_sessions() {
     for i in $(alces session list | cut -d ' ' -f 2 | tail -n +4 | head -n -1); do
         alces session kill $i
