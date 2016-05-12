@@ -21,3 +21,11 @@ if [ -n "$ZSH_VERSION" ]; then
 else
     export HISTFILE="$DROP/.bash_history"
 fi
+
+# Effectively store unlimited history.
+export HISTSIZE=999999999
+export SAVEHIST=$HISTSIZE
+
+export PROJECTS="$HOME/projects"
+export ALCES_PROJECTS="$PROJECTS/alces"
+export OTHER_PROJECTS="$PROJECTS/other"
