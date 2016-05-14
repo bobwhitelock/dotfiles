@@ -20,7 +20,8 @@
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
 	snapshot = ! git stash save $(date) && git stash apply
-	revisions = log --oneline --follow
+	revisions = log --oneline --follow --
+	revisions-full = log -p --follow --
 	add-deleted = ! git rm $(git ls-files --deleted)
 	tracked-files = ls-tree --full-tree -r HEAD
 	ls-revisions = ls-revisions
