@@ -420,7 +420,8 @@ nmap <silent> gV mzvae:VSResize<CR>`z
 
 " Resize to/split out visual selection.
 vmap <silent> gV mz:VSResize<CR>`z
-vmap <silent> gR mz:VSSplitAbove<CR>`z
+vmap <silent> gA mz:VSSplitAbove<CR>`z
+vmap <silent> gB mz:VSSplitBelow<CR>`z
 
 " Use X clipboard.
 " TODO: Have this switch back the other way to Vim clipboard too.
