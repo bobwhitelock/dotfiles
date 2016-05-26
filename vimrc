@@ -216,6 +216,11 @@ set suffixesadd+=.js
 " Count '-' as part of a word; useful for CSS in particular.
 set iskeyword+=-
 
+" Allow modeline settings.
+" TODO: Apparently insecure sometimes.
+set modeline
+set modelines=50
+
 " Highlighting for Portal Sass and XHtml Haml templates (see lib/alces/action_view/templates.rb).
 au BufReadPost *.pscss set syntax=scss
 au BufReadPost *.xhaml set syntax=haml
