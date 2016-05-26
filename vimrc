@@ -57,6 +57,9 @@ Plug 'AndrewRadev/splitjoin.vim'
 " Switch text with pre-defined replacements e.g. || <-> && (gs).
 Plug 'AndrewRadev/switch.vim'
 
+" Reopen last-closed window (C-w u)
+Plug 'AndrewRadev/undoquit.vim'
+
 " Look up documentation for word under cursor (gK).
 Plug 'keith/investigate.vim'
 
@@ -160,6 +163,7 @@ Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
 Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
 Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
 Plug 'ap/vim-css-color' " Highlight background of CSS colors.
+Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
 
  " Status line. Currently pinned to old commit as colours broke on upgrade.
  " TODO: Install patched font?
