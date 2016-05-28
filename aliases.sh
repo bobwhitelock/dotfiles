@@ -10,7 +10,7 @@ function cl() {
 }
 
 # Misc aliases.
-alias tree="tree -C --filelimit 50"
+alias tree="tree -C -a --filelimit 50"
 alias pyserver="python -m SimpleHTTPServer 8000"
 
 # Git aliases.
