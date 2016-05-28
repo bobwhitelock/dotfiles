@@ -107,6 +107,14 @@ unset swps_path
 # Ease transition between shell and vim.
 alias :q="exit"
 
+# Forward host port to same port on a Vagrant VM using SSH port forwarding.
+function vagrant-forward-port() {
+    local port vagrant_ssh_port
+    port="$1"
+    vagrant_ssh_port="${2:-2222}"
+    ssh -L ${port}:localhost:${port} -p ${vagrant_ssh_port} vagrant@localhost
+}
+
 # Because I can never remember how to do this.
 function whats-blocking-port() {
     if [ -z "$1" ]; then
