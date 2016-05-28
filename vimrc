@@ -135,6 +135,9 @@ Plug 'wellle/targets.vim'
 " eslint plugins as well.
 Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 
+" Search for current visual selection with */#.
+Plug 'bronson/vim-visual-star-search'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -354,9 +357,6 @@ vnoremap <S-Tab> <gv
 " Delete above/below current line.
 noremap [<Backspace> mzkdd`z
 noremap ]<Backspace> mzjdd`z
-
-" * in visual mode to search for current selection.
-vnoremap * y/<C-R>"<CR>
 
 " Don't go to next immediately when searching current word.
 nnoremap * *N
