@@ -351,8 +351,8 @@ nnoremap k gk
 inoremap <S-Tab> <C-o><<
 
 " tab/shift-tab to indent/unindent in visual mode.
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
+xnoremap <Tab> >gv
+xnoremap <S-Tab> <gv
 
 " Delete above/below current line.
 noremap [<Backspace> mzkdd`z
@@ -400,7 +400,7 @@ noremap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
 
 nnoremap <leader>gu :GundoToggle<CR>
 
-vnoremap gz :sort<CR>
+xnoremap gz :sort<CR>
 
 " Make directory relative to current file.
 " TODO: make this a command instead e.g. MkdirRelative.
@@ -423,9 +423,9 @@ nnoremap gL Oconsole.log() // eslint-disable-line no-console<esc>F)i
 nmap <silent> gV mzvae:VSResize<CR>`z
 
 " Resize to/split out visual selection.
-vmap <silent> gV mz:VSResize<CR>`z
-vmap <silent> gA mz:VSSplitAbove<CR>`z
-vmap <silent> gB mz:VSSplitBelow<CR>`z
+xnoremap <silent> gV mz:VSResize<CR>`z
+xnoremap <silent> gA mz:VSSplitAbove<CR>`z
+xnoremap <silent> gB mz:VSSplitBelow<CR>`z
 
 " Use X clipboard.
 " TODO: Have this switch back the other way to Vim clipboard too.
