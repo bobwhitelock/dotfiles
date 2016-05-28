@@ -228,6 +228,9 @@ set iskeyword+=-
 set modeline
 set modelines=50
 
+" Highlight shell scripts as bash by default unless specified otherwise.
+let g:is_bash=1
+
 " Highlighting for Portal Sass and XHtml Haml templates (see lib/alces/action_view/templates.rb).
 au BufReadPost *.pscss set syntax=scss
 au BufReadPost *.xhaml set syntax=haml
