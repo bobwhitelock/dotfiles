@@ -15,9 +15,6 @@ Plug 'tpope/vim-eunuch'
 " Git command helpers (:G*)
 Plug 'tpope/vim-fugitive'
 
-" Improved netrw.
-Plug 'tpope/vim-vinegar'
-
 " Various paired bracket mappings.
 Plug 'tpope/vim-unimpaired'
 
@@ -122,6 +119,9 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " 2-character search motion (s/S).
 Plug 'justinmk/vim-sneak'
+
+" Better file browser than netrw.
+Plug 'justinmk/vim-dirvish'
 
 " Adds commands to resize/create splits to/for current visual selection
 " (VSResize, VSSplit etc).
