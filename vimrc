@@ -30,9 +30,6 @@ Plug 'terryma/vim-multiple-cursors'
 " Show git changes (]c/[c to jump between).
 Plug 'airblade/vim-gitgutter'
 
-" Fuzzy file/buffer/mru etc. finder (C-p, obviously).
-Plug 'ctrlpvim/ctrlp.vim'
-
 " Add :Bdelete command to close buffer without changing layout.
 Plug 'moll/vim-bbye'
 
@@ -135,6 +132,10 @@ Plug 'wellle/targets.vim'
 " eslint plugins as well.
 Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 
+" Fuzzy finder for many different sources.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 " Search for current visual selection with */#.
 Plug 'bronson/vim-visual-star-search'
 
@@ -209,7 +210,7 @@ set smartcase " ...unless search includes a capital.
 
 set spell spelllang=en_gb " Enable spell checking (z= for corrections).
 
-" Ignore these, specifically so not included in CtrlP file list.
+" Ignore these in various cases.
 set wildignore+=.git/*,*.swp,*.swo
 
 " Start scrolling when certain distance from edges of window.
@@ -251,15 +252,6 @@ let g:vim_json_syntax_conceal = 0 " Don't hide Json syntax.
 let g:jsx_ext_required = 0 " Let vim-jsx handle JSX in `.js` files.
 
 let g:indentLine_char = '│' " indentLine character.
-
-let g:ctrlp_custom_ignore = 'node_modules'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_use_caching = 0
-let g:ctrlp_reuse_window = 'startify'
-
-" In git repos have CtrlP show files known to git (tracked and untracked but
-" not ignored).
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 let g:mta_filetypes = {
     \ 'html' : 1,
@@ -363,6 +355,9 @@ noremap ]<Backspace> mzjdd`z
 
 " Don't go to next immediately when searching current word.
 nnoremap * *N
+
+nnoremap <silent> <C-p> :GitFiles<CR>
+nnoremap <silent> <C-f> :Files<CR>
 
 " Delete current buffer while preserving layout.
 noremap <C-c> :Bdelete<CR>

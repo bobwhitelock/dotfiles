@@ -55,3 +55,6 @@ eval "$(thefuck --alias)"
 
 export NVM_DIR="/home/bob/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Enable FZF.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

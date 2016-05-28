@@ -105,3 +105,6 @@ fi
 . "$DOTFILES/alias_completion.sh"
 
 setxkbmap gb
+
+# Enable FZF.
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
