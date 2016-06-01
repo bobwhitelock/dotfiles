@@ -107,6 +107,15 @@ unset swps_path
 # Ease transition between shell and vim.
 alias :q="exit"
 
+# Explain the current rustc error.
+function rustc-explain() {
+    rustc --explain $( \
+        cargo build 2>&1 | \
+        awk -F 'rustc --explain' '{ print $2 }' | \
+        cut -d '`' -f 1
+    )
+}
+
 # Forward host port to same port on a Vagrant VM using SSH port forwarding.
 function vagrant-forward-port() {
     local port vagrant_ssh_port
