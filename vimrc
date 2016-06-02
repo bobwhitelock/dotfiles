@@ -413,9 +413,6 @@ nmap <leader>gr <Plug>GitGutterRevertHunk
 nmap [h <Plug>GitGutterPrevHunk
 nmap ]h <Plug>GitGutterNextHunk
 
-" Quick JS logging.
-nnoremap gl oconsole.log() // eslint-disable-line no-console<esc>F)i
-nnoremap gL Oconsole.log() // eslint-disable-line no-console<esc>F)i
 
 " Resize to show entire buffer (or as much as possible).
 nmap <silent> gV mzvae:VSResize<CR>`z
