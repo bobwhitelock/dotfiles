@@ -151,6 +151,7 @@ Plug 'evanmiller/nginx-vim-syntax'
 Plug 'nvie/vim-flake8'
 Plug 'yaymukund/vim-rabl'
 Plug 'tpope/vim-rails'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
