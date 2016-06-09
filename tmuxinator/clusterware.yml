@@ -1,0 +1,61 @@
+# ~/.tmuxinator/clusterware.yml
+
+name: clusterware
+root: ~/
+
+pre: >
+  cd ~/projects/alces/clusterware-project/imageware/support/vagrant/login-el7 &&
+  vagrant up
+
+windows:
+  - notes:
+      root: ~/Dropbox/notes
+      panes:
+        - vim
+
+  - imageware:
+      root: ~/projects/alces/clusterware-project/imageware/support/vagrant/login-el7
+      layout: even-horizontal
+      panes:
+        -
+        - vim Vagrantfile
+
+  - clusterware:
+      layout: 'f498,274x72,0,0{137x72,0,0[137x36,0,0,7,137x35,0,37,9],136x72,138,0,8}'
+      panes:
+        - vm:
+          - cd ~/projects/alces/clusterware-project/imageware/support/vagrant/login-el7
+          - vagrant ssh
+        - shell:
+          - cd ~/projects/alces/clusterware-project/clusterware
+        - code:
+          - cd ~/projects/alces/clusterware-project/clusterware
+          - vim
+
+  - services:
+      root: ~/projects/alces/clusterware-project/clusterware-services
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - handlers:
+      root: ~/projects/alces/clusterware-project/clusterware-handlers
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - sessions:
+      root: ~/projects/alces/clusterware-project/clusterware-sessions
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - dotfiles:
+      root: ~/.dotfiles
+      layout: even-horizontal
+      panes:
+        -
+        - vim
