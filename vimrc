@@ -244,6 +244,13 @@ au BufNewFile,BufRead .reduxrc set filetype=json
 au BufNewFile,BufRead gitconfig set filetype=gitconfig
 au BufNewFile,BufRead Vagrantfile set filetype=ruby
 
+" Clusterware serviceware metadata files are YAML with shell in, and the shell
+" is the more interesting part.
+au BufNewFile,BufRead metadata.yml set filetype=sh
+
+" Clusterware modulefiles are Tcl.
+au BufNewFile,BufRead *-module.template set filetype=tcl
+
 " Low vim-plug timeout to get around issue where installing fails sometimes
 " and have to wait 60 seconds for timeout.
 let g:plug_timeout = 5
