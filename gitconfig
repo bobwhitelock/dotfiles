@@ -23,6 +23,11 @@
 	add-deleted = ! git rm $(git ls-files --deleted)
 	tracked-files = ls-tree --full-tree -r HEAD
 	ls-revisions = ls-revisions
+	churn = churn
+	summary = summary
+	effort = effort
+	delete-submodule = delete-submodule
+	delete-remote = git push origin --delete
 
 [color]
 	ui = true
