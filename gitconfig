@@ -1,6 +1,6 @@
 [user]
 	name = Bob Whitelock
-	email = "(none)"
+	email = bob.whitelock1@gmail.com
 
 [core]
 	pager = less -FRSX
@@ -15,8 +15,6 @@
 [alias]
 	amend = commit --amend -C HEAD
 	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
-	home = config user.email 'bob.whitelock1@gmail.com'
-	work = config user.email 'bob.whitelock@alces-software.com'
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
 	snapshot = ! git stash save $(date) && git stash apply
