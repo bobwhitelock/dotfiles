@@ -10,7 +10,7 @@ function cl() {
 }
 
 # Misc aliases.
-alias tree="tree -C -a --filelimit 50"
+alias tree="tree -C -a --filelimit 50 -I .git"
 alias pyserver="python -m SimpleHTTPServer 8000"
 
 # Git aliases.
@@ -114,6 +114,22 @@ function rustc-explain() {
         awk -F 'rustc --explain' '{ print $2 }' | \
         cut -d '`' -f 1
     )
+}
+
+function vagrant-rebuild() {
+    vagrant destroy --force && vagrant up --provision
+}
+
+# SSH into nth Vagrant VM.
+function vagrant-ssh() {
+    local vm_number port
+    vm_number="${1:-1}"
+    if [[ vm_number -eq 1 ]]; then
+        port=2222
+    else
+        port=$((2200 + vm_number - 2))
+    fi
+    ssh -p "${port}" vagrant@localhost
 }
 
 # Forward host port to same port on a Vagrant VM using SSH port forwarding.
