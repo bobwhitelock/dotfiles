@@ -27,7 +27,7 @@ Plug 'tpope/vim-rsi'
 " Sublime-like multiple cursors (C-n).
 Plug 'terryma/vim-multiple-cursors'
 
-" Show git changes (]c/[c to jump between).
+" Show git changes in gutter.
 Plug 'airblade/vim-gitgutter'
 
 " Add :Bdelete command to close buffer without changing layout.
@@ -90,6 +90,7 @@ Plug 'kana/vim-operator-replace'
 map _  <Plug>(operator-replace)
 
 " Operator to search web.
+" TODO: Modify this so can pass in the filetype and get more relevant results.
 Plug 'kana/vim-wwwsearch'
 map gW <Plug>(operator-wwwsearch)
 let g:wwwsearch_command_to_open_uri = "xdg-open {uri}"
@@ -186,7 +187,6 @@ set cursorline " Highlight current line.
 highlight Search ctermfg=black
 highlight Visual ctermfg=233 ctermbg=67 guifg=#1b1d1e guibg=#465457
 
-set relativenumber " Show line numbers relative to current line.
 set number " Show current line number (would be all lines without above).
 set numberwidth=8 " Spacing always given to these numbers.
 
@@ -316,6 +316,11 @@ let g:investigate_url_for_javascriptjsx = "https://www.omniref.com/?language=jav
 let g:tern_map_prefix = '<leader>'
 let g:tern_map_keys=1
 
+" TODO:
+" - way to make this shrink as less results?
+" - adapt colours
+let g:fzf_layout = { 'down': '~20%' }
+
 " Map Space to Leader; don't use `mapleader` so something shows in `showcmd`
 " corner.
 map <Space> <Leader>
@@ -332,6 +337,7 @@ endfunction
 " Define custom vim-tmux-navigator mappings: if window is maximized only move
 " within Vim panes, so navigating doesn't break out of Vim unexpectedly,
 " otherwise navigate between Vim and Tmux as normal.
+" TODO: doesn't work with vipe
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <expr> <C-h> TmuxMaximized() ? ':wincmd h<CR>' : ':TmuxNavigateLeft<CR>'
 nnoremap <silent> <expr> <C-j> TmuxMaximized() ? ':wincmd j<CR>' : ':TmuxNavigateDown<CR>'
@@ -362,8 +368,11 @@ noremap [<Backspace> mzkdd`z
 noremap ]<Backspace> mzjdd`z
 
 " Don't go to next immediately when searching current word.
-nnoremap * *N
+" TODO: broken by indexed-search? - remove indexed search mappings then remap
+" all with some changed
+" nnoremap * <Plug>(indexed-search-*)N
 
+" FZF maps.
 nnoremap <silent> <C-p> :GitFiles<CR>
 nnoremap <silent> <C-f> :Files<CR>
 
@@ -373,20 +382,12 @@ noremap <C-c> :Bdelete<CR>
 " Open file relative to current file.
 noremap <C-e> :e <C-R>=expand("%:p:h") . "/" <CR>
 
-nnoremap <silent> <C-y> :YRShow<CR>
-
 " Easily create horizontal/vertical splits.
 noremap <leader>h :wincmd s<CR>
 noremap <leader>v :wincmd v<CR>
 
-" Arrow keys navigate split screens.
-" TODO: possibly remove in favour of C-j etc added with vim-tmux-navigator
-noremap <silent> <Up> :wincmd k<CR>
-noremap <silent> <Down> :wincmd j<CR>
-noremap <silent> <Left> :wincmd h<CR>
-noremap <silent> <Right> :wincmd l<CR>
-
 " C-arrow for resizing windows.
+" TODO: stopped working.
 noremap <C-Up> :wincmd +<CR>
 noremap <C-Down> :wincmd -<CR>
 noremap <C-Left> :wincmd <<CR>
@@ -402,7 +403,7 @@ nnoremap <PageDown> <C-d>
 
 " Format Json and set filetype (adapted from
 " coderwall.com/p/faceag/format-json-in-vim)
-noremap <silent> =j :%!python -m json.tool<CR> :setfiletype json<CR>
+noremap <silent> =J :%!python -m json.tool<CR> :setfiletype json<CR>
 
 nnoremap <leader>gu :GundoToggle<CR>
 
@@ -416,11 +417,17 @@ noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 " TODO: change to plug mappings?
 nnoremap gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
+
+let g:gitgutter_map_keys = 0
 nmap <leader>gs <Plug>GitGutterStageHunk
-nmap <leader>gr <Plug>GitGutterRevertHunk
+nmap <leader>gr <Plug>GitGutterUndoHunk
+nmap <Leader>gp <Plug>GitGutterPreviewHunk
 nmap [h <Plug>GitGutterPrevHunk
 nmap ]h <Plug>GitGutterNextHunk
-
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 " Resize to show entire buffer (or as much as possible).
 nmap <silent> gV mzvae:VSResize<CR>`z
@@ -432,6 +439,7 @@ xnoremap <silent> gB mz:VSSplitBelow<CR>`z
 
 " Use X clipboard.
 " TODO: Have this switch back the other way to Vim clipboard too.
+" TODO: Does not work on initial load as unimpaired clobbers
 nnoremap cox :set clipboard=unnamedplus<CR>
 
 " Join current line with line above.
