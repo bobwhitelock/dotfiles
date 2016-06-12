@@ -24,9 +24,6 @@ Plug 'tpope/vim-speeddating'
 " Readline key bindings for Vim (C-a, C-e etc.).
 Plug 'tpope/vim-rsi'
 
-" Sublime-like multiple cursors (C-n).
-Plug 'terryma/vim-multiple-cursors'
-
 " Show git changes in gutter.
 Plug 'airblade/vim-gitgutter'
 
@@ -45,17 +42,8 @@ Plug 'wesQ3/vim-windowswap'
 " Autocompletion.
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
-" Transition between single and multiline code (gS and gJ).
-Plug 'AndrewRadev/splitjoin.vim'
-
-" Switch text with pre-defined replacements e.g. || <-> && (gs).
-Plug 'AndrewRadev/switch.vim'
-
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
-
-" Look up documentation for word under cursor (gK).
-Plug 'keith/investigate.vim'
 
 " Motions through camel-case/underscore-case words (',b', ',w', ',e')
 " TODO: broken at the moment fsr.
@@ -68,9 +56,6 @@ Plug 'vim-scripts/YankRing.vim'
 " file.
 Plug 'vim-scripts/ingo-library'
 Plug 'vim-scripts/SyntaxRange'
-
-" Better JavaScript support.
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
 " For custom text objects, needed for all vim-textobj plugins.
 Plug 'kana/vim-textobj-user'
@@ -319,10 +304,6 @@ let g:yankring_replace_n_nkey = '<C-d>'
 " TODO: let jsx just use js URL.
 let g:investigate_url_for_javascript = "https://www.omniref.com/?language=javascript&q=^s"
 let g:investigate_url_for_javascriptjsx = "https://www.omniref.com/?language=javascript&q=^s"
-
-" Set up tern maps, see http://usevim.com/2013/05/24/tern/ for details.
-let g:tern_map_prefix = '<leader>'
-let g:tern_map_keys=1
 
 " TODO:
 " - way to make this shrink as less results?

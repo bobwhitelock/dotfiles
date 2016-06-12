@@ -36,6 +36,3 @@
     ~/.config/htop:
         path: config/htop
         create: true
-    ~/projects/alces/aviator/.tern-project:
-        path: tern/aviator-tern-project.json
-        create: false
