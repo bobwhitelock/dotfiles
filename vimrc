@@ -64,6 +64,11 @@ Plug 'bkad/CamelCaseMotion'
 " Emacs-like handling of previously yanked text.
 Plug 'vim-scripts/YankRing.vim'
 
+" Add commands and functions to include different syntax settings within a
+" file.
+Plug 'vim-scripts/ingo-library'
+Plug 'vim-scripts/SyntaxRange'
+
 " Better JavaScript support.
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 
@@ -81,6 +86,9 @@ Plug 'kana/vim-textobj-entire'
 
 " HTML/XML attribute text object (ix / ax).
 Plug 'whatyouhide/vim-textobj-xmlattr'
+
+" Indent-level text object (ai / ii / aI / iI)
+Plug 'michaeljsmith/vim-indent-object'
 
 " For custom operators, needed for all vim-operator plugins.
 Plug 'kana/vim-operator-user'
@@ -436,6 +444,8 @@ nmap <silent> gV mzvae:VSResize<CR>`z
 xnoremap <silent> gV mz:VSResize<CR>`z
 xnoremap <silent> gA mz:VSSplitAbove<CR>`z
 xnoremap <silent> gB mz:VSSplitBelow<CR>`z
+
+xnoremap <silent> SI :SyntaxInclude<space>
 
 " Use X clipboard.
 " TODO: Have this switch back the other way to Vim clipboard too.
