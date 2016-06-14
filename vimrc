@@ -180,7 +180,7 @@ set cursorline " Highlight current line.
 highlight Search ctermfg=black
 highlight Visual ctermfg=233 ctermbg=67 guifg=#1b1d1e guibg=#465457
 
-set number " Show current line number (would be all lines without above).
+set number " Show current line number.
 set numberwidth=8 " Spacing always given to these numbers.
 
 set undofile " Maintain undo history between sessions.
@@ -300,10 +300,6 @@ let g:HiCursorWords_delay = 100
 
 let g:yankring_replace_n_pkey = '<C-u>'
 let g:yankring_replace_n_nkey = '<C-d>'
-
-" TODO: let jsx just use js URL.
-let g:investigate_url_for_javascript = "https://www.omniref.com/?language=javascript&q=^s"
-let g:investigate_url_for_javascriptjsx = "https://www.omniref.com/?language=javascript&q=^s"
 
 " TODO:
 " - way to make this shrink as less results?
