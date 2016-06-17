@@ -132,6 +132,8 @@ Plug 'junegunn/fzf.vim'
 " Search for current visual selection with */#.
 Plug 'bronson/vim-visual-star-search'
 
+Plug 'tlvince/vim-auto-commit'
+
 " Language-specific.
 Plug 'kchmck/vim-coffee-script'
 Plug 'tpope/vim-haml'
@@ -250,6 +252,24 @@ augroup END
 
 " Create CamelCaseMotion maps name-spaced behind leader.
 call camelcasemotion#CreateMotionMappings('<leader>')
+
+" Commands to enable/disable auto-committing on every save in git repos -
+" useful when developing something where changes won't take effect until a
+" commit is made, and can then squash when finished.
+function! s:EnableAutoCommit()
+  augroup git_auto_commit
+    autocmd!
+    autocmd BufWritePost * call AutoCommit()
+  augroup END
+endfunction
+command! EnableAutoCommit call s:EnableAutoCommit()
+
+function! s:DisableAutoCommit()
+  augroup git_auto_commit
+    autocmd!
+  augroup END
+endfunction
+command! DisableAutoCommit call s:DisableAutoCommit()
 
 " Low vim-plug timeout to get around issue where installing fails sometimes
 " and have to wait 60 seconds for timeout.
