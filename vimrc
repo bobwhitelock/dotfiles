@@ -325,6 +325,8 @@ nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>
 
 let g:HiCursorWords_delay = 100
 
+let g:rustfmt_autosave = 1 " Run rustfmt on save of rust files.
+
 let g:yankring_replace_n_pkey = '<C-u>'
 let g:yankring_replace_n_nkey = '<C-d>'
 
