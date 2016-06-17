@@ -45,8 +45,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
 
-" Motions through camel-case/underscore-case words (',b', ',w', ',e')
-" TODO: broken at the moment fsr.
+" Motions through camel-case/underscore-case words.
 Plug 'bkad/CamelCaseMotion'
 
 " Emacs-like handling of previously yanked text.
@@ -243,6 +242,9 @@ au BufNewFile,BufRead metadata.yml set filetype=sh
 
 " Clusterware modulefiles are Tcl.
 au BufNewFile,BufRead *-module.template set filetype=tcl
+
+" Create CamelCaseMotion maps name-spaced behind leader.
+call camelcasemotion#CreateMotionMappings('<leader>')
 
 " Low vim-plug timeout to get around issue where installing fails sometimes
 " and have to wait 60 seconds for timeout.
