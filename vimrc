@@ -225,23 +225,28 @@ set modelines=50
 " Highlight shell scripts as bash by default unless specified otherwise.
 let g:is_bash=1
 
-" Highlighting for Portal Sass and XHtml Haml templates (see lib/alces/action_view/templates.rb).
-au BufReadPost *.pscss set syntax=scss
-au BufReadPost *.xhaml set syntax=haml
+augroup autocmds
+  autocmd!
 
-" Set other file types. (TODO: why difference between this and above?)
-au BufNewFile,BufRead .babelrc set filetype=javascript
-au BufNewFile,BufRead .eslintrc set filetype=json
-au BufNewFile,BufRead .reduxrc set filetype=json
-au BufNewFile,BufRead gitconfig set filetype=gitconfig
-au BufNewFile,BufRead Vagrantfile set filetype=ruby
+  " Miscellaneous file types.
+  autocmd BufNewFile,BufRead .babelrc set filetype=javascript
+  autocmd BufNewFile,BufRead .eslintrc,.reduxrc set filetype=json
+  autocmd BufNewFile,BufRead gitconfig set filetype=gitconfig
+  autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 
-" Clusterware serviceware metadata files are YAML with shell in, and the shell
-" is the more interesting part.
-au BufNewFile,BufRead metadata.yml set filetype=sh
+  " Clusterware serviceware metadata files are YAML with shell in, and the
+  " shell is the more interesting part.
+  autocmd BufNewFile,BufRead metadata.yml set filetype=sh
 
-" Clusterware modulefiles are Tcl.
-au BufNewFile,BufRead *-module.template set filetype=tcl
+  " Clusterware modulefiles are Tcl.
+  autocmd BufNewFile,BufRead *-module.template set filetype=tcl
+
+  " Open quickfix window after any grep.
+  autocmd QuickFixCmdPost *grep* cwindow
+
+  " Resize panes whenever containing window resized.
+  autocmd VimResized * wincmd =
+augroup END
 
 " Create CamelCaseMotion maps name-spaced behind leader.
 call camelcasemotion#CreateMotionMappings('<leader>')
@@ -463,9 +468,3 @@ function! s:Underline(chars)
   put =strpart(uline, 0, nr_columns)
 endfunction
 command! -nargs=? Underline call s:Underline(<q-args>)
-
-" Open quickfix window after any grep.
-autocmd QuickFixCmdPost *grep* cwindow
-
-" Resize panes whenever containing window resized.
-autocmd VimResized * wincmd =
