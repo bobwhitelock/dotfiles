@@ -1,11 +1,10 @@
 
-
 # Some ls aliases.
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-function cl() {
+cl() {
     cd "$@" && l
 }
 
@@ -55,15 +54,15 @@ alias pvm='sshpass -p alces ssh portalvm'
 alias vacsvm='ssh bob@127.0.0.1 -p 9322'
 
 # Kill/clean any running/leftover Clusterware sessions.
-function alces_kill_all_sessions() {
+alces_kill_all_sessions() {
     for i in $(alces session list | cut -d ' ' -f 2 | tail -n +4 | head -n -1); do
-        alces session kill $i
+        alces session kill "$i"
     done
     alces session clean
 }
 
 # Shortcuts for frequent xrandr commands.
-alias xrandr_laptop_single='xrandr \
+alias xrandr_laptop_single="xrandr \
     --output DP2 --off \
     --output DP1 --off \
     --output HDMI3 --off \
@@ -71,8 +70,8 @@ alias xrandr_laptop_single='xrandr \
     --output HDMI1 --off \
     --output eDP1 --mode 1920x1080 --pos 0x0 --rotate normal \
     --output VGA1 --off \
-    && conkywonky'
-alias xrandr_laptop_dual='xrandr \
+    && conkywonky"
+alias xrandr_laptop_dual="xrandr \
     --output DP2 --off \
     --output DP1 --off \
     --output HDMI3 --off \
@@ -80,8 +79,8 @@ alias xrandr_laptop_dual='xrandr \
     --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal \
     --output eDP1 --mode 1920x1080 --pos 0x0 --rotate normal \
     --output VGA1 --off \
-    && conkywonky'
-alias xrandr_laptop_triple='xrandr \
+    && conkywonky"
+alias xrandr_laptop_triple="xrandr \
     --output DP2 --off \
     --output DP1 --off \
     --output HDMI3 --off \
@@ -89,10 +88,10 @@ alias xrandr_laptop_triple='xrandr \
     --output HDMI1 --mode 1920x1080 --pos 1440x900 --rotate normal \
     --output eDP1 --mode 1360x768 --pos 80x900 --rotate normal \
     --output VGA1 --mode 1440x900 --pos 0x0 --rotate normal \
-    && conkywonky'
+    && conkywonky"
 
-function xrandr_off() {
-    for output in "$(xrandr | cut -d ' '  -f 1 | grep -i "$@")"; do
+xrandr_off() {
+    for output in $(xrandr | cut -d ' '  -f 1 | grep -i "$@"); do
         xrandr --output "$output" --off
     done
     conkywonky
@@ -115,7 +114,7 @@ alias :q="exit"
 alias :qa="tmux kill-window"
 
 # Explain the current rustc error.
-function rustc-explain() {
+rustc-explain() {
     rustc --explain $( \
         cargo build 2>&1 | \
         awk -F 'rustc --explain' '{ print $2 }' | \
@@ -123,15 +122,15 @@ function rustc-explain() {
     )
 }
 
-function vagrant-rebuild() {
+vagrant-rebuild() {
     vagrant destroy --force && vagrant up --provision
 }
 
 # SSH into nth Vagrant VM.
-function vagrant-ssh() {
+vagrant-ssh() {
     local vm_number port
     vm_number="${1:-1}"
-    if [[ vm_number -eq 1 ]]; then
+    if [[ $vm_number -eq 1 ]]; then
         port=2222
     else
         port=$((2200 + vm_number - 2))
@@ -140,15 +139,15 @@ function vagrant-ssh() {
 }
 
 # Forward host port to same port on a Vagrant VM using SSH port forwarding.
-function vagrant-forward-port() {
+vagrant-forward-port() {
     local port vagrant_ssh_port
     port="$1"
     vagrant_ssh_port="${2:-2222}"
-    ssh -L ${port}:localhost:${port} -p ${vagrant_ssh_port} vagrant@localhost
+    ssh -L "${port}:localhost:${port}" -p "${vagrant_ssh_port}" vagrant@localhost
 }
 
 # Because I can never remember how to do this.
-function whats-blocking-port() {
+whats-blocking-port() {
     if [ -z "$1" ]; then
         sudo netstat -tulpn
     else
@@ -158,12 +157,12 @@ function whats-blocking-port() {
 
 # Swap 2 filenames around, if they exist (from Uzi's bashrc).
 # From http://tldp.org/LDP/abs/html/sample-bashrc.html.
-function swap() {
+swap() {
     local TMPFILE=tmp.$$
 
     [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
-    [ ! -e $1 ] && echo "swap: $1 does not exist" && return 1
-    [ ! -e $2 ] && echo "swap: $2 does not exist" && return 1
+    [ ! -e "$1" ] && echo "swap: $1 does not exist" && return 1
+    [ ! -e "$2" ] && echo "swap: $2 does not exist" && return 1
 
     mv "$1" $TMPFILE
     mv "$2" "$1"
@@ -172,20 +171,20 @@ function swap() {
 
 # Handy Extract Program.
 # From http://tldp.org/LDP/abs/html/sample-bashrc.html.
-function extract() {
-    if [ -f $1 ] ; then
+extract() {
+    if [ -f "$1" ] ; then
         case $1 in
-            *.tar.bz2)   tar xvjf $1     ;;
-            *.tar.gz)    tar xvzf $1     ;;
-            *.bz2)       bunzip2 $1      ;;
-            *.rar)       unrar x $1      ;;
-            *.gz)        gunzip $1       ;;
-            *.tar)       tar xvf $1      ;;
-            *.tbz2)      tar xvjf $1     ;;
-            *.tgz)       tar xvzf $1     ;;
-            *.zip)       unzip $1        ;;
-            *.Z)         uncompress $1   ;;
-            *.7z)        7z x $1         ;;
+            *.tar.bz2)   tar xvjf "$1"     ;;
+            *.tar.gz)    tar xvzf "$1"     ;;
+            *.bz2)       bunzip2 "$1"      ;;
+            *.rar)       unrar x "$1"      ;;
+            *.gz)        gunzip "$1"       ;;
+            *.tar)       tar xvf "$1"      ;;
+            *.tbz2)      tar xvjf "$1"     ;;
+            *.tgz)       tar xvzf "$1"     ;;
+            *.zip)       unzip "$1"        ;;
+            *.Z)         uncompress "$1"   ;;
+            *.7z)        7z x "$1"         ;;
             *)           echo "'$1' cannot be extracted via extract()" ;;
         esac
     else
@@ -193,6 +192,6 @@ function extract() {
     fi
 }
 
-function yaml_validate() {
+yaml_validate() {
     ruby -e "require 'yaml'; YAML.load_file('$1')"
 }
