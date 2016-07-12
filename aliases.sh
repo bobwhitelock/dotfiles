@@ -12,6 +12,7 @@ function cl() {
 # Misc aliases.
 alias tree="tree -C -a --filelimit 50 -I .git"
 alias pyserver="python -m SimpleHTTPServer 8000"
+alias grip="grip --browser"
 
 # Git aliases.
 alias g='git'
@@ -111,6 +112,7 @@ unset swps_path
 
 # Ease transition between shell and vim.
 alias :q="exit"
+alias :qa="tmux kill-window"
 
 # Explain the current rustc error.
 function rustc-explain() {
