@@ -16,16 +16,21 @@ alias pyserver="python -m SimpleHTTPServer 8000"
 # Git aliases.
 alias g='git'
 alias gp='git push'
+alias gpf='gp --force'
 alias gpl='git pull --prune'
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%ar / %cr)%Creset' --abbrev-commit --date=relative"
+alias glog="git log \
+    --graph \
+    --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%ar / %cr)%Creset' \
+    --abbrev-commit \
+    --date=relative"
 alias glogall='glog --all'
 alias gd='git diff --color'
-alias gdc='git diff --cached'
+alias gdc='gd --cached'
 alias gg='git grep'
 alias gbl='git blame'
 alias gst='git stash'
-alias gc='git commit'
-alias gca='git commit -a'
+alias gc='git commit --verbose'
+alias gca='gc --all'
 alias ga='git add'
 alias gco='git checkout'
 alias gr='git reset'
@@ -33,10 +38,10 @@ alias gb='git branch'
 alias gs='git status -sb'
 alias gsh='git show'
 alias gbi='git bisect'
-alias gbis='git bisect start'
-alias gbir='git bisect reset'
-alias gbib='git bisect bad'
-alias gbig='git bisect good'
+alias gbis='gbi start'
+alias gbir='gbi reset'
+alias gbib='gbi bad'
+alias gbig='gbi good'
 
 # Alces aliases/functions.
 alias pscreen='cd ~/alces-portal && screen -dr portal'
