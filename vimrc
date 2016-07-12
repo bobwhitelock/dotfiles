@@ -135,7 +135,9 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'tlvince/vim-auto-commit'
 
 " Language-specific.
+Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
+Plug 'rdolgushin/gitignore.vim'
 Plug 'tpope/vim-haml'
 Plug 'andreimaxim/vim-io'
 Plug 'jelera/vim-javascript-syntax'
