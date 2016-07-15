@@ -27,7 +27,7 @@
 	summary = summary
 	effort = effort
 	delete-submodule = delete-submodule
-	delete-remote = git push origin --delete
+	delete-remote = push origin --delete
 
 [color]
 	ui = true
