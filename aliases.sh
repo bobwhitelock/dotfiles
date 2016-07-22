@@ -42,6 +42,9 @@ alias gbis='gbi start'
 alias gbir='gbi reset'
 alias gbib='gbi bad'
 alias gbig='gbi good'
+alias gre='git rebase'
+alias grec='gre --continue'
+alias grea='gre --abort'
 
 # Alces aliases/functions.
 alias pscreen='cd ~/alces-portal && screen -dr portal'
