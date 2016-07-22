@@ -238,6 +238,9 @@ augroup autocmds
   autocmd BufNewFile,BufRead gitconfig set filetype=gitconfig
   autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 
+  " oh-my-zsh themes are shell.
+  autocmd BufNewFile,BufRead *.zsh-theme set filetype=sh
+
   " Clusterware serviceware metadata files are YAML with shell in, and the
   " shell is the more interesting part.
   autocmd BufNewFile,BufRead metadata.yml set filetype=sh
