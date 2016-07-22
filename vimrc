@@ -296,6 +296,8 @@ let g:mta_filetypes = {
 
 let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.js,*.html.erb"
 
+let g:markdown_fenced_languages = ['bash=sh']
+
 let g:startify_bookmarks = ['~/.vimrc', '~/projects/alces/aviator', '~/projects/alces/exodus']
 let g:startify_session_persistence = 1 " Save Session.vim on quit or new session load (if exists already).
 let g:startify_change_to_vcs_root = 1 " Change to VCS root on file load.
@@ -315,9 +317,6 @@ let g:airline_powerline_fonts = 1
 let g:syntastic_javascript_checkers = ['eslint']
 
 " TODO: Suggested Syntastic settings, read manual and adjust if needed.
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 " let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
