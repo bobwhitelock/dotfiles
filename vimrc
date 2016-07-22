@@ -307,6 +307,8 @@ let g:startify_list_order = [
     \ 'bookmarks',
     \ ]
 
+let g:airline_powerline_fonts = 1
+
 let g:syntastic_javascript_checkers = ['eslint']
 
 " TODO: Suggested Syntastic settings, read manual and adjust if needed.

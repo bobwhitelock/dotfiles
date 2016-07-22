@@ -7,8 +7,6 @@
   title_transmit_bg_color = "#000000"
   inactive_color_offset = 0.61
   title_inactive_bg_color = "#000000"
-  use_system_font = False
-  font = Mono 9
 [keybindings]
   hide_window = <Shift><Control>a
 [profiles]
@@ -22,17 +20,14 @@
     scrollback_lines = 5000
     background_type = transparent
     background_image = None
+    use_system_font = False
     cursor_color = "#d8d8d8"
     foreground_color = "#ffffff"
     scroll_on_output = False
     show_titlebar = False
     color_scheme = custom
-    font = Monospace 10
+    font = DejaVu Sans Mono for Powerline 9
     scrollback_infinite = True
-  [[portal]]
-    use_custom_command = True
-    background_image = None
-    custom_command = sshpass -p alces ssh portalvm
 [layouts]
   [[default]]
     [[[child1]]]
