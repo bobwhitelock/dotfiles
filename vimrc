@@ -464,6 +464,22 @@ xnoremap <silent> gB mz:VSSplitBelow<CR>`z
 
 xnoremap <silent> SI :SyntaxInclude<space>
 
+" Maps for yanking to system clipboard with <leader> instead of "+.
+" TODO: Make <leader>_ maps not pop up register window
+xnoremap <leader>d "+d
+xnoremap <leader>y "+y
+xnoremap <leader>p "+p
+xnoremap <leader>P "+P
+xmap <leader>_ "+_
+nnoremap <leader>d "+d
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+nmap <leader>_ "+_
+
+" Move last thing yanked to system clipboard.
+nnoremap <leader>c :let @+=@"<cr>:echo "copied!"<cr>
+
 " Use X clipboard.
 " TODO: Have this switch back the other way to Vim clipboard too.
 " TODO: Does not work on initial load as unimpaired clobbers
