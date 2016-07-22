@@ -345,7 +345,7 @@ let g:fzf_layout = { 'down': '~20%' }
 " corner.
 map <Space> <Leader>
 
-" Explicitly map double-space to double-leader for vim-easymotion.
+" Explicitly map double-space to double-leader in case want to map this.
 map <Space><Space> <Leader><Leader>
 
 " Tmux window is maximized if any pane has the 'Z' flag.
@@ -371,6 +371,8 @@ nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 " otherwise (Tmux will then send us C-q). Mapping adapted from vim-sensible.
 nnoremap <silent> <C-q> :nohlsearch<C-r>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-l>
 
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
 " Move by visual line.
 nnoremap j gj
 nnoremap k gk
@@ -395,6 +397,9 @@ noremap ]<Backspace> mzjdd`z
 " FZF maps.
 nnoremap <silent> <C-p> :GitFiles<CR>
 nnoremap <silent> <C-f> :Files<CR>
+
+" Close quickfix window.
+nnoremap <leader>q :cclose<CR>
 
 " Delete current buffer while preserving layout.
 noremap <C-c> :Bdelete<CR>
@@ -441,7 +446,7 @@ nnoremap <leader>gd :Gdiff<CR>
 let g:gitgutter_map_keys = 0
 nmap <leader>gs <Plug>GitGutterStageHunk
 nmap <leader>gr <Plug>GitGutterUndoHunk
-nmap <Leader>gp <Plug>GitGutterPreviewHunk
+nmap <leader>gp <Plug>GitGutterPreviewHunk
 nmap [h <Plug>GitGutterPrevHunk
 nmap ]h <Plug>GitGutterNextHunk
 omap ih <Plug>GitGutterTextObjectInnerPending
