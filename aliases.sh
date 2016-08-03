@@ -88,9 +88,9 @@ alias xrandr_laptop_triple="xrandr \
     --output DP1 --off \
     --output HDMI3 --off \
     --output HDMI2 --off \
-    --output HDMI1 --mode 1920x1080 --pos 1440x900 --rotate normal \
-    --output eDP1 --mode 1360x768 --pos 80x900 --rotate normal \
-    --output VGA1 --mode 1440x900 --pos 0x0 --rotate normal \
+    --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal \
+    --output eDP1 --mode 1920x1080 --pos 0x0 --rotate normal \
+    --output VGA1 --mode 1440x900 --pos 3840x180 --rotate normal \
     && conkywonky"
 
 xrandr_off() {
