@@ -313,6 +313,7 @@ let g:startify_list_order = [
     \ ]
 
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#enabled = 0
 
 let g:syntastic_javascript_checkers = ['eslint']
 
