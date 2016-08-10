@@ -28,6 +28,9 @@
 	effort = effort
 	delete-submodule = delete-submodule
 	delete-remote = push origin --delete
+	longest = longest
+	cloc = cloc
+	own-files = own-files
 
 [color]
 	ui = true

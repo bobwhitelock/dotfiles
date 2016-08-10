@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Script to return the tracked files in repository which are not submodules or
+# symlinks to other files (so each unique file should appear only once in
+# output).
+
+filter_symlinks() {
+    while IFS= read -r file
+        do
+            if [ ! -L "$file" ]; then
+                echo "$file"
+            fi
+    done
+}
+
+git ls-files | \
+    grep \
+    --invert-match \
+    --line-regexp \
+    --fixed-strings \
+    "$(git submodule | cut -d ' ' -f 3)" | \
+    filter_symlinks
