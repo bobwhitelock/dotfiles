@@ -6,7 +6,7 @@ source "$DOTFILES/env.sh"
 ZSH_THEME="robbyrussell"
 CASE_SENSITIVE="true" # Use case-sensitive completion.
 DISABLE_AUTO_UPDATE="true" # Don't nag about updates.
-plugins=(git grunt history-substring-search httpie rvm rails tmuxinator vagrant)
+plugins=(history-substring-search httpie rvm rails rust tmuxinator vagrant)
 export ZSH=$DOTFILES/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
