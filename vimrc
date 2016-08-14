@@ -337,6 +337,8 @@ let g:rustfmt_autosave = 1 " Run rustfmt on save of rust files.
 let g:yankring_replace_n_pkey = '<C-u>'
 let g:yankring_replace_n_nkey = '<C-d>'
 
+let g:AutoPairsShortcutToggle = ''
+
 " TODO:
 " - way to make this shrink as less results?
 " - adapt colours
