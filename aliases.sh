@@ -18,12 +18,6 @@ alias g='git'
 alias gp='git push'
 alias gpf='gp --force'
 alias gpl='git pull --prune'
-alias glog="git log \
-    --graph \
-    --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%ar / %cr)%Creset' \
-    --abbrev-commit \
-    --date=relative"
-alias glogall='glog --all'
 alias gd='git diff --color'
 alias gdc='gd --cached'
 alias gg='git grep'
@@ -37,14 +31,25 @@ alias gr='git reset'
 alias gb='git branch'
 alias gs='git status -sb'
 alias gsh='git show'
+
+alias glog="git log \
+    --graph \
+    --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%ar / %cr)%Creset' \
+    --abbrev-commit \
+    --date=relative"
+alias glogall='glog --all'
+
 alias gbi='git bisect'
 alias gbis='gbi start'
 alias gbir='gbi reset'
 alias gbib='gbi bad'
 alias gbig='gbi good'
+
 alias gre='git rebase'
 alias grec='gre --continue'
 alias grea='gre --abort'
+alias gres='gre --skip'
+alias grei='gre --interactive'
 
 # Alces aliases/functions.
 alias pscreen='cd ~/alces-portal && screen -dr portal'
