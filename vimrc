@@ -380,6 +380,14 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap j gj
 nnoremap k gk
 
+" Easier macro executing (with added benefit of preventing accidentally
+" entering 'Ex' mode).
+nnoremap Q @q
+
+" Search with more magic.
+nnoremap / /\v
+nnoremap ? ?\v
+
 " shift-tab indents left in insert mode.
 " TODO: some plugin seems to have broken this.
 inoremap <S-Tab> <C-o><<
@@ -400,6 +408,7 @@ noremap ]<Backspace> mzjdd`z
 " FZF maps.
 nnoremap <silent> <C-p> :GitFiles<CR>
 nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> gh :Helptags<CR>
 
 " Close quickfix window.
 nnoremap <leader>q :cclose<CR>
@@ -437,6 +446,9 @@ nnoremap <leader>gu :GundoToggle<CR>
 
 xnoremap gz :sort<CR>
 
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>tc :tabclose<CR>
+
 " Make directory relative to current file.
 " TODO: make this a command instead e.g. MkdirRelative.
 noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
@@ -459,9 +471,10 @@ xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 " Resize to show entire buffer (or as much as possible).
 nmap <silent> gV mzvae:VSResize<CR>`z
+" TODO: command to gV quickfix window (gQ)
 
 " Resize to/split out visual selection.
-xnoremap <silent> gV mz:VSResize<CR>`z
+xnoremap <silent> gV :VSResize<CR>
 xnoremap <silent> gA mz:VSSplitAbove<CR>`z
 xnoremap <silent> gB mz:VSSplitBelow<CR>`z
 
