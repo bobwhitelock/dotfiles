@@ -380,6 +380,7 @@ nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 nnoremap <silent> <C-q> :nohlsearch<C-r>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-l>
 
 nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>sf :source %<CR>
 
 " Move by visual line.
 nnoremap j gj
@@ -392,6 +393,11 @@ nnoremap Q @q
 " Search with more magic.
 nnoremap / /\v
 nnoremap ? ?\v
+
+" Quick find and replace in file of current word with a new string, with and
+" without confirmation respectively
+nnoremap <leader>gc :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+nnoremap <leader>gg :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " shift-tab indents left in insert mode.
 " TODO: some plugin seems to have broken this.
@@ -417,6 +423,9 @@ nnoremap <silent> gh :Helptags<CR>
 
 " Close quickfix window.
 nnoremap <leader>q :cclose<CR>
+
+" Reload files in all windows.
+nnoremap <leader>re :windo edit!<CR>
 
 " Delete current buffer while preserving layout.
 noremap <C-c> :Bdelete<CR>
@@ -480,8 +489,8 @@ nmap <silent> gV mzvae:VSResize<CR>`z
 
 " Resize to/split out visual selection.
 xnoremap <silent> gV :VSResize<CR>
-xnoremap <silent> gA mz:VSSplitAbove<CR>`z
-xnoremap <silent> gB mz:VSSplitBelow<CR>`z
+xnoremap <silent> gA :VSSplitAbove<CR>
+xnoremap <silent> gB :VSSplitBelow<CR>
 
 xnoremap <silent> SI :SyntaxInclude<space>
 
