@@ -125,6 +125,9 @@ Plug 'wellle/targets.vim'
 " eslint plugins as well.
 Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 
+" Run eslint --fix for current JavaScript buffer.
+Plug 'ruanyl/vim-fixmyjs'
+
 " Fuzzy finder for many different sources.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -316,6 +319,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 0
 
 let g:syntastic_javascript_checkers = ['eslint']
+
+let g:fixmyjs_use_local = 1
 
 " TODO: Suggested Syntastic settings, read manual and adjust if needed.
 
