@@ -3,9 +3,7 @@ name: access-manager
 root: ~/
 
 pre: >
-  cd ~/projects/alces/alces-access-manager/dev/multiple-nodes-el7/login-el7  &&
-  vagrant up &&
-  cd ../compute-el7 &&
+  cd ~/projects/alces/access-manager-project/alces-access-manager/dev/multiple-nodes-el7/login-el7  &&
   vagrant up
 
 windows:
@@ -15,7 +13,7 @@ windows:
         - vim
 
   - client:
-      root: ~/projects/alces/alces-access-manager/client
+      root: ~/projects/alces/access-manager-project/alces-access-manager/client
       layout: '4fa4,274x72,0,0{136x72,0,0[136x36,0,0,14,136x35,0,37,31],137x72,137,0,19}'
       panes:
         - npm start
@@ -23,15 +21,22 @@ windows:
         - vim
 
   - server:
-      root: ~/projects/alces/alces-access-manager/server
+      root: ~/projects/alces/access-manager-project/alces-access-manager/server
       layout: '4fa4,274x72,0,0{136x72,0,0[136x36,0,0,14,136x35,0,37,31],137x72,137,0,19}'
       panes:
         - bin/rails server
         -
         - vim
 
+  - flight-common:
+      root: ~/projects/alces/access-manager-project/flight-common
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
   - cluster:
-      root: ~/projects/alces/alces-access-manager/dev/multiple-nodes-el7/login-el7
+      root: ~/projects/alces/access-manager-project/alces-access-manager/dev/multiple-nodes-el7/login-el7
       layout: even-horizontal
       panes:
         # Forward port daemon running on.
@@ -41,7 +46,7 @@ windows:
         - ssh -L 41361:10.0.2.15:41361 -p 2222 vagrant@localhost
 
   - daemon:
-      root: ~/projects/alces/alces-access-manager-daemon
+      root: ~/projects/alces/access-manager-project/alces-access-manager-daemon
       layout: even-horizontal
       panes:
         -
