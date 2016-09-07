@@ -121,6 +121,11 @@ unset swps_path
 alias :q="exit"
 alias :qa="tmux kill-window"
 
+# Copy/paste to/from system clipboard (xclip default is primary clipboard, i.e.
+# middle-click clipboard).
+alias cbcopy='xclip -selection clipboard'
+alias cbpaste='xclip -selection clipboard -out'
+
 # Explain the current rustc error.
 rustc-explain() {
     rustc --explain $( \
