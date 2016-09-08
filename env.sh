@@ -3,7 +3,7 @@ export PATH="$PATH:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin:./node_modules/.bin:$
 
 # As suggested to make Yeoman work in
 # https://github.com/creationix/nvm/issues/586#issuecomment-68220064.
-export NODE_PATH=$NODE_PATH:`npm root -g`
+export NODE_PATH=$NODE_PATH:"$(npm root -g)"
 
 export EDITOR="vim"
 export VISUAL="vim"
@@ -29,3 +29,8 @@ export SAVEHIST=$HISTSIZE
 export PROJECTS="$HOME/projects"
 export ALCES_PROJECTS="$PROJECTS/alces"
 export OTHER_PROJECTS="$PROJECTS/other"
+
+export GITHUB_USER='bobwhitelock'
+
+# Required for Karma to work when Chromium is installed but Chrome isn't.
+export CHROME_BIN=chromium
