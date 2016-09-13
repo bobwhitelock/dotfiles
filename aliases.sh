@@ -31,6 +31,7 @@ alias gr='git reset'
 alias gb='git branch'
 alias gs='git status -sb'
 alias gsh='git show'
+alias gcp='git cherry-pick'
 
 alias glog="git log \
     --graph \
@@ -99,8 +100,10 @@ alias xrandr_laptop_triple="xrandr \
     && conkywonky"
 
 xrandr_off() {
-    for output in $(xrandr | cut -d ' '  -f 1 | grep -i "$@"); do
-        xrandr --output "$output" --off
+    for arg in "$@"; do
+        for output in $(xrandr | cut -d ' '  -f 1 | grep -i "$arg"); do
+            xrandr --output "$output" --off
+        done
     done
     conkywonky
 }
@@ -166,6 +169,11 @@ whats-blocking-port() {
     else
         sudo netstat -tulpn | grep ":$1[[:space:]]"
     fi
+}
+
+# Launch process independent of current process and ignoring all output.
+launch() {
+    ("$@" >/dev/null 2>&1 &)
 }
 
 # Swap 2 filenames around, if they exist (from Uzi's bashrc).
