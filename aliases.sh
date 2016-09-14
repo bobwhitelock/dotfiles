@@ -114,12 +114,6 @@ xrandr_off() {
 alias vim="stty stop '' -ixoff ; vim"
 ttyctl -f
 
-# Listing and removing swp files.
-swps_path="~/.vim/swps/*sw?"
-alias swps="ls -l $swps_path"
-alias swp_cleanup="rm $swps_path"
-unset swps_path
-
 # Ease transition between shell and vim.
 alias :q="exit"
 alias :qa="tmux kill-window"

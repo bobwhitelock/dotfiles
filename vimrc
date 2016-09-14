@@ -191,7 +191,10 @@ set numberwidth=8 " Spacing always given to these numbers.
 
 set undofile " Maintain undo history between sessions.
 set undodir=~/.vim/undodir " Dir for undo history.
-set directory=$HOME/.vim/swps " Dir for swp files.
+
+" Don't use swap files. Cause more trouble than they're worth; saving often,
+" undofiles, and committing often are better ways to avoid losing things.
+set noswapfile
 
 " Add new splits on right/below existing.
 set splitbelow
