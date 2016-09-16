@@ -170,6 +170,22 @@ launch() {
     ("$@" >/dev/null 2>&1 &)
 }
 
+# Add new Tmux window in given dir; appropriately named and with panes for
+# shell and Vim open.
+add-window() {
+    local window_path window_name
+
+    window_path=$(realpath "$*")
+    window_name=$(basename "$window_path")
+
+    tmux new-window \
+        -c "$window_path" \
+        -n "$window_name" \
+        \; split-window -hd -c "$window_path" \
+        \; send-keys -t 2 vim \
+        \; send-keys -t 2 Enter
+}
+
 # Swap 2 filenames around, if they exist (from Uzi's bashrc).
 # From http://tldp.org/LDP/abs/html/sample-bashrc.html.
 swap() {
