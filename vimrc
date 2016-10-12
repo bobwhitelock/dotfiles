@@ -140,6 +140,7 @@ Plug 'tlvince/vim-auto-commit'
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
+Plug 'ElmCast/elm-vim'
 Plug 'rdolgushin/gitignore.vim'
 Plug 'tpope/vim-haml'
 Plug 'andreimaxim/vim-io'
@@ -346,6 +347,10 @@ let g:yankring_replace_n_pkey = '<C-u>'
 let g:yankring_replace_n_nkey = '<C-d>'
 
 let g:AutoPairsShortcutToggle = ''
+
+let g:elm_setup_keybindings = 0
+let g:elm_syntastic_show_warnings = 1
+let g:elm_format_autosave = 1
 
 " TODO:
 " - way to make this shrink as less results?
