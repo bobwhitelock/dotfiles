@@ -174,12 +174,13 @@ launch() {
     ("$@" >/dev/null 2>&1 &)
 }
 
-# Add new Tmux window in given dir; appropriately named and with panes for
-# shell and Vim open.
+# Add new Tmux window in given dir (defaulting to current dir); appropriately
+# named and with panes for shell and Vim open.
 add-window() {
-    local window_path window_name
+    local args window_path window_name
 
-    window_path=$(realpath "$*")
+    args="$*"
+    window_path=$(realpath "${args:-$(pwd)}")
     window_name=$(basename "$window_path")
 
     tmux new-window \
