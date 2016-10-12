@@ -12,11 +12,13 @@ cl() {
 alias tree="tree -C -a --filelimit 50 -I .git"
 alias pyserver="python -m SimpleHTTPServer 8000"
 alias grip="grip --browser"
+alias sz='source ~/.zshrc'
+alias sa='source $DOTFILES/aliases.sh'
 
 # Git aliases.
 alias g='git'
 alias gp='git push'
-alias gpf='gp --force'
+alias gpf='gp --force-with-lease'
 alias gpl='git pull --prune'
 alias gd='git diff --color'
 alias gdc='gd --cached'
@@ -28,10 +30,12 @@ alias gca='gc --all'
 alias ga='git add'
 alias gco='git checkout'
 alias gr='git reset'
+alias gpop='gr HEAD~'
 alias gb='git branch'
 alias gs='git status -sb'
 alias gsh='git show'
 alias gcp='git cherry-pick'
+alias gm='git merge'
 
 alias glog="git log \
     --graph \
@@ -185,6 +189,7 @@ add-window() {
         \; send-keys -t 2 vim \
         \; send-keys -t 2 Enter
 }
+alias aw="add-window"
 
 # Swap 2 filenames around, if they exist (from Uzi's bashrc).
 # From http://tldp.org/LDP/abs/html/sample-bashrc.html.
