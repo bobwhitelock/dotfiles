@@ -394,6 +394,9 @@ nnoremap <leader>sf :source %<CR>
 nnoremap j gj
 nnoremap k gk
 
+" Make Y behave like C and D.
+nnoremap Y y$
+
 " Easier macro executing (with added benefit of preventing accidentally
 " entering 'Ex' mode).
 nnoremap Q @q
@@ -404,8 +407,8 @@ nnoremap ? ?\v
 
 " Quick find and replace in file of current word with a new string, with and
 " without confirmation respectively
-nnoremap <leader>gc :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-nnoremap <leader>gg :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <leader>gc :%s/\<<C-r><C-w>\>//gcI<Left><Left><Left><Left>
+nnoremap <leader>gg :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
 
 " shift-tab indents left in insert mode.
 " TODO: some plugin seems to have broken this.
@@ -428,9 +431,11 @@ noremap ]<Backspace> mzjdd`z
 nnoremap <silent> <C-p> :GitFiles<CR>
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> gh :Helptags<CR>
+nnoremap <leader>/ :BLines<CR>
 
-" Close quickfix window.
+" Close quickfix/location list windows.
 nnoremap <leader>q :cclose<CR>
+nnoremap <leader>l :lclose<CR>
 
 " Reload files in all windows.
 nnoremap <leader>re :windo edit!<CR>
@@ -517,6 +522,10 @@ nmap <leader>_ "+_
 
 " Move last thing yanked to system clipboard.
 nnoremap <leader>c :let @+=@"<cr>:echo "copied!"<cr>
+
+" Paste above/below, justify, and return to original position.
+nnoremap <leader>A mzO<esc>p==`z
+nnoremap <leader>B mzo<esc>p==`z
 
 " Use X clipboard.
 " TODO: Have this switch back the other way to Vim clipboard too.
