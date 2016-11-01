@@ -36,6 +36,11 @@ alias gs='git status -sb'
 alias gsh='git show'
 alias gcp='git cherry-pick'
 alias gm='git merge'
+alias gcf=' git clean --force'
+alias gci=' git clean --interactive'
+
+# cd to git repo root dir.
+alias groot='cd "$(git rev-parse --show-toplevel)"'
 
 alias glog="git log \
     --graph \
