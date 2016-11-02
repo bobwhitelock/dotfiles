@@ -434,9 +434,15 @@ nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> gh :Helptags<CR>
 nnoremap <leader>/ :BLines<CR>
 
-" Close quickfix/location list windows.
+" Close/open quickfix/location list windows.
 nnoremap <leader>q :cclose<CR>
+nnoremap <leader>Q :copen<CR>
 nnoremap <leader>l :lclose<CR>
+nnoremap <leader>L :lopen<CR>
+
+" Move through quickfix list history.
+nnoremap <silent> [Q :colder<CR>
+nnoremap <silent> ]Q :cnewer<CR>
 
 " Reload files in all windows.
 nnoremap <leader>re :windo edit!<CR>
