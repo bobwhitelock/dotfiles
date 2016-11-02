@@ -85,7 +85,7 @@ map _  <Plug>(operator-replace)
 " TODO: Modify this so can pass in the filetype and get more relevant results.
 Plug 'kana/vim-wwwsearch'
 map gW <Plug>(operator-wwwsearch)
-let g:wwwsearch_command_to_open_uri = "xdg-open {uri}"
+let g:wwwsearch_command_to_open_uri = 'xdg-open {uri}'
 
 " Operator to search using Ag/Ack/CtrlSF/Ggrep/etc.
 Plug 'rgrinberg/vim-operator-gsearch'
@@ -301,7 +301,7 @@ let g:mta_filetypes = {
     \ 'javascript.jsx' : 1,
     \}
 
-let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.js,*.html.erb"
+let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb'
 
 let g:markdown_fenced_languages = ['bash=sh']
 
@@ -323,6 +323,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 0
 
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_vim_checkers = ['vint']
 
 let g:fixmyjs_use_local = 1
 
@@ -544,7 +545,7 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 function! XTermPasteBegin()
   set pastetoggle=<Esc>[201~
   set paste
-  return ""
+  return ''
 endfunction
 
 " From http://stackoverflow.com/a/8459043/2620402.
