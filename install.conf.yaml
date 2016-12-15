@@ -8,6 +8,7 @@
     ~/.bash_logout: bash_logout
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
+    ~/.git_template: git_template
     ~/.vimrc: vimrc
     ~/.vim:
         path: vim/

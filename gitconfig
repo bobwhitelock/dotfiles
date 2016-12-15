@@ -31,6 +31,7 @@
 	longest = longest
 	cloc = cloc
 	own-files = own-files
+	ctags = !.git/hooks/ctags
 
 [color]
 	ui = true
@@ -44,3 +45,5 @@
 	ff = false
 [pull]
 	ff = only
+[init]
+	templatedir = ~/.git_template
