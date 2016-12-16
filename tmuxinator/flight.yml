@@ -13,13 +13,19 @@ windows:
   - services:
       layout: tiled
       panes:
+        # TODO: Don't need VPN and need different proxy when developing for
+        # AWS.
         - openstack-vpn:
           - cd ~/vpn/symphony-office-openstack
           - sudo openvpn client.conf
 
         - bellman:
           - cd ~/projects/alces/bellman
-          - DATABASE_URL=postgres://bob@localhost/postgres ./node_modules/coffee-script/bin/coffee app.coffee
+
+            # Note: This may need to be updated to a user/database that exist
+            # locally - it doesn't matter what so long as the auth works; the
+            # database is not actually used for FlightDeck.
+          - DATABASE_URL=postgres://bob@localhost/exodus_original ./node_modules/coffee-script/bin/coffee app.coffee
 
         - elmo:
           # SSH port forward required to launch clusters, need to access Flight
