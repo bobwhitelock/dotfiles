@@ -137,6 +137,10 @@ Plug 'bronson/vim-visual-star-search'
 
 Plug 'tlvince/vim-auto-commit'
 
+" Commands to open browser + open specific pages on Github.
+Plug 'tyru/open-browser.vim'
+Plug 'tyru/open-browser-github.vim'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
@@ -431,7 +435,7 @@ noremap ]<Backspace> mzjdd`z
 " FZF maps.
 nnoremap <silent> <C-p> :GitFiles<CR>
 nnoremap <silent> <C-f> :Files<CR>
-nnoremap <silent> gh :Helptags<CR>
+nnoremap <silent> <leader>gh :Helptags<CR>
 nnoremap <leader>/ :BLines<CR>
 
 " Close/open quickfix/location list windows.
@@ -541,6 +545,10 @@ nnoremap cox :set clipboard=unnamedplus<CR>
 
 " Join current line with line above.
 nnoremap K kJ
+
+" Open current file/current visual selection of current file in Github.
+nnoremap gh :OpenGithubFile<CR><CR>
+xnoremap gh :'<,'>OpenGithubFile<CR><CR>
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - will need changing if using vim within
