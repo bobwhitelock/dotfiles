@@ -2,10 +2,6 @@
 name: clusterware
 root: ~/
 
-pre: >
-  cd ~/projects/alces/clusterware-project/imageware/support/vagrant/login-el7 &&
-  vagrant up
-
 windows:
   - notes:
       root: ~/Dropbox/notes
@@ -13,18 +9,18 @@ windows:
         - vim
 
   - imageware:
-      root: ~/projects/alces/clusterware-project/imageware/support/vagrant/login-el7
+      root: ~/projects/alces/clusterware-project/imageware
       layout: even-horizontal
       panes:
         -
-        - vim Vagrantfile
+        - vim
 
   - clusterware:
       layout: 'f498,274x72,0,0{137x72,0,0[137x36,0,0,7,137x35,0,37,9],136x72,138,0,8}'
       panes:
         - vm:
           - cd ~/projects/alces/clusterware-project/imageware/support/vagrant/login-el7
-          - vagrant ssh
+          - vagrant up && vagrant ssh
         - shell:
           - cd ~/projects/alces/clusterware-project/clusterware
         - code:
