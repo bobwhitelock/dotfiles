@@ -1,8 +1,9 @@
 
 # Some ls aliases.
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls='ls --color=always --classify'
+alias l='ls'
+alias ll='ls -l --all --human-readable'
+alias la='ls --almost-all'
 
 cl() {
     cd "$@" && l
@@ -14,6 +15,7 @@ alias pyserver="python -m SimpleHTTPServer 8000"
 alias grip="grip --browser"
 alias sz='source ~/.zshrc'
 alias sa='source $DOTFILES/aliases.sh'
+alias rg='rg --color always --heading'
 
 # Git aliases.
 alias g='git'
@@ -141,6 +143,11 @@ rustc-explain() {
     )
 }
 
+# Vagrant aliases.
+alias v="vagrant"
+alias vs="vagrant status"
+alias vssh="vagrant ssh || vagrant up && vagrant ssh"
+
 vagrant-rebuild() {
     vagrant destroy --force && vagrant up --provision
 }
@@ -190,6 +197,7 @@ alias aw="add-window"
 new-session() {
     _tmux-create new-session "$*"
 }
+alias ns="new-session"
 
 # Utility function to be used by above.
 _tmux-create() {
@@ -208,7 +216,6 @@ _tmux-create() {
         \; send-keys -t 2 vim \
         \; send-keys -t 2 Enter
 }
-alias aw="add-window"
 
 # Swap 2 filenames around, if they exist (from Uzi's bashrc).
 # From http://tldp.org/LDP/abs/html/sample-bashrc.html.
