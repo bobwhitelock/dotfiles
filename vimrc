@@ -260,6 +260,9 @@ augroup autocmds
   " Clusterware modulefiles are Tcl.
   autocmd BufNewFile,BufRead *-module.template set filetype=tcl
 
+  " Clusterware rc files are shell.
+  autocmd BufNewFile,BufRead *.rc set filetype=sh
+
   " Open quickfix window after any grep.
   autocmd QuickFixCmdPost *grep* cwindow
 
@@ -311,8 +314,10 @@ let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb'
 let g:markdown_fenced_languages = ['bash=sh']
 let g:markdown_syntax_conceal = 0
 
-let g:startify_bookmarks = ['~/.vimrc', '~/projects/alces/aviator', '~/projects/alces/exodus']
+" TODO: looks like there's a way in the docs to run commands on session save
+" - could use to clean up old buffers?
 let g:startify_session_persistence = 1 " Save Session.vim on quit or new session load (if exists already).
+let g:startify_session_autoload = 1 " Autoload Session.vim on start, if it is present.
 let g:startify_change_to_vcs_root = 1 " Change to VCS root on file load.
 let g:startify_list_order = [
     \ ['   MRU:'],
@@ -321,8 +326,6 @@ let g:startify_list_order = [
     \ 'dir',
     \ ['   Sessions:'],
     \ 'sessions',
-    \ ['   Bookmarks:'],
-    \ 'bookmarks',
     \ ]
 
 let g:airline_powerline_fonts = 1
@@ -330,6 +333,10 @@ let g:airline#extensions#branch#enabled = 0
 
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_vim_checkers = ['vint']
+" Other Syntastic checkers:
+" - ruby: rubocop
+" - rust: rustc
+" - shell: shellcheck
 
 let g:fixmyjs_use_local = 1
 
@@ -359,10 +366,23 @@ let g:elm_setup_keybindings = 0
 let g:elm_syntastic_show_warnings = 1
 let g:elm_format_autosave = 1
 
+" Default blacklist minus markdown, as completion can be useful there.
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \ 'mail' : 1
+      \}
+
 " TODO:
 " - way to make this shrink as less results?
 " - adapt colours
-let g:fzf_layout = { 'down': '~20%' }
+" let g:fzf_layout = { 'down': '~20%' }
 
 " Map Space to Leader; don't use `mapleader` so something shows in `showcmd`
 " corner.
@@ -408,7 +428,7 @@ nnoremap Y y$
 " entering 'Ex' mode).
 nnoremap Q @q
 
-" Search with more magic.
+" Search with more magic. - TODO: overwritten on initial load by plugin?
 nnoremap / /\v
 nnoremap ? ?\v
 
@@ -496,7 +516,12 @@ noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 " Git mappings.
 " TODO: change to plug mappings?
 nnoremap gb :Gblame<CR>
-nnoremap <leader>gd :Gdiff<CR>
+nnoremap gd :Gdiff<CR>
+
+" Grep for current filename, less extension if present.
+nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
+
+nnoremap <leader>G :Ggrep!<space>
 
 let g:gitgutter_map_keys = 0
 nmap <leader>gs <Plug>GitGutterStageHunk
