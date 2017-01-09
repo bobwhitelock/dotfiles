@@ -23,3 +23,22 @@ function! ShowShellcheckWikiPage()
   endif
 endfunction
 nnoremap <silent> <leader>sc :call ShowShellcheckWikiPage()<CR>
+
+" Add a line above the current line to disable the current Shellcheck issue,
+" if any.
+function! DisableShellcheckIssue()
+  let l:error_regex = line('.') . ' col'
+
+  Errors
+  lopen
+
+  if search(l:error_regex)
+    normal! $b"zyiw
+    lclose
+    execute 'normal! mzO# shellcheck disable=' . @z . "\<esc>`z"
+  else
+    lclose
+    echom 'No ShellCheck issue on current line.'
+  endif
+endfunction
+nnoremap <silent> <leader>sd :call DisableShellcheckIssue()<CR>
