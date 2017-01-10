@@ -30,8 +30,10 @@
 	delete-remote = push origin --delete
 	longest = longest
 	cloc = cloc
+	cloc-children = cloc-children
 	own-files = own-files
 	ctags = !.git/hooks/ctags
+	review = log -p
 
 [color]
 	ui = true

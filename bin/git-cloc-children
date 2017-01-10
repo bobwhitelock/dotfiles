@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Runs `./git-cloc` in each child git repo, and returns the summed results.
+
+reports_dir=/tmp/cloc
+mkdir -p "$reports_dir"
+
+# Tests if any matches; refer to http://stackoverflow.com/a/34195247.
+if compgen -G "$reports_dir/*" > /dev/null; then
+  rm $reports_dir/*
+fi
+
+for file in *; do
+  if [[ -d  "$file" && -d "$file/.git" ]]; then
+    (cd "$file" && git cloc --report-file="${reports_dir}/${file}")
+  fi
+done
+
+cloc --sum-reports $reports_dir/*
