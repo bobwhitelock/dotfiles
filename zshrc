@@ -9,6 +9,7 @@ DISABLE_AUTO_UPDATE="true" # Don't nag about updates.
 plugins=(history-substring-search httpie rvm rails rust tmuxinator vagrant)
 export ZSH=$DOTFILES/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+unalias -m '*' # Get rid of Oh my Zsh aliases polluting shell.
 
 # Disable Software Flow Control for when I accidentally hit C-s.
 # (see http://unix.stackexchange.com/a/72092).
