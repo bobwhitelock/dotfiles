@@ -59,3 +59,7 @@ export NVM_DIR="/home/bob/.nvm"
 
 # Enable FZF.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Source this again to set up things depending on earlier parts of this file,
+# e.g. on aliases, and ensure no variables are mysteriously clobbered.
+source "$DOTFILES/env.sh"

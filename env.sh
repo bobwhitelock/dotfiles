@@ -34,3 +34,8 @@ export GITHUB_USER='bobwhitelock'
 
 # Required for Karma to work when Chromium is installed but Chrome isn't.
 export CHROME_BIN=chromium
+
+# Set these AWS key variables if the functions exist yet, it doesn't matter if
+# they don't though.
+export AWS_ACCESS_KEY_ID=$(aws_access_key &> /dev/null)
+export AWS_SECRET_ACCESS_KEY=$(aws_secret_key &> /dev/null)

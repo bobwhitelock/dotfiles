@@ -93,6 +93,10 @@ alias pdir='cd ~/alces-portal'
 alias pvm='sshpass -p alces ssh portalvm'
 alias vacsvm='ssh bob@127.0.0.1 -p 9322'
 
+# Get AWS keys from Dropbox.
+alias aws_access_key='cut -d "," -f 2 $DROP/bob-alces-aws-credentials.csv | tail -n 1'
+alias aws_secret_key='cut -d "," -f 3 $DROP/bob-alces-aws-credentials.csv | tail -n 1'
+
 # Kill/clean any running/leftover Clusterware sessions.
 alces_kill_all_sessions() {
     for i in $(alces session list | cut -d ' ' -f 2 | tail -n +4 | head -n -1); do
