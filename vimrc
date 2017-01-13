@@ -536,7 +536,19 @@ xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 " Resize to show entire buffer (or as much as possible).
 nmap <silent> gV mzvae:VSResize<CR>`z
-" TODO: command to gV quickfix window (gQ)
+
+" Resize quickfix window to fit content.
+function! ResizeQuickFix()
+  let s:current_window = winnr()
+
+  copen
+  execute "normal! mzggvG:VSResize\<CR>`z"
+
+  " Return to previous window; can't use <C-w>p as visual-split changes
+  " previous window.
+  execute 'normal! ' . s:current_window . "\<C-w>w"
+endfunction
+nnoremap gQ :call ResizeQuickFix()<CR>
 
 " Resize to/split out visual selection.
 xnoremap <silent> gV :VSResize<CR>
@@ -545,7 +557,7 @@ xnoremap <silent> gB :VSSplitBelow<CR>
 
 xnoremap <silent> SI :SyntaxInclude<space>
 
-" Maps for yanking to system clipboard with <leader> instead of "+.
+" Maps for using system clipboard with <leader> instead of "+.
 " TODO: Make <leader>_ maps not pop up register window
 xnoremap <leader>d "+d
 xnoremap <leader>y "+y
@@ -561,6 +573,9 @@ nmap <leader>_ "+_
 " Move last thing yanked to system clipboard.
 nnoremap <leader>c :let @+=@"<cr>:echo "copied!"<cr>
 
+" Copy path to current file to system clipboard.
+nnoremap <leader>C :let @+ = expand("%")<CR>:echo "copied path!"<CR>
+
 " Paste above/below, justify, and return to original position.
 nnoremap <leader>A mzO<esc>p==`z
 nnoremap <leader>B mzo<esc>p==`z
@@ -570,16 +585,22 @@ nnoremap <leader>B mzo<esc>p==`z
 " TODO: Does not work on initial load as unimpaired clobbers
 nnoremap cox :set clipboard=unnamedplus<CR>
 
-" Join current line with line above.
-nnoremap K kJ
+" Make J not shift cursor position.
+nnoremap J mzJ`z
+
+" Join current line with line above; also do not move cursor as with J above.
+nnoremap K mzkJ`z
+
+" Access original 'K' meaning.
+nnoremap gK K
 
 " Open current file/current visual selection of current file in Github.
 nnoremap gh :OpenGithubFile<CR><CR>
 xnoremap gh :'<,'>OpenGithubFile<CR><CR>
 
 " Automatically set/unset paste when pasting in insert mode
-" (see http://superuser.com/a/904446 - will need changing if using vim within
-" Tmux).
+" (see http://superuser.com/a/904446 - simpler method works for me under Tmux,
+" and more complex one doesn't).
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
