@@ -229,3 +229,6 @@ swap() {
 yaml_validate() {
     ruby -e "require 'yaml'; YAML.load_file('$1')"
 }
+
+# Experimental stuff.
+source "$DOTFILES/experimental.sh"

@@ -1,1 +1,3 @@
 vim/plugged
+vim/plugin/experimental.vim
+experimental.sh
