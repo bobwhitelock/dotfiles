@@ -6,7 +6,7 @@ source "$DOTFILES/env.sh"
 ZSH_THEME="robbyrussell"
 CASE_SENSITIVE="true" # Use case-sensitive completion.
 DISABLE_AUTO_UPDATE="true" # Don't nag about updates.
-plugins=(history-substring-search httpie rvm rails rust tmuxinator vagrant)
+plugins=(history-substring-search httpie rvm rust tmuxinator vagrant)
 export ZSH=$DOTFILES/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 unalias -m '*' # Get rid of Oh my Zsh aliases polluting shell.
@@ -46,10 +46,10 @@ bindkey '^Z' fancy-ctrl-z
 
 source "$DOTFILES/aliases.sh"
 
-# For advanced shell history.
-export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
-source /usr/lib/advanced_shell_history/zsh
-unset ASH_CFG_MOTD # Don't show message at shell start.
+# For advanced shell history - disabled for now as messes up environment.
+# export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
+# source /usr/lib/advanced_shell_history/zsh
+# unset ASH_CFG_MOTD # Don't show message at shell start.
 
 # Enable thefuck.
 eval "$(thefuck --alias)"
