@@ -135,11 +135,15 @@ Plug 'junegunn/fzf.vim'
 " Search for current visual selection with */#.
 Plug 'bronson/vim-visual-star-search'
 
+" A Vim function to automatically commit to Git
 Plug 'tlvince/vim-auto-commit'
 
 " Commands to open browser + open specific pages on Github.
 Plug 'tyru/open-browser.vim'
 Plug 'tyru/open-browser-github.vim'
+
+" Look things up in Zeal from Vim.
+Plug 'KabbAmine/zeavim.vim'
 
 " Language-specific.
 Plug 'markcornick/vim-bats'
@@ -168,16 +172,19 @@ Plug 'tpope/vim-sleuth' " Automatic indent settings.
 Plug 'tpope/vim-repeat' " Make '.' work with mappings.
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
-Plug 'Yggdroot/indentLine' " Indentation lines.
 Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
 Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
 Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
+Plug 'vimtaku/hl_matchit.vim' " Highlight matchit.vim matches.
 Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
 Plug 'ap/vim-css-color' " Highlight background of CSS colors.
 Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
 
+" Indentation lines (Note: can seriously affect performance for files with
+" long lines, see https://github.com/Yggdroot/indentLine/issues/48)
+" Plug 'Yggdroot/indentLine'
+
  " Status line. Currently pinned to old commit as colours broke on upgrade.
- " TODO: Install patched font?
 Plug 'bling/vim-airline', { 'commit': 'ca6ab34' }
 
 " Colorschemes.
@@ -217,7 +224,8 @@ set nostartofline " Don't move cursor to start of line after various commands.
 set ignorecase " Ignore case in searches...
 set smartcase " ...unless search includes a capital.
 
-set spell spelllang=en_gb " Enable spell checking (z= for corrections).
+" Use correct language for spellcheck (cos to toggle; z= for corrections).
+set spelllang=en_gb
 
 " Ignore these in various cases.
 set wildignore+=.git/*,*.swp,*.swo
@@ -366,6 +374,10 @@ let g:elm_setup_keybindings = 0
 let g:elm_syntastic_show_warnings = 1
 let g:elm_format_autosave = 1
 
+let g:hl_matchit_enable_on_vim_startup = 1
+let g:hl_matchit_hl_groupname = 'MatchParen'
+let g:hl_matchit_speed_level = 2
+
 " Default blacklist minus markdown, as completion can be useful there.
 let g:ycm_filetype_blacklist = {
       \ 'tagbar' : 1,
@@ -400,7 +412,6 @@ endfunction
 " Define custom vim-tmux-navigator mappings: if window is maximized only move
 " within Vim panes, so navigating doesn't break out of Vim unexpectedly,
 " otherwise navigate between Vim and Tmux as normal.
-" TODO: doesn't work with vipe
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <expr> <C-h> TmuxMaximized() ? ':wincmd h<CR>' : ':TmuxNavigateLeft<CR>'
 nnoremap <silent> <expr> <C-j> TmuxMaximized() ? ':wincmd j<CR>' : ':TmuxNavigateDown<CR>'
