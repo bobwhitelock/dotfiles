@@ -157,7 +157,7 @@ Plug 'gavocanov/vim-js-indent'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-markdown'
-Plug 'evanmiller/nginx-vim-syntax'
+Plug 'nginx/nginx', {'rtp': 'contrib/vim'}
 Plug 'nvie/vim-flake8'
 Plug 'yaymukund/vim-rabl'
 Plug 'tpope/vim-rails'
