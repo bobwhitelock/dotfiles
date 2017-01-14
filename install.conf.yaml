@@ -3,9 +3,6 @@
 
 - link:
     ~/.profile: profile
-    ~/.bash_profile: bash_profile
-    ~/.bashrc: bashrc
-    ~/.bash_logout: bash_logout
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.git_template: git_template
