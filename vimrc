@@ -159,6 +159,7 @@ Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-markdown'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'nvie/vim-flake8'
+Plug 'tell-k/vim-autopep8'
 Plug 'yaymukund/vim-rabl'
 Plug 'tpope/vim-rails'
 Plug 'Matt-Deacalion/vim-systemd-syntax'
@@ -276,6 +277,9 @@ augroup autocmds
 
   " Resize panes whenever containing window resized.
   autocmd VimResized * wincmd =
+
+  " Automatically format Python according to PEP8.
+  autocmd BufWritePost *.py call Autopep8()
 augroup END
 
 " Create CamelCaseMotion maps name-spaced behind leader.
@@ -390,6 +394,8 @@ let g:ycm_filetype_blacklist = {
       \ 'infolog' : 1,
       \ 'mail' : 1
       \}
+
+let g:autopep8_disable_show_diff=1
 
 " TODO:
 " - way to make this shrink as less results?
