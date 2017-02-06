@@ -41,13 +41,6 @@ windows:
         -
         - vim
 
-  - sessions:
-      root: ~/projects/alces/clusterware-project/clusterware-sessions
-      layout: even-horizontal
-      panes:
-        -
-        - vim
-
   - dotfiles:
       root: ~/.dotfiles
       layout: even-horizontal

@@ -1,0 +1,20 @@
+
+name: elm-game-of-life
+root: ~/
+
+windows:
+  - app:
+      root: ~/projects/other/elm-game-of-life
+      layout: 'c6e0,274x72,0,0{137x72,0,0[137x17,0,0,99,137x32,0,18,115,137x21,0,51,116],136x72,138,0,100}'
+      panes:
+        - yarn start
+        - yarn test -- --watch
+        -
+        - vim
+
+  - dotfiles:
+      root: ~/.dotfiles
+      layout: even-horizontal
+      panes:
+        -
+        - vim
