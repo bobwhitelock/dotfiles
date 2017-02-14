@@ -588,10 +588,11 @@ nnoremap <leader>P "+P
 nmap <leader>_ "+_
 
 " Move last thing yanked to system clipboard.
-nnoremap <leader>c :let @+=@"<cr>:echo "copied!"<cr>
+nnoremap <leader>cc :let @+=@"<cr>:echo "copied!"<cr>
 
-" Copy path to current file to system clipboard.
-nnoremap <leader>C :let @+ = expand("%")<CR>:echo "copied path!"<CR>
+" Copy current file path/name to system clipboard.
+nnoremap <leader>cp :let @+ = expand("%")<CR>:echo "copied filepath!"<CR>
+nnoremap <leader>cf :let @+ = expand("%:t")<CR>:echo "copied filename!"<CR>
 
 " Paste above/below, justify, and return to original position.
 nnoremap <leader>A mzO<esc>p==`z
