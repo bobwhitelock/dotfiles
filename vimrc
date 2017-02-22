@@ -454,7 +454,7 @@ nnoremap / /\v
 nnoremap ? ?\v
 
 " Quick find and replace in file of current word with a new string, with and
-" without confirmation respectively
+" without confirmation respectively.
 nnoremap <leader>gc :%s/\<<C-r><C-w>\>//gcI<Left><Left><Left><Left>
 nnoremap <leader>gg :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
 
@@ -481,13 +481,13 @@ nnoremap <silent> <C-f> :Files<CR>
 nnoremap <silent> <leader>gh :Helptags<CR>
 nnoremap <leader>/ :BLines<CR>
 
-" Close/open quickfix/location list windows.
-nnoremap <leader>q :cclose<CR>
+" Quick close/open of special windows.
+nnoremap <leader>q :cclose \| lclose \| pclose<CR>
 nnoremap <leader>Q :copen<CR>
-nnoremap <leader>l :lclose<CR>
 nnoremap <leader>L :lopen<CR>
 
 " Move through quickfix list history.
+" TODO: Unimpaired clobbers.
 nnoremap <silent> [Q :colder<CR>
 nnoremap <silent> ]Q :cnewer<CR>
 
@@ -529,6 +529,8 @@ xnoremap gz :sort<CR>
 
 nnoremap <leader>tn :tabnew<CR>
 nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>t> :tabmove +<CR>
+nnoremap <leader>t< :tabmove -<CR>
 
 " Make directory relative to current file.
 " TODO: make this a command instead e.g. MkdirRelative.
