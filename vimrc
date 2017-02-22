@@ -272,6 +272,10 @@ augroup autocmds
   " Clusterware rc files are shell.
   autocmd BufNewFile,BufRead *.rc set filetype=sh
 
+  " Always want spellcheck for text files.
+  autocmd BufNewFile,BufRead *.txt,*.md,*.markdown setlocal spell
+  autocmd FileType gitcommit setlocal spell
+
   " Open quickfix window after any grep.
   autocmd QuickFixCmdPost *grep* cwindow
 
@@ -279,7 +283,7 @@ augroup autocmds
   autocmd VimResized * wincmd =
 
   " Automatically format Python according to PEP8.
-  autocmd BufWritePost *.py call Autopep8()
+  autocmd BufWritePre *.py call Autopep8()
 augroup END
 
 " Create CamelCaseMotion maps name-spaced behind leader.
