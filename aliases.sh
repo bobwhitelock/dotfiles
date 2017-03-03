@@ -124,6 +124,28 @@ alces_kill_all_sessions() {
     alces session clean
 }
 
+domain() {
+    local default_name
+    default_name="$(_default_fly_domain_name)"
+    fly domain status "${1:-$default_name}"
+}
+
+_default_fly_domain_name() {
+    grep domain: ~/.fly.yml | cut -d' ' -f2
+}
+
+# TODO - could load all domain variables into corresponding env vars - e.g.
+# MONITOR_IP_ADDRESS for monitor IP. Possibly use config file that can be
+# loaded for new shells.
+domain-vars() {
+    local domain_status
+    domain_status="$(domain "$1")"
+
+    MONITORIP="$(echo "$domain_status" | grep monitor -A 2 | grep 'IP address' | cut -d: -f 2 | xargs)"
+    DIRECTORYIP="$(echo "$domain_status" | grep directory -A 2 | grep 'IP address' | cut -d: -f 2 | xargs)"
+    export MONITORIP DIRECTORYIP
+}
+
 xrandr_off() {
     for arg in "$@"; do
         for output in $(xrandr | cut -d ' '  -f 1 | grep -i "$arg"); do
