@@ -30,12 +30,15 @@ alias 9='cd -9'
 alias d='dirs -v | head -10'
 
 # Misc aliases.
-alias tree="tree -C -a --filelimit 50 -I .git"
-alias pyserver="python -m SimpleHTTPServer 8000"
+alias treeall="command tree -C -a -I .git"
+alias tree="treeall --filelimit 50"
+alias pyserver="python -m SimpleHTTPServer"
 alias grip="grip --browser"
 alias sz='source ~/.zshrc'
 alias sa='source $DOTFILES/aliases.sh'
-alias rg='rg --color always --heading'
+alias rgp='rg --pretty'
+alias rsync='rsync --human-readable --progress'
+
 
 # Git aliases.
 alias g='git'
@@ -48,6 +51,7 @@ alias gg='git grep'
 alias gbl='git blame'
 alias gst='git stash'
 alias gc='git commit --verbose'
+alias gcm='gc -m'
 alias gca='gc --all'
 alias ga='git add'
 alias gco='git checkout'
@@ -169,6 +173,10 @@ alias :qa="tmux kill-window"
 # middle-click clipboard).
 alias cbcopy='xclip -selection clipboard'
 alias cbpaste='xclip -selection clipboard -out'
+
+du() {
+    command du -h "$@" | sort -h
+}
 
 # Explain the current rustc error.
 rustc-explain() {
