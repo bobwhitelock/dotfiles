@@ -13,7 +13,7 @@ filter_symlinks() {
     done
 }
 
-git ls-files | \
+git ls-files "$@" | \
     grep \
     --invert-match \
     --line-regexp \

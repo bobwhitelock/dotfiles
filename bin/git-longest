@@ -1,5 +1,5 @@
 #!/bin/sh
 
-git own-files | \
+git own-files "$@" | \
     xargs wc --lines | \
     sort --numeric-sort

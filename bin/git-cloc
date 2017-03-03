@@ -1,3 +1,5 @@
 #!/bin/bash
 
+# TODO - Allow passing which files to use to `own-files` as well.
+
 cloc --list-file=<(git own-files) "$@"
