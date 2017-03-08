@@ -282,12 +282,27 @@ augroup autocmds
   " Resize panes whenever containing window resized.
   autocmd VimResized * wincmd =
 
-  " Automatically format Python according to PEP8.
-  autocmd BufWritePre *.py call Autopep8()
 augroup END
 
 " Create CamelCaseMotion maps name-spaced behind leader.
 call camelcasemotion#CreateMotionMappings('<leader>')
+
+" Toggle automatically formatting Python according to PEP8 (default enabled).
+function! s:EnablePythonAutoFormat()
+  augroup python_auto_format
+    autocmd!
+    autocmd BufWritePre *.py call Autopep8()
+  augroup END
+endfunction
+command! EnablePythonAutoFormat call s:EnablePythonAutoFormat()
+EnablePythonAutoFormat
+
+function! s:DisablePythonAutoFormat()
+  augroup python_auto_format
+    autocmd!
+  augroup END
+endfunction
+command! DisablePythonAutoFormat call s:DisablePythonAutoFormat()
 
 " Commands to enable/disable auto-committing on every save in git repos -
 " useful when developing something where changes won't take effect until a
