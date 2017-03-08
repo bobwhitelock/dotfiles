@@ -44,6 +44,9 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+bindkey '^B' backward-word
+bindkey '^F' forward-word
+
 source "$DOTFILES/aliases.sh"
 
 # For advanced shell history - disabled for now as messes up environment.

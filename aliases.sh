@@ -39,6 +39,9 @@ alias sa='source $DOTFILES/aliases.sh'
 alias rgp='rg --pretty'
 alias rsync='rsync --human-readable --progress'
 
+which-edit() {
+    $EDITOR "$(which "$1")"
+}
 
 # Git aliases.
 alias g='git'
@@ -190,6 +193,8 @@ du() {
 
 # Explain the current rustc error.
 rustc-explain() {
+    # Word splitting required here for this to work.
+    # shellcheck disable=SC2046
     rustc --explain $( \
         cargo build 2>&1 | \
         awk -F 'rustc --explain' '{ print $2 }' | \
