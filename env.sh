@@ -39,3 +39,6 @@ export CHROME_BIN=chromium
 # they don't though.
 export AWS_ACCESS_KEY_ID=$(aws_access_key 2> /dev/null)
 export AWS_SECRET_ACCESS_KEY=$(aws_secret_key 2> /dev/null)
+
+export DOMAIN_VARS_FILE=/tmp/domain-vars
+cached-domain-vars 2> /dev/null

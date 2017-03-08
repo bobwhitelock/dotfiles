@@ -138,9 +138,8 @@ _default_fly_domain_name() {
     grep domain: ~/.fly.yml | cut -d' ' -f2
 }
 
-# TODO - could load all domain variables into corresponding env vars - e.g.
-# MONITOR_IP_ADDRESS for monitor IP. Possibly use config file that can be
-# loaded for new shells.
+# TODO - could (dynamically) load all other domain variables into corresponding
+# env vars - e.g.  MONITOR_IP_ADDRESS for monitor IP.
 domain-vars() {
     local domain_status
     domain_status="$(domain "$1")"
@@ -148,6 +147,17 @@ domain-vars() {
     MONITORIP="$(echo "$domain_status" | grep monitor -A 2 | grep 'IP address' | cut -d: -f 2 | xargs)"
     DIRECTORYIP="$(echo "$domain_status" | grep directory -A 2 | grep 'IP address' | cut -d: -f 2 | xargs)"
     export MONITORIP DIRECTORYIP
+
+    # Cache the domain vars, to be loaded by new shells.
+    cat <<EOF > "$DOMAIN_VARS_FILE"
+MONITORIP="$MONITORIP"
+DIRECTORYIP="$DIRECTORYIP"
+EOF
+}
+
+# Load cached Flight Attendant domain vars, if present.
+cached-domain-vars() {
+    source "$DOMAIN_VARS_FILE" 2> /dev/null
 }
 
 xrandr_off() {
