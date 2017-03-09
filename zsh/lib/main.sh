@@ -35,7 +35,7 @@ alias tree="treeall --filelimit 50"
 alias pyserver="python -m SimpleHTTPServer"
 alias grip="grip --browser"
 alias sz='source ~/.zshrc'
-alias sa='source $DOTFILES/aliases.sh'
+alias sa='source $ZSH_LIB'
 alias rgp='rg --pretty'
 alias rsync='rsync --human-readable --progress'
 

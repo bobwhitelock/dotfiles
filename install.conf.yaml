@@ -14,7 +14,7 @@
     ~/.screenrc: screenrc
     ~/.psqlrc: psqlrc
     ~/.sqliterc: sqliterc
-    ~/.zshrc: zshrc
+    ~/.zshrc: zsh/zshrc
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator:
         path: tmuxinator/

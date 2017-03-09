@@ -1,6 +1,6 @@
 
 export DOTFILES="$HOME/.dotfiles"
-source "$DOTFILES/env.sh"
+source "$DOTFILES/zsh/env.sh"
 
 # Oh My Zsh stuff.
 ZSH_THEME="robbyrussell"
@@ -47,7 +47,7 @@ bindkey '^Z' fancy-ctrl-z
 bindkey '^B' backward-word
 bindkey '^F' forward-word
 
-source "$DOTFILES/aliases.sh"
+source "$DOTFILES/zsh/lib/main.sh"
 
 # For advanced shell history - disabled for now as messes up environment.
 # export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
@@ -65,4 +65,4 @@ export NVM_DIR="/home/bob/.nvm"
 
 # Source this again to set up things depending on earlier parts of this file,
 # e.g. on aliases, and ensure no variables are mysteriously clobbered.
-source "$DOTFILES/env.sh"
+source "$DOTFILES/zsh/env.sh"
