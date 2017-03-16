@@ -48,6 +48,7 @@ bindkey '^B' backward-word
 bindkey '^F' forward-word
 
 source "$DOTFILES/zsh/lib/main.sh"
+source-libs
 
 # For advanced shell history - disabled for now as messes up environment.
 # export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
