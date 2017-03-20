@@ -258,6 +258,9 @@ augroup autocmds
   autocmd BufNewFile,BufRead .eslintrc,.reduxrc set filetype=json
   autocmd BufNewFile,BufRead gitconfig set filetype=gitconfig
   autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+  autocmd BufNewFile,BufRead *.zsh set filetype=sh
+  autocmd BufNewFile,BufRead *.pyconf set filetype=conf
+  autocmd BufNewFile,BufRead *cloud.cfg set filetype=yaml
 
   " oh-my-zsh themes are shell.
   autocmd BufNewFile,BufRead *.zsh-theme set filetype=sh
@@ -273,7 +276,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead *.rc set filetype=sh
 
   " Always want spellcheck for text files.
-  autocmd BufNewFile,BufRead *.txt,*.md,*.markdown setlocal spell
+  autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst setlocal spell
   autocmd FileType gitcommit setlocal spell
 
   " Open quickfix window after any grep.
@@ -342,7 +345,7 @@ let g:mta_filetypes = {
 
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb'
 
-let g:markdown_fenced_languages = ['bash=sh']
+let g:markdown_fenced_languages = ['bash=sh', 'elm']
 let g:markdown_syntax_conceal = 0
 
 " TODO: looks like there's a way in the docs to run commands on session save
@@ -390,6 +393,7 @@ let g:rustfmt_autosave = 1 " Run rustfmt on save of rust files.
 
 let g:yankring_replace_n_pkey = '<C-u>'
 let g:yankring_replace_n_nkey = '<C-d>'
+nnoremap <C-y> :YRShow<CR>
 
 let g:AutoPairsShortcutToggle = ''
 
@@ -493,7 +497,7 @@ noremap ]<Backspace> mzjdd`z
 " FZF maps.
 nnoremap <silent> <C-p> :GitFiles<CR>
 nnoremap <silent> <C-f> :Files<CR>
-nnoremap <silent> <leader>gh :Helptags<CR>
+nnoremap <silent> gh :Helptags<CR>
 nnoremap <leader>/ :BLines<CR>
 
 " Quick close/open of special windows.
@@ -634,8 +638,16 @@ nnoremap K mzkJ`z
 nnoremap gK K
 
 " Open current file/current visual selection of current file in Github.
-nnoremap gh :OpenGithubFile<CR><CR>
-xnoremap gh :'<,'>OpenGithubFile<CR><CR>
+nnoremap <leader>gh :OpenGithubFile<CR><CR>
+xnoremap <leader>gh :'<,'>OpenGithubFile<CR><CR>
+
+" Quick appending of commonly appended chars.
+nnoremap g. mzA.<esc>`z
+nnoremap g; mzA;<esc>`z
+nnoremap g, mzA,<esc>`z
+
+" Remove last char on line.
+nnoremap g<Backspace> mzA<Backspace><Esc>`z
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - simpler method works for me under Tmux,
