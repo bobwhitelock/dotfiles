@@ -1,5 +1,5 @@
 
-export PATH="$PATH:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin:./node_modules/.bin:$HOME/.cargo/bin"
+export PATH="$HOME/.rvm/gems/ruby-2.1.6/bin:$PATH:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin:./node_modules/.bin:$HOME/.cargo/bin"
 
 # As suggested to make Yeoman work in
 # https://github.com/creationix/nvm/issues/586#issuecomment-68220064.
