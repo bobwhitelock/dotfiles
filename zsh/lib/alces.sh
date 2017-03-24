@@ -11,10 +11,35 @@ alces_kill_all_sessions() {
     alces session clean
 }
 
+ami-creator() {
+    local ami_creator_dir ami_type
+    ami_creator_dir="$ALCES_PROJECTS"/clusterware-project/imageware/support/aws
+
+    ami_type="$1"
+    shift
+
+    (cd "$ami_creator_dir" && \
+        ./ami-creator \
+        --key-name aws_ireland \
+        --branch develop \
+        --imageware "$(git rev-parse --abbrev-ref HEAD)" \
+        --type "$ami_type" \
+        --jfdi \
+        --development \
+        --fly \
+        "$@" \
+        ) && domain-vars
+}
+
+fly() {
+    command fly "$@" && domain-vars
+}
+
+# TODO - combine this and `domain-vars`
 domain() {
     local default_name
     default_name="$(_default_fly_domain_name)"
-    fly domain status "${1:-$default_name}"
+    command fly domain status "${1:-$default_name}"
 }
 
 _default_fly_domain_name() {
@@ -23,24 +48,76 @@ _default_fly_domain_name() {
 
 # TODO - could (dynamically) load all other domain variables into corresponding
 # env vars - e.g.  MONITOR_IP_ADDRESS for monitor IP.
+# TODO don't export/load unknown appliance vars?
 domain-vars() {
     local domain_status
-    domain_status="$(domain "$1")"
+    # domain_status="$(domain "$1")"
+    domain_status="$(domain)"
 
-    MONITORIP="$(echo "$domain_status" | grep monitor -A 2 | grep 'IP address' | cut -d: -f 2 | xargs)"
-    DIRECTORYIP="$(echo "$domain_status" | grep directory -A 2 | grep 'IP address' | cut -d: -f 2 | xargs)"
-    export MONITORIP DIRECTORYIP
+    MONITORIP="$(_grep_appliance_ip "$domain_status" monitor)"
+    DIRECTORYIP="$(_grep_appliance_ip "$domain_status" directory)"
+    CONTROLLERIP="$(_grep_appliance_ip "$domain_status" controller)"
+    export MONITORIP DIRECTORYIP CONTROLLERIP
 
     # Cache the domain vars, to be loaded by new shells.
-    cat <<EOF > "$DOMAIN_VARS_FILE"
+    cat <<EOF | tee "$DOMAIN_VARS_FILE"
 MONITORIP="$MONITORIP"
 DIRECTORYIP="$DIRECTORYIP"
+CONTROLLERIP="$CONTROLLERIP"
 EOF
+}
+
+_grep_appliance_ip() {
+    local domain_status appliance_type
+    domain_status="$1"
+    appliance_type="$2"
+
+    echo "$domain_status" | \
+        grep "$appliance_type" -A 2 | \
+        grep 'IP address' | \
+        cut -d: -f 2 | \
+        xargs
 }
 
 # Load cached Flight Attendant domain vars, if present.
 cached-domain-vars() {
     source "$DOMAIN_VARS_FILE" 2> /dev/null
+    export MONITORIP DIRECTORYIP CONTROLLERIP
+}
+
+bobdomain() {
+    _use_domain bobdomain
+}
+
+bobdomain2() {
+    _use_domain bobdomain2
+}
+
+_use_domain() {
+    local domain_name
+    domain_name="$1"
+    cp ~/.fly."$domain_name".yml ~/.fly.yml
+    domain-vars
+}
+
+controller() {
+    _ssh_appliance "$CONTROLLERIP"
+}
+
+directory() {
+    _ssh_appliance "$DIRECTORYIP"
+}
+
+monitor() {
+    _ssh_appliance "$MONITORIP"
+}
+
+_ssh_appliance() {
+    local appliance_ip
+    appliance_ip="$1"
+
+    # TODO load var if not present
+    ssh "dev@$appliance_ip"
 }
 
 # Old aliases kept for reference.
