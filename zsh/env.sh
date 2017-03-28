@@ -44,3 +44,9 @@ export DOMAIN_VARS_FILE=/tmp/domain-vars
 cached-domain-vars 2> /dev/null
 
 export ZSH_LIB="$ZSH_DIR/lib"
+
+# See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
+export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
+    vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
+    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
+    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""

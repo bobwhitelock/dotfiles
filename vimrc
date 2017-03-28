@@ -422,6 +422,9 @@ let g:ycm_filetype_blacklist = {
 
 let g:autopep8_disable_show_diff=1
 
+" See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
+let $PAGER=''
+
 " TODO:
 " - way to make this shrink as less results?
 " - adapt colours
