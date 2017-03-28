@@ -1,4 +1,6 @@
 
+alias mux="tmuxinator"
+
 # Add new Tmux window in given dir (defaulting to current dir); appropriately
 # named and with panes for shell and Vim open.
 add-window() {

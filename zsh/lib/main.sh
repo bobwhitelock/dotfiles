@@ -5,7 +5,7 @@ alias tree="treeall --filelimit 50"
 alias pyserver="python -m SimpleHTTPServer"
 alias grip="grip --browser"
 alias rgp='rg --pretty'
-alias rsync='rsync --human-readable --progress'
+alias rsync='rerun --exit --pattern "**/*" -- rsync --human-readable --progress'
 
 alias sz='source ~/.zshrc'
 source-libs() {
@@ -74,4 +74,13 @@ swap() {
 
 yaml_validate() {
     ruby -e "require 'yaml'; YAML.load_file('$1')"
+}
+
+# Pretty-print a YAML file as JSON.
+yaml_to_json() {
+    cat <<RUBY | ruby | jq .
+require 'yaml'
+require 'json'
+puts YAML.load_file('$1').to_json
+RUBY
 }

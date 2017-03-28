@@ -22,7 +22,7 @@ alias gm='git merge'
 alias gcf=' git clean --force'
 alias gci=' git clean --interactive'
 
-alias gsh='git show'
+alias gsh='git show --pretty=fuller'
 alias gsh~='gsh HEAD~'
 alias gsh2='gsh HEAD~2'
 alias gsh3='gsh HEAD~3'
@@ -32,7 +32,6 @@ alias gsh6='gsh HEAD~6'
 alias gsh7='gsh HEAD~7'
 alias gsh8='gsh HEAD~8'
 alias gsh9='gsh HEAD~9'
-alias gshf='gsh --pretty=fuller'
 
 # cd to git repo root dir.
 alias groot='cd "$(git rev-parse --show-toplevel)"'
