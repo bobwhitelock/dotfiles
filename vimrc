@@ -285,6 +285,8 @@ augroup autocmds
   " Resize panes whenever containing window resized.
   autocmd VimResized * wincmd =
 
+  " Follow symlinks when opening files.
+  autocmd BufReadPost * nested call FollowSymlink(expand('%'))
 augroup END
 
 " Create CamelCaseMotion maps name-spaced behind leader.
@@ -678,3 +680,43 @@ function! s:Underline(chars)
   put =strpart(uline, 0, nr_columns)
 endfunction
 command! -nargs=? Underline call s:Underline(<q-args>)
+
+" Follow symlinks when opening files. From
+" https://github.com/blueyed/dotfiles/blob/e6af94cc6aaac34becfb08bd7af14af8ddb03483/vimrc#L1637.
+" Note: this happens with directory symlinks anyway (due to Vim's chdir/getcwd
+" magic when getting filenames).
+function! FollowSymlink(...)
+  if exists('w:no_resolve_symlink') && w:no_resolve_symlink
+    return
+  endif
+  if &ft == 'help'
+    return
+  endif
+  let fname = a:0 ? a:1 : expand('%')
+  if fname =~ '^\w\+:/'
+    " Do not mess with 'fugitive://' etc.
+    return
+  endif
+  let fname = simplify(fname)
+
+  let resolvedfile = resolve(fname)
+  if resolvedfile == fname
+    return
+  endif
+  let resolvedfile = fnameescape(resolvedfile)
+  let sshm = &shm
+  set shortmess+=A  " silence ATTENTION message about swap file (would get displayed twice)
+  redraw  " Redraw now, to avoid hit-enter prompt.
+  exec 'file ' . resolvedfile
+  let &shm=sshm
+
+  unlet! b:git_dir
+  call fugitive#detect(resolvedfile)
+
+  if &modifiable
+    " Only display a note when editing a file, especially not for `:help`.
+    redraw  " Redraw now, to avoid hit-enter prompt.
+    echomsg 'Resolved symlink: =>' resolvedfile
+  endif
+endfunction
+command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
