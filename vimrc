@@ -156,6 +156,7 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'gavocanov/vim-js-indent'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
+Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
@@ -343,6 +344,7 @@ let g:mta_filetypes = {
     \ 'xml' : 1,
     \ 'jinja' : 1,
     \ 'javascript.jsx' : 1,
+    \ 'liquid' : 1,
     \}
 
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb'
