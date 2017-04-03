@@ -507,8 +507,12 @@ noremap ]<Backspace> mzjdd`z
 " FZF maps.
 nnoremap <silent> <C-p> :GitFiles<CR>
 nnoremap <silent> <C-f> :Files<CR>
-nnoremap <silent> gh :Helptags<CR>
-nnoremap <leader>/ :BLines<CR>
+nnoremap <leader>fh :Helptags<CR>
+nnoremap <leader>fb :BLines<CR>
+nnoremap <leader>ft :Tags<CR>
+nnoremap <leader>fm :Maps<CR>
+nnoremap <leader>fC :Commits<CR>
+nnoremap <leader>fc :BCommits<CR>
 
 " Quick close/open of special windows.
 nnoremap <leader>q :cclose \| lclose \| pclose<CR>
