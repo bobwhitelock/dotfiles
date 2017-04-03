@@ -328,6 +328,9 @@ function! s:DisableAutoCommit()
 endfunction
 command! DisableAutoCommit call s:DisableAutoCommit()
 
+" When searching for ctags include generated tag files in neighbouring repos.
+command! IncludeNeighbourTags set tags+=../*/.git/tags
+
 " Low vim-plug timeout to get around issue where installing fails sometimes
 " and have to wait 60 seconds for timeout.
 let g:plug_timeout = 5
