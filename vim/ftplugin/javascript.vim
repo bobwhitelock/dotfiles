@@ -1,12 +1,12 @@
 
-nnoremap gl oconsole.log() // eslint-disable-line no-console<esc>F)i
-nnoremap gL Oconsole.log() // eslint-disable-line no-console<esc>F)i
+nnoremap <buffer> gl oconsole.log() // eslint-disable-line no-console<esc>F)i
+nnoremap <buffer> gL Oconsole.log() // eslint-disable-line no-console<esc>F)i
 
 " Add line to log current word.
-nnoremap <leader>gl mz"zyiwoconsole.log("<C-r>z:", <C-r>z) // eslint-disable-line no-console<esc>`z
+nnoremap <buffer> <leader>gl mz"zyiwoconsole.log("<C-r>z:", <C-r>z) // eslint-disable-line no-console<esc>`z
 
 " Have eslint ignore current line.
-nnoremap <leader>i mzA // eslint-disable-line<esc>`z`
+nnoremap <buffer> <leader>i mzA // eslint-disable-line<esc>`z`
 
 " `eslint --fix` current file.
-nnoremap <leader>f :Fixmyjs<CR>
+nnoremap <buffer> <leader>f :Fixmyjs<CR>
