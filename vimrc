@@ -14,6 +14,7 @@ Plug 'tpope/vim-eunuch'
 
 " Git command helpers (:G*)
 Plug 'tpope/vim-fugitive'
+Plug 'SevereOverfl0w/vim-rhubarb', {'branch': 'moreorigin'}
 
 " Various paired bracket mappings.
 Plug 'tpope/vim-unimpaired'
@@ -109,6 +110,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " 2-character search motion (s/S).
 Plug 'justinmk/vim-sneak'
+" TODO needed?
 
 " Better file browser than netrw.
 Plug 'justinmk/vim-dirvish'
@@ -183,6 +185,8 @@ Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
 Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
 Plug 'ap/vim-css-color' " Highlight background of CSS colors.
 Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
+Plug 'machakann/vim-highlightedyank' " Briefly highlight yanked area after a yank.
+Plug 'luochen1990/rainbow'
 
 " Indentation lines (Note: can seriously affect performance for files with
 " long lines, see https://github.com/Yggdroot/indentLine/issues/48)
@@ -440,10 +444,20 @@ let g:ycm_filetype_blacklist = {
 
 let g:autopep8_disable_show_diff=1
 
+" TODO need to make this cooperate with other 'y' maps.
+" map y <Plug>(highlightedyank)
+let g:highlightedyank_highlight_duration = 100
+
+let g:html_indent_script1 = 'inc'
+let g:html_indent_style1 = 'inc'
+let g:html_indent_inctags = 'html,body,head'
+
 let g:zv_disable_mapping = 1
 
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''
+
+" let g:rainbow_active = 1
 
 " TODO:
 " - way to make this shrink as less results?
@@ -551,6 +565,8 @@ noremap <C-c> :Bdelete<CR>
 " Open file relative to current file.
 noremap <C-e> :e <C-R>=expand("%:p:h") . "/" <CR>
 
+nnoremap ge :edit scp:////<Left><Left>
+
 " Easily create horizontal/vertical splits.
 noremap <leader>h :wincmd s<CR>
 noremap <leader>v :wincmd v<CR>
@@ -623,6 +639,14 @@ function! ResizeQuickFix()
   " Return to previous window; can't use <C-w>p as visual-split changes
   " previous window.
   execute 'normal! ' . s:current_window . "\<C-w>w"
+
+  " Attempted new version:
+  " 
+  " copen
+  " execute "normal! mzggvG:VSResize\<CR>`z"
+  " wincmd p
+  "
+  " - but will still go to previous window if in qf window already.
 endfunction
 nnoremap gQ :call ResizeQuickFix()<CR>
 
@@ -669,7 +693,7 @@ nnoremap J mzJ`z
 nnoremap K mzkJ`z
 
 " Access original 'K' meaning.
-nnoremap gK K
+" nnoremap gK K
 
 " Open current file/current visual selection of current file in Github.
 nnoremap <leader>gh :OpenGithubFile<CR><CR>
@@ -679,6 +703,13 @@ nnoremap <leader>do :diffoff<CR>
 nnoremap <leader>dt :diffthis<CR>
 nnoremap <leader>dp :diffput<CR>
 nnoremap <leader>dg :diffget<CR>
+
+nmap gK <Plug>Zeavim
+vmap gK <Plug>Zeavim
+
+" Poor man's 'capitalize' operator. TODO google this
+nnoremap gCiw mzviwo<esc>gUl`z
+
 
 " TODO: do better, just have `z=` and `1z=` maps which enable spell first
 nmap z+ cos1z=cos

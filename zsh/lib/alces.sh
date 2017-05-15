@@ -12,7 +12,7 @@ alces_kill_all_sessions() {
 }
 
 ami-creator() {
-    local ami_creator_dir ami_type
+    local ami_creator_dir ami_type imageware_branch clusterware_branch
     ami_creator_dir="$ALCES_PROJECTS"/clusterware-project/imageware/support/aws
 
     ami_type="$1"
@@ -21,14 +21,52 @@ ami-creator() {
     (cd "$ami_creator_dir" && \
         ./ami-creator \
         --key-name aws_ireland \
-        --branch develop \
-        --imageware "$(git rev-parse --abbrev-ref HEAD)" \
+        --branch "$(_clusterware_branch)" \
+        --imageware "$(_imageware_branch)" \
         --type "$ami_type" \
         --jfdi \
         --development \
         --fly \
         "$@" \
         ) && domain-vars
+}
+
+qcow-creator() {
+    local build_server qcow_creator_dir qcow_type build_command
+    build_server=julius.dmz.alces-software.com
+    qcow_creator_dir=/root/markt/imageware/support/openstack/
+
+    qcow_type="$1"
+    shift
+
+    build_command="$(cat <<EOF
+    cd $qcow_creator_dir && \
+        ./qcow-creator \
+        --name bob-$(date +%Y-%m-%d_%H-%M) \
+        --type $qcow_type \
+        --branch "$(_clusterware_branch)"  \
+        --imageware "$(_imageware_branch)" \
+        --jfdi \
+        --development
+EOF
+)"
+
+    # shellcheck disable=SC2029
+    ssh "root@$build_server" "$build_command"
+}
+
+_clusterware_branch() {
+    _repo_current_branch "$ALCES_PROJECTS"/clusterware-project/clusterware
+}
+
+_imageware_branch() {
+    _repo_current_branch "$ALCES_PROJECTS"/clusterware-project/imageware
+}
+
+_repo_current_branch() {
+    local repo_path
+    repo_path="$1"
+    (cd "$repo_path" && git rev-parse --abbrev-ref HEAD)
 }
 
 fly() {

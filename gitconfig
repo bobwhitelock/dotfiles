@@ -34,6 +34,8 @@
 	own-files = own-files
 	ctags = !.git/hooks/ctags
 	review = log -p
+	propagate = propagate
+	on-changed = on-changed
 
 [color]
 	ui = true

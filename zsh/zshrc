@@ -11,6 +11,8 @@ plugins=(history-substring-search httpie rvm rust tmuxinator vagrant)
 export ZSH=$DOTFILES/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 unalias -m '*' # Get rid of Oh my Zsh aliases polluting shell.
+# TODO: adapt
+# https://github.com/cowboy/dotfiles/blob/master/source/50_prompt.sh for Zsh?
 
 # Disable Software Flow Control for when I accidentally hit C-s.
 # (see http://unix.stackexchange.com/a/72092).
@@ -64,6 +66,9 @@ export NVM_DIR="/home/bob/.nvm"
 
 # Enable FZF.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Setup Pyenv.
+eval "$(pyenv init -)"
 
 # Source this again to set up things depending on earlier parts of this file,
 # e.g. on aliases, and ensure no variables are mysteriously clobbered.
