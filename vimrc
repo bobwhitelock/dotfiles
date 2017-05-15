@@ -156,6 +156,7 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'gavocanov/vim-js-indent'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
+Plug 'tangledhelix/vim-kickstart'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 Plug 'othree/nginx-contrib-vim'
@@ -177,7 +178,8 @@ Plug 'henrik/vim-indexed-search' " Show number of search results.
 Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
 Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
 Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
-Plug 'vimtaku/hl_matchit.vim' " Highlight matchit.vim matches.
+" TODO disabled for now as was slowing things down.
+" Plug 'vimtaku/hl_matchit.vim' " Highlight matchit.vim matches.
 Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
 Plug 'ap/vim-css-color' " Highlight background of CSS colors.
 Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
@@ -407,6 +409,14 @@ nnoremap <C-y> :YRShow<CR>
 
 let g:AutoPairsShortcutToggle = ''
 
+" Default maps minus quote maps, which were getting in the way.
+let g:AutoPairs = {
+    \ '(': ')',
+    \ '[': ']',
+    \ '{': '}',
+    \ '`': '`'
+    \}
+
 let g:elm_setup_keybindings = 0
 let g:elm_syntastic_show_warnings = 1
 let g:elm_format_autosave = 1
@@ -429,6 +439,8 @@ let g:ycm_filetype_blacklist = {
       \}
 
 let g:autopep8_disable_show_diff=1
+
+let g:zv_disable_mapping = 1
 
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''
@@ -514,8 +526,9 @@ nnoremap <leader>fh :Helptags<CR>
 nnoremap <leader>fb :BLines<CR>
 nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fm :Maps<CR>
-nnoremap <leader>fC :Commits<CR>
-nnoremap <leader>fc :BCommits<CR>
+nnoremap <leader>fc :Commits<CR>
+nnoremap <leader>fC :BCommits<CR>
+nnoremap <leader>ff :Filetypes<CR>
 
 " Quick close/open of special windows.
 nnoremap <leader>q :cclose \| lclose \| pclose<CR>
@@ -528,6 +541,8 @@ nnoremap <silent> [Q :colder<CR>
 nnoremap <silent> ]Q :cnewer<CR>
 
 " Reload files in all windows.
+" TODO go back to otiginal window afterwards
+" TODO do in other tabs?
 nnoremap <leader>re :windo edit!<CR>
 
 " Delete current buffer while preserving layout.
@@ -561,7 +576,9 @@ noremap <silent> =J :%!python -m json.tool<CR> :setfiletype json<CR>
 
 nnoremap <leader>gu :GundoToggle<CR>
 
+" Sort visual selection/current paragraph.
 xnoremap gz :sort<CR>
+nnoremap gz vip:'<,'>sort<CR>
 
 nnoremap <leader>tn :tabnew<CR>
 nnoremap <leader>tc :tabclose<CR>
@@ -658,13 +675,29 @@ nnoremap gK K
 nnoremap <leader>gh :OpenGithubFile<CR><CR>
 xnoremap <leader>gh :'<,'>OpenGithubFile<CR><CR>
 
+nnoremap <leader>do :diffoff<CR>
+nnoremap <leader>dt :diffthis<CR>
+nnoremap <leader>dp :diffput<CR>
+nnoremap <leader>dg :diffget<CR>
+
+" TODO: do better, just have `z=` and `1z=` maps which enable spell first
+nmap z+ cos1z=cos
+
 " Quick appending of commonly appended chars.
+" TODO make these `vim-repeat`-able
 nnoremap g. mzA.<esc>`z
 nnoremap g; mzA;<esc>`z
 nnoremap g, mzA,<esc>`z
 
 " Remove last char on line.
 nnoremap g<Backspace> mzA<Backspace><Esc>`z
+
+" Insert current timestamp.
+command! Time execute "normal! i<C-R>=strftime('%R:%S')<CR><Esc>"
+
+nmap <leader>` ysiW`
+nmap <leader>) ysiW)
+nmap <leader>] ysiW]
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - simpler method works for me under Tmux,
