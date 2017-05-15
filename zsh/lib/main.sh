@@ -4,8 +4,14 @@ alias treeall="command tree -C -a -I .git"
 alias tree="treeall --filelimit 50"
 alias pyserver="python -m SimpleHTTPServer"
 alias grip="grip --browser"
-alias rgp='rg --pretty'
 alias rsync='rerun --exit --pattern "**/*" -- rsync --human-readable --progress'
+alias diff='vimdiff'
+alias m='make'
+alias be='bundle exec'
+alias rspec='be rspec'
+
+# List files installed on system by given package.
+alias apt-files='dpkg-query --listfiles'
 
 alias sz='source ~/.zshrc'
 source-libs() {
@@ -56,6 +62,10 @@ rustc-explain() {
         awk -F 'rustc --explain' '{ print $2 }' | \
         cut -d '`' -f 1
     )
+}
+
+rgp() {
+    rg --pretty "$@" | less
 }
 
 # Swap 2 filenames around, if they exist (from Uzi's bashrc).

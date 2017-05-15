@@ -36,6 +36,11 @@ alias gsh9='gsh HEAD~9'
 # cd to git repo root dir.
 alias groot='cd "$(git rev-parse --show-toplevel)"'
 
+# Open Vim and run command from `junegunn/fzf.vim`, for fuzzy finding of all
+# commits.
+# TODO set `g:fzf_layout` here so this fills screen?
+alias gf='vim +Commits'
+
 alias glog="git log \
     --graph \
     --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%ar / %cr)%Creset' \
