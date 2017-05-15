@@ -288,6 +288,9 @@ augroup autocmds
 
   " Follow symlinks when opening files.
   autocmd BufReadPost * nested call FollowSymlink(expand('%'))
+
+  " Make `3` in Markdown files trigger vim-surround maps for code blocks.
+  autocmd FileType markdown let b:surround_51 = "```\n\r\n```"
 augroup END
 
 " Create CamelCaseMotion maps name-spaced behind leader.
@@ -352,7 +355,7 @@ let g:mta_filetypes = {
 
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb'
 
-let g:markdown_fenced_languages = ['bash=sh', 'elm']
+let g:markdown_fenced_languages = ['bash=sh', 'python', 'elm', 'xml', 'yaml']
 let g:markdown_syntax_conceal = 0
 
 " TODO: looks like there's a way in the docs to run commands on session save
