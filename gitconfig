@@ -45,7 +45,10 @@
 	tool = vimdiff
 [merge]
 	ff = false
+	conflictstyle = diff3
 [pull]
 	ff = only
 [init]
 	templatedir = ~/.git_template
+[rerere]
+	enabled = 1
