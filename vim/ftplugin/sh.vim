@@ -10,7 +10,7 @@ nnoremap <buffer> <leader>gl mz"zyiwoecho <C-r>z: "'${<C-r>z}'"<esc>`z
 function! ShowShellcheckWikiPage()
   let l:issue = s:LineHasShellcheckIssue()
 
-  if l:issue == 0
+  if l:issue != -1
     execute '!xdg-open https://github.com/koalaman/shellcheck/wiki/' . l:issue
   endif
 endfunction
@@ -21,16 +21,14 @@ nnoremap <buffer> <silent> <leader>sc :call ShowShellcheckWikiPage()<CR>
 function! DisableShellcheckIssue()
   let l:issue = s:LineHasShellcheckIssue()
 
-  if l:issue == 0
+  if l:issue != -1
     execute 'normal! mzO# shellcheck disable=' . l:issue . "\<esc>`z"
   endif
 endfunction
 nnoremap <buffer> <silent> <leader>sd :call DisableShellcheckIssue()<CR>
 
 " Return the Shellcheck error code (SCxxxx) if the current line has a
-" Shellcheck issue, otherwise return 0. Note: to test if there is an issue
-" need to explicitly compare the return value to 0, as Vim will coerce strings
-" to integers...
+" Shellcheck issue, otherwise return -1.
 function! s:LineHasShellcheckIssue()
   let l:error_regex = line('.') . ' col'
 
@@ -43,7 +41,7 @@ function! s:LineHasShellcheckIssue()
 
   if (!l:has_issue)
     echom 'No ShellCheck issue on current line.'
-    return 0
+    return -1
   else
     return l:issue
   endif
