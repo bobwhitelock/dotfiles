@@ -17,7 +17,7 @@
 	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
-	snapshot = ! git stash save $(date) && git stash apply
+	snapshot = snapshot
 	revisions = log --oneline --follow --
 	revisions-full = log -p --follow --
 	add-deleted = ! git rm $(git ls-files --deleted)

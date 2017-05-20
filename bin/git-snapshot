@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+current_branch="$(git rev-parse --abbrev-ref HEAD)"
+timestamp="$(date +%Y-%m-%d_%H-%M)"
+snapshot_branch="snapshot/$timestamp"
+
+(
+git checkout -b "$snapshot_branch"
+git commit -am "Snapshot"
+git branch -f "$current_branch"
+git checkout -
+git reset HEAD~
+) > /dev/null
