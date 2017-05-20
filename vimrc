@@ -145,6 +145,10 @@ Plug 'tyru/open-browser-github.vim'
 " Look things up in Zeal from Vim.
 Plug 'KabbAmine/zeavim.vim'
 
+" Snippets.
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
@@ -442,6 +446,10 @@ let g:autopep8_disable_show_diff=1
 
 let g:zv_disable_mapping = 1
 
+let g:UltiSnipsExpandTrigger='<C-e>'
+let g:UltiSnipsJumpForwardTrigger='<C-d>'
+let g:UltiSnipsJumpBackwardTrigger='<C-u>'
+
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''
 
@@ -529,6 +537,7 @@ nnoremap <leader>fm :Maps<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fC :BCommits<CR>
 nnoremap <leader>ff :Filetypes<CR>
+nnoremap <leader>fs :Snippets<CR>
 
 " Quick close/open of special windows.
 nnoremap <leader>q :cclose \| lclose \| pclose<CR>
