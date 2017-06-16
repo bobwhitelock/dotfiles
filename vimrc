@@ -283,6 +283,9 @@ augroup autocmds
   " Clusterware rc files are shell.
   autocmd BufNewFile,BufRead *.rc set filetype=sh
 
+  " Metalware repo files can contain embedded ERB.
+  autocmd BufNewFile,BufRead **/config/*.yaml,*/default,files/** if &filetype !~ '.eruby'| set filetype+=.eruby | endif
+
   " Always want spellcheck for text files.
   autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst setlocal spell
   autocmd FileType gitcommit setlocal spell
@@ -362,7 +365,15 @@ let g:mta_filetypes = {
 
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb'
 
-let g:markdown_fenced_languages = ['bash=sh', 'python', 'elm', 'xml', 'yaml']
+let g:markdown_fenced_languages = [
+    \ 'bash=sh',
+    \ 'elm',
+    \ 'erb=eruby',
+    \ 'json',
+    \ 'python',
+    \ 'xml',
+    \ 'yaml',
+    \]
 let g:markdown_syntax_conceal = 0
 
 " TODO: looks like there's a way in the docs to run commands on session save
@@ -450,6 +461,7 @@ let g:zv_disable_mapping = 1
 let g:UltiSnipsExpandTrigger='<C-e>'
 let g:UltiSnipsJumpForwardTrigger='<C-d>'
 let g:UltiSnipsJumpBackwardTrigger='<C-u>'
+nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''
@@ -560,6 +572,9 @@ noremap <C-c> :Bdelete<CR>
 
 " Open file relative to current file.
 noremap <C-e> :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Replace current window with new empty buffer.
+nnoremap <leader>n :new<CR><C-w>p:q<CR><C-w>p
 
 " Easily create horizontal/vertical splits.
 noremap <leader>h :wincmd s<CR>
@@ -705,6 +720,7 @@ nnoremap g<Backspace> mzA<Backspace><Esc>`z
 command! Time execute "normal! i<C-R>=strftime('%R:%S')<CR><Esc>"
 
 nmap <leader>` ysiW`
+nmap <leader>' ysiW'
 nmap <leader>) ysiW)
 nmap <leader>] ysiW]
 
