@@ -177,6 +177,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
 Plug 'tpope/vim-sleuth' " Automatic indent settings.
 Plug 'tpope/vim-repeat' " Make '.' work with mappings.
+Plug 'kreskij/Repeatable.vim', { 'on': 'Repeatable' }
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
 Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
@@ -693,10 +694,9 @@ nnoremap <leader>dg :diffget<CR>
 nmap z+ cos1z=cos
 
 " Quick appending of commonly appended chars.
-" TODO make these `vim-repeat`-able
-nnoremap g. mzA.<esc>`z
-nnoremap g; mzA;<esc>`z
-nnoremap g, mzA,<esc>`z
+Repeatable nnoremap g. mzA.<esc>`z
+Repeatable nnoremap g; mzA;<esc>`z
+Repeatable nnoremap g, mzA,<esc>`z
 
 " Remove last char on line.
 nnoremap g<Backspace> mzA<Backspace><Esc>`z
