@@ -4,7 +4,9 @@ alias treeall="command tree -C -a -I .git"
 alias tree="treeall --filelimit 50"
 alias pyserver="python -m SimpleHTTPServer"
 alias grip="grip --browser"
-alias rsync='rerun --exit --pattern "**/*" -- rsync --human-readable --progress'
+alias rerun="rerun --pattern '**/*'"
+alias rsync='rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git'
+alias sync-dir='rerun --exit --pattern "**/*" -- rsync'
 alias diff='vimdiff'
 alias m='make'
 alias be='bundle exec'
@@ -43,6 +45,7 @@ ttyctl -f
 # Ease transition between shell and vim.
 alias :q="exit"
 alias :qa="tmux kill-window"
+alias :qa!="tmux kill-session"
 
 # Copy/paste to/from system clipboard (xclip default is primary clipboard, i.e.
 # middle-click clipboard).
@@ -93,4 +96,18 @@ require 'yaml'
 require 'json'
 puts YAML.load_file('$1').to_json
 RUBY
+}
+
+ssh_remove_last_key() {
+    ssh-keygen \
+        -f ~/.ssh/known_hosts \
+        -R "$(history -n | tail -n 1 | cut -d@ -f2)"
+}
+
+absolute-path() {
+    readlink --canonicalize --no-newline "$@"
+}
+
+weather() {
+    curl "wttr.in/$1"
 }

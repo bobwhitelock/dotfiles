@@ -7,6 +7,7 @@ add-window() {
     _tmux-create new-window "$*"
 }
 alias aw="add-window"
+alias dot="aw \$DOTFILES"
 
 # Same as above, except start a new session for the window.
 new-session() {
