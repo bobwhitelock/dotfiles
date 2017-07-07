@@ -356,17 +356,19 @@ let g:indentLine_char = '│' " indentLine character.
 
 let g:mta_filetypes = {
     \ 'html' : 1,
+    \ 'javascript.jsx' : 1,
+    \ 'jinja' : 1,
+    \ 'liquid' : 1,
+    \ 'markdown' : 1,
     \ 'xhtml' : 1,
     \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'javascript.jsx' : 1,
-    \ 'liquid' : 1,
     \}
 
-let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb'
+let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
 
 let g:markdown_fenced_languages = [
     \ 'bash=sh',
+    \ 'css',
     \ 'elm',
     \ 'erb=eruby',
     \ 'json',
@@ -522,6 +524,15 @@ nnoremap ? ?\v
 " without confirmation respectively.
 nnoremap <leader>gc :%s/\<<C-r><C-w>\>//gcI<Left><Left><Left><Left>
 nnoremap <leader>gg :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
+
+" Similarly, quick find and replace of last search.
+nnoremap <leader>c/ :%s///gcI<Left><Left><Left><Left>
+nnoremap <leader>g/ :%s///gI<Left><Left><Left>
+
+" Similarly, quick find and replace of current visual selection. Adapted from
+" https://stackoverflow.com/a/676619.
+xnoremap <leader>gc "zy:%s/<C-r>z//gcI<Left><Left><Left><Left>
+xnoremap <leader>gc "zy:%s/<C-r>z//gI<Left><Left><Left>
 
 " shift-tab indents left in insert mode.
 " TODO: some plugin seems to have broken this.
