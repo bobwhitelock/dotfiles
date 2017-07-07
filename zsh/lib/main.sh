@@ -5,12 +5,18 @@ alias tree="treeall --filelimit 50"
 alias pyserver="python -m SimpleHTTPServer"
 alias grip="grip --browser"
 alias rerun="rerun --pattern '**/*'"
-alias rsync='rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git'
-alias sync-dir='rerun --exit --pattern "**/*" -- rsync'
 alias diff='vimdiff'
 alias m='make'
 alias be='bundle exec'
 alias rspec='be rspec'
+
+# rsync="rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git"
+rsync="rsync -r --copy-links --delete --perms --human-readable --progress"
+# shellcheck disable=SC2139
+alias rsync="$rsync"
+# shellcheck disable=SC2139
+alias sync-dir="rerun --exit --pattern '**/*' -- $rsync ."
+unset rsync
 
 # List files installed on system by given package.
 alias apt-files='dpkg-query --listfiles'
@@ -107,6 +113,7 @@ ssh_remove_last_key() {
 absolute-path() {
     readlink --canonicalize --no-newline "$@"
 }
+alias path='absolute-path'
 
 weather() {
     curl "wttr.in/$1"
