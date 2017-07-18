@@ -28,7 +28,7 @@
     <center>yes</center>
     <!-- whether to place windows in the center of the free area found or
        the top left corner -->
-    <monitor>Any</monitor>
+    <monitor>Active</monitor>
     <!-- with Smart placement on a multi-monitor system, try to place new windows
          on: 'Any' - any monitor, 'Mouse' - where the mouse is, 'Active' - where
          the active window is, 'Primary' - only on the primary monitor -->
@@ -41,7 +41,9 @@
   </placement>
   <theme>
     <name>waldorf</name>
-    <titleLayout>DSLIMC</titleLayout>
+    <!-- <titleLayout>LIMDC</titleLayout> -->
+    <!-- Above disabled to encourage me to use key bindings. -->
+    <titleLayout>L</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
       N: window icon
@@ -118,7 +120,7 @@
 
        use obconf if you want to change these without having to log out
        and back in -->
-    <number>2</number>
+    <number>3</number>
     <firstdesk>1</firstdesk>
     <names>
       <!-- set names up here if you want to, like this:
@@ -205,25 +207,25 @@
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Left">
+    <keybind key="W-S-Left">
       <action name="SendToDesktop">
         <to>left</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Right">
+    <keybind key="W-S-Right">
       <action name="SendToDesktop">
         <to>right</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Up">
+    <keybind key="W-S-Up">
       <action name="SendToDesktop">
         <to>up</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Down">
+    <keybind key="W-S-Down">
       <action name="SendToDesktop">
         <to>down</to>
         <wrap>no</wrap>
@@ -253,27 +255,18 @@
       <action name="ToggleShowDesktop"/>
     </keybind>
     <!-- Keybindings for windows -->
-    <keybind key="A-F4">
+    <keybind key="W-c">
       <action name="Close"/>
     </keybind>
-    <keybind key="A-Escape">
-      <action name="Lower"/>
-      <action name="FocusToBottom"/>
-      <action name="Unfocus"/>
+    <keybind key="W-m">
+      <action name="Maximize"/>
+    </keybind>
+    <keybind key="W-S-m">
+      <action name="Iconify"/>
     </keybind>
     <keybind key="A-space">
       <action name="ShowMenu">
         <menu>client-menu</menu>
-      </action>
-    </keybind>
-    <keybind key="Print">
-      <action name="Execute">
-        <command>xfce4-screenshooter</command>
-      </action>
-    </keybind>
-    <keybind key="A-Print">
-      <action name="Execute">
-        <command>scrot '%Y-%m-%d--%s_$wx$h_scrot.png' -e 'mv $f ~/images/ &amp; viewnior ~/images/$f'</command>
       </action>
     </keybind>
     <!-- Keybindings for window switching -->
@@ -295,38 +288,6 @@
         </finalactions>
       </action>
     </keybind>
-    <keybind key="C-A-Tab">
-      <action name="NextWindow">
-        <panels>yes</panels>
-        <desktop>yes</desktop>
-        <finalactions>
-          <action name="Focus"/>
-          <action name="Raise"/>
-          <action name="Unshade"/>
-        </finalactions>
-      </action>
-    </keybind>
-    <!-- Keybindings for window switching with the arrow keys -->
-    <keybind key="W-S-Right">
-      <action name="DirectionalCycleWindows">
-        <direction>right</direction>
-      </action>
-    </keybind>
-    <keybind key="W-S-Left">
-      <action name="DirectionalCycleWindows">
-        <direction>left</direction>
-      </action>
-    </keybind>
-    <keybind key="W-S-Up">
-      <action name="DirectionalCycleWindows">
-        <direction>up</direction>
-      </action>
-    </keybind>
-    <keybind key="W-S-Down">
-      <action name="DirectionalCycleWindows">
-        <direction>down</direction>
-      </action>
-    </keybind>
     <!-- Keybindings for running applications -->
     <keybind key="W-r">
       <action name="Execute">
@@ -335,15 +296,6 @@
           <name>Run Program</name>
         </startupnotify>
         <command>gmrun</command>
-      </action>
-    </keybind>
-    <keybind key="A-F3">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>dmenu-bind</name>
-        </startupnotify>
-        <command>~/.config/dmenu/dmenu-bind.sh</command>
       </action>
     </keybind>
     <keybind key="W-f">
@@ -382,31 +334,13 @@
         <command>cb-lock</command>
       </action>
     </keybind>
-    <keybind key="W-e">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>Editor</name>
-        </startupnotify>
-        <command>geany</command>
-      </action>
-    </keybind>
-    <keybind key="W-m">
+    <keybind key="W-S-v">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
           <name>Mediaplayer</name>
         </startupnotify>
         <command>vlc</command>
-      </action>
-    </keybind>
-    <keybind key="W-h">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>htop</name>
-        </startupnotify>
-        <command>terminator --command="htop"</command>
       </action>
     </keybind>
     <keybind key="W-v">
@@ -418,13 +352,13 @@
         <command>pavucontrol</command>
       </action>
     </keybind>
-    <keybind key="W-x">
+    <keybind key="W-k">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Logout</name>
+          <name>Keepass2</name>
         </startupnotify>
-        <command>cb-exit</command>
+        <command>keepass2</command>
       </action>
     </keybind>
     <keybind key="W-Tab">
@@ -437,9 +371,9 @@
         <menu>root-menu</menu>
       </action>
     </keybind>
-    <keybind key="A-C-q">
-      <action name="ShowMenu">
-        <menu>root-menu</menu>
+    <keybind key="Print">
+      <action name="Execute">
+        <command>xfce4-screenshooter</command>
       </action>
     </keybind>
     <!-- A bit of tiling -->
