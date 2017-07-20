@@ -118,3 +118,15 @@ alias path='absolute-path'
 weather() {
     curl "wttr.in/$1"
 }
+
+# Edit a temporary file, with optional extension and part of name from args.
+scratch() {
+    local extension name file
+
+    extension="$1"
+    name="$2"
+
+    mkdir -p /tmp/scratch/
+    file="$(mktemp "/tmp/scratch/${name}XXXXX.${extension}")"
+    "$EDITOR" "$file"
+}
