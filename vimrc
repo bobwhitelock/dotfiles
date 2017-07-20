@@ -107,9 +107,6 @@ Plug 'alvan/vim-closetag'
 " Improved navigation between vim and tmux panes (C-h/C-j/C-k/C-l).
 Plug 'christoomey/vim-tmux-navigator'
 
-" 2-character search motion (s/S).
-Plug 'justinmk/vim-sneak'
-
 " Better file browser than netrw.
 Plug 'justinmk/vim-dirvish'
 
@@ -168,6 +165,7 @@ Plug 'nvie/vim-flake8'
 Plug 'tell-k/vim-autopep8'
 Plug 'yaymukund/vim-rabl'
 Plug 'tpope/vim-rails'
+Plug 'ngmy/vim-rubocop'
 Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
 Plug 'cespare/vim-toml'
@@ -629,6 +627,7 @@ noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 " TODO: change to plug mappings?
 nnoremap gb :Gblame<CR>
 nnoremap gd :Gdiff<CR>
+nnoremap <leader>ge :Gedit<CR>
 
 " Grep for current filename, less extension if present.
 nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
@@ -705,7 +704,10 @@ nnoremap J mzJ`z
 nnoremap K mzkJ`z
 
 " Access original 'K' meaning.
-nnoremap gK K
+" nnoremap gK K " XXX Disabled in favour of following.
+
+nmap gK <Plug>Zeavim
+vmap gK <Plug>Zeavim
 
 " Open current file/current visual selection of current file in Github.
 nnoremap <leader>gh :OpenGithubFile<CR><CR>
@@ -726,6 +728,9 @@ Repeatable nnoremap g, mzA,<esc>`z
 
 " Remove last char on line.
 nnoremap g<Backspace> mzA<Backspace><Esc>`z
+
+" Split line at end of WORD.
+nnoremap gs Ea<CR><Esc>w
 
 " Insert current timestamp.
 command! Time execute "normal! i<C-R>=strftime('%R:%S')<CR><Esc>"
