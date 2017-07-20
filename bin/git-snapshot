@@ -14,9 +14,14 @@ else
 fi
 
 (
-git checkout -b "$snapshot_branch"
-git commit -am "Snapshot"
-git branch -f "$current_branch"
-git checkout -
-git reset HEAD~
+if [ -z "$(git status --porcelain)" ]; then
+  # Just create the branch if nothing to commit.
+  git branch "$snapshot_branch"
+else
+  git checkout -b "$snapshot_branch"
+  git commit -am "Snapshot"
+  git branch -f "$current_branch"
+  git checkout -
+  git reset HEAD~
+fi
 ) > /dev/null
