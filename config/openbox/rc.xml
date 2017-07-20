@@ -255,7 +255,7 @@
       <action name="ToggleShowDesktop"/>
     </keybind>
     <!-- Keybindings for windows -->
-    <keybind key="W-c">
+    <keybind key="C-S-w">
       <action name="Close"/>
     </keybind>
     <keybind key="W-m">
@@ -359,6 +359,15 @@
           <name>Keepass2</name>
         </startupnotify>
         <command>keepass2</command>
+      </action>
+    </keybind>
+    <keybind key="W-s">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Spotify</name>
+        </startupnotify>
+        <command>spotify</command>
       </action>
     </keybind>
     <keybind key="W-Tab">
