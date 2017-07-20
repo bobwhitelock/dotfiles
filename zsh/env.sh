@@ -3,11 +3,12 @@ export PATH="$HOME/.rvm/gems/ruby-2.4.0/bin:$PATH:$HOME/bin:/usr/local/bin:$HOME
 
 # As suggested to make Yeoman work in
 # https://github.com/creationix/nvm/issues/586#issuecomment-68220064.
-export NODE_PATH=$NODE_PATH:"$(npm root -g)"
+# XXX Commented as was being very slow
+# export NODE_PATH=$NODE_PATH:"$(npm root -g)"
 
 export EDITOR="vim"
 export VISUAL="vim"
-export PAGER="less"
+export PAGER="less -K"
 
 # Let git find repos split across filesystems.
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
@@ -45,6 +46,8 @@ export DOMAIN_VARS_FILE=/tmp/domain-vars
 cached-domain-vars 2> /dev/null
 
 export ZSH_LIB="$ZSH_DIR/lib"
+
+export PYENV_ROOT="$HOME/repos/pyenv"
 
 # See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
