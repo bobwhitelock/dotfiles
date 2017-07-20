@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+git pull-submodules
+for submodule in $(git submodule foreach --quiet pwd); do
+  git add "$submodule"
+done
+git commit -m 'Update submodules'
