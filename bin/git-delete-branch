@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+git branch --delete "$@"
+git push origin --delete "$@"

@@ -18,6 +18,7 @@
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
 	snapshot = snapshot
+	clear-snapshots = clear-snapshots
 	revisions = log --oneline --follow --
 	revisions-full = log -p --follow --
 	add-deleted = ! git rm $(git ls-files --deleted)
@@ -34,6 +35,11 @@
 	own-files = own-files
 	ctags = !.git/hooks/ctags
 	review = log -p
+	delete-branch = delete-branch
+	; From https://stackoverflow.com/a/21857717.
+	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+	pop = reset HEAD~
+	just-index = stash save --keep-index
 
 [color]
 	ui = true

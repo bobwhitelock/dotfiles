@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+for branch in $(git branch | grep 'snapshot/.*' | xargs | tr -s " " "\n"); do
+  git branch -D "$branch"
+done
