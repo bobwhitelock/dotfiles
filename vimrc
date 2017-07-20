@@ -146,6 +146,12 @@ Plug 'KabbAmine/zeavim.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
+" Commands to run tests in different ways.
+Plug 'janko-m/vim-test'
+
+" Command to send a command to a given Tmux pane.
+Plug 'jgdavey/tslime.vim'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
@@ -462,6 +468,26 @@ let g:UltiSnipsExpandTrigger='<C-e>'
 let g:UltiSnipsJumpForwardTrigger='<C-d>'
 let g:UltiSnipsJumpBackwardTrigger='<C-u>'
 nnoremap <leader>ue :UltiSnipsEdit<CR>
+
+let g:tslime_always_current_session = 1
+let g:tslime_always_current_window = 1
+
+" TODO:
+" - What strategy to use
+" - Show things in quickfix list?
+" - How to run excluding certain tests
+let test#strategy = 'tslime'
+
+" Maps to run tests.
+nnoremap <silent> <leader>ts :TestSuite<CR>
+nnoremap <silent> <leader>tt :TestNearest<CR>
+nnoremap <silent> <leader>tl :TestLast<CR>
+nnoremap <silent> <leader>tf :TestFile<CR>
+nnoremap <silent> <leader>tv :TestVisit<CR>
+
+" Maps to interact with Tmux pane.
+nnoremap <silent> <leader>m :Tmux make<CR>
+nnoremap <leader>T :Tmux<space>
 
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''
