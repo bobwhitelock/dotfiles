@@ -7,7 +7,6 @@ add-window() {
     _tmux-create new-window "$*"
 }
 alias aw="add-window"
-alias dot="aw \$DOTFILES"
 
 # Same as above, except start a new session for the window.
 new-session() {
@@ -31,4 +30,12 @@ _tmux-create() {
         \; split-window -hd -c "$window_path" \
         \; send-keys -t 2 vim \
         \; send-keys -t 2 Enter
+}
+
+dot() {
+    if [ -n "$TMUX" ]; then
+        add-window "$DOTFILES"
+    else
+        new-session "$DOTFILES"
+    fi
 }
