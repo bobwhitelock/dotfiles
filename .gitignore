@@ -1,3 +1,8 @@
+experimental.sh
+vim/.netrwhist
 vim/plugged
 vim/plugin/experimental.vim
-experimental.sh
+vim/session
+vim/spell
+vim/undodir
+vim/view
