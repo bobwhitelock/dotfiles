@@ -31,13 +31,6 @@ windows:
         -
         - vim
 
-  - metalware-profile-hpc:
-      layout: even-horizontal
-      root: ~/projects/alces/metalware-project/metalware-profile-hpc
-      panes:
-        -
-        - vim
-
   - metalware-default:
       layout: even-horizontal
       root: ~/projects/alces/metalware-project/metalware-default
