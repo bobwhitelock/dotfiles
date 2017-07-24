@@ -104,6 +104,9 @@ puts YAML.load_file('$1').to_json
 RUBY
 }
 
+alias ssh-add-personal='ssh-add ~/.ssh/id_rsa.bob'
+alias ssh-add-aws='ssh-add ~/.ssh/aws_ireland.pem'
+
 ssh_remove_last_key() {
     ssh-keygen \
         -f ~/.ssh/known_hosts \
