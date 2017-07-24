@@ -269,6 +269,27 @@
         <menu>client-menu</menu>
       </action>
     </keybind>
+    <!-- Keybindings to move windows to different monitors -->
+    <keybind key="W-1">
+      <action name="MoveResizeTo">
+        <monitor>1</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-2">
+      <action name="MoveResizeTo">
+        <monitor>2</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-3">
+      <action name="MoveResizeTo">
+        <monitor>3</monitor>
+      </action>
+    </keybind>
+    <keybind key="W-4">
+      <action name="MoveResizeTo">
+        <monitor>4</monitor>
+      </action>
+    </keybind>
     <!-- Keybindings for window switching -->
     <keybind key="A-Tab">
       <action name="NextWindow">
