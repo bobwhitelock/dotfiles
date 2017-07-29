@@ -19,7 +19,8 @@ if [ -z "$(git status --porcelain)" ]; then
   git branch "$snapshot_branch"
 else
   git checkout -b "$snapshot_branch"
-  git commit -am "Snapshot"
+  git add .
+  git commit -m "Snapshot"
   git branch -f "$current_branch"
   git checkout -
   git reset HEAD~
