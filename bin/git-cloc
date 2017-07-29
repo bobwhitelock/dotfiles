@@ -1,5 +1,10 @@
 #!/bin/bash
 
-# TODO - Allow passing which files to use to `own-files` as well.
+if [[ -e "$1" ]]; then
+    dir_to_count="$1"
+    shift
+else
+    dir_to_count=""
+fi
 
-cloc --list-file=<(git own-files) "$@"
+cloc --list-file=<(git own-files "$dir_to_count") "$@"
