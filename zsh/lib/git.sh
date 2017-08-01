@@ -57,7 +57,7 @@ alias glogall='glog --all'
 
 alias gbi='git bisect'
 alias gbis='gbi start'
-alias gbir='gbi reset'
+alias gbir='gbi reset HEAD'
 alias gbib='gbi bad'
 alias gbig='gbi good'
 

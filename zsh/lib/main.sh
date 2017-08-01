@@ -42,9 +42,8 @@ xrandr_off() {
     conkywonky
 }
 
-# Let vim interpret commands which would be interpreted by the terminal
-# otherwise; not quite sure of purpose of ttyctl here (from
-# http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files).
+# Let Vim interpret keys which would be interpreted by the terminal otherwise
+# (see http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files).
 alias vim="stty stop '' -ixoff ; vim"
 ttyctl -f
 
@@ -61,6 +60,7 @@ alias cbpaste='xclip -selection clipboard -out'
 du() {
     command du -h "$@" | sort -h
 }
+alias df='df --human-readable'
 
 # Explain the current rustc error.
 rustc-explain() {
