@@ -447,17 +447,18 @@ let g:hl_matchit_enable_on_vim_startup = 1
 let g:hl_matchit_hl_groupname = 'MatchParen'
 let g:hl_matchit_speed_level = 2
 
-" Default blacklist minus markdown, as completion can be useful there.
+ " `gitcommit` included here to prevent weird issue where YCM was causing
+ " characters to be duplicated when gitcommit ftplugin auto-splits lines.
 let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'qf' : 1,
-      \ 'notes' : 1,
-      \ 'unite' : 1,
-      \ 'text' : 1,
-      \ 'vimwiki' : 1,
-      \ 'pandoc' : 1,
+      \ 'gitcommit' : 1,
       \ 'infolog' : 1,
-      \ 'mail' : 1
+      \ 'mail' : 1,
+      \ 'notes' : 1,
+      \ 'pandoc' : 1,
+      \ 'qf' : 1,
+      \ 'tagbar' : 1,
+      \ 'unite' : 1,
+      \ 'vimwiki' : 1,
       \}
 
 let g:autopep8_disable_show_diff=1
@@ -473,21 +474,28 @@ let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
 
 " TODO:
-" - What strategy to use
 " - Show things in quickfix list?
-" - How to run excluding certain tests
 let test#strategy = 'tslime'
+
+" Extra option when running suite tests is specific to Alces Metalware, but
+" shouldn't hurt in most other cases.
+let test#ruby#rspec#options = {
+  \ 'suite': "--exclude-pattern 'spec/slow/**/*, spec/integration/**/*'",
+\}
 
 " Maps to run tests.
 nnoremap <silent> <leader>ts :TestSuite<CR>
 nnoremap <silent> <leader>tt :TestNearest<CR>
-nnoremap <silent> <leader>tl :TestLast<CR>
 nnoremap <silent> <leader>tf :TestFile<CR>
 nnoremap <silent> <leader>tv :TestVisit<CR>
+nnoremap <silent> <CR> :TestLast<CR>
 
 " Maps to interact with Tmux pane.
 nnoremap <silent> <leader>m :Tmux make<CR>
 nnoremap <leader>T :Tmux<space>
+
+" Command to change Tmux pane used by tslime.
+command! -nargs=1 TmuxSetPane execute "let g:tslime['pane'] = <args>"
 
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''
@@ -640,7 +648,7 @@ nnoremap <leader>gu :GundoToggle<CR>
 xnoremap gz :sort<CR>
 nnoremap gz vip:'<,'>sort<CR>
 
-nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>tn :tabnew %<CR>
 nnoremap <leader>tc :tabclose<CR>
 nnoremap <leader>t> :tabmove +<CR>
 nnoremap <leader>t< :tabmove -<CR>
@@ -748,9 +756,9 @@ nnoremap <leader>dg :diffget<CR>
 nmap z+ cos1z=cos
 
 " Quick appending of commonly appended chars.
-Repeatable nnoremap g. mzA.<esc>`z
-Repeatable nnoremap g; mzA;<esc>`z
-Repeatable nnoremap g, mzA,<esc>`z
+Repeatable nnoremap <leader>g. mzA.<esc>`z
+Repeatable nnoremap <leader>g; mzA;<esc>`z
+Repeatable nnoremap <leader>g, mzA,<esc>`z
 
 " Remove last char on line.
 nnoremap g<Backspace> mzA<Backspace><Esc>`z
@@ -765,6 +773,8 @@ nmap <leader>` ysiW`
 nmap <leader>' ysiW'
 nmap <leader>) ysiW)
 nmap <leader>] ysiW]
+
+abbreviate un unnecessary
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - simpler method works for me under Tmux,
