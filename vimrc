@@ -129,6 +129,9 @@ Plug 'ruanyl/vim-fixmyjs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" Distraction-free writing mode.
+Plug 'junegunn/goyo.vim'
+
 " Search for current visual selection with */#.
 Plug 'bronson/vim-visual-star-search'
 
@@ -305,6 +308,10 @@ augroup autocmds
 
   " Make `3` in Markdown files trigger vim-surround maps for code blocks.
   autocmd FileType markdown let b:surround_51 = "```\n\r\n```"
+
+  " Enable Goyo hook functions.
+  autocmd User GoyoEnter nested call <SID>goyo_enter()
+  autocmd User GoyoLeave nested call <SID>goyo_leave()
 augroup END
 
 " Create CamelCaseMotion maps name-spaced behind leader.
@@ -422,6 +429,19 @@ let g:windowswap_map_keys = 0 " Prevent default bindings.
 nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>
 
 let g:HiCursorWords_delay = 100
+
+let g:goyo_width = '50%'
+
+function! s:goyo_enter()
+  " HiCursorWords in Goyo highlights the word the same colour as the
+  " background for some reason; this setting effectively disables it in this
+  " mode.
+  let g:HiCursorWords_hiGroupRegexp = 'SomethingWhichWillNeverOccur'
+endfunction
+
+function! s:goyo_leave()
+  let g:HiCursorWords_hiGroupRegexp = ''
+endfunction
 
 let g:rustfmt_autosave = 1 " Run rustfmt on save of rust files.
 
