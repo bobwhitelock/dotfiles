@@ -503,6 +503,8 @@ let test#ruby#rspec#options = {
   \ 'suite': "--exclude-pattern 'spec/slow/**/*, spec/integration/**/*'",
 \}
 
+let g:test#runner_commands = ['RSpec']
+
 " Maps to run tests.
 nnoremap <silent> <leader>ts :TestSuite<CR>
 nnoremap <silent> <leader>tt :TestNearest<CR>
