@@ -21,8 +21,8 @@ ami-creator() {
     (cd "$ami_creator_dir" && \
         ./ami-creator \
         --key-name aws_ireland \
-        --branch develop \
-        --imageware "$(git rev-parse --abbrev-ref HEAD)" \
+        --branch "$(_clusterware_branch)" \
+        --imageware "$(_imageware_branch)" \
         --type "$ami_type" \
         --jfdi \
         --development \
