@@ -27,9 +27,6 @@ Plug 'tpope/vim-rsi'
 " Show git changes in gutter.
 Plug 'airblade/vim-gitgutter'
 
-" Add :Bdelete command to close buffer without changing layout.
-Plug 'moll/vim-bbye'
-
 " Start screen and improved session management.
 Plug 'mhinz/vim-startify'
 
@@ -262,6 +259,10 @@ set iskeyword+=-
 set modeline
 set modelines=50
 
+" Show current key strokes, or size of select area when in visual mode, in
+" bottom right corner.
+set showcmd
+
 " Highlight shell scripts as bash by default unless specified otherwise.
 let g:is_bash=1
 
@@ -382,6 +383,7 @@ let g:markdown_fenced_languages = [
     \ 'css',
     \ 'elm',
     \ 'erb=eruby',
+    \ 'js=javascript',
     \ 'json',
     \ 'python',
     \ 'xml',
@@ -449,7 +451,7 @@ let g:yankring_replace_n_pkey = '<C-u>'
 let g:yankring_replace_n_nkey = '<C-d>'
 nnoremap <C-y> :YRShow<CR>
 
-let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsShortcutToggle = '<leader>ap'
 
 " Default maps minus quote maps, which were getting in the way.
 let g:AutoPairs = {
@@ -633,7 +635,7 @@ nnoremap <silent> ]Q :cnewer<CR>
 nnoremap <leader>re :windo edit!<CR>
 
 " Delete current buffer while preserving layout.
-noremap <C-c> :Bdelete<CR>
+noremap <C-c> :q<CR>
 
 " Open file relative to current file.
 noremap <C-e> :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -684,6 +686,8 @@ noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap gb :Gblame<CR>
 nnoremap gd :Gdiff<CR>
 nnoremap <leader>ge :Gedit<CR>
+nnoremap <leader>gS :Gwrite<CR>:edit!<CR>
+nnoremap <leader>gR mz:Gread<CR>`z
 
 " Grep for current filename, less extension if present.
 nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
@@ -786,7 +790,9 @@ Repeatable nnoremap <leader>g, mzA,<esc>`z
 nnoremap g<Backspace> mzA<Backspace><Esc>`z
 
 " Split line at end of WORD.
-nnoremap gs Ea<CR><Esc>w
+Repeatable nnoremap gs Ea<CR><Esc>w
+Repeatable nnoremap 2gs 2Ea<CR><Esc>w
+Repeatable nnoremap 3gs 3Ea<CR><Esc>w
 
 " Insert current timestamp.
 command! Time execute "normal! i<C-R>=strftime('%R:%S')<CR><Esc>"
@@ -795,6 +801,15 @@ nmap <leader>` ysiW`
 nmap <leader>' ysiW'
 nmap <leader>) ysiW)
 nmap <leader>] ysiW]
+
+" TODO: Would be useful to make these jump over current section if in matching
+" section already.
+nnoremap ]=  /^+ <CR>
+nnoremap [=  ?^+ <CR>
+nnoremap ]-  /^- <CR>
+nnoremap [-  ?^- <CR>
+
+nnoremap <leader>; :
 
 abbreviate un unnecessary
 
