@@ -811,6 +811,21 @@ nnoremap [-  ?^- <CR>
 
 nnoremap <leader>; :
 
+" Rails maps.
+nnoremap <leader>eC :Econtroller<space>
+nnoremap <leader>eI :Einitializer<space>
+nnoremap <leader>eJ :Ejavascript<space>
+nnoremap <leader>eL :Elayout<space>
+nnoremap <leader>eM :Emodel<space>
+nnoremap <leader>eV :Eview<space>
+nnoremap <leader>ec :Econtroller<CR>
+nnoremap <leader>ei :Einitializer<CR>
+nnoremap <leader>ej :Ejavascript<CR>
+nnoremap <leader>el :Elayout<CR>
+nnoremap <leader>em :Emodel<CR>
+nnoremap <leader>es :Eschema<CR>
+nnoremap <leader>ev :Eview<CR>
+
 abbreviate un unnecessary
 
 " Automatically set/unset paste when pasting in insert mode
