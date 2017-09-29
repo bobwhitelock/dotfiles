@@ -7,8 +7,6 @@ alias grip="grip --browser"
 alias rerun="rerun --pattern '**/*'"
 alias diff='vimdiff'
 alias m='make'
-alias be='bundle exec'
-alias rspec='be rspec'
 
 # rsync="rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git"
 rsync="rsync -r --copy-links --delete --perms --human-readable --progress"
