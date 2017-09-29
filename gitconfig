@@ -42,6 +42,7 @@
 	just-index = stash save --keep-index
 	wip = ! git add . && git commit -m WIP
 	about = ! git summary && git cloc
+	discard-unresolved = discard-unresolved
 
 [color]
 	ui = true

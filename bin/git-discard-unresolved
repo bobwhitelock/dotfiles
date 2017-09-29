@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Given some file paths, discards changes to those files even if they have
+# unresolved changes from a merge or during a rebase.
+
+git add "$@"
+git reset "$@"
+git checkout "$@"
