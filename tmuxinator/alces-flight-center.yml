@@ -1,18 +1,18 @@
 
-name: supportware
+name: alces-flight-center
 root: ~/
 
 windows:
   - notes:
-      root: ~/Dropbox/notes/alces/supportware
+      root: ~/Dropbox/notes/alces/alces-flight-center
       layout: even-horizontal
       panes:
         -
         - vim
 
-  - supportware:
+  - alces-flight-center:
       layout: 'f498,274x72,0,0{137x72,0,0[137x36,0,0,7,137x35,0,37,9],136x72,138,0,8}'
-      root: ~/projects/alces/supportware
+      root: ~/projects/alces/alces-flight-center
       panes:
         - rails server
         -
