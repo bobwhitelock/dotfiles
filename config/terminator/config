@@ -8,9 +8,34 @@
   inactive_color_offset = 0.61
   title_inactive_bg_color = "#000000"
 [keybindings]
+  close_window = None
+  group_tab = None
+  resize_left = None
+  rotate_ccw = None
+  reset_clear = None
+  go_right = None
+  resize_right = None
+  group_all = None
+  toggle_zoom = None
+  scaled_zoom = None
+  resize_down = None
   split_vert = None
-  hide_window = <Shift><Control>a
+  ungroup_all = None
+  ungroup_tab = None
+  go_prev = None
+  cycle_next = <Primary>Tab
+  new_terminator = None
+  go_left = None
+  hide_window = None
+  reset = None
+  search = None
+  go_up = None
+  resize_up = None
+  rotate_cw = None
   split_horiz = None
+  go_down = None
+  new_window = None
+  go_next = None
   toggle_scrollbar = None
 [profiles]
   [[default]]
