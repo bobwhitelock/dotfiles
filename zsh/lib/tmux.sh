@@ -1,14 +1,19 @@
 
 alias mux="tmuxinator"
 
-# Add new Tmux window in given dir (defaulting to current dir); appropriately
-# named and with panes for shell and Vim open.
+# Add new Tmux window (or session if not already in session) in given dir
+# (defaulting to current dir); appropriately named and with panes for shell and
+# Vim open.
 add-window() {
-    _tmux-create new-window "$*"
+    if [ -n "$TMUX" ]; then
+        _tmux-create new-window "$*"
+    else
+        new-session "$*"
+    fi
 }
 alias aw="add-window"
 
-# Same as above, except start a new session for the window.
+# Same as above, except only try to start a new session.
 new-session() {
     _tmux-create new-session "$*"
 }
@@ -33,9 +38,5 @@ _tmux-create() {
 }
 
 dot() {
-    if [ -n "$TMUX" ]; then
-        add-window "$DOTFILES"
-    else
-        new-session "$DOTFILES"
-    fi
+    add-window "$DOTFILES"
 }
