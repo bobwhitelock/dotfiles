@@ -174,6 +174,7 @@ Plug 'tpope/vim-rails'
 Plug 'ngmy/vim-rubocop'
 Plug 'Matt-Deacalion/vim-systemd-syntax'
 Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
+Plug 'tmux-plugins/vim-tmux'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 
