@@ -35,3 +35,6 @@
     ~/.config/htop:
         path: config/htop
         create: true
+    ~/.tmux/plugins:
+        path: tmux/plugins
+        create: true
