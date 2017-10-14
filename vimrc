@@ -518,6 +518,7 @@ nnoremap <silent> <CR> :TestLast<CR>
 " Maps to interact with Tmux pane.
 nnoremap <silent> <leader>m :Tmux make<CR>
 nnoremap <leader>T :Tmux<space>
+vmap <leader>tS <Plug>SendSelectionToTmux
 
 " Command to change Tmux pane used by tslime.
 command! -nargs=1 TmuxSetPane execute "let g:tslime['pane'] = <args>"
@@ -807,7 +808,7 @@ nnoremap [=  ?^+ <CR>
 nnoremap ]-  /^- <CR>
 nnoremap [-  ?^- <CR>
 
-nnoremap <leader>; :
+nnoremap <leader>; :<Up><CR>
 
 " Rails maps.
 nnoremap <leader>eC :Econtroller<space>

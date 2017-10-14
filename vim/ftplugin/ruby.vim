@@ -18,3 +18,5 @@ nnoremap <buffer> <leader>rf :RuboCop --auto-correct<CR>:wincmd p<CR>:cclose<CR>
 " Lint/fix all files respectively, in Tmux pane
 nnoremap <buffer> <leader>rU :Tmux rubocop<CR>
 nnoremap <buffer> <leader>rF :Tmux rubocop --auto-correct<CR>
+
+nnoremap <buffer> <leader>b :Tmux bundle<CR>
