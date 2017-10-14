@@ -6,7 +6,9 @@ nnoremap <buffer> gL mz"zyiwOlet logDefinition = Debug.log "<C-r>z" <C-r>z in<es
 " already encloses cursor.
 nnoremap <buffer> <leader>gL mz"zyiwOlogDefinition = Debug.log "<C-r>z" <C-r>z<esc>`z
 
+" Map to look up docs consistent with devdocs.io map in Vimrc.
+nmap <buffer> gK <Plug>(elm-browse-docs)
+
 nmap <buffer> <leader>sd <Plug>(elm-show-docs)
-nmap <buffer> <leader>bd <Plug>(elm-browse-docs)
 nmap <buffer> <leader>em <Plug>(elm-make)
 nmap <buffer> <leader>eM <Plug>(elm-make-main)

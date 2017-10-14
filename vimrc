@@ -139,9 +139,6 @@ Plug 'tlvince/vim-auto-commit'
 Plug 'tyru/open-browser.vim'
 Plug 'tyru/open-browser-github.vim'
 
-" Look things up in Zeal from Vim.
-Plug 'KabbAmine/zeavim.vim'
-
 " Snippets.
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -151,6 +148,9 @@ Plug 'janko-m/vim-test'
 
 " Command to send a command to a given Tmux pane.
 Plug 'jgdavey/tslime.vim'
+
+" Maps/commands to look things up in devdocs.io.
+Plug 'rhysd/devdocs.vim'
 
 " Language-specific.
 Plug 'markcornick/vim-bats'
@@ -763,11 +763,8 @@ nnoremap J mzJ`z
 " Join current line with line above; also do not move cursor as with J above.
 nnoremap K mzkJ`z
 
-" Access original 'K' meaning.
-" nnoremap gK K " XXX Disabled in favour of following.
-
-nmap gK <Plug>Zeavim
-vmap gK <Plug>Zeavim
+" Look current word up in devdocs.io.
+nmap gK <Plug>(devdocs-under-cursor)
 
 " Open current file/current visual selection of current file in Github.
 nnoremap <leader>gh :OpenGithubFile<CR><CR>
