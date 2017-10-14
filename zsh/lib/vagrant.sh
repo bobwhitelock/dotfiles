@@ -1,5 +1,4 @@
 
-alias v="vagrant"
 alias vs="vagrant status"
 alias vssh="vagrant ssh || vagrant up && vagrant ssh"
 

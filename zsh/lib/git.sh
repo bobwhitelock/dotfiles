@@ -20,6 +20,7 @@ alias gds='gd --shortstat'
 alias gdcs='gdc --shortstat'
 
 alias gst='git stash'
+alias gstk='gst --keep-index'
 alias gsta='gst apply'
 alias gsts='gst show --patch'
 alias gstl='gst list'
