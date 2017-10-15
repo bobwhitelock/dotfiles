@@ -1,7 +1,16 @@
-local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
-PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}git:(%{$fg[red]%}"
+# Will be linked in to be available as 'bob' oh-my-zsh theme.
+
+# shellcheck disable=SC2034
+local ret_status="%(?:%{$fg_bold[green]%}$ :%{$fg_bold[red]%}$ )"
+# shellcheck disable=SC2016
+PROMPT='%{$fg[cyan]%}[%T]%{$reset_color%} %{$fg[blue]%}%~%{$reset_color%} $(git_prompt_info)${ret_status}%{$reset_color%}'
+
+# shellcheck disable=SC2034
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}"
+# shellcheck disable=SC2034
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+# shellcheck disable=SC2034
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}✗"
+# shellcheck disable=SC2034
+ZSH_THEME_GIT_PROMPT_CLEAN=""
