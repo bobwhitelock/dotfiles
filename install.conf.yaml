@@ -16,6 +16,7 @@
     ~/.psqlrc: psqlrc
     ~/.sqliterc: sqliterc
     ~/.zshrc: zsh/zshrc
+    $DOTFILES/oh-my-zsh/custom/themes/bob.zsh-theme: zsh/theme.zsh-theme
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator:
         path: tmuxinator/
