@@ -375,6 +375,21 @@
     </keybind>
     <keybind key="W-k">
       <action name="Execute">
+        <command>pactl set-sink-volume @DEFAULT_SINK@ +5%</command>
+      </action>
+    </keybind>
+    <keybind key="W-j">
+      <action name="Execute">
+        <command>pactl set-sink-volume @DEFAULT_SINK@ -5%</command>
+      </action>
+    </keybind>
+    <keybind key="W-S-space">
+      <action name="Execute">
+        <command>pactl set-sink-mute @DEFAULT_SINK@ toggle</command>
+      </action>
+    </keybind>
+    <keybind key="W-S-k">
+      <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
           <name>Keepass2</name>
