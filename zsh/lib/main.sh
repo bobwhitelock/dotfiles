@@ -7,6 +7,7 @@ alias grip="grip --browser"
 alias rerun="rerun --pattern '**/*'"
 alias diff='vimdiff'
 alias m='make'
+alias sls='serverless --aws-profile personal'
 
 # rsync="rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git"
 rsync="rsync -r --copy-links --delete --perms --human-readable --progress"
