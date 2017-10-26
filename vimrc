@@ -152,6 +152,11 @@ Plug 'jgdavey/tslime.vim'
 " Maps/commands to look things up in devdocs.io.
 Plug 'rhysd/devdocs.vim'
 
+" Make C-a/C-x work as expected when `-` in front of number.
+Plug 'osyo-manga/vim-trip'
+nmap <C-a> <Plug>(trip-increment)
+nmap <C-x> <Plug>(trip-decrement)
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
