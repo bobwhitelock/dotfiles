@@ -793,10 +793,13 @@ Repeatable nnoremap <leader>g, mzA,<esc>`z
 " Remove last char on line.
 nnoremap g<Backspace> mzA<Backspace><Esc>`z
 
-" Split line at end of WORD.
-Repeatable nnoremap gs Ea<CR><Esc>w
-Repeatable nnoremap 2gs 2Ea<CR><Esc>w
-Repeatable nnoremap 3gs 3Ea<CR><Esc>w
+" Split line in different places.
+Repeatable nnoremap gs( f(a<CR><Esc>
+Repeatable nnoremap gs) f)i<CR><Esc>
+Repeatable nnoremap gs, f,a<CR><Esc>
+Repeatable nnoremap gs. f.i<CR><Esc>
+Repeatable nnoremap gss i<CR><Esc>
+Repeatable nnoremap gs<space> hf<space>xi<CR><Esc>
 
 " Insert current timestamp.
 command! Time execute "normal! i<C-R>=strftime('%R:%S')<CR><Esc>"
@@ -831,6 +834,9 @@ nnoremap <leader>es :Eschema<CR>
 nnoremap <leader>ev :Eview<CR>
 
 abbreviate un unnecessary
+abbreviate unecesary unnecessary
+abbreviate unnecesary unnecessary
+abbreviate unecessary unnecessary
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - simpler method works for me under Tmux,
