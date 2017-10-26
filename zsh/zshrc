@@ -70,3 +70,6 @@ source "$DOTFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 # Source this again to set up things depending on earlier parts of this file,
 # e.g. on aliases, and ensure no variables are mysteriously clobbered.
 source "$ZSH_DIR/env.sh"
+
+# Enable Pyenv.
+eval "$(pyenv init -)"
