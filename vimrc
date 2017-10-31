@@ -24,6 +24,13 @@ Plug 'tpope/vim-speeddating'
 " Readline key bindings for Vim (C-a, C-e etc.).
 Plug 'tpope/vim-rsi'
 
+" - Generate abbreviations (Abolish).
+" - Substitute related names (Subvert).
+" - Coerce word cases: snake_case (crs), MixedCase (crm), camelCase (crc),
+"   snake_case (crs), UPPER_CASE (cru), dash-case (cr-), dot.case (cr.), space
+"   case (cr<space>), and Title Case (crt).
+Plug 'tpope/vim-abolish'
+
 " Show git changes in gutter.
 Plug 'airblade/vim-gitgutter'
 
