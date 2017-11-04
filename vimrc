@@ -127,7 +127,8 @@ Plug 'wellle/targets.vim'
 Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 
 " Run eslint --fix for current JavaScript buffer.
-Plug 'ruanyl/vim-fixmyjs'
+" XXX Disabled in favour of vim-prettier at the moment.
+" Plug 'ruanyl/vim-fixmyjs'
 
 " Fuzzy finder for many different sources.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -173,6 +174,9 @@ Plug 'tpope/vim-haml'
 Plug 'andreimaxim/vim-io'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'gavocanov/vim-js-indent'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'tangledhelix/vim-kickstart'
@@ -290,6 +294,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead *.zsh set filetype=sh
   autocmd BufNewFile,BufRead *.pyconf set filetype=conf
   autocmd BufNewFile,BufRead *cloud.cfg set filetype=yaml
+  autocmd BufNewFile,BufRead .prettierrc set filetype=yaml
 
   " oh-my-zsh themes are shell.
   autocmd BufNewFile,BufRead *.zsh-theme set filetype=sh
@@ -322,6 +327,9 @@ augroup autocmds
 
   " Make `3` in Markdown files trigger vim-surround maps for code blocks.
   autocmd FileType markdown let b:surround_51 = "```\n\r\n```"
+
+  " Run Prettier on write of JS files.
+  autocmd BufWritePre *.js PrettierAsync
 
   " Enable Goyo hook functions.
   autocmd User GoyoEnter nested call <SID>goyo_enter()
@@ -428,7 +436,9 @@ let g:syntastic_vim_checkers = ['vint']
 " - rust: rustc
 " - shell: shellcheck
 
-let g:fixmyjs_use_local = 1
+" let g:fixmyjs_use_local = 1
+
+let g:prettier#autoformat = 0
 
 " TODO: Suggested Syntastic settings, read manual and adjust if needed.
 
