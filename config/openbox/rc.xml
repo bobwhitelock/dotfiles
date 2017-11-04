@@ -392,9 +392,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Keepass2</name>
+          <name>KeepassXC</name>
         </startupnotify>
-        <command>keepass2</command>
+        <command>keepassxc</command>
       </action>
     </keybind>
     <keybind key="W-s">
