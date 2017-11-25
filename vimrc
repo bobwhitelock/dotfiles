@@ -49,6 +49,9 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
 
+" Transition between single and multiline code (gS / gJ).
+Plug 'AndrewRadev/splitjoin.vim'
+
 " Motions through camel-case/underscore-case words.
 Plug 'bkad/CamelCaseMotion'
 
