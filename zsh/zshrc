@@ -76,3 +76,6 @@ source "$ZSH_DIR/env.sh"
 
 # Enable Pyenv.
 eval "$(pyenv init -)"
+
+# OPAM configuration
+. /home/bob/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
