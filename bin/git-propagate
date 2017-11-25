@@ -1,0 +1,7 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+git status --short | \
+    cut -d' ' -f3 | \
+    xargs propagate "$1"
