@@ -1,10 +1,4 @@
 
-nnoremap <buffer> gl oecho "${}"<esc>F}i
-nnoremap <buffer> gL Oecho "${}"<esc>F}i
-
-" Add line to log current word.
-nnoremap <buffer> <leader>gl mz"zyiwoecho <C-r>z: "'${<C-r>z}'"<esc>`z
-
 " Open the ShellCheck wiki page for the error detected on the current line, as
 " reported by Syntastic.
 function! ShowShellcheckWikiPage()
