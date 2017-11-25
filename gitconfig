@@ -17,6 +17,7 @@
 	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
+	update-submodules = "! git stash save && git pull-submodules && git commit -am 'Update submodules'; git stash apply"
 	snapshot = snapshot
 	clear-snapshots = clear-snapshots
 	revisions = log --oneline --follow --
@@ -38,6 +39,7 @@
 	; From https://stackoverflow.com/a/21857717.
 	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
 	pop = reset HEAD~
+	discard = reset --hard HEAD~
 	just-index = stash save --keep-index
 	wip = ! git add . && git commit -m WIP
 	about = ! git summary && git cloc
