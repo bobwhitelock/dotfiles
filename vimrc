@@ -105,6 +105,11 @@ let g:gsearch_ggrep_command = 'Ggrep!'
 " nmap gr <plug>(GrepperOperator) -tool git -open -noswitch<cr>
 " xmap gr <plug>(GrepperOperator)
 
+" Operator to log motion as output.
+Plug '~/projects/other/vim-lumberjack'
+map gl <Plug>(operator-print-below)
+map gL <Plug>(operator-print-above)
+
 " View tree of all undos.
 Plug 'sjl/gundo.vim/'
 
