@@ -2,12 +2,13 @@
 # Misc aliases.
 alias treeall="command tree -C -a -I .git"
 alias tree="treeall --filelimit 50"
-alias pyserver="python -m SimpleHTTPServer"
+alias pyserver="python2 -m SimpleHTTPServer"
 alias grip="grip --browser"
 alias rerun="rerun --pattern '**/*'"
 alias diff='vimdiff'
 alias m='make'
-alias sls='serverless --aws-profile personal'
+alias sls='AWS_CLIENT_TIMEOUT=600000 serverless --aws-profile personal'
+alias ipinfo='curl ipinfo.io | jq .'
 
 # rsync="rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git"
 rsync="rsync -r --copy-links --delete --perms --human-readable --progress"
@@ -132,4 +133,9 @@ scratch() {
     mkdir -p /tmp/scratch/
     file="$(mktemp "/tmp/scratch/${name}XXXXX.${extension}")"
     "$EDITOR" "$file"
+}
+
+# Quickly run something with Ruby.
+r() {
+    ruby -e "p $*"
 }

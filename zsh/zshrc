@@ -16,6 +16,9 @@ unalias -m '*' # Get rid of Oh my Zsh aliases polluting shell.
 # (see http://unix.stackexchange.com/a/72092).
 stty -ixon
 
+# Don't need `r` command.
+disable r
+
 # Check existence of setxkbmap so doesn't break without X.
 # TODO Doesn't actually work, get message about cannot open display default
 # display; is $DISPLAY set, on machine with X but not available
