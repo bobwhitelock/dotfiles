@@ -1,4 +1,6 @@
 
+" Add common RSpec `shared_examples` dir to path.
+set path+=spec/shared_examples
 
 " Run only failing RSpec tests from last run, using vim-test.
 nnoremap <buffer> <leader>tb :RSpec --only-failures<CR>
@@ -13,4 +15,4 @@ nnoremap <buffer> <leader>rf :RuboCop --auto-correct<CR>:wincmd p<CR>:cclose<CR>
 nnoremap <buffer> <leader>rU :Tmux rubocop<CR>
 nnoremap <buffer> <leader>rF :Tmux rubocop --auto-correct<CR>
 
-nnoremap <buffer> <leader>b :Tmux bundle<CR>
+command! -buffer Bundle Tmux bundle

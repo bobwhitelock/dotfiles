@@ -100,11 +100,6 @@ map gr <Plug>(operator-ggrep)
 " TODO: annoying: opens shell, jumps to first match
 let g:gsearch_ggrep_command = 'Ggrep!'
 
-" TODO: possibly consider below instead?
-" Plug 'mhinz/vim-grepper' | Plug 'tpope/vim-dispatch'
-" nmap gr <plug>(GrepperOperator) -tool git -open -noswitch<cr>
-" xmap gr <plug>(GrepperOperator)
-
 " Operator to log motion as output.
 Plug '~/projects/other/vim-lumberjack'
 map gl <Plug>(operator-print-below)
@@ -168,10 +163,11 @@ Plug 'jgdavey/tslime.vim'
 " Maps/commands to look things up in devdocs.io.
 Plug 'rhysd/devdocs.vim'
 
-" Make C-a/C-x work as expected when `-` in front of number.
-Plug 'osyo-manga/vim-trip'
-nmap <C-a> <Plug>(trip-increment)
-nmap <C-x> <Plug>(trip-decrement)
+" " Make C-a/C-x work as expected when `-` in front of number.
+" XXX Disabled atm as conflicts with `vim-speeddating`.
+" Plug 'osyo-manga/vim-trip'
+" nmap <C-a> <Plug>(trip-increment)
+" nmap <C-x> <Plug>(trip-decrement)
 
 " Language-specific.
 Plug 'markcornick/vim-bats'
@@ -276,9 +272,6 @@ set sidescroll=1
 " Allow use of `gf` for relative imports in JS.
 set suffixesadd+=.js
 
-" Count '-' as part of a word; useful for CSS in particular.
-set iskeyword+=-
-
 " Allow modeline settings.
 " TODO: Apparently insecure sometimes.
 set modeline
@@ -303,6 +296,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead *.pyconf set filetype=conf
   autocmd BufNewFile,BufRead *cloud.cfg set filetype=yaml
   autocmd BufNewFile,BufRead .prettierrc set filetype=yaml
+  autocmd BufNewFile,BufRead *.mm set filetype=xml
 
   " oh-my-zsh themes are shell.
   autocmd BufNewFile,BufRead *.zsh-theme set filetype=sh
@@ -384,6 +378,17 @@ command! DisableAutoCommit call s:DisableAutoCommit()
 
 " When searching for ctags include generated tag files in neighbouring repos.
 command! IncludeNeighbourTags set tags+=../*/.git/tags
+
+" Disable some built in plugins.
+" As dicussed in https://www.reddit.com/r/vim/comments/7anxss.
+let g:loaded_getscript         = 1 "$VIMRUNTIME/autoload/getscript.vim
+let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
+let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
+let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
+let g:loaded_netrwPlugin       = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
+let g:loaded_netrwSettings     = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
+let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
+let g:loaded_vimballPlugin     = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
 
 " Low vim-plug timeout to get around issue where installing fails sometimes
 " and have to wait 60 seconds for timeout.
@@ -552,6 +557,8 @@ vmap <leader>tS <Plug>SendSelectionToTmux
 
 " Command to change Tmux pane used by tslime.
 command! -nargs=1 TmuxSetPane execute "let g:tslime['pane'] = <args>"
+
+command! RunCurrentFile execute 'Tmux ' expand('%:p')
 
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''
@@ -821,6 +828,8 @@ nnoremap g<Backspace> mzA<Backspace><Esc>`z
 " Split line in different places.
 Repeatable nnoremap gs( f(a<CR><Esc>
 Repeatable nnoremap gs) f)i<CR><Esc>
+Repeatable nnoremap gs{ f{a<CR><Esc>
+Repeatable nnoremap gs} f}i<CR><Esc>
 Repeatable nnoremap gs, f,a<CR><Esc>
 Repeatable nnoremap gs. f.i<CR><Esc>
 Repeatable nnoremap gss i<CR><Esc>
@@ -844,24 +853,33 @@ nnoremap [-  ?^- <CR>
 nnoremap <leader>; :<Up><CR>
 
 " Rails maps.
-nnoremap <leader>eC :Econtroller<space>
-nnoremap <leader>eI :Einitializer<space>
-nnoremap <leader>eJ :Ejavascript<space>
-nnoremap <leader>eL :Elayout<space>
-nnoremap <leader>eM :Emodel<space>
-nnoremap <leader>eV :Eview<space>
-nnoremap <leader>ec :Econtroller<CR>
-nnoremap <leader>ei :Einitializer<CR>
-nnoremap <leader>ej :Ejavascript<CR>
-nnoremap <leader>el :Elayout<CR>
-nnoremap <leader>em :Emodel<CR>
-nnoremap <leader>es :Eschema<CR>
-nnoremap <leader>ev :Eview<CR>
+nnoremap <leader>eC :Econtroller<CR>
+nnoremap <leader>eD :Eschema<CR>
+nnoremap <leader>eI :Einitializer<CR>
+nnoremap <leader>eJ :Ejavascript<CR>
+nnoremap <leader>eL :Elayout<CR>
+nnoremap <leader>eM :Emodel<CR>
+nnoremap <leader>eS :Espec<CR>
+nnoremap <leader>eV :Eview<CR>
+nnoremap <leader>ec :Econtroller<space>
+nnoremap <leader>ed :Eschema<space>
+nnoremap <leader>ei :Einitializer<space>
+nnoremap <leader>ej :Ejavascript<space>
+nnoremap <leader>el :Elayout<space>
+nnoremap <leader>em :Emodel<space>
+nnoremap <leader>es :Espec<space>
+nnoremap <leader>ev :Eview<space>
 
-abbreviate un unnecessary
+" Apparently I can never spell these.
 abbreviate unecesary unnecessary
 abbreviate unnecesary unnecessary
 abbreviate unecessary unnecessary
+abbreviate uneccesary unnecessary
+abbreviate unneccesary unnecessary
+abbreviate unneccessary unnecessary
+abbreviate uneccessary unnecessary
+
+abbreviate unecesarily unnecessarily
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - simpler method works for me under Tmux,
