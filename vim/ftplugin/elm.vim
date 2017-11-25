@@ -18,6 +18,7 @@ nmap <buffer> <leader>eM <Plug>(elm-make-main)
 " Commands for quickly adding imports.
 command! -buffer -nargs=* Import call s:import(<f-args>)
 command! -buffer -nargs=* ImportAs call s:import_as(<f-args>)
+command! -buffer -nargs=* ImportType call s:import_type(<f-args>)
 
 function! s:import(...)
   if empty(a:000)
@@ -42,6 +43,19 @@ function! s:import_as(first, ...)
   endif
 
   call s:add_import_line(module, as, exposing)
+endfunction
+
+function! s:import_type(...)
+  if empty(a:000)
+    let cword = expand('<cword>')
+    let module = cword
+    let exposing = [cword]
+  else
+    let module = a:1
+    let exposing = [a:1] + a:000[1:]
+  endif
+
+  call s:add_import_line(module, v:null, exposing)
 endfunction
 
 function! s:add_import_line(module, as, exposing)
