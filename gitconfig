@@ -24,9 +24,8 @@
 	add-deleted = ! git rm $(git ls-files --deleted)
 	tracked-files = ls-tree --full-tree -r HEAD
 	ls-revisions = ls-revisions
-	churn = churn
+	churn = effort
 	summary = summary
-	effort = effort
 	delete-submodule = delete-submodule
 	delete-remote = push origin --delete
 	longest = longest
