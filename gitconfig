@@ -44,6 +44,7 @@
 	wip = ! git add . && git commit -m WIP
 	about = ! git summary && git cloc
 	discard-unresolved = discard-unresolved
+	changes-since=changes-since
 
 [color]
 	ui = true
