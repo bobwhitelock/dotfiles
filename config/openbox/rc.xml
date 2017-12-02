@@ -40,7 +40,7 @@
                     'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>waldorf</name>
+    <name>bob</name>
     <!-- <titleLayout>LIMDC</titleLayout> -->
     <!-- Above disabled to encourage me to use key bindings. -->
     <titleLayout>L</titleLayout>
