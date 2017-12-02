@@ -421,6 +421,11 @@
         <command>xfce4-screenshooter</command>
       </action>
     </keybind>
+    <keybind key="W-o">
+      <action name="Execute">
+        <command>reconfigure-gui</command>
+      </action>
+    </keybind>
     <!-- A bit of tiling -->
     <keybind key="W-Right">
       <action name="GrowToEdgeEast"/>
