@@ -6,6 +6,13 @@ Plug 'tpope/vim-sensible'
 " Handle surroundings (ys/cs/ds).
 Plug 'tpope/vim-surround'
 
+" Various mappings for HTML/XML/ERB etc. In particular extra replacements for
+" vim-surround:
+" - `-` -> `<% ^ %>`
+" - `=` -> `<%= ^ %>`
+" - `#` -> `<%# ^ %>`
+Plug 'tpope/vim-ragtag'
+
 " Comment and uncomment (gc*)
 Plug 'tpope/vim-commentary'
 
@@ -80,6 +87,9 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 
 " Indent-level text object (ai / ii / aI / iI)
 Plug 'michaeljsmith/vim-indent-object'
+
+" ERB text object (iE / aE)
+Plug 'whatyouhide/vim-textobj-erb'
 
 " For custom operators, needed for all vim-operator plugins.
 Plug 'kana/vim-operator-user'
