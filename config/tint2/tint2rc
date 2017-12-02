@@ -135,7 +135,7 @@ systray_icon_size = 24
 systray_icon_asb = 100 0 0
 
 # Clock
-time1_format = %H:%M
+time1_format = %a %d/%m %H:%M
 time1_font = Liberation Sans 11
 #time2_format = %A %d %B
 #time2_font = Liberation Sans 6
