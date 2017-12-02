@@ -2,10 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Show diff since given date string (any valid argument for `git log --since`,
-# e.g. '2 days'); additional arguments passed through to `git diff`.
-
 since="$1"
 shift
 
-git diff "$(git log --since "$since" --format='format: %H' | tail -n 1 | xargs)" "$@"
+git diff-since "$since" --shortstat "$@"
