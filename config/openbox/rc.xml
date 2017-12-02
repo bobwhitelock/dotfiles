@@ -346,7 +346,7 @@
         <command>x-www-browser</command>
       </action>
     </keybind>
-    <keybind key="W-l">
+    <keybind key="W-S-l">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
