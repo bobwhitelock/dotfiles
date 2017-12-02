@@ -614,8 +614,11 @@ nnoremap <leader>sf :source %<CR>
 nnoremap j gj
 nnoremap k gk
 
-" Make Y behave like C and D.
-nnoremap Y y$
+" Make Y behave like C and D; defined like this so YankRing behaviour still
+" works and doesn't overwrite existing map.
+function! YRRunAfterMaps()
+  nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+endfunction
 
 " Easier macro executing (with added benefit of preventing accidentally
 " entering 'Ex' mode).
