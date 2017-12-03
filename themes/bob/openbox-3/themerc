@@ -22,41 +22,17 @@ menu.bullet.selected.image.color: #FFFFFF
 
 !! focused window settings
 
-window.active.title.bg: flat gradient vertical bevel1
-window.active.title.bg.color: #DBDBDB
-window.active.title.bg.colorTo: #B5B5B5
-window.active.title.separator.color: #B5B5B5
-
-window.active.handle.bg: flat gradient vertical bevel1
-window.active.handle.bg.color: #DEDCDB
-window.active.handle.bg.colorTo: #D9D7D6
-
-window.active.grip.bg: parentrelative
-
-window.active.label.bg: parentrelative
-window.active.label.text.color: #101010
-
-window.*.button.*.bg: parentrelative
-window.active.button.*.image.color: #101010
-window.active.button.disabled.image.color: #ACACAC
+window.active.*.bg: Solid Flat
+window.active.*.*.bg.color: #f7f7f7
+window.active.*.border.color: #f7f7f7
+window.active.label.text.color: #000000
 
 !! unfocused window settings
 
-window.inactive.title.bg: flat gradient vertical bevel1
-window.inactive.title.bg.color: #DBDBDB
-window.inactive.title.bg.colorTo: #B5B5B5
-window.inactive.title.separator.color: #B5B5B5
-
-window.inactive.handle.bg: flat gradient vertical bevel1
-window.inactive.handle.bg.color: #DEDCDB
-window.inactive.handle.bg.colorTo: #D9D7D6
-
-window.inactive.grip.bg: parentrelative
-
-window.inactive.label.bg: parentrelative
-window.inactive.label.text.color: #666666
-
-window.inactive.button.*.image.color: #666666
+window.inactive.*.bg: Solid Flat
+window.inactive.*.*.bg.color: #111111
+window.inactive.*.border.color: #111111
+window.inactive.label.text.color: #ffffff
 
 !! Global width settings
 border.Width: 1
