@@ -533,6 +533,8 @@ let g:autopep8_disable_show_diff=1
 
 let g:zv_disable_mapping = 1
 
+let g:gundo_prefer_python3 = 1
+
 let g:UltiSnipsExpandTrigger='<C-e>'
 let g:UltiSnipsJumpForwardTrigger='<C-d>'
 let g:UltiSnipsJumpBackwardTrigger='<C-u>'
