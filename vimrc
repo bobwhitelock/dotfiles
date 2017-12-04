@@ -662,7 +662,7 @@ noremap ]<Backspace> mzjdd`z
 " nnoremap * <Plug>(indexed-search-*)N
 
 " FZF maps.
-nnoremap <silent> <C-p> :GitFiles<CR>
+nnoremap <silent> <C-p> :GitFiles --cached --others --exclude-standard<CR>
 nnoremap <silent> <C-f> :Files<CR>
 nnoremap <leader>fh :Helptags<CR>
 nnoremap <leader>fb :BLines<CR>
