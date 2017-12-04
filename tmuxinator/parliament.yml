@@ -1,0 +1,30 @@
+
+name: parliament
+
+pre: sudo systemctl start postgresql
+
+windows:
+  - notes:
+      root: ~/projects/other/life
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - app:
+      root: ~/projects/other/parliament-voting-experiments
+      layout: 'df8f,274x67,0,0{137x67,0,0[137x23,0,0,1,137x22,0,24,4,137x20,0,47,5],136x67,138,0,6}'
+      panes:
+        - client:
+          - cd client
+          - elm app start
+        - ruby server/server.rb
+        -
+        - vim
+
+  - dotfiles:
+      root: ~/.dotfiles
+      layout: even-horizontal
+      panes:
+        -
+        - vim
