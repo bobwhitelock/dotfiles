@@ -1,6 +1,6 @@
 [global_config]
   handle_size = 3
-  custom_url_handler = chromium
+  custom_url_handler = google-chrome
   enabled_plugins = APTURLHandler, LaunchpadBugURLHandler
   focus = mouse
   use_custom_url_handler = True
