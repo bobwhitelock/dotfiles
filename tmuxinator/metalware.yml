@@ -4,8 +4,10 @@ root: ~/
 
 windows:
   - notes:
-      root: ~/Dropbox/notes
+      root: ~/projects/other/life
+      layout: even-horizontal
       panes:
+        -
         - vim
 
   - metalware:

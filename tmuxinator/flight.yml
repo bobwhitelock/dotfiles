@@ -33,8 +33,10 @@ windows:
           - ssh -R 10.101.0.33:4567:localhost:3000 elmo
 
   - notes:
-      root: ~/Dropbox/notes
+      root: ~/projects/other/life
+      layout: even-horizontal
       panes:
+        -
         - vim
 
   - valet:

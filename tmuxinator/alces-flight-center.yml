@@ -4,7 +4,7 @@ root: ~/
 
 windows:
   - notes:
-      root: ~/Dropbox/notes/alces/alces-flight-center
+      root: ~/projects/other/life
       layout: even-horizontal
       panes:
         -
