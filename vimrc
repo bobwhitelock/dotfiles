@@ -747,7 +747,7 @@ nnoremap gb :Gblame<CR>
 nnoremap gd :Gdiff<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gS :Gwrite<CR>:edit!<CR>
-nnoremap <leader>gR mz:Gread<CR>`z
+nnoremap <leader>gR :Gread<CR>
 
 " Grep for current filename, less extension if present.
 nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
@@ -794,12 +794,14 @@ xnoremap <leader>d "+d
 xnoremap <leader>y "+y
 xnoremap <leader>p "+p
 xnoremap <leader>P "+P
+xmap <leader>Y "+Y
 xmap <leader>_ "+_
 nnoremap <leader>d "+d
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nmap <leader>_ "+_
+nmap <leader>Y "+Y
 
 " Move last thing yanked to system clipboard.
 nnoremap <leader>cc :let @+=@"<cr>:echo "copied!"<cr>
