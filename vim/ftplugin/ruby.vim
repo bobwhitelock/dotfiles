@@ -3,7 +3,7 @@
 set path+=spec/shared_examples
 
 " Run only failing RSpec tests from last run, using vim-test.
-nnoremap <buffer> <leader>tb :RSpec --only-failures<CR>
+nnoremap <buffer> <leader>tb :call InterruptAndRun('RSpec --only-failures')<CR>
 
 " Rubocop bindings - `<leader>ru` binding to lint current buffer defined by
 " `vim-rubocop` plugin.

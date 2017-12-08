@@ -556,11 +556,17 @@ let test#ruby#rspec#options = {
 let g:test#runner_commands = ['RSpec']
 
 " Maps to run tests.
-nnoremap <silent> <leader>ts :TestSuite<CR>
-nnoremap <silent> <leader>tt :TestNearest<CR>
-nnoremap <silent> <leader>tf :TestFile<CR>
-nnoremap <silent> <leader>tv :TestVisit<CR>
-nnoremap <silent> <CR> :TestLast<CR>
+nnoremap <silent> <leader>ts :call InterruptAndRun('TestSuite')<CR>
+nnoremap <silent> <leader>tt :call InterruptAndRun('TestNearest')<CR>
+nnoremap <silent> <leader>tf :call InterruptAndRun('TestFile')<CR>
+nnoremap <silent> <leader>tv :call InterruptAndRun('TestVisit')<CR>
+nnoremap <silent> <CR> :call InterruptAndRun('TestLast')<CR>
+
+" Run a command in the Tmux pane, sending an interrupt first.
+function! InterruptAndRun(test_command)
+  execute 'Tmux'
+  execute a:test_command
+endfunction
 
 " Maps to interact with Tmux pane.
 nnoremap <silent> <leader>m :Tmux make<CR>
