@@ -18,7 +18,9 @@ windows:
         - client:
           - cd client
           - elm app start
-        - ruby server/server.rb
+        - server:
+          - cd server
+          - rerun ruby server.rb
         -
         - vim
 
