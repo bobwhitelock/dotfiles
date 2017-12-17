@@ -17,10 +17,10 @@ windows:
       panes:
         - client:
           - cd client
-          - elm app start
+          - ELM_APP_API_URL=http://localhost:4567 elm app start
         - server:
           - cd server
-          - rerun ruby server.rb
+          - DATABASE_URL=postgres://postgres:password@localhost:5432 rerun ruby server.rb
         -
         - vim
 
