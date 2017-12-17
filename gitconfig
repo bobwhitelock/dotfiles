@@ -55,6 +55,7 @@
 
 [diff]
 	tool = vimdiff
+	algorithm = patience
 [merge]
 	ff = false
 	conflictstyle = diff3
