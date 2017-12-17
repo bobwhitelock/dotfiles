@@ -12,7 +12,7 @@ windows:
         - vim
 
   - app:
-      root: ~/projects/other/parliament-voting-experiments
+      root: ~/projects/other/parliament-visualization
       layout: 'df8f,274x67,0,0{137x67,0,0[137x23,0,0,1,137x22,0,24,4,137x20,0,47,5],136x67,138,0,6}'
       panes:
         - client:
