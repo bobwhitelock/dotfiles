@@ -16,3 +16,6 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "git-recover"]
+	path = git-recover
+	url = https://github.com/ethomson/git-recover

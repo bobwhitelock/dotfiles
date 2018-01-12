@@ -8,7 +8,8 @@ export PATH="$HOME/.rvm/gems/ruby-2.4.0/bin:$PATH:$HOME/bin:/usr/local/bin:$HOME
 
 export EDITOR="vim"
 export VISUAL="vim"
-export PAGER="less -K"
+export PAGER="less"
+export LESS="-K"
 
 # Let git find repos split across filesystems.
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1

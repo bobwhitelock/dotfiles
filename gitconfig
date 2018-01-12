@@ -46,6 +46,7 @@
 	discard-unresolved = discard-unresolved
 	diff-since=diff-since
 	changes-since=changes-since
+	recover=recover
 
 [color]
 	ui = true
