@@ -393,10 +393,6 @@ command! IncludeNeighbourTags set tags+=../*/.git/tags
 " As dicussed in https://www.reddit.com/r/vim/comments/7anxss.
 let g:loaded_getscript         = 1 "$VIMRUNTIME/autoload/getscript.vim
 let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
-let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
-let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
-let g:loaded_netrwPlugin       = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
-let g:loaded_netrwSettings     = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
 let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
 let g:loaded_vimballPlugin     = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
 
