@@ -1,7 +1,7 @@
 
 name: parliament
-
 pre: sudo systemctl start postgresql
+startup_window: app
 
 windows:
   - notes:

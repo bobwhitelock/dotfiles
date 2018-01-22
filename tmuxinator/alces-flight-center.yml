@@ -2,6 +2,7 @@
 name: alces-flight-center
 root: ~/
 pre: sudo systemctl start postgresql
+startup_window: alces-flight-center
 
 windows:
   - notes:
