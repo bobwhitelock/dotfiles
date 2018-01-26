@@ -17,6 +17,7 @@
     ~/.sqliterc: sqliterc
     ~/.zshrc: zsh/zshrc
     $DOTFILES/oh-my-zsh/custom/themes/bob.zsh-theme: zsh/theme.zsh-theme
+    ~/.xsessionrc: xsessionrc
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator:
         path: tmuxinator/
