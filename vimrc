@@ -291,6 +291,10 @@ set modelines=50
 " bottom right corner.
 set showcmd
 
+" Do not treat `#` as part of a file name so can e.g. use `gF` while cursor in
+" `foo.md#5` to jump to line 5 of `foo.md`.
+set isfname-=#
+
 " Highlight shell scripts as bash by default unless specified otherwise.
 let g:is_bash=1
 
@@ -426,6 +430,7 @@ let g:markdown_fenced_languages = [
     \ 'js=javascript',
     \ 'json',
     \ 'python',
+    \ 'ruby',
     \ 'xml',
     \ 'yaml',
     \]
@@ -536,9 +541,6 @@ let g:UltiSnipsJumpForwardTrigger='<C-d>'
 let g:UltiSnipsJumpBackwardTrigger='<C-u>'
 nnoremap <leader>ue :UltiSnipsEdit<CR>
 
-let g:tslime_always_current_session = 1
-let g:tslime_always_current_window = 1
-
 " TODO:
 " - Show things in quickfix list?
 let test#strategy = 'tslime'
@@ -552,25 +554,29 @@ let test#ruby#rspec#options = {
 let g:test#runner_commands = ['RSpec']
 
 " Maps to run tests.
-nnoremap <silent> <leader>ts :call InterruptAndRun('TestSuite')<CR>
-nnoremap <silent> <leader>tt :call InterruptAndRun('TestNearest')<CR>
-nnoremap <silent> <leader>tf :call InterruptAndRun('TestFile')<CR>
-nnoremap <silent> <leader>tv :call InterruptAndRun('TestVisit')<CR>
-nnoremap <silent> <CR> :call InterruptAndRun('TestLast')<CR>
+nnoremap <silent> <leader>ts :call TmuxInterruptAndRun('TestSuite')<CR>
+nnoremap <silent> <leader>tt :call TmuxInterruptAndRun('TestNearest')<CR>
+nnoremap <silent> <leader>tf :call TmuxInterruptAndRun('TestFile')<CR>
+nnoremap <silent> <leader>tv :call TmuxInterruptAndRun('TestVisit')<CR>
+nnoremap <silent> <CR> :call TmuxInterruptAndRun('TestLast')<CR>
 
 " Run a command in the Tmux pane, sending an interrupt first.
-function! InterruptAndRun(test_command)
-  execute 'Tmux'
-  execute a:test_command
+function! TmuxInterruptAndRun(command)
+  TmuxInterrupt
+  execute a:command
 endfunction
+
+function! TmuxInterrupt()
+  execute 'Tmux'
+endfunction
+command! TmuxInterrupt call TmuxInterrupt()
 
 " Maps to interact with Tmux pane.
 nnoremap <silent> <leader>m :Tmux make<CR>
 nnoremap <leader>T :Tmux<space>
 vmap <leader>tS <Plug>SendSelectionToTmux
 
-" Command to change Tmux pane used by tslime.
-command! -nargs=1 TmuxSetPane execute "let g:tslime['pane'] = <args>"
+command! TmuxReset execute "normal <Plug>SetTmuxVars"
 
 command! RunCurrentFile execute 'Tmux ' expand('%:p')
 
@@ -737,6 +743,8 @@ nnoremap <leader>t< :tabmove -<CR>
 " TODO: make this a command instead e.g. MkdirRelative.
 noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
 
+nnoremap <leader>rr :Rename <C-R>=expand('%:t')<CR>
+
 " Git mappings.
 " TODO: change to plug mappings?
 nnoremap gb :Gblame<CR>
@@ -854,13 +862,15 @@ Repeatable nnoremap gs. f.i<CR><Esc>
 Repeatable nnoremap gss i<CR><Esc>
 Repeatable nnoremap gs<space> hf<space>xi<CR><Esc>
 
-" Insert current timestamp.
-command! Time execute "normal! i<C-R>=strftime('%R:%S')<CR><Esc>"
-
 nmap <leader>` ysiW`
 nmap <leader>' ysiW'
 nmap <leader>) ysiW)
 nmap <leader>] ysiW]
+
+" For some reason something in my config is causing `<Esc>b` in insert mode to
+" jump back into insert mode. Not sure what's doing this, but ensuring
+" `<Esc>b` just means `<Esc>b` appears to fix it.
+inoremap <Esc>b <Esc>b
 
 " TODO: Would be useful to make these jump over current section if in matching
 " section already.
