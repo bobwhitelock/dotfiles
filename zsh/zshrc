@@ -68,7 +68,8 @@ export NVM_DIR="/home/bob/.nvm"
 # Enable FZF.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source "$DOTFILES/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# Source script to set up all Zsh packages.
+source "$ZSH_DIR/packages.sh"
 
 # Source this again to set up things depending on earlier parts of this file,
 # e.g. on aliases, and ensure no variables are mysteriously clobbered.

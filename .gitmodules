@@ -10,8 +10,8 @@
 [submodule "vim-plug"]
 	path = vim-plug
 	url = https://github.com/junegunn/vim-plug
-[submodule "zsh-syntax-highlighting"]
-	path = zsh-syntax-highlighting
+[submodule "zsh/packages/zsh-syntax-highlighting"]
+	path = zsh/packages/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
