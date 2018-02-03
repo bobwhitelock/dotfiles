@@ -857,6 +857,8 @@ Repeatable nnoremap gs( f(a<CR><Esc>
 Repeatable nnoremap gs) f)i<CR><Esc>
 Repeatable nnoremap gs{ f{a<CR><Esc>
 Repeatable nnoremap gs} f}i<CR><Esc>
+Repeatable nnoremap gs[ f[a<CR><Esc>
+Repeatable nnoremap gs] f]i<CR><Esc>
 Repeatable nnoremap gs, f,a<CR><Esc>
 Repeatable nnoremap gs. f.i<CR><Esc>
 Repeatable nnoremap gss i<CR><Esc>

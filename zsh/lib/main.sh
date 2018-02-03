@@ -78,8 +78,8 @@ rgp() {
     rg --pretty "$@" | less
 }
 
-# Swap 2 filenames around, if they exist (from Uzi's bashrc).
-# From http://tldp.org/LDP/abs/html/sample-bashrc.html.
+# Swap 2 filenames around, if they exist (from
+# http://tldp.org/LDP/abs/html/sample-bashrc.html).
 swap() {
     local TMPFILE=tmp.$$
 
@@ -98,10 +98,10 @@ yaml_validate() {
 
 # Pretty-print a YAML file as JSON.
 yaml_to_json() {
-    cat <<RUBY | ruby | jq .
-require 'yaml'
-require 'json'
-puts YAML.load_file('$1').to_json
+    cat <<-RUBY | ruby | jq .
+        require 'yaml'
+        require 'json'
+        puts YAML.load_file('$1').to_json
 RUBY
 }
 
