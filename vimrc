@@ -207,6 +207,7 @@ Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
 Plug 'tmux-plugins/vim-tmux'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go'
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
