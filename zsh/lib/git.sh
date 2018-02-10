@@ -1,4 +1,5 @@
 
+alias git='hub'
 alias g='git'
 alias gpl='git pull --prune'
 alias gg='git grep'

@@ -54,6 +54,10 @@ bindkey '^F' forward-word
 source "$ZSH_LIB/main.sh"
 source-libs
 
+# Load completions.
+fpath=("$ZSH_DIR/completions" $fpath)
+autoload -U compinit && compinit
+
 # For advanced shell history - disabled for now as messes up environment.
 # export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
 # source /usr/lib/advanced_shell_history/zsh

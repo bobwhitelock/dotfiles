@@ -11,6 +11,10 @@ export VISUAL="vim"
 export PAGER="less"
 export LESS="-K"
 
+# Apparently required for `hub` to use correct version of `vim` when opening
+# editor (see https://github.com/github/hub/issues/1675).
+export GIT_EDITOR=/usr/local/bin/vim
+
 # Let git find repos split across filesystems.
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
@@ -54,3 +58,6 @@ export PYENV_ROOT="$HOME/repos/pyenv"
 export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+
+# Load private environment variables.
+source "$ZSH_DIR/env.private.sh"

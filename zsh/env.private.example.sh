@@ -1,0 +1,2 @@
+
+export GITHUB_PASSWORD=XXX

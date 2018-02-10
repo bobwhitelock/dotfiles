@@ -13,3 +13,8 @@ git submodule update --init --recursive
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
+# Copy example private environment variable file (if needed), so these can be
+# set but not committed.
+if [ ! -f zsh/env.private.sh ]; then
+    cp zsh/env.private.{example.,}sh
+fi

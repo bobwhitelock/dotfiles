@@ -7,3 +7,4 @@ vim/spell
 vim/undodir
 vim/view
 tmux/plugins
+zsh/env.private.sh
