@@ -29,6 +29,9 @@ source-libs() {
 }
 alias sa="source-libs"
 
+alias simple-prompt="SIMPLE_PROMPT=true sz"
+alias simple-prompt-off="unset SIMPLE_PROMPT && sz"
+
 which-edit() {
     $EDITOR "$(which "$1")"
 }

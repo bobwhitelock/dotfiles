@@ -4,7 +4,12 @@
 # shellcheck disable=SC2034
 local ret_status="%(?:%{$fg_bold[green]%}$ :%{$fg_bold[red]%}$ )"
 # shellcheck disable=SC2016
-PROMPT='%{$fg[cyan]%}[%T]%{$reset_color%} %{$fg[blue]%}%~%{$reset_color%} $(git_prompt_info)${ret_status}%{$reset_color%}'
+
+if [ -n "$SIMPLE_PROMPT" ]; then
+    PROMPT='${ret_status}%{$reset_color%}'
+else
+    PROMPT='%{$fg[cyan]%}[%T]%{$reset_color%} %{$fg[blue]%}%~%{$reset_color%} $(git_prompt_info)${ret_status}%{$reset_color%}'
+fi
 
 # shellcheck disable=SC2034
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[red]%}"
