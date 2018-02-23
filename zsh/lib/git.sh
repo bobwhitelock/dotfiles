@@ -34,7 +34,6 @@ alias gco='git checkout'
 alias gcot='gco --track'
 
 alias gr='git reset'
-alias gpop='gr HEAD~'
 
 alias gcf=' git clean --force'
 alias gci=' git clean --interactive'
@@ -65,6 +64,8 @@ alias glog="git log \
     --abbrev-commit \
     --date=relative"
 alias glogall='glog --all'
+alias glogp='glog | head -n 20'
+alias glogallp='glogall | head -n 20'
 
 alias gbi='git bisect'
 alias gbis='gbi start'

@@ -44,8 +44,10 @@ export CHROME_BIN=chromium
 
 # Set these AWS key variables if the functions exist yet, it doesn't matter if
 # they don't though.
-export AWS_ACCESS_KEY_ID=$(aws_access_key 2> /dev/null)
-export AWS_SECRET_ACCESS_KEY=$(aws_secret_key 2> /dev/null)
+# XXX Disable automatically setting these for now to require explicit setting,
+# to avoid accidentally using variables for wrong account (again).
+# export AWS_ACCESS_KEY_ID=$(aws_access_key 2> /dev/null)
+# export AWS_SECRET_ACCESS_KEY=$(aws_secret_key 2> /dev/null)
 
 export DOMAIN_VARS_FILE=/tmp/domain-vars
 cached-domain-vars 2> /dev/null
