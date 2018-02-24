@@ -58,7 +58,7 @@
     use_custom_command = True
     scroll_on_output = False
     show_titlebar = False
-    custom_command = TERM=xterm-256color zsh -l
+    custom_command = TERM=xterm-256color tmux
     color_scheme = custom
     font = DejaVu Sans Mono for Powerline 8.7001953125
     scrollback_infinite = True
