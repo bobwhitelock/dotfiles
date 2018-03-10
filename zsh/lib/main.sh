@@ -15,7 +15,7 @@ rsync="rsync -r --copy-links --delete --perms --human-readable --progress"
 # shellcheck disable=SC2139
 alias rsync="$rsync"
 # shellcheck disable=SC2139
-alias sync-dir="rerun --exit --pattern '**/*' -- $rsync ."
+alias sync-dir="rerun --exit --no-notify --pattern '**/*' -- $rsync ."
 unset rsync
 
 # List files installed on system by given package.

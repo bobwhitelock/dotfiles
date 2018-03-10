@@ -11,5 +11,5 @@ alias rdc='bin/rails dbconsole'
 alias rdR='bin/rails db:reset'
 alias rgm='bin/rails g migration'
 
-alias raket='bin/rake -T'
+alias raket='rake -T'
 alias rakeall='raket -A'

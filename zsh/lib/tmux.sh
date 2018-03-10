@@ -35,6 +35,5 @@ _tmux-create() {
         \; send-keys -t 2 Enter
 }
 
-dot() {
-    add-window "$DOTFILES"
-}
+alias dot="add-window \$DOTFILES"
+alias notes="add-window \$OTHER_PROJECTS/life"
