@@ -50,7 +50,6 @@
     login_shell = True
     background_image = None
     background_darkness = 0.98
-    scrollback_lines = 5000
     background_type = transparent
     use_system_font = False
     cursor_color = "#d8d8d8"
