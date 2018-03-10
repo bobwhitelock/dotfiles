@@ -1,9 +1,15 @@
 
 snippet RS "Start new RSpec test file"
+require 'rails_helper'
+
 RSpec.describe $1 do
   describe '$2' do
     it '$3' do
     end
   end
 end
+endsnippet
+
+snippet open "Open browser in Capybara test"
+save_and_open_page
 endsnippet
