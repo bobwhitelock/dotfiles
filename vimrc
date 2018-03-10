@@ -346,7 +346,9 @@ augroup autocmds
   autocmd FileType markdown let b:surround_51 = "```\n\r\n```"
 
   " Run Prettier on write of JS files.
-  autocmd BufWritePre *.js PrettierAsync
+  " XXX Disabled for now to avoid messing up JS files on projects not using
+  " Prettier.
+  " autocmd BufWritePre *.js PrettierAsync
 
   " Enable Goyo hook functions.
   autocmd User GoyoEnter nested call <SID>goyo_enter()
@@ -425,6 +427,7 @@ let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
 
 let g:markdown_fenced_languages = [
     \ 'bash=sh',
+    \ 'crontab',
     \ 'css',
     \ 'elm',
     \ 'erb=eruby',
@@ -560,6 +563,9 @@ nnoremap <silent> <leader>tt :call TmuxInterruptAndRun('TestNearest')<CR>
 nnoremap <silent> <leader>tf :call TmuxInterruptAndRun('TestFile')<CR>
 nnoremap <silent> <leader>tv :call TmuxInterruptAndRun('TestVisit')<CR>
 nnoremap <silent> <CR> :call TmuxInterruptAndRun('TestLast')<CR>
+" XXX have this as toggle with above (ToggleTdd vs ToggleRunCommand?)?
+" - or have command to map/unmap <CR> from running any command.
+" nnoremap <CR> :<Up><CR>
 
 " Run a command in the Tmux pane, sending an interrupt first.
 function! TmuxInterruptAndRun(command)
