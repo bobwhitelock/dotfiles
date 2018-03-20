@@ -13,3 +13,8 @@ alias rgm='bin/rails g migration'
 
 alias raket='rake -T'
 alias rakeall='raket -A'
+
+# Quickly run something with Ruby.
+r() {
+    ruby -e "p $*"
+}

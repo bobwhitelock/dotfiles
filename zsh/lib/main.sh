@@ -4,7 +4,7 @@ alias treeall="command tree -C -a -I .git"
 alias tree="treeall --filelimit 50"
 alias pyserver="python2 -m SimpleHTTPServer"
 alias grip="grip --browser"
-alias rerun="rerun --pattern '**/*'"
+alias rerun="rerun --pattern '**/*' --no-notify"
 alias diff='vimdiff'
 alias m='make'
 alias sls='AWS_CLIENT_TIMEOUT=600000 serverless --aws-profile personal'
@@ -15,7 +15,7 @@ rsync="rsync -r --copy-links --delete --perms --human-readable --progress"
 # shellcheck disable=SC2139
 alias rsync="$rsync"
 # shellcheck disable=SC2139
-alias sync-dir="rerun --exit --no-notify --pattern '**/*' -- $rsync ."
+alias sync-dir="rerun --exit --pattern '**/*' -- $rsync ."
 unset rsync
 
 # List files installed on system by given package.
@@ -136,9 +136,4 @@ scratch() {
     mkdir -p /tmp/scratch/
     file="$(mktemp "/tmp/scratch/${name}XXXXX.${extension}")"
     "$EDITOR" "$file"
-}
-
-# Quickly run something with Ruby.
-r() {
-    ruby -e "p $*"
 }
