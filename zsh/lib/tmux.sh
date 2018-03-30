@@ -37,3 +37,25 @@ _tmux-create() {
 
 alias dot="add-window \$DOTFILES"
 alias notes="add-window \$OTHER_PROJECTS/life"
+
+# Replace current window with new window as created by `add-window`.
+replace-window() {
+    local current_window new_window
+
+    # shellcheck disable=SC2063
+    current_window="$(_find-window-id "grep '*'")"
+
+    add-window "$*"
+    new_window="$(_find-window-id 'tail -n 1')"
+
+    tmux swap-window -t "$current_window" -s "$new_window"
+    tmux kill-window -t "$new_window"
+}
+alias rw="replace-window"
+
+_find-window-id() {
+    local filter
+    filter="$1"
+
+    tmux list-windows | eval "$filter" | cut -d: -f1
+}
