@@ -1,5 +1,7 @@
 
 alias mux="tmuxinator"
+alias dot="add-window \$DOTFILES"
+alias notes="add-window \$OTHER_PROJECTS/life"
 
 # Add new Tmux window (or session if not already in session) in given dir
 # (defaulting to current dir); appropriately named and with panes for shell and
@@ -34,9 +36,6 @@ _tmux-create() {
         \; send-keys -t 2 vim \
         \; send-keys -t 2 Enter
 }
-
-alias dot="add-window \$DOTFILES"
-alias notes="add-window \$OTHER_PROJECTS/life"
 
 # Replace current window with new window as created by `add-window`.
 replace-window() {

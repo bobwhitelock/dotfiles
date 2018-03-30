@@ -126,7 +126,8 @@ weather() {
     curl "wttr.in/$1"
 }
 
-# Edit a temporary file, with optional extension and part of name from args.
+# Create, output name of, and edit a temporary file, with optional extension
+# and part of name from args.
 scratch() {
     local extension name file
 
@@ -135,5 +136,11 @@ scratch() {
 
     mkdir -p /tmp/scratch/
     file="$(mktemp "/tmp/scratch/${name}XXXXX.${extension}")"
+    echo "$file"
     "$EDITOR" "$file"
+}
+
+# Echo to stderr.
+echoerr() {
+    echo "$@" >&2
 }

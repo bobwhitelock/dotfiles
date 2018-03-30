@@ -10,6 +10,7 @@ alias rdms='bin/rails db:migrate:status'
 alias rdc='bin/rails dbconsole'
 alias rdR='bin/rails db:reset'
 alias rgm='bin/rails g migration'
+alias routes='rake routes'
 
 alias raket='rake -T'
 alias rakeall='raket -A'
