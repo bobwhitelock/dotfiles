@@ -47,6 +47,7 @@
 	diff-since=diff-since
 	changes-since=changes-since
 	recover=recover
+	today = changes-since 12hours
 
 [color]
 	ui = true
