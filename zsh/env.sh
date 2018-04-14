@@ -1,5 +1,6 @@
 
 export PATH="$HOME/.local/bin:$HOME/.rbenv/bin:/usr/local/go/bin:$PATH:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin:./node_modules/.bin:$HOME/.cargo/bin"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # As suggested to make Yeoman work in
 # https://github.com/creationix/nvm/issues/586#issuecomment-68220064.
