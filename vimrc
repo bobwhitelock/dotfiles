@@ -578,6 +578,7 @@ function! TmuxInterrupt()
   execute 'Tmux'
 endfunction
 command! TmuxInterrupt call TmuxInterrupt()
+nnoremap <leader>ti :TmuxInterrupt<CR>
 
 " Maps to interact with Tmux pane.
 nnoremap <silent> <leader>m :Tmux make<CR>
@@ -596,6 +597,7 @@ function! TmuxLaunchTerminal()
   let g:tslime['pane'] = 1
 endfunction
 command! TmuxLaunchTerminal call TmuxLaunchTerminal()
+nnoremap <leader>tT :TmuxLaunchTerminal<CR>
 
 command! RunCurrentFile execute 'Tmux ' expand('%:p')
 
@@ -920,6 +922,10 @@ nnoremap <leader>em :Emodel<space>
 nnoremap <leader>es :Espec<space>
 nnoremap <leader>ev :Eview<space>
 
+" Attempt to fix typo immediately after typing word, and then jump back into
+" insert mode in original position.
+inoremap <C-z> <esc>mzB1z=`za
+
 " Apparently I can never spell these.
 abbreviate unecesary unnecessary
 abbreviate unnecesary unnecessary
@@ -951,6 +957,7 @@ function! DeleteHiddenBuffers()
         silent execute 'bwipeout' buf
     endfor
 endfunction
+command! DeleteHiddenBuffers call DeleteHiddenBuffers()
 
 " From http://vim.wikia.com/wiki/Underline_using_dashes_automatically.
 function! s:Underline(chars)
