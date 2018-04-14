@@ -16,3 +16,8 @@ nnoremap <buffer> <leader>rU :Tmux rubocop<CR>
 nnoremap <buffer> <leader>rF :Tmux rubocop --auto-correct<CR>
 
 command! -buffer Bundle Tmux bundle
+
+" Use command provided by vim-ruby-refactoring to extract a `let` for an
+" assignment, delete the extraneous brackets included by this command, and
+" then jump back to line below original position.
+nmap <buffer> <leader>rel jmzk:RExtractLet<CR>wwds)i <Esc>`z
