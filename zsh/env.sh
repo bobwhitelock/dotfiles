@@ -62,5 +62,5 @@ export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
-# Load private environment variables.
-source "$ZSH_DIR/env.private.sh"
+# Load private environment variables if present.
+source "$ZSH_DIR/env.private.sh" 2> /dev/null
