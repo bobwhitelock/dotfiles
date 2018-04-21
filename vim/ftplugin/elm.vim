@@ -11,6 +11,14 @@ command! -buffer -nargs=* Import call s:import(<f-args>)
 command! -buffer -nargs=* ImportAs call s:import_as(<f-args>)
 command! -buffer -nargs=* ImportType call s:import_type(<f-args>)
 
+command! -buffer ImportJsonEncode call s:import_as('Json.Encode', 'E')
+command! -buffer ImportJsonDecode call s:import_as('Json.Decode', 'D')
+
+" TODO for these functions:
+" - Handle things like `ImportType Tier.Level` correctly (should give `import
+"   Tier.Level exposing (Level)` )
+" - Add similar functions for module exports (`exposing`)?
+
 function! s:import(...)
   if empty(a:000)
     let module = expand('<cword>')
