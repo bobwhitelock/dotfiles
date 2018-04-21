@@ -1,90 +1,86 @@
 [global_config]
-  handle_size = 3
   custom_url_handler = google-chrome
   enabled_plugins = APTURLHandler, LaunchpadBugURLHandler
   focus = mouse
-  use_custom_url_handler = True
-  title_transmit_bg_color = "#000000"
+  handle_size = 3
   inactive_color_offset = 0.61
   title_inactive_bg_color = "#000000"
+  title_transmit_bg_color = "#000000"
+  use_custom_url_handler = True
 [keybindings]
-  cycle_prev = None
-  next_tab = None
   close_window = None
-  group_tab = None
-  resize_left = None
-  rotate_ccw = None
-  reset_clear = None
+  cycle_next = None
+  cycle_prev = None
+  go_down = None
+  go_left = None
+  go_next = None
+  go_prev = None
   go_right = None
-  new_tab = None
-  resize_right = None
-  resize_down = None
-  toggle_zoom = None
-  scaled_zoom = None
+  go_up = None
   group_all = None
+  group_tab = None
+  hide_window = None
+  move_tab_left = None
   move_tab_right = None
+  new_tab = None
+  new_terminator = None
+  new_window = None
+  next_tab = None
   prev_tab = None
+  reset = None
+  reset_clear = None
+  resize_down = None
+  resize_left = None
+  resize_right = None
+  resize_up = None
+  rotate_ccw = None
+  rotate_cw = None
+  scaled_zoom = None
+  search = None
+  split_horiz = None
   split_vert = None
+  toggle_scrollbar = None
+  toggle_zoom = None
   ungroup_all = None
   ungroup_tab = None
-  go_prev = None
-  cycle_next = None
-  new_terminator = None
-  go_next = None
-  go_left = None
-  hide_window = None
-  reset = None
-  search = None
-  go_up = None
-  resize_up = None
-  rotate_cw = None
-  split_horiz = None
-  go_down = None
-  new_window = None
-  move_tab_left = None
-  toggle_scrollbar = None
-[profiles]
-  [[default]]
-    scrollbar_position = hidden
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
-    login_shell = True
-    background_image = None
-    background_darkness = 0.98
-    background_type = transparent
-    use_system_font = False
-    cursor_color = "#d8d8d8"
-    foreground_color = "#ffffff"
-    use_custom_command = True
-    scroll_on_output = False
-    show_titlebar = False
-    custom_command = TERM=xterm-256color tmux
-    color_scheme = custom
-    font = DejaVu Sans Mono for Powerline 8.7001953125
-    scrollback_infinite = True
-  [[secondary]]
-    scrollbar_position = hidden
-    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
-    login_shell = True
-    background_image = None
-    background_darkness = 0.98
-    background_type = transparent
-    use_system_font = False
-    cursor_color = "#d8d8d8"
-    foreground_color = "#ffffff"
-    use_custom_command = True
-    scroll_on_output = False
-    show_titlebar = False
-    custom_command = unset TMUX; TERM=xterm-256color tmux new-session -s secondary
-    color_scheme = custom
-    font = DejaVu Sans Mono for Powerline 11
-    scrollback_infinite = True
 [layouts]
   [[default]]
     [[[child1]]]
-      type = Terminal
       parent = window0
       profile = default
+      type = Terminal
     [[[window0]]]
-      type = Window
       parent = ""
+      type = Window
 [plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.98
+    background_type = transparent
+    color_scheme = custom
+    cursor_color = "#d8d8d8"
+    custom_command = TERM=xterm-256color tmux
+    font = DejaVu Sans Mono 10
+    foreground_color = "#ffffff"
+    login_shell = True
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_custom_command = True
+    use_system_font = False
+  [[secondary]]
+    background_darkness = 0.98
+    background_type = transparent
+    color_scheme = custom
+    cursor_color = "#d8d8d8"
+    custom_command = unset TMUX; TERM=xterm-256color tmux new-session -s secondary
+    font = DejaVu Sans Mono for Powerline 11
+    foreground_color = "#ffffff"
+    login_shell = True
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_custom_command = True
+    use_system_font = False
