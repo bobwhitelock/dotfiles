@@ -27,8 +27,8 @@
     ~/bin:
         path: bin/
         create: true
-    ~/.config/openbox:
-        path: config/openbox/
+    ~/.config/openbox/rc.xml:
+        path: config/openbox/rc.xml
         create: true
     ~/.config/terminator:
         path: config/terminator
