@@ -24,8 +24,9 @@
     ~/.tmuxinator:
         path: tmuxinator/
         create: true
-    ~/bin:
-        path: bin/
+    ~/bin/:
+        path: bin/*
+        glob: true
         create: true
     ~/.config/openbox/rc.xml:
         path: config/openbox/rc.xml
