@@ -43,6 +43,3 @@
     ~/.tmux/plugins:
         path: tmux/plugins
         create: true
-    ~/.themes:
-        path: themes
-        create: true
