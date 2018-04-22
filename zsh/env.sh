@@ -34,9 +34,10 @@ fi
 export HISTSIZE=999999999
 export SAVEHIST=$HISTSIZE
 
-export PROJECTS="$HOME/projects"
-export ALCES_PROJECTS="$PROJECTS/alces"
-export OTHER_PROJECTS="$PROJECTS/other"
+export SRC="$HOME/src"
+export BOB="$SRC/bobwhitelock"
+export NOTES="$BOB/life"
+export ALCES="$SRC/alces-software"
 
 export GITHUB_USER='bobwhitelock'
 

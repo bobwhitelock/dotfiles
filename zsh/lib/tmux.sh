@@ -1,7 +1,7 @@
 
 alias mux="tmuxinator"
 alias dot="add-window \$DOTFILES"
-alias notes="add-window \$OTHER_PROJECTS/life"
+alias notes="add-window \$NOTES"
 
 # Add new Tmux window (or session if not already in session) in given dir
 # (defaulting to current dir); appropriately named and with panes for shell and
