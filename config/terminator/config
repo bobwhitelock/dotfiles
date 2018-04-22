@@ -8,9 +8,15 @@
   title_transmit_bg_color = "#000000"
   use_custom_url_handler = True
 [keybindings]
+  broadcast_all = None
+  broadcast_group = None
+  broadcast_off = None
   close_window = None
   cycle_next = None
   cycle_prev = None
+  edit_tab_title = None
+  edit_terminal_title = None
+  edit_window_title = None
   go_down = None
   go_left = None
   go_next = None
@@ -19,7 +25,11 @@
   go_up = None
   group_all = None
   group_tab = None
+  help = None
   hide_window = None
+  insert_number = None
+  insert_padded = None
+  layout_launcher = None
   move_tab_left = None
   move_tab_right = None
   new_tab = None
