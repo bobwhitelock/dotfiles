@@ -381,6 +381,11 @@
         <command>spotify</command>
       </action>
     </keybind>
+    <keybind key="W-n">
+      <action name="Execute">
+        <command>networkmanager_dmenu</command>
+      </action>
+    </keybind>
     <keybind key="C-A-s">
       <action name="Execute">
         <command>xfce4-settings-manager</command>
