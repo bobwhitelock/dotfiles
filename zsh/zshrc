@@ -7,7 +7,13 @@ source "$ZSH_DIR/env.sh"
 ZSH_THEME="bob"
 CASE_SENSITIVE="true" # Use case-sensitive completion.
 DISABLE_AUTO_UPDATE="true" # Don't nag about updates.
-plugins=(history-substring-search httpie rust tmuxinator vagrant)
+plugins=(\
+  history-substring-search \
+  httpie \
+  rust \
+  tmuxinator \
+  vagrant \
+  )
 export ZSH=$DOTFILES/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 unalias -m '*' # Get rid of Oh my Zsh aliases polluting shell.
