@@ -330,6 +330,9 @@ augroup autocmds
   " Metalware repo files can contain embedded ERB.
   autocmd BufNewFile,BufRead **/config/*.yaml,*/default,files/** if &filetype !~ '.eruby'| set filetype+=.eruby | endif
 
+  " Tmuxinator configs can contain embedded ERB.
+  autocmd BufNewFile,BufRead **/tmuxinator/*.yml set filetype=yaml.eruby
+
   " Always want spellcheck for text files.
   autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst setlocal spell
   autocmd FileType gitcommit setlocal spell

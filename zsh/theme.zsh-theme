@@ -5,10 +5,14 @@
 local ret_status="%(?:%{$fg_bold[green]%}$ :%{$fg_bold[red]%}$ )"
 # shellcheck disable=SC2016
 
+short_path() {
+    shrink_path --last --nameddirs
+}
+
 if [ -n "$SIMPLE_PROMPT" ]; then
     PROMPT='${ret_status}%{$reset_color%}'
 else
-    PROMPT='%{$fg[cyan]%}[%T]%{$reset_color%} %{$fg[blue]%}%~%{$reset_color%} $(git_prompt_info)${ret_status}%{$reset_color%}'
+    PROMPT='%{$fg[cyan]%}[%T]%{$reset_color%} %{$fg[blue]%}$(short_path)%{$reset_color%} $(git_prompt_info)${ret_status}%{$reset_color%}'
 fi
 
 # shellcheck disable=SC2034

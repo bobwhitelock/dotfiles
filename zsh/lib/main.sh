@@ -6,9 +6,14 @@ alias pyserver="python2 -m SimpleHTTPServer"
 alias grip="grip --browser"
 alias rerun="rerun --pattern '**/*' --no-notify"
 alias diff='vimdiff'
-alias m='make'
 alias sls='AWS_CLIENT_TIMEOUT=600000 serverless --aws-profile personal'
 alias ipinfo='curl ipinfo.io | jq .'
+alias etc='sudo etckeeper vcs'
+
+alias m='make'
+alias p='sudo pacman'
+alias v='vim'
+alias y='yaourt'
 
 # rsync="rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git"
 rsync="rsync -r --copy-links --delete --perms --human-readable --progress"
@@ -44,12 +49,6 @@ xrandr_off() {
     done
     conkywonky
 }
-
-# Let Vim interpret keys which would be interpreted by the terminal otherwise
-# (see http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files).
-alias vim="stty stop '' -ixoff ; vim"
-alias v='vim'
-ttyctl -f
 
 # Ease transition between shell and vim.
 alias :q="exit"
@@ -108,8 +107,10 @@ yaml_to_json() {
 RUBY
 }
 
-alias sshaddbob='ssh-add ~/.ssh/id_rsa.bob'
-alias sshaddaws='ssh-add ~/.ssh/aws_ireland.pem'
+alias sshstart='eval "$(ssh-agent -s)"'
+
+alias sshaddbob='sshstart && ssh-add ~/.ssh/id_rsa.bob'
+alias sshaddaws='sshstart && ssh-add ~/.ssh/aws_ireland.pem'
 
 ssh_remove_last_key() {
     ssh-keygen \

@@ -16,17 +16,23 @@
     ~/.psqlrc: psqlrc
     ~/.sqliterc: sqliterc
     ~/.zshrc: zsh/zshrc
-    $DOTFILES/oh-my-zsh/custom/themes/bob.zsh-theme: zsh/theme.zsh-theme
+    $DOTFILES/oh-my-zsh/custom/themes/bob.zsh-theme:
+      path: zsh/theme.zsh-theme
+      create: true
     ~/.xsessionrc: xsessionrc
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator:
         path: tmuxinator/
         create: true
-    ~/bin:
-        path: bin/
+    ~/bin/:
+        path: bin/*
+        glob: true
         create: true
-    ~/.config/openbox:
-        path: config/openbox/
+    ~/.config/openbox/rc.xml:
+        path: config/openbox/rc.xml
+        create: true
+    ~/.config/polybar/master.conf:
+        path: config/polybar/master.conf
         create: true
     ~/.config/terminator:
         path: config/terminator
@@ -39,7 +45,4 @@
         create: true
     ~/.tmux/plugins:
         path: tmux/plugins
-        create: true
-    ~/.themes:
-        path: themes
         create: true

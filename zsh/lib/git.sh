@@ -66,7 +66,7 @@ alias glogf="git log \
     --abbrev-commit \
     --date=relative"
 alias glogall='glogf --all'
-alias glog='glogf | head -n 25'
+alias glog='glogf --color=always | head -n 25'
 
 alias gbi='git bisect'
 alias gbis='gbi start'

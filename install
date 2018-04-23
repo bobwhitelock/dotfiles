@@ -18,3 +18,5 @@ git submodule update --init --recursive
 if [ ! -f zsh/env.private.sh ]; then
     cp zsh/env.private.{example.,}sh
 fi
+
+mkdir -p vim/{session,undodir,view}

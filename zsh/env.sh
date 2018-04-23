@@ -12,10 +12,6 @@ export VISUAL="vim"
 export PAGER="less"
 export LESS="-K"
 
-# Apparently required for `hub` to use correct version of `vim` when opening
-# editor (see https://github.com/github/hub/issues/1675).
-export GIT_EDITOR=/usr/local/bin/vim
-
 # Let git find repos split across filesystems.
 export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
@@ -34,9 +30,10 @@ fi
 export HISTSIZE=999999999
 export SAVEHIST=$HISTSIZE
 
-export PROJECTS="$HOME/projects"
-export ALCES_PROJECTS="$PROJECTS/alces"
-export OTHER_PROJECTS="$PROJECTS/other"
+export SRC="$HOME/src"
+export BOB="$SRC/bobwhitelock"
+export NOTES="$BOB/life"
+export ALCES="$SRC/alces-software"
 
 export GITHUB_USER='bobwhitelock'
 
@@ -62,5 +59,5 @@ export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
-# Load private environment variables.
-source "$ZSH_DIR/env.private.sh"
+# Load private environment variables if present.
+source "$ZSH_DIR/env.private.sh" 2> /dev/null

@@ -1,5 +1,5 @@
 
-export DOTFILES="$HOME/.dotfiles"
+export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
 export ZSH_DIR="$DOTFILES/zsh"
 source "$ZSH_DIR/env.sh"
 
@@ -7,7 +7,17 @@ source "$ZSH_DIR/env.sh"
 ZSH_THEME="bob"
 CASE_SENSITIVE="true" # Use case-sensitive completion.
 DISABLE_AUTO_UPDATE="true" # Don't nag about updates.
-plugins=(history-substring-search httpie rust tmuxinator vagrant)
+plugins=(\
+  aws \
+  bundler \
+  history-substring-search \
+  httpie \
+  rust \
+  shrink-path \
+  tmuxinator \
+  vagrant \
+  yarn \
+  )
 export ZSH=$DOTFILES/oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 unalias -m '*' # Get rid of Oh my Zsh aliases polluting shell.
@@ -51,6 +61,11 @@ bindkey '^Z' fancy-ctrl-z
 bindkey '^B' backward-word
 bindkey '^F' forward-word
 
+# Let Vim interpret keys which would be interpreted by the terminal otherwise
+# (see http://vim.wikia.com/wiki/Map_Ctrl-S_to_save_current_or_new_files).
+stty stop '' -ixoff
+ttyctl -f
+
 source "$ZSH_LIB/main.sh"
 source-libs
 
@@ -64,7 +79,7 @@ autoload -U compinit && compinit
 # unset ASH_CFG_MOTD # Don't show message at shell start.
 
 # Enable thefuck.
-eval "$(thefuck --alias)"
+command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
 
 export NVM_DIR="/home/bob/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -80,11 +95,11 @@ source "$ZSH_DIR/packages.sh"
 source "$ZSH_DIR/env.sh"
 
 # Enable Pyenv.
-eval "$(pyenv init -)"
+command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
 
 # Enable Rbenv.
 # XXX or could use omz plugin, for this and pyenv
-eval "$(rbenv init -)"
+command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 
 # OPAM configuration
 . /home/bob/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
