@@ -68,6 +68,7 @@
     background_darkness = 0.98
     background_type = transparent
     color_scheme = custom
+    cursor_blink = False
     cursor_color = "#d8d8d8"
     custom_command = TERM=xterm-256color tmux
     font = DejaVu Sans Mono 10
@@ -80,12 +81,14 @@
     use_custom_command = True
     use_system_font = False
   [[secondary]]
+    allow_bold = False
     background_darkness = 0.98
     background_type = transparent
     color_scheme = custom
+    cursor_blink = False
     cursor_color = "#d8d8d8"
     custom_command = unset TMUX; TERM=xterm-256color tmux new-session -s secondary
-    font = DejaVu Sans Mono for Powerline 11
+    font = DejaVu Sans Mono 15
     foreground_color = "#ffffff"
     login_shell = True
     palette = "#000000:#cd0000:#00cd00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#e5e5e5:#4c4c4c:#ff0000:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"
