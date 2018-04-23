@@ -31,6 +31,9 @@
     ~/.config/openbox/rc.xml:
         path: config/openbox/rc.xml
         create: true
+    ~/.config/polybar/master.conf:
+        path: config/polybar/master.conf
+        create: true
     ~/.config/terminator:
         path: config/terminator
         create: true
