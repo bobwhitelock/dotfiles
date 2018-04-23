@@ -13,6 +13,7 @@ plugins=(\
   history-substring-search \
   httpie \
   rust \
+  shrink-path \
   tmuxinator \
   vagrant \
   yarn \
