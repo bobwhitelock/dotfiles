@@ -30,7 +30,7 @@
 	delete-submodule = delete-submodule
 	delete-remote = push origin --delete
 	longest = longest
-	cloc = cloc
+	cloc = "!cloc --vcs=git"
 	cloc-children = cloc-children
 	own-files = own-files
 	ctags = !.git/hooks/ctags

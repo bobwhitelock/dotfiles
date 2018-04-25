@@ -179,6 +179,8 @@ Plug 'rhysd/devdocs.vim'
 " nmap <C-a> <Plug>(trip-increment)
 " nmap <C-x> <Plug>(trip-decrement)
 
+Plug 'bobwhitelock/vim-lumberjack'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'

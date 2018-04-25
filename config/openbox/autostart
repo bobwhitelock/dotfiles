@@ -7,11 +7,10 @@ al-compositor --start &
 # restore wallpaper
 nitrogen --restore &
 
-# start panel
-sleep 1; al-tint2-session &
+# Start Polybar
+# al-polybar-session &
 
-# system tray
-sleep 1; trayer --edge bottom --align left --widthtype request --SetDockType false --expand true &
+xrandr-laptop-single
 
 # Openbox autostart
 ob-autostart -d &
@@ -25,3 +24,4 @@ xfsettingsd &
 # Side shortcuts for file managers
 xdg-user-dirs-gtk-update &
 
+remap_caps
