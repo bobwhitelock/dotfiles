@@ -1,0 +1,27 @@
+# compton
+al-compositor --start &
+
+# enable numlock, commented out for laptop users
+# numlockx &
+
+# restore wallpaper
+nitrogen --restore &
+
+# start panel
+sleep 1; al-tint2-session &
+
+# system tray
+sleep 1; trayer --edge bottom --align left --widthtype request --SetDockType false --expand true &
+
+# Openbox autostart
+ob-autostart -d &
+
+# PolicyKit authentication
+lxpolkit &
+
+# Required for xfce settings to work
+xfsettingsd &
+
+# Side shortcuts for file managers
+xdg-user-dirs-gtk-update &
+

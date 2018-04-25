@@ -28,8 +28,9 @@
         path: bin/*
         glob: true
         create: true
-    ~/.config/openbox/rc.xml:
-        path: config/openbox/rc.xml
+    ~/.config/openbox/:
+        path: config/openbox/*
+        glob: true
         create: true
     ~/.config/polybar/master.conf:
         path: config/polybar/master.conf
