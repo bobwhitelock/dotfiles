@@ -1,4 +1,8 @@
 
+" Count '@' and '?' as part of a word (don't include '!' to avoid considering
+" the whole of `!condition` as one word).
+setlocal iskeyword+=@-@,?
+
 " Add common RSpec `shared_examples` dir to path.
 set path+=spec/shared_examples
 
