@@ -22,6 +22,9 @@ Plug 'tpope/vim-eunuch'
 " Git command helpers (:G*)
 Plug 'tpope/vim-fugitive'
 
+" GitHub :Gbrowse handling for the above.
+Plug 'tpope/vim-rhubarb'
+
 " Various paired bracket mappings.
 Plug 'tpope/vim-unimpaired'
 
