@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 
 xrandr \
     --output DP2 --off \
@@ -9,3 +11,5 @@ xrandr \
     --output eDP1 --mode 1920x1080 --pos 0x0 --rotate normal \
     --output VGA1 --mode 1440x900 --pos 3840x180 --rotate normal \
     && conkywonky
+
+al-polybar-session &
