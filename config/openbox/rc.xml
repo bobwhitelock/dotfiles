@@ -386,7 +386,12 @@
         <command>networkmanager_dmenu</command>
       </action>
     </keybind>
-    <keybind key="C-A-s">
+    <keybind key="W-h">
+      <action name="Execute">
+        <command>/usr/lib/gpaste/gpaste-ui</command>
+      </action>
+    </keybind>
+    <keybind key="W-x">
       <action name="Execute">
         <command>xfce4-settings-manager</command>
       </action>
