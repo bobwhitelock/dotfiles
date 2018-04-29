@@ -1,5 +1,5 @@
 
-- clean: ['~']
+- clean: ['~', '~/bin']
 
 - link:
     ~/.ctags: ctags
