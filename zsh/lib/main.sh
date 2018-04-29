@@ -11,7 +11,8 @@ alias ipinfo='curl ipinfo.io | jq .'
 alias etc='sudo etckeeper vcs'
 
 alias m='make'
-alias p='sudo pacman'
+alias pacman='sudo pacman'
+alias p='pacman'
 alias v='vim'
 alias y='yaourt'
 
@@ -107,10 +108,8 @@ yaml_to_json() {
 RUBY
 }
 
-alias sshstart='eval "$(ssh-agent -s)"'
-
-alias sshaddbob='sshstart && ssh-add ~/.ssh/id_rsa.bob'
-alias sshaddaws='sshstart && ssh-add ~/.ssh/aws_ireland.pem'
+alias sshaddbob='ssh-add ~/.ssh/id_rsa.bob'
+alias sshaddaws='ssh-add ~/.ssh/aws_ireland.pem'
 
 ssh_remove_last_key() {
     ssh-keygen \
@@ -145,3 +144,6 @@ scratch() {
 echoerr() {
     echo "$@" >&2
 }
+
+alias urlencode='ruby -r cgi -e "puts CGI.escape(ARGV[0])"'
+alias urldecode='ruby -r cgi -e "puts CGI.unescape(ARGV[0])"'

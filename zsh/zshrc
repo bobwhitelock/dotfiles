@@ -78,6 +78,14 @@ autoload -U compinit && compinit
 # source /usr/lib/advanced_shell_history/zsh
 # unset ASH_CFG_MOTD # Don't show message at shell start.
 
+# Start ssh-agent and share this between shells. From
+# https://unix.stackexchange.com/a/217223/229081.
+if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+  eval `ssh-agent`
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+fi
+export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+
 # Enable thefuck.
 command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
 

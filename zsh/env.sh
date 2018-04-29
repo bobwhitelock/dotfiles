@@ -60,4 +60,5 @@ export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 # Load private environment variables if present.
+# shellcheck disable=SC1090
 source "$ZSH_DIR/env.private.sh" 2> /dev/null
