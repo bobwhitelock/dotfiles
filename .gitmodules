@@ -22,3 +22,6 @@
 [submodule "zsh/packages/elm-bash-completion"]
 	path = zsh/packages/elm-bash-completion
 	url = https://github.com/eeue56/elm-bash-completion.git
+[submodule "fzf-scripts"]
+	path = fzf-scripts
+	url = https://github.com/DanielFGray/fzf-scripts
