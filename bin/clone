@@ -1,0 +1,32 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Clone a GitHub repo into standard directory structure, then create Tmux
+# window for new repo.
+
+main() {
+    local repo_identifier owner name repo owner_path
+
+    # Can be URL or just `owner/name`.
+    repo_identifier="$1"
+
+    owner="$(basename "$(dirname "$repo_identifier")")"
+    name="$(basename "$repo_identifier")"
+
+    # Standardize repo name so `hub` can figure out method should use to clone;
+    # avoids being unnecessarily prompted for password.
+    repo="$owner/$name"
+
+    owner_path="$SRC/$owner"
+    mkdir -p "$owner_path"
+    cd "$owner_path"
+
+    hub clone "$repo" || true
+
+    # shellcheck disable=SC1090
+    source "$ZSH_LIB/tmux.sh"
+    add-window "$name"
+}
+
+main "$@"
