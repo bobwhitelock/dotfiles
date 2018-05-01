@@ -22,7 +22,9 @@ main() {
     mkdir -p "$owner_path"
     cd "$owner_path"
 
-    hub clone "$repo" || true
+    if [ ! -d "$name" ]; then
+        hub clone "$repo"
+    fi
 
     # shellcheck disable=SC1090
     source "$ZSH_LIB/tmux.sh"
