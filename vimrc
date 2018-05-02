@@ -212,6 +212,7 @@ Plug 'killphi/vim-ruby-refactoring'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
+Plug 'dbeniamine/todo.txt-vim'
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
@@ -540,6 +541,10 @@ let g:ycm_filetype_blacklist = {
       \ 'unite' : 1,
       \ 'vimwiki' : 1,
       \}
+
+let g:ycm_semantic_triggers = {
+    \   'todo': [ '@', '+' ],
+    \ }
 
 let g:autopep8_disable_show_diff=1
 
