@@ -31,7 +31,7 @@ def main():
         os.rename(args.file, destination_path)
         os.symlink(destination_path, args.file)
     else:
-        sys.exit("drop: destination_path '{}'' already exists".format(destination_path))
+        sys.exit("drop: destination_path '{}' already exists".format(destination_path))
 
 
 if __name__ == '__main__':
