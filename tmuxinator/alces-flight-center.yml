@@ -1,7 +1,7 @@
 
 name: alces-flight-center
-root: ~/
-on_project_start: sudo systemctl start postgresql
+root: <%= ENV['ALCES'] %>/alces-flight-center
+on_project_start: sudo systemctl start postgresql docker && sudo bin/start-docker-redis.sh
 startup_window: alces-flight-center
 
 windows:
@@ -14,7 +14,6 @@ windows:
 
   - alces-flight-center:
       layout: 'df8f,274x67,0,0{137x67,0,0[137x23,0,0,1,137x22,0,24,4,137x20,0,47,5],136x67,138,0,6}'
-      root: <%= ENV['ALCES'] %>/alces-flight-center
       panes:
         - rails server
         - bin/webpack-dev-server
