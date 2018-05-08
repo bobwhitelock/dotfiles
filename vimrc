@@ -317,6 +317,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead *cloud.cfg set filetype=yaml
   autocmd BufNewFile,BufRead .prettierrc set filetype=yaml
   autocmd BufNewFile,BufRead *.mm set filetype=xml
+  autocmd BufNewFile,BufRead *.todo set filetype=todo
 
   " oh-my-zsh themes are shell.
   autocmd BufNewFile,BufRead *.zsh-theme set filetype=sh
@@ -338,7 +339,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead **/tmuxinator/*.yml set filetype=yaml.eruby
 
   " Always want spellcheck for text files.
-  autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst setlocal spell
+  autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst,*.todo setlocal spell
   autocmd FileType gitcommit setlocal spell
 
   " Open quickfix window after any grep.
