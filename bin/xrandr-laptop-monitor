@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 
 xrandr \
     --output DP1 --mode 1920x1080 --pos 0x0 --rotate normal \
@@ -7,3 +9,5 @@ xrandr \
     --output HDMI2 --off \
     --output VIRTUAL1 --off \
     --output eDP1 --off
+
+al-polybar-session &
