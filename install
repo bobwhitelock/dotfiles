@@ -10,7 +10,7 @@ main() {
     cd "${BASEDIR}"
 
     header 'Installing dependencies'
-    git submodule update --init --recursive
+    install_dependencies
 
     header 'Installing dotfiles'
     faketty "$DOTBOT" -d "${BASEDIR}" -c "${CONFIG}" "${@}" | indent
@@ -24,6 +24,44 @@ main() {
 
     header 'Setting up Vim'
     mkdir -p vim/{session,undodir,view}
+    vim +':PlugInstall | :qa!'
+
+    header 'Setting up Tmux'
+    ~/.tmux/plugins/tpm/bin/install_plugins
+
+    header 'Linking other needed files'
+    link_files
+}
+
+install_dependencies() {
+    local package_manager
+
+    git submodule update --init --recursive
+
+    for package_manager in pacman yaourt; do
+        xargs sudo "$package_manager" -S --noconfirm --needed < dependencies/"$package_manager"
+    done
+
+    yarn global add elm elm-format@exp create-elm-app
+}
+
+link_files() {
+    # XXX Move doing all this into `install.conf.yaml`?
+
+    set +u
+    # shellcheck disable=SC1091
+    source 'zsh/env.sh'
+    set -u
+
+    ln -sf "$DROP"/.aws ~/.aws
+    ln -sf "$DROP"/.ssh/ ~/.ssh
+    ln -sf "$DROP"/vim/spell/ ~/.vim/spell
+
+    mkdir -p ~/.todo/
+    ln -sf "$NOTES"/todo/done.txt ~/.todo
+    ln -sf "$NOTES"/todo/todo.txt ~/.todo
+    ln -sf "$NOTES"/todo/report.txt ~/.todo
+    ln -sf zsh/todotxt.sh ~/.todo/config
 }
 
 header() {
