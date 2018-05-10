@@ -38,9 +38,6 @@
     ~/.config/terminator:
         path: config/terminator
         create: true
-    ~/.config/tint2:
-        path: config/tint2/
-        create: true
     ~/.config/htop:
         path: config/htop
         create: true
