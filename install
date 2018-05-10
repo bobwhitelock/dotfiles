@@ -13,7 +13,7 @@ main() {
     install_dependencies
 
     header 'Installing dotfiles'
-    faketty "$DOTBOT" -d "${BASEDIR}" -c "${CONFIG}" "${@}" | indent
+    bin/faketty "$DOTBOT" -d "${BASEDIR}" -c "${CONFIG}" "${@}" | indent
 
     # Copy example private environment variable file (if needed), so these can be
     # set but not committed.
@@ -73,11 +73,6 @@ header() {
 
 indent() {
     sed 's/^/       /'
-}
-
-# Adapted from https://stackoverflow.com/a/20401674/2620402.
-faketty() {
-    script --quiet --flush --return --command "$(printf "%q " "$@")" /dev/null
 }
 
 main "$@"

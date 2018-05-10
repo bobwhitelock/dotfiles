@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Adapted from https://stackoverflow.com/a/20401674/2620402.
+script --quiet --flush --return --command "$(printf "%q " "$@")" /dev/null
