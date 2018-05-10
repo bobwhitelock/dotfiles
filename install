@@ -1,22 +1,45 @@
-#!/usr/bin/env bash
-
-set -e
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
 
 CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
-
-DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTBOT="$BASEDIR/dotbot/bin/dotbot"
 
-cd "${BASEDIR}"
-git submodule update --init --recursive
+main() {
+    cd "${BASEDIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+    header 'Installing dependencies'
+    git submodule update --init --recursive
 
-# Copy example private environment variable file (if needed), so these can be
-# set but not committed.
-if [ ! -f zsh/env.private.sh ]; then
-    cp zsh/env.private.{example.,}sh
-fi
+    header 'Installing dotfiles'
+    faketty "$DOTBOT" -d "${BASEDIR}" -c "${CONFIG}" "${@}" | indent
 
-mkdir -p vim/{session,undodir,view}
+    # Copy example private environment variable file (if needed), so these can be
+    # set but not committed.
+    if [ ! -f zsh/env.private.sh ]; then
+        header 'Copying private environment variables file'
+        cp zsh/env.private.{example.,}sh
+    fi
+
+    header 'Setting up Vim'
+    mkdir -p vim/{session,undodir,view}
+}
+
+header() {
+    echo
+    # shellcheck disable=SC2001
+    echo "$@" | sed 's/^/======> /'
+    echo
+}
+
+indent() {
+    sed 's/^/       /'
+}
+
+# Adapted from https://stackoverflow.com/a/20401674/2620402.
+faketty() {
+    script --quiet --flush --return --command "$(printf "%q " "$@")" /dev/null
+}
+
+main "$@"
