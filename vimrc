@@ -182,6 +182,8 @@ Plug 'rhysd/devdocs.vim'
 " nmap <C-a> <Plug>(trip-increment)
 " nmap <C-x> <Plug>(trip-decrement)
 
+Plug 'bobwhitelock/vim-lumberjack'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
@@ -742,6 +744,9 @@ nnoremap <leader>n :new<CR><C-w>p:q<CR><C-w>p
 noremap <leader>h :wincmd s<CR>
 noremap <leader>v :wincmd v<CR>
 
+" Zoom split.
+nnoremap <C-w>z :wincmd <bar><CR>:wincmd _<CR>
+
 " C-arrow for resizing windows.
 " TODO: stopped working.
 noremap <C-Up> :wincmd +<CR>
@@ -790,6 +795,7 @@ nnoremap <leader>gR :Gread<CR>
 nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
 
 nnoremap <leader>G :Ggrep!<space>
+nnoremap <leader>I :Ggrep! -i<space>
 
 let g:gitgutter_map_keys = 0
 nmap <leader>gs <Plug>GitGutterStageHunk

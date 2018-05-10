@@ -16,8 +16,9 @@ command! -buffer ImportJsonDecode call s:import_as('Json.Decode', 'D')
 
 " TODO for these functions:
 " - Handle things like `ImportType Tier.Level` correctly (should give `import
-"   Tier.Level exposing (Level)` )
+"   Tier.Level exposing (Level)`)
 " - Add similar functions for module exports (`exposing`)?
+" - Handle importing visual selection
 
 function! s:import(...)
   if empty(a:000)

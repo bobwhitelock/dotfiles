@@ -1,4 +1,6 @@
 
+setlocal iskeyword+=$
+
 " Open the ShellCheck wiki page for the error detected on the current line, as
 " reported by Syntastic.
 function! ShowShellcheckWikiPage()
