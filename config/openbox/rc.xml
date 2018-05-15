@@ -396,6 +396,11 @@
         <command>xfce4-settings-manager</command>
       </action>
     </keybind>
+    <keybind key="W-b">
+      <action name="Execute">
+        <command>blueman-manager</command>
+      </action>
+    </keybind>
     <keybind key="W-Tab">
       <action name="ShowMenu">
         <menu>client-list-combined-menu</menu>
