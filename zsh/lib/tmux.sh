@@ -1,7 +1,7 @@
 
 alias mux="tmuxinator"
-alias dot="add-window \$DOTFILES"
-alias dotr="replace-window \$DOTFILES"
+alias dots="add-window \$DOTFILES"
+alias dotsr="replace-window \$DOTFILES"
 alias notes="add-window \$NOTES"
 alias notesr="replace-window \$NOTES"
 

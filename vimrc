@@ -939,6 +939,7 @@ nnoremap <leader>el :Elayout<space>
 nnoremap <leader>em :Emodel<space>
 nnoremap <leader>es :Espec<space>
 nnoremap <leader>ev :Eview<space>
+nnoremap <leader>ea :A<CR>
 
 " Attempt to fix typo immediately after typing word, and then jump back into
 " insert mode in original position.
