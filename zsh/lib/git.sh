@@ -10,6 +10,7 @@ alias gcp='git cherry-pick'
 alias gm='git merge'
 
 alias ga='git add'
+alias gan='ga --intent-to-add'
 alias gap='ga -p'
 
 alias gp='git push'

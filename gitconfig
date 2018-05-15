@@ -13,7 +13,8 @@
 	helper = cache --timeout=3600
 
 [alias]
-	amend = commit --amend -C HEAD
+	amend = commit --verbose --amend -C HEAD
+	amend-and-edit = commit --verbose --amend
 	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
@@ -21,7 +22,7 @@
 	snapshot = snapshot
 	clear-snapshots = clear-snapshots
 	revisions = log --oneline --follow --
-	revisions-full = log -p --follow --
+	history = log -p --follow --
 	add-deleted = ! git rm $(git ls-files --deleted)
 	tracked-files = ls-tree --full-tree -r HEAD
 	ls-revisions = ls-revisions
@@ -48,6 +49,7 @@
 	changes-since=changes-since
 	recover=recover
 	today = changes-since 12hours
+	run = "!run-command-on-git-revisions"
 
 [color]
 	ui = true
