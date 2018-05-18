@@ -22,6 +22,9 @@ xdg-user-dirs-gtk-update &
 # Start outputting to single laptop screen.
 sleep 1 && xrandr-laptop-single &
 
+# Start GPaste capturing clipboard changes.
+gpaste-client start
+
 remap_caps
 
 # vim:set ft=sh:
