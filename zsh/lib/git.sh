@@ -38,8 +38,8 @@ alias gcot='gco --track'
 
 alias gr='git reset'
 
-alias gcf=' git clean --force'
-alias gci=' git clean --interactive'
+alias gcf=' git clean -d --force'
+alias gci=' git clean -d --interactive'
 
 alias gsh='git show --pretty=fuller'
 alias gshs='gsh --shortstat'
