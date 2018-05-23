@@ -42,7 +42,7 @@ install_dependencies() {
         xargs sudo "$package_manager" -S --noconfirm --needed < dependencies/"$package_manager"
     done
 
-    yarn global add elm elm-format@exp create-elm-app elm-oracle
+    yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test
 }
 
 link_files() {
