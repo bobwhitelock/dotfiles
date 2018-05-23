@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Run `cloc` against all own files in repo (see `./git-own-files`). Basically
+# the same as `cloc --vcs=git`, except doesn't count submodules or symlinks to
+# other files (which can lead to files which aren't really part of the repo
+# being counted.)
+
 if [[ -e "$1" ]]; then
     dir_to_count="$1"
     shift
