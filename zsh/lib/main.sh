@@ -3,7 +3,7 @@
 alias treeall="command tree -C -a -I .git"
 alias tree="treeall --filelimit 50"
 alias pyserver="python2 -m SimpleHTTPServer"
-alias grip="grip --browser"
+alias grip="grip --browser --user \"\$GITHUB_USER\" --pass \"\$GITHUB_PASSWORD\""
 alias rerun="rerun --pattern '**/*' --no-notify"
 alias diff='vimdiff'
 alias sls='AWS_CLIENT_TIMEOUT=600000 serverless --aws-profile personal'
