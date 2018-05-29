@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# shellcheck disable=SC2016
+scrot "$@" \
+	--focused \
+	'%Y-%m-%d_%H:%M:%S.png' \
+	--exec 'mv $f $$(xdg-user-dir PICTURES) ; gpicview $$(xdg-user-dir PICTURES)/$f'

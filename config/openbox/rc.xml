@@ -413,12 +413,12 @@
     </keybind>
     <keybind key="Print">
       <action name="Execute">
-        <command>scrot '%Y-%m-%d-%S_$wx$h.png' -e 'mv $f $$(xdg-user-dir PICTURES) ; gpicview $$(xdg-user-dir PICTURES)/$f'</command>
+        <command>screenshot</command>
       </action>
     </keybind>
     <keybind key="A-Print">
       <action name="Execute">
-        <command>scrot -d 5 '%Y-%m-%d-%S_$wx$h.png' -e 'mv $f $$(xdg-user-dir PICTURES) ; gpicview $$(xdg-user-dir PICTURES)/$f'</command>
+        <command>screenshot --delay 5</command>
       </action>
     </keybind>
     <keybind key="W-o">
