@@ -24,7 +24,7 @@ main() {
 
     header 'Setting up Vim'
     mkdir -p vim/{session,undodir,view}
-    vim +':PlugInstall | :qa!'
+    vim +':PlugInstall | :PlugUpdate | :qa!'
 
     header 'Setting up Tmux'
     ~/.tmux/plugins/tpm/bin/install_plugins
