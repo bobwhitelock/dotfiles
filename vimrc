@@ -434,6 +434,12 @@ let g:mta_filetypes = {
     \ 'xml' : 1,
     \}
 
+" Disable unimpaired mappings which I don't want.
+let g:nremap = {
+  \ '[Q': '<Nop>',
+  \ ']Q': '<Nop>'
+  \}
+
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
 
 let g:markdown_fenced_languages = [
@@ -451,8 +457,6 @@ let g:markdown_fenced_languages = [
     \]
 let g:markdown_syntax_conceal = 0
 
-" TODO: looks like there's a way in the docs to run commands on session save
-" - could use to clean up old buffers?
 let g:startify_session_persistence = 1 " Save Session.vim on quit or new session load (if exists already).
 let g:startify_session_autoload = 1 " Autoload Session.vim on start, if it is present.
 let g:startify_change_to_vcs_root = 1 " Change to VCS root on file load.
@@ -479,9 +483,6 @@ let g:syntastic_vim_checkers = ['vint']
 
 let g:prettier#autoformat = 0
 
-" TODO: Suggested Syntastic settings, read manual and adjust if needed.
-
-" let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -618,11 +619,6 @@ command! RunCurrentFile execute 'Tmux ' expand('%:p')
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''
 
-" TODO:
-" - way to make this shrink as less results?
-" - adapt colours
-" let g:fzf_layout = { 'down': '~20%' }
-
 " Map Space to Leader; don't use `mapleader` so something shows in `showcmd`
 " corner.
 map <Space> <Leader>
@@ -669,7 +665,7 @@ endfunction
 " entering 'Ex' mode).
 nnoremap Q @q
 
-" Search with more magic. - TODO: overwritten on initial load by plugin?
+" Search with more magic.
 nnoremap / /\v
 nnoremap ? ?\v
 
@@ -687,11 +683,10 @@ nnoremap <leader>g/ :%s///gI<Left><Left><Left>
 xnoremap <leader>gc "zy:%s/<C-r>z//gcI<Left><Left><Left><Left>
 xnoremap <leader>gc "zy:%s/<C-r>z//gI<Left><Left><Left>
 
-" shift-tab indents left in insert mode.
-" TODO: some plugin seems to have broken this.
-inoremap <S-Tab> <C-o><<
+" Shift-tab to indent left in insert mode.
+inoremap <S-Tab> <C-d>
 
-" tab/shift-tab to indent/unindent in visual mode.
+" Tab/shift-tab to indent/unindent in visual mode.
 xnoremap <Tab> >gv
 xnoremap <S-Tab> <gv
 
@@ -722,13 +717,12 @@ nnoremap <leader>Q :copen<CR>
 nnoremap <leader>L :lopen<CR>
 
 " Move through quickfix list history.
-" TODO: Unimpaired clobbers.
 nnoremap <silent> [Q :colder<CR>
 nnoremap <silent> ]Q :cnewer<CR>
 
 " Reload files in all windows.
-" TODO go back to otiginal window afterwards
-" TODO do in other tabs?
+" TODO: go back to original window afterwards
+" TODO: do in other tabs?
 nnoremap <leader>re :windo edit!<CR>
 
 " Delete current buffer while preserving layout.
@@ -746,13 +740,6 @@ noremap <leader>v :wincmd v<CR>
 
 " Zoom split.
 nnoremap <C-w>z :wincmd <bar><CR>:wincmd _<CR>
-
-" C-arrow for resizing windows.
-" TODO: stopped working.
-noremap <C-Up> :wincmd +<CR>
-noremap <C-Down> :wincmd -<CR>
-noremap <C-Left> :wincmd <<CR>
-noremap <C-Right> :wincmd ><CR>
 
 " C-s to save in all modes.
 noremap <silent> <C-s> <Esc>:write<CR>
@@ -777,14 +764,9 @@ nnoremap <leader>tc :tabclose<CR>
 nnoremap <leader>t> :tabmove +<CR>
 nnoremap <leader>t< :tabmove -<CR>
 
-" Make directory relative to current file.
-" TODO: make this a command instead e.g. MkdirRelative.
-noremap <leader>mk :Mkdir <C-R>=expand("%:p:h") . "/" <CR>
-
 nnoremap <leader>rr :Rename <C-R>=expand('%:t')<CR>
 
 " Git mappings.
-" TODO: change to plug mappings?
 nnoremap gb :Gblame<CR>
 nnoremap gd :Gdiff<CR>
 nnoremap <leader>ge :Gedit<CR>
@@ -832,14 +814,13 @@ xnoremap <silent> gB :VSSplitBelow<CR>
 xnoremap <silent> SI :SyntaxInclude<space>
 
 " Maps for using system clipboard with <leader> instead of "+.
-" TODO: Make <leader>_ maps not pop up register window
 xnoremap <leader>d "+d
 xnoremap <leader>y "+y
 xnoremap <leader>p "+p
 xnoremap <leader>P "+P
-xmap <leader>Y "+Y
 xmap <leader>_ "+_
 nnoremap <leader>d "+d
+nnoremap <leader>D "+D
 nnoremap <leader>y "+y
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
@@ -856,11 +837,6 @@ nnoremap <leader>cf :let @+ = expand("%:t")<CR>:echo "copied filename!"<CR>
 " Paste above/below, justify, and return to original position.
 nnoremap <leader>A mzO<esc>p==`z
 nnoremap <leader>B mzo<esc>p==`z
-
-" Use X clipboard.
-" TODO: Have this switch back the other way to Vim clipboard too.
-" TODO: Does not work on initial load as unimpaired clobbers
-nnoremap cox :set clipboard=unnamedplus<CR>
 
 " Make J not shift cursor position.
 nnoremap J mzJ`z
