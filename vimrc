@@ -564,9 +564,21 @@ let g:UltiSnipsJumpForwardTrigger='<C-d>'
 let g:UltiSnipsJumpBackwardTrigger='<C-u>'
 nnoremap <leader>ue :UltiSnipsEdit<CR>
 
-" TODO:
-" - Show things in quickfix list?
-let test#strategy = 'tslime'
+" Custom vim-test strategy; identical to `tslime` strategy except caches
+" results for loading into QuickFix window using `Failures` command below (so
+" can quickly jump between failures).
+function! TslimeAndCacheStrategy(cmd)
+  " TODO: Need to create new temp file each time? Should remove old temp file?
+  let s:output_file = trim(system('mktemp'))
+  let l:test_command = 'faketty '.a:cmd.' | tee >(stripcolours > '.s:output_file.')'
+  call test#strategy#tslime(l:test_command)
+endfunction
+
+let g:test#custom_strategies = {'tslime_and_cache': function('TslimeAndCacheStrategy')}
+let test#strategy = 'tslime_and_cache'
+
+command! Failures cexpr readfile(s:output_file)
+nnoremap <leader>tF :Failures<CR>
 
 " Extra option when running suite tests is specific to Alces Metalware, but
 " shouldn't hurt in most other cases.
