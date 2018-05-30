@@ -248,8 +248,11 @@ colorscheme molokai
 set cursorline " Highlight current line.
 
 " Highlight settings.
-highlight Search ctermfg=black
 highlight Visual ctermfg=233 ctermbg=67 guifg=#1b1d1e guibg=#465457
+
+set hlsearch
+highlight clear Search
+highlight Search gui=underline cterm=underline
 
 set number " Show current line number.
 set numberwidth=8 " Spacing always given to these numbers.
