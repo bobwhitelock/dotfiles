@@ -69,3 +69,5 @@
 	templatedir = ~/.git_template
 [rerere]
 	enabled = 1
+[url "git@github.com:"]
+	insteadOf = https://github.com/

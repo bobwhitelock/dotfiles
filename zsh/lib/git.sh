@@ -10,6 +10,10 @@ alias gcp='git cherry-pick'
 alias gm='git merge'
 
 alias ga='git add'
+# gap() {
+#     # XXX when no args passed gives warning
+#     ga --intent-to-add "$@" && ga --patch "$@"
+# }
 alias gan='ga --intent-to-add'
 alias gap='ga -p'
 
@@ -34,7 +38,12 @@ alias gcm='gc -m'
 alias gca='gc --all'
 
 alias gco='git checkout'
+# XXX how to make this just check the branch out if already exists
 alias gcot='gco --track'
+# gcot() {
+#     gco --track "$@" || gco "$@"
+# }
+# compdef '_git-checkout' gcot
 
 alias gr='git reset'
 
@@ -60,6 +69,9 @@ alias groot='cd "$(git rev-parse --show-toplevel)"'
 # commits.
 # TODO set `g:fzf_layout` here so this fills screen?
 alias gf='vim +Commits'
+
+# XXX
+# --pretty=format:'%Cred%h%Creset %an, %Cgreen%ar%Creset: %s%C(yellow)%d%Creset (%cn, %Cgray%cr%Creset)' \
 
 alias glogf="git log \
     --graph \
@@ -88,3 +100,8 @@ alias grei6='grei HEAD~6'
 alias grei7='grei HEAD~7'
 alias grei8='grei HEAD~8'
 alias grei9='grei HEAD~9'
+
+# XXX this works, but not for git alias version
+# compdef '_git-branch' 'git-delete-branch'
+
+# __git_complete git-delete-branch _git-branch

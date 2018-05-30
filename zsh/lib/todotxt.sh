@@ -14,3 +14,13 @@ alias trm='t del'
 alias tprojects='t listproj'
 alias tcontexts='t listcon'
 alias inbox='t addto inbox.todo'
+
+review() {
+    ta "Review https://github.com/alces-software/alces-flight-center/pull/$1" +flight-center @work
+}
+
+# tcenter() {
+#     ta "$* +flight-center @work"
+# }
+# XXX Doesn't work
+# compdef '_todo.sh add' 'tcenter'

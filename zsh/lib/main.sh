@@ -8,7 +8,10 @@ alias rerun="rerun --pattern '**/*' --no-notify"
 alias diff='vimdiff'
 alias sls='AWS_CLIENT_TIMEOUT=600000 serverless --aws-profile personal'
 alias ipinfo='curl ipinfo.io | jq .'
+
 alias etc='sudo etckeeper vcs'
+# XXX Doesn't work?
+compdef '_git' 'etc'
 
 alias m='make'
 alias pacman='sudo pacman'
@@ -143,6 +146,12 @@ scratch() {
 # Echo to stderr.
 echoerr() {
     echo "$@" >&2
+}
+
+unwindows() {
+    local file
+    file="$1"
+    tr -d '\15\32' < "$file" | sponge "$file"
 }
 
 alias urlencode='ruby -r cgi -e "puts CGI.escape(ARGV[0])"'

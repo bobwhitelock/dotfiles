@@ -19,3 +19,12 @@ alias rakeall='raket -A'
 r() {
     ruby -e "p $*"
 }
+
+# Open a console
+# rc() {
+#     if [ -e bin/rails ]; then
+#         bin/rail console
+#     else
+#         pry
+#     fi
+# }

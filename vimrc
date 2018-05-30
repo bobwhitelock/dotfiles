@@ -41,6 +41,8 @@ Plug 'tpope/vim-rsi'
 "   case (cr<space>), and Title Case (crt).
 Plug 'tpope/vim-abolish'
 
+Plug 'tpope/vim-dispatch'
+
 " Show git changes in gutter.
 Plug 'airblade/vim-gitgutter'
 
@@ -841,6 +843,7 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nmap <leader>_ "+_
 nmap <leader>Y "+Y
+" XXX sort these?
 
 " Move last thing yanked to system clipboard.
 nnoremap <leader>cc :let @+=@"<cr>:echo "copied!"<cr>
