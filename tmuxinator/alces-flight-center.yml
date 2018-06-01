@@ -1,7 +1,11 @@
 
 name: alces-flight-center
 root: <%= ENV['ALCES'] %>/alces-flight-center
-on_project_start: sudo systemctl start postgresql docker && sudo bin/start-docker-redis.sh
+on_project_start:
+  sudo systemctl start postgresql docker &&
+  xdg-open http://center.alces-flight.lvh.me:3000/ &&
+  sudo bin/start-docker-redis.sh # Fails if container already started, so don't
+  # put anything after it.
 startup_window: alces-flight-center
 
 windows:
