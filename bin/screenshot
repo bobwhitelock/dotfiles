@@ -6,4 +6,4 @@ IFS=$'\n\t'
 scrot "$@" \
 	--focused \
 	'%Y-%m-%d_%H:%M:%S.png' \
-	--exec 'mv $f $$(xdg-user-dir PICTURES) ; gpicview $$(xdg-user-dir PICTURES)/$f'
+	--exec 'mv $f $$(xdg-user-dir PICTURES) ; gthumb $$(xdg-user-dir PICTURES)/$f'

@@ -4,6 +4,7 @@ cmake
 ctags
 etckeeper
 gpaste
+gthumb
 httpie
 hub
 jq
