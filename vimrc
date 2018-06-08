@@ -725,6 +725,7 @@ nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fC :BCommits<CR>
 nnoremap <leader>ff :Filetypes<CR>
 nnoremap <leader>fs :Snippets<CR>
+nnoremap <leader>fr :History<CR>
 
 " Quick close/open of special windows.
 nnoremap <leader>q :cclose \| lclose \| pclose<CR>
