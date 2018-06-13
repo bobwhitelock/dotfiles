@@ -184,6 +184,10 @@ Plug 'rhysd/devdocs.vim'
 
 Plug 'bobwhitelock/vim-lumberjack'
 
+" Slightly better `:%s/<cword>/foo/gc` - starts at current word and can scope
+" to visual selection.
+Plug 'wincent/scalpel'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
@@ -600,6 +604,9 @@ nnoremap <silent> <CR> :call TmuxInterruptAndRun('TestLast')<CR>
 
 " Run a command in the Tmux pane, sending an interrupt first.
 function! TmuxInterruptAndRun(command)
+  " Interrupt twice to also send interrupt to e.g. RSpec's graceful interrupt
+  " handling.
+  TmuxInterrupt
   TmuxInterrupt
   execute a:command
 endfunction
@@ -686,7 +693,7 @@ nnoremap ? ?\v
 
 " Quick find and replace in file of current word with a new string, with and
 " without confirmation respectively.
-nnoremap <leader>gc :%s/\<<C-r><C-w>\>//gcI<Left><Left><Left><Left>
+nnoremap <Leader>gc :Scalpel/\<<C-r><C-w>\>//<Left>
 nnoremap <leader>gg :%s/\<<C-r><C-w>\>//gI<Left><Left><Left>
 
 " Similarly, quick find and replace of last search.
