@@ -447,6 +447,10 @@ let g:nremap = {
   \ ']Q': '<Nop>'
   \}
 
+" Bring back unimpaired `co` maps without deprecation warning (see
+" https://github.com/tpope/vim-unimpaired/issues/150#issuecomment-387608331).
+nmap co yo
+
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
 
 let g:markdown_fenced_languages = [
@@ -610,6 +614,7 @@ function! TmuxInterruptAndRun(command)
   TmuxInterrupt
   execute a:command
 endfunction
+command! -nargs=? TmuxInterruptAndRun call TmuxInterruptAndRun('Tmux '.<q-args>)
 
 function! TmuxInterrupt()
   execute 'Tmux'
@@ -723,7 +728,7 @@ noremap ]<Backspace> mzjdd`z
 
 " FZF maps.
 nnoremap <silent> <C-p> :GitFiles --cached --others --exclude-standard<CR>
-nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <C-f> :History<CR>
 nnoremap <leader>fh :Helptags<CR>
 nnoremap <leader>fb :BLines<CR>
 nnoremap <leader>ft :Tags<CR>
@@ -732,7 +737,7 @@ nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fC :BCommits<CR>
 nnoremap <leader>ff :Filetypes<CR>
 nnoremap <leader>fs :Snippets<CR>
-nnoremap <leader>fr :History<CR>
+nnoremap <leader>fF :Files<CR>
 
 " Quick close/open of special windows.
 nnoremap <leader>q :cclose \| lclose \| pclose<CR>
