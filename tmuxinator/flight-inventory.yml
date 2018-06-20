@@ -1,0 +1,43 @@
+
+name: flight-inventory
+root: ~/
+startup_window: flight-inventory
+
+windows:
+  - notes:
+      root: <%= ENV.fetch('NOTES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - flight-inventory:
+      layout: 'cd25,239x60,0,0{120x60,0,0[120x15,0,0,4,120x14,0,16,28,120x14,0,31,9,120x14,0,46,26],118x60,121,0,10}'
+      root: <%= ENV.fetch('ALCES') %>/flight-inventory
+      panes:
+        - rails server
+        - bin/webpack-dev-server
+        - controller:
+          - sshpass -p "<%= ENV.fetch('ALCES_INSECURE_PASSWORD') %>" ssh root@10.101.0.46
+          - cd /var/lib/metalware
+        -
+        - vim
+
+  - metalware:
+      layout: even-horizontal
+      root: <%= ENV.fetch('ALCES') %>/metalware
+      panes:
+        -
+        - vim
+
+  - dotfiles:
+      root: <%= ENV.fetch('DOTFILES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - vpn:
+      root: <%= ENV.fetch('DROP') %>/vpn/bob.whitelock-office-vpn
+      panes:
+        - sudo openvpn office.conf
