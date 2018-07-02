@@ -253,6 +253,7 @@ set cursorline " Highlight current line.
 
 " Highlight settings.
 highlight Visual ctermfg=233 ctermbg=67 guifg=#1b1d1e guibg=#465457
+highlight MatchParen ctermfg=233 ctermbg=67 guifg=#1b1d1e guibg=#465457
 
 set hlsearch
 highlight clear Search
@@ -615,6 +616,7 @@ function! TmuxInterruptAndRun(command)
   execute a:command
 endfunction
 command! -nargs=? TmuxInterruptAndRun call TmuxInterruptAndRun('Tmux '.<q-args>)
+command! -nargs=0 TmuxRunCurrentFile execute TmuxInterruptAndRun(expand('%:p'))
 
 function! TmuxInterrupt()
   execute 'Tmux'
@@ -640,8 +642,6 @@ function! TmuxLaunchTerminal()
 endfunction
 command! TmuxLaunchTerminal call TmuxLaunchTerminal()
 nnoremap <leader>tT :TmuxLaunchTerminal<CR>
-
-command! RunCurrentFile execute 'Tmux ' expand('%:p')
 
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''

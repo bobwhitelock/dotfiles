@@ -13,6 +13,7 @@ command! -buffer -nargs=* ImportType call s:import_type(<f-args>)
 
 command! -buffer ImportJsonEncode call s:import_as('Json.Encode', 'E')
 command! -buffer ImportJsonDecode call s:import_as('Json.Decode', 'D')
+command! -buffer ImportJsonDecodePipeline call s:import_as('Json.Decode.Pipeline', 'P')
 
 " TODO for these functions:
 " - Handle things like `ImportType Tier.Level` correctly (should give `import
