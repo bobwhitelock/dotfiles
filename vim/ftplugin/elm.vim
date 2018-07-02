@@ -19,6 +19,7 @@ nmap <buffer> <leader>eM <Plug>(elm-make-main)
 " `ImportType` => `import <cword> exposing (<cword>)`
 " `ImportType Foo` => `import Foo exposing (Foo)`
 " `ImportType Foo bar` => `import Foo exposing (Foo, bar)`
+" `ImportType Foo.Bar` => `import Foo.Bar exposing (Bar)`
 command! -buffer -nargs=* Import call s:import(<f-args>)
 command! -buffer -nargs=* ImportAs call s:import_as(<f-args>)
 command! -buffer -nargs=* ImportType call s:import_type(<f-args>)
@@ -28,10 +29,12 @@ command! -buffer ImportJsonDecode call s:import_as('Json.Decode', 'D')
 command! -buffer ImportJsonDecodePipeline call s:import_as('Json.Decode.Pipeline', 'P')
 
 " TODO for these functions:
-" - Handle things like `ImportType Tier.Level` correctly (should give `import
-"   Tier.Level exposing (Level)`)
+" - Handle things like `ImportAs Tier.Level` correctly (should give `import
+"   Tier.Level as (Level)`)
 " - Add similar functions for module exports (`exposing`)?
 " - Handle importing visual selection
+" - Consider simplifying/removing the non-intuitive commands, and/or having a
+"   general purpose command to just add an import as written instead.
 
 function! s:import(...)
   if empty(a:000)
@@ -65,7 +68,8 @@ function! s:import_type(...)
     let exposing = [cword]
   else
     let module = a:1
-    let exposing = [a:1] + a:000[1:]
+    let module_parts = split(a:1, '\.')
+    let exposing = [module_parts[-1]] + a:000[1:]
   endif
 
   call s:add_import_line(module, v:null, exposing)
