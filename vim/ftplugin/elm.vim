@@ -6,7 +6,19 @@ nmap <buffer> <leader>sd <Plug>(elm-show-docs)
 nmap <buffer> <leader>em <Plug>(elm-make)
 nmap <buffer> <leader>eM <Plug>(elm-make-main)
 
-" Commands for quickly adding imports.
+" Commands for quickly adding imports:
+"
+" `Import` => `import <cword>`
+" `Import Foo` => `import `Foo`
+" `Import Foo bar baz` => `import Foo exposing (bar, baz)`
+"
+" `ImportAs Foo` => `import Foo as <cword>`
+" `ImportAs Foo Bar` => `import Foo as Bar`
+" `ImportAs Foo Bar baz` => `import Foo as Bar exposing (baz)`
+"
+" `ImportType` => `import <cword> exposing (<cword>)`
+" `ImportType Foo` => `import Foo exposing (Foo)`
+" `ImportType Foo bar` => `import Foo exposing (Foo, bar)`
 command! -buffer -nargs=* Import call s:import(<f-args>)
 command! -buffer -nargs=* ImportAs call s:import_as(<f-args>)
 command! -buffer -nargs=* ImportType call s:import_type(<f-args>)
