@@ -52,8 +52,6 @@ cached-domain-vars 2> /dev/null
 
 export ZSH_LIB="$ZSH_DIR/lib"
 
-export PYENV_ROOT="$HOME/repos/pyenv"
-
 # See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
