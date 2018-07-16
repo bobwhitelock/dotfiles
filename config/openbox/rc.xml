@@ -254,6 +254,9 @@
     <keybind key="W-S-t">
       <action name="ToggleDecorations"/>
     </keybind>
+    <keybind key="W-S-o">
+      <action name="ToggleOmnipresent"/>
+    </keybind>
     <!-- Keybindings to move windows to different monitors -->
     <keybind key="W-1">
       <action name="MoveResizeTo">
