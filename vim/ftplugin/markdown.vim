@@ -8,8 +8,8 @@ nmap <buffer> <leader>3 ysip3
 " Convert a regular markdown bullet to a checkbox.
 Repeatable nnoremap <buffer> <leader>ctc mzF-a [ ]<esc>`z
 
-" Check a checkbox in a checklist.
-Repeatable nnoremap <buffer> <leader>x mz0f[lrx`z
+" Format and renumber a list (so long as all in one paragraph).
+Repeatable nnoremap <buffer> <leader>F mzgqipvip:RenumberSelection<CR>`z
 
 " Uncheck all checked checkboxes (`[x]`) in a checklist.
 command! -buffer -nargs=0 ClearChecklist %s/\[x\]/\[ \]/g

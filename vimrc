@@ -188,6 +188,9 @@ Plug 'bobwhitelock/vim-lumberjack'
 " to visual selection.
 Plug 'wincent/scalpel'
 
+" Tweaks and commands for working with bulleted/numbered lists.
+Plug 'dkarter/bullets.vim'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
