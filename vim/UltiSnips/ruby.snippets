@@ -15,3 +15,18 @@ endsnippet
 snippet open "Open browser in Capybara test"
 save_and_open_page; sleep 1000
 endsnippet
+
+snippet concern "Create ActiveSupport::Concern"
+module $1
+  extend ActiveSupport::Concern
+
+  included do
+    # scope :disabled, -> { where(disabled: true) }
+    $2
+  end
+
+  class_methods do
+    $3
+  end
+end
+endsnippet

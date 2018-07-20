@@ -861,8 +861,10 @@ nmap <leader>Y "+Y
 " Move last thing yanked to system clipboard.
 nnoremap <leader>cc :let @+=@"<cr>:echo "copied!"<cr>
 
-" Copy current file path/name to system clipboard.
-nnoremap <leader>cp :let @+ = expand("%")<CR>:echo "copied filepath!"<CR>
+" Copy current absolute or relative file path, or file name, to system
+" clipboard.
+nnoremap <leader>ca :let @+ = expand("%:p")<CR>:echo "copied absolute filepath!"<CR>
+nnoremap <leader>cp :let @+ = expand("%")<CR>:echo "copied relative filepath!"<CR>
 nnoremap <leader>cf :let @+ = expand("%:t")<CR>:echo "copied filename!"<CR>
 
 " Paste above/below, justify, and return to original position.
@@ -928,6 +930,8 @@ nnoremap ]-  /^- <CR>
 nnoremap [-  ?^- <CR>
 
 nnoremap <leader>; :<Up><CR>
+
+nnoremap <leader><leader> :e!<CR>
 
 " Rails maps.
 nnoremap <leader>eC :Econtroller<CR>
