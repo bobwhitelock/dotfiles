@@ -22,6 +22,7 @@ add-window() {
 alias aw="add-window"
 
 # Utility function to be used by above.
+# XXX Do not blindly continue if given dir which doesn't exist
 _tmux-create() {
     local tmux_command args window_path window_name
 
