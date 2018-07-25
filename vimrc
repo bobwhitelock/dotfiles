@@ -367,11 +367,6 @@ augroup autocmds
   " Make `3` in Markdown files trigger vim-surround maps for code blocks.
   autocmd FileType markdown let b:surround_51 = "```\n\r\n```"
 
-  " Run Prettier on write of JS files.
-  " XXX Disabled for now to avoid messing up JS files on projects not using
-  " Prettier.
-  " autocmd BufWritePre *.js PrettierAsync
-
   " Enable Goyo hook functions.
   autocmd User GoyoEnter nested call <SID>goyo_enter()
   autocmd User GoyoLeave nested call <SID>goyo_leave()
@@ -381,6 +376,7 @@ augroup END
 call camelcasemotion#CreateMotionMappings('<leader>')
 
 " Toggle automatically formatting Python according to PEP8 (default enabled).
+" TODO Move this and `EnablePrettierAutoFormat` to appropriate ftplugin files?
 function! s:EnablePythonAutoFormat()
   augroup python_auto_format
     autocmd!
@@ -396,6 +392,23 @@ function! s:DisablePythonAutoFormat()
   augroup END
 endfunction
 command! DisablePythonAutoFormat call s:DisablePythonAutoFormat()
+
+" Toggle automatically formatting JavaScript with Prettier (default enabled).
+function! s:EnablePrettierAutoFormat()
+  augroup prettier_auto_format
+    autocmd!
+    autocmd BufWritePre *.js PrettierAsync
+  augroup END
+endfunction
+command! EnablePrettierAutoFormat call s:EnablePrettierAutoFormat()
+EnablePrettierAutoFormat
+
+function! s:DisablePrettierAutoFormat()
+  augroup prettier_auto_format
+    autocmd!
+  augroup END
+endfunction
+command! DisablePrettierAutoFormat call s:DisablePrettierAutoFormat()
 
 " Commands to enable/disable auto-committing on every save in git repos -
 " useful when developing something where changes won't take effect until a
