@@ -880,6 +880,9 @@ nnoremap <leader>ca :let @+ = expand("%:p")<CR>:echo "copied absolute filepath!"
 nnoremap <leader>cp :let @+ = expand("%")<CR>:echo "copied relative filepath!"<CR>
 nnoremap <leader>cf :let @+ = expand("%:t")<CR>:echo "copied filename!"<CR>
 
+" Copy SHA or path to current object using Fugitive.
+nmap <leader>ch "+y<C-g>:echo "copied SHA/current object path!"<CR>
+
 " Paste above/below, justify, and return to original position.
 nnoremap <leader>A mzO<esc>p==`z
 nnoremap <leader>B mzo<esc>p==`z
