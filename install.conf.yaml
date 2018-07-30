@@ -32,8 +32,9 @@
         path: config/openbox/*
         glob: true
         create: true
-    ~/.config/polybar/master.conf:
-        path: config/polybar/master.conf
+    ~/.config/polybar/:
+        path: config/polybar/*
+        glob: true
         create: true
     ~/.config/terminator:
         path: config/terminator
