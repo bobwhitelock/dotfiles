@@ -21,3 +21,7 @@ command! -buffer -nargs=0 Unchecked /\[ ]
 " Easily allow inserting checkbox in insert mode (without `auto-pairs` messing
 " this up).
 inoremap <buffer> -<space>[ <C-v>- <C-v>[ ]<space>
+
+" Indent/dedent in insert mode.
+inoremap <buffer> >> <C-o>>><C-o>$
+inoremap <buffer> << <C-o><<<C-o>$
