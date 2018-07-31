@@ -96,10 +96,6 @@ swap() {
     mv $TMPFILE "$2"
 }
 
-yaml_validate() {
-    ruby -e "require 'yaml'; YAML.load_file('$1')"
-}
-
 # Pretty-print a YAML file as JSON.
 yaml_to_json() {
     cat <<-RUBY | ruby | jq .
