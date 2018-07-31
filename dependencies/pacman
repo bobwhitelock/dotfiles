@@ -16,6 +16,8 @@ ripgrep
 ruby
 shellcheck
 terminator
+tex-gyre-fonts
+texlive-most
 tmux
 tree
 xcape
