@@ -1,0 +1,34 @@
+
+name: flight-blueprint
+root: ~/
+startup_window: flight-blueprint
+
+windows:
+  - notes:
+      root: <%= ENV.fetch('NOTES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - flight-blueprint:
+      layout: 'cdc3,239x60,0,0{119x60,0,0[119x30,0,0,4,119x29,0,31,12],119x60,120,0,11}'
+      root: <%= ENV.fetch('ALCES') %>/flight-blueprint
+      panes:
+        - elm-app start
+        -
+        - vim
+
+  - flight-inventory:
+      layout: even-horizontal
+      root: <%= ENV.fetch('ALCES') %>/flight-inventory
+      panes:
+        -
+        - vim
+
+  - dotfiles:
+      root: <%= ENV.fetch('DOTFILES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
