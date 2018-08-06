@@ -1,6 +1,7 @@
 
 name: flight-blueprint
 root: ~/
+on_project_start: sudo systemctl start postgresql
 startup_window: flight-blueprint
 
 windows:
@@ -12,10 +13,11 @@ windows:
         - vim
 
   - flight-blueprint:
-      layout: 'cdc3,239x60,0,0{119x60,0,0[119x30,0,0,4,119x29,0,31,12],119x60,120,0,11}'
+      layout: 'df8f,274x67,0,0{137x67,0,0[137x23,0,0,1,137x22,0,24,4,137x20,0,47,5],136x67,138,0,6}'
       root: <%= ENV.fetch('ALCES') %>/flight-blueprint
       panes:
-        - elm-app start
+        - rails server
+        - bin/webpack-dev-server
         -
         - vim
 
