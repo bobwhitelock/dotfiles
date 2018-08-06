@@ -461,12 +461,17 @@ let g:mta_filetypes = {
 " Disable unimpaired mappings which I don't want.
 let g:nremap = {
   \ '[Q': '<Nop>',
-  \ ']Q': '<Nop>'
+  \ ']Q': '<Nop>',
+  \ 'cox': '<Nop>',
   \}
 
 " Bring back unimpaired `co` maps without deprecation warning (see
 " https://github.com/tpope/vim-unimpaired/issues/150#issuecomment-387608331).
 nmap co yo
+
+" Override unimpaired map to just toggle `cursorcolumn`, since I always want
+" `cursorline`.
+nnoremap cox :set cursorcolumn!<CR>
 
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
 
