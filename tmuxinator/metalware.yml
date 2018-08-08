@@ -5,7 +5,7 @@ startup_window: metalware
 
 windows:
   - notes:
-      root: ~/projects/other/life
+      root: <%= ENV.fetch('NOTES') %>
       layout: even-horizontal
       panes:
         -
@@ -13,7 +13,7 @@ windows:
 
   - metalware:
       layout: 'be91,274x72,0,0{137x72,0,0[137x33,0,0,4,137x4,0,34,7,137x33,0,39,6],136x72,138,0,5}'
-      root: ~/projects/alces/metalware-project/metalware
+      root: <%= ENV.fetch('ALCES') %>/metalware
       panes:
         - controller:
           - ssh-add ~/.ssh/aws_ireland.pem
@@ -26,7 +26,7 @@ windows:
 
   - imageware:
       layout: 'f498,274x72,0,0{137x72,0,0[137x36,0,0,7,137x35,0,37,9],136x72,138,0,8}'
-      root: ~/projects/alces/clusterware-project/imageware
+      root: <%= ENV.fetch('ALCES') %>/imageware
       panes:
         - vm-server:
           - ssh root@julius.dmz.alces-software.com -XC
@@ -36,14 +36,14 @@ windows:
 
   - metalware-default:
       layout: 'f498,274x72,0,0{137x72,0,0[137x36,0,0,7,137x35,0,37,9],136x72,138,0,8}'
-      root: ~/projects/alces/metalware-project/metalware-default
+      root: <%= ENV.fetch('ALCES') %>/metalware-default
       panes:
         - sync-dir dev@10.101.0.75:/var/lib/metalware/repo
         -
         - vim
 
   - dotfiles:
-      root: ~/.dotfiles
+      root: <%= ENV.fetch('DOTFILES') %>
       layout: even-horizontal
       panes:
         -
