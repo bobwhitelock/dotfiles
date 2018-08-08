@@ -10,7 +10,7 @@ startup_window: flight-center
 
 windows:
   - notes:
-      root: <%= ENV['NOTES'] %>
+      root: <%= ENV.fetch('NOTES') %>
       layout: even-horizontal
       panes:
         -
@@ -26,14 +26,14 @@ windows:
 
   - flight-sso:
       layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
-      root: <%= ENV['ALCES'] %>/flight-sso
+      root: <%= ENV.fetch('ALCES') %>/flight-sso
       panes:
         - sudo docker-compose up
         -
         - vim
 
   - dotfiles:
-      root: <%= ENV['DOTFILES'] %>
+      root: <%= ENV.fetch('DOTFILES') %>
       layout: even-horizontal
       panes:
         -
