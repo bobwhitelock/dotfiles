@@ -1,27 +1,13 @@
 
 alias mux="tmuxinator"
-alias dots="add-window \$DOTFILES"
-alias dotsr="replace-window \$DOTFILES"
-alias notes="add-window \$NOTES"
-alias notesr="replace-window \$NOTES"
+alias aw="add_window"
+alias rw="replace_window"
+alias dots="aw \$DOTFILES"
+alias dotsr="rw \$DOTFILES"
+alias notes="aw \$NOTES"
+alias notesr="rw \$NOTES"
 
-# Add new Tmux window (or session if not already in session) in given dir
-# (defaulting to current dir); appropriately named and with panes for shell and
-# Vim open.
-add-window() {
-    local tmux_command
-
-    if [ -n "$TMUX" ]; then
-        tmux_command='new-window'
-    else
-        tmux_command='new-session'
-    fi
-
-    _tmux-create "$tmux_command" "$*"
-}
-alias aw="add-window"
-
-# Utility function to be used by above.
+# Utility function to be used by scripts.
 # XXX Do not blindly continue if given dir which doesn't exist
 _tmux-create() {
     local tmux_command args window_path window_name
@@ -39,21 +25,6 @@ _tmux-create() {
         \; send-keys -t 2 vim \
         \; send-keys -t 2 Enter
 }
-
-# Replace current window with new window as created by `add-window`.
-replace-window() {
-    local current_window new_window
-
-    # shellcheck disable=SC2063
-    current_window="$(_find-window-id "grep '*'")"
-
-    add-window "$*"
-    new_window="$(_find-window-id 'tail -n 1')"
-
-    tmux swap-window -t "$current_window" -s "$new_window"
-    tmux kill-window -t "$new_window"
-}
-alias rw="replace-window"
 
 _find-window-id() {
     local filter

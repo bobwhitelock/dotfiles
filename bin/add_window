@@ -1,0 +1,26 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+# Add new Tmux window (or session if not already in session) in given dir
+# (defaulting to current dir); appropriately named and with panes for shell and
+# Vim open.
+
+
+main() {
+    local tmux_command
+
+    # shellcheck disable=SC1090
+    source "$ZSH_LIB/tmux.sh"
+
+    if [ -n "$TMUX" ]; then
+        tmux_command='new-window'
+    else
+        tmux_command='new-session'
+    fi
+
+    _tmux-create "$tmux_command" "$*"
+}
+
+main "$@"

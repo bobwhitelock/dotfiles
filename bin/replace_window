@@ -1,0 +1,25 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+# Replace current window with new window as created by `add_window`.
+
+
+main() {
+    local current_window new_window
+
+    # shellcheck disable=SC1090
+    source "$ZSH_LIB/tmux.sh"
+
+    # shellcheck disable=SC2063
+    current_window="$(_find-window-id "grep '*'")"
+
+    add_window "$*"
+    new_window="$(_find-window-id 'tail -n 1')"
+
+    tmux swap-window -t "$current_window" -s "$new_window"
+    tmux kill-window -t "$new_window"
+}
+
+main "$@"

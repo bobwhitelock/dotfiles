@@ -28,7 +28,7 @@ main() {
 
     # shellcheck disable=SC1090
     source "$ZSH_LIB/tmux.sh"
-    add-window "$name"
+    add_window "$name"
 }
 
 main "$@"
