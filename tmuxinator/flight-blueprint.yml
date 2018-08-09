@@ -1,7 +1,7 @@
 
 name: flight-blueprint
 root: ~/
-on_project_start: sudo systemctl start postgresql
+on_project_start: sudo systemctl start postgresql docker
 startup_window: flight-blueprint
 
 windows:
@@ -16,8 +16,20 @@ windows:
       layout: 'df8f,274x67,0,0{137x67,0,0[137x23,0,0,1,137x22,0,24,4,137x20,0,47,5],136x67,138,0,6}'
       root: <%= ENV.fetch('ALCES') %>/flight-blueprint
       panes:
-        - rails server
-        - bin/webpack-dev-server
+        - server:
+          - cd server
+          - rails server
+        - client:
+          - cd client
+          - yarn start
+        -
+        - vim
+
+  - flight-sso:
+      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
+      root: <%= ENV.fetch('ALCES') %>/flight-sso
+      panes:
+        - sudo docker-compose up
         -
         - vim
 
