@@ -8,13 +8,20 @@ alias notes="aw \$NOTES"
 alias notesr="rw \$NOTES"
 
 # Utility function to be used by scripts.
-# XXX Do not blindly continue if given dir which doesn't exist
 _tmux-create() {
     local tmux_command args window_path window_name
 
     tmux_command="$1"
     shift
     args="$*"
+
+    if [ -n "$args"  ]; then
+        if [ ! -d "$args" ]; then
+            echo "ERROR: Not a directory: \`$args\`" >&2
+            return 1
+        fi
+    fi
+
     window_path=$(realpath "${args:-$(pwd)}")
     window_name=$(basename "$window_path")
 
