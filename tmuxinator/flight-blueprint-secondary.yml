@@ -1,0 +1,12 @@
+
+name: flight-blueprint-secondary
+root: <%= ENV.fetch('ALCES') %>/flight-blueprint/client
+
+windows:
+  - output:
+      layout: even-horizontal
+      panes:
+        - elm-test:
+          - cd src/elm
+          - elm-test --watch
+        - yarn start
