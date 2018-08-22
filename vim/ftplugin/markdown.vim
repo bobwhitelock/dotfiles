@@ -3,6 +3,9 @@
 " noremap <silent> <buffer> <C-s> <Esc>mzgqip:write<CR>`z
 " noremap! <silent> <buffer> <C-s> <Esc>mzgqip:write<CR>`z
 
+" So can write `@tag` in markdown files and search for this with `*`.
+setlocal iskeyword+=@-@
+
 nmap <buffer> <leader>3 ysip3
 
 " Convert a regular markdown bullet to a checkbox.

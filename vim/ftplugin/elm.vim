@@ -32,9 +32,26 @@ command! -buffer ImportJsonDecodePipeline call s:import_as('Json.Decode.Pipeline
 " - Handle things like `ImportAs Tier.Level` correctly (should give `import
 "   Tier.Level as (Level)`)
 " - Add similar functions for module exports (`exposing`)?
-" - Handle importing visual selection
+" - Handle importing visual selection instead of <cword>
 " - Consider simplifying/removing the non-intuitive commands, and/or having a
-"   general purpose command to just add an import as written instead.
+"   general purpose command to just add an import as written instead (see
+"   below).
+"
+" Suggested possible improved commands:
+"
+" `Import` => `import <cword>`
+" `Import Foo as Bar exposing (baz)` => `import Foo as Bar exposing (baz)`
+" - could use `cnoremap <buffer> ex exposing ()<left>` to make this even
+"   shorter
+"
+" `ImportAs Foo` => `import Foo as <cword>`
+" - or just remove, confusing
+"
+" `ImportType` => `import <cword> exposing (<cword>)`
+" `ImportType Foo` => `import Foo exposing (Foo)`
+" `ImportType Foo.Bar` => `import Foo.Bar exposing (Bar)`
+"
+" `ImportTypeAs Foo.Bar` => `import Foo.Bar as Bar exposing (Bar)`
 
 function! s:import(...)
   if empty(a:000)

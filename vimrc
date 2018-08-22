@@ -515,6 +515,7 @@ let g:syntastic_vim_checkers = ['vint']
 " let g:fixmyjs_use_local = 1
 
 let g:prettier#autoformat = 0
+let g:prettier#exec_cmd_path = "~/.yarn/bin/prettier"
 
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0

@@ -8,3 +8,24 @@ snippet {- "Documentation comment"
 endsnippet
 # Note: missing trailing bracket above as automatically inserted by
 # `auto-pairs`.
+
+snippet test "Start new elm-test file"
+module $1Tests exposing (..)
+
+import Expect exposing (Expectation)
+import Fuzz exposing (Fuzzer, int, list, string)
+import $1
+import Test exposing (..)
+
+
+suite : Test
+suite =
+    describe "$1 module"
+        [
+          describe "$2"
+            [ test "$3" <|
+                \_ ->
+		    $4
+            ]
+        ]
+endsnippet
