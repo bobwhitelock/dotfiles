@@ -311,7 +311,12 @@
     </keybind>
     <keybind key="W-t">
       <action name="Execute">
-        <command>exo-open --launch TerminalEmulator</command>
+        <command>terminator --maximise</command>
+      </action>
+    </keybind>
+    <keybind key="W-s">
+      <action name="Execute">
+        <command>terminator --maximise --profile=secondary</command>
       </action>
     </keybind>
     <keybind key="W-w">
@@ -375,7 +380,7 @@
         <command>keepassxc</command>
       </action>
     </keybind>
-    <keybind key="W-s">
+    <keybind key="W-S-s">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
