@@ -760,6 +760,9 @@ nnoremap <leader>fC :BCommits<CR>
 nnoremap <leader>ff :Filetypes<CR>
 nnoremap <leader>fs :Snippets<CR>
 nnoremap <leader>fF :Files<CR>
+" Fuzz files in Git repo of same language as current file (or at least with
+" same extension, which is 90% of the way there).
+nnoremap <leader>fl :execute "GitFiles --cached --others --exclude-standard '*." . expand("%:e") . "'"<CR>
 
 " Quick close/open of special windows.
 nnoremap <leader>q :cclose \| lclose \| pclose<CR>
