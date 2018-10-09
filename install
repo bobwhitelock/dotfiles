@@ -61,10 +61,10 @@ link_files() {
     ln -sf "$DROP"/vim/spell/ ~/.vim/spell
 
     mkdir -p ~/.todo/
-    ln -sf "$NOTES"/todo/done.txt ~/.todo
-    ln -sf "$NOTES"/todo/todo.txt ~/.todo
-    ln -sf "$NOTES"/todo/report.txt ~/.todo
-    ln -sf zsh/todotxt.sh ~/.todo/config
+    ln -sf "$NOTES"/todo/done.todo ~/.todo
+    ln -sf "$NOTES"/todo/next_actions.todo ~/.todo
+    ln -sf "$NOTES"/todo/report.todo ~/.todo
+    ln -sf "$DOTFILES"/zsh/lib/todotxt.sh ~/.todo/config
 }
 
 enable_services() {
