@@ -8,8 +8,9 @@ setlocal iskeyword+=@-@
 
 nmap <buffer> <leader>3 ysip3
 
-" Convert a regular markdown bullet to a checkbox.
-Repeatable nnoremap <buffer> <leader>ctc mzF-a [ ]<esc>`z
+" Convert a regular markdown bullet to a checkbox (note: use `4l` here to
+" negate the `a [ ]`, so cursor moved back to same original position).
+Repeatable nnoremap <buffer> <leader>ctc mz0f-a [ ]<esc>`z4l
 
 " Format and renumber a list (so long as all in one paragraph).
 Repeatable nnoremap <buffer> <leader>F mzgqipvip:RenumberSelection<CR>`z
@@ -25,6 +26,3 @@ command! -buffer -nargs=0 Unchecked /\[ ]
 " this up).
 inoremap <buffer> -<space>[ <C-v>- <C-v>[ ]<space>
 
-" Indent/dedent in insert mode.
-inoremap <buffer> >> <C-o>>><C-o>$
-inoremap <buffer> << <C-o><<<C-o>$

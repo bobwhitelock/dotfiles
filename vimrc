@@ -732,8 +732,13 @@ nnoremap <leader>g/ :%s///gI<Left><Left><Left>
 xnoremap <leader>gc "zy:%s/<C-r>z//gcI<Left><Left><Left><Left>
 xnoremap <leader>gc "zy:%s/<C-r>z//gI<Left><Left><Left>
 
-" Shift-tab to indent left in insert mode.
-inoremap <S-Tab> <C-d>
+" XXX remove, doesn't seem to work anyway?
+" " Shift-tab to indent left in insert mode.
+" inoremap <S-Tab> <C-d>
+
+" Indent/dedent in insert mode.
+inoremap  >> <C-o>>><C-o>$
+inoremap  << <C-o><<<C-o>$
 
 " Tab/shift-tab to indent/unindent in visual mode.
 xnoremap <Tab> >gv
@@ -855,6 +860,9 @@ nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
 
 nnoremap <leader>G :Ggrep!<space>
 nnoremap <leader>I :Ggrep! -i<space>
+" Grep in files in Git repo of same language as current file (similar to
+" `<leader>fl` map). Need to use `nmap` so `vim-rsi` maps available.
+nmap <leader>gl :Ggrep!  -- '*.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
 
 let g:gitgutter_map_keys = 0
 nmap <leader>gs <Plug>GitGutterStageHunk
@@ -973,8 +981,8 @@ inoremap <Esc>b <Esc>b
 
 " TODO: Would be useful to make these jump over current section if in matching
 " section already.
-nnoremap ]=  /^+ <CR>
-nnoremap [=  ?^+ <CR>
+nnoremap ]+  /^+ <CR>
+nnoremap [+  ?^+ <CR>
 nnoremap ]-  /^- <CR>
 nnoremap [-  ?^- <CR>
 
