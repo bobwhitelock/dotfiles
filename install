@@ -31,6 +31,9 @@ main() {
 
     header 'Linking other needed files'
     link_files
+
+    header 'Enabling services'
+    enable_services
 }
 
 install_dependencies() {
@@ -62,6 +65,10 @@ link_files() {
     ln -sf "$NOTES"/todo/todo.txt ~/.todo
     ln -sf "$NOTES"/todo/report.txt ~/.todo
     ln -sf zsh/todotxt.sh ~/.todo/config
+}
+
+enable_services() {
+    sudo systemctl enable --now udevmon
 }
 
 header() {

@@ -19,7 +19,6 @@
     $DOTFILES/oh-my-zsh/custom/themes/bob.zsh-theme:
       path: zsh/theme.zsh-theme
       create: true
-    ~/.xsessionrc: xsessionrc
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator:
         path: tmuxinator/
