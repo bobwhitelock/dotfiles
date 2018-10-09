@@ -87,7 +87,7 @@
     color_scheme = custom
     cursor_color = "#ff6600"
     cursor_color_fg = False
-    custom_command = unset TMUX; TERM=xterm-256color tmux new-session -s secondary
+    custom_command = unset TMUX; TERM=xterm-256color tmux new-session
     font = DejaVu Sans Mono 15
     foreground_color = "#ffffff"
     login_shell = True
