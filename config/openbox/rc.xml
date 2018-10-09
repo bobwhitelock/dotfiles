@@ -409,6 +409,11 @@
         <command>blueman-manager</command>
       </action>
     </keybind>
+    <keybind key="W-c">
+      <action name="Execute">
+        <command>slack</command>
+      </action>
+    </keybind>
     <keybind key="W-Tab">
       <action name="ShowMenu">
         <menu>client-list-combined-menu</menu>
