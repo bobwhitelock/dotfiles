@@ -1,0 +1,31 @@
+
+name: adminware
+root: ~/
+
+windows:
+  - notes:
+      root: <%= ENV.fetch('NOTES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - adminware:
+      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
+      root: <%= ENV.fetch('ALCES') %>/adminware
+      panes:
+        - sshpass -p "<%= ENV.fetch('ALCES_INSECURE_PASSWORD') %>" ssh root@10.101.0.52
+        -
+        - vim
+
+  - dotfiles:
+      root: <%= ENV.fetch('DOTFILES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - vpn:
+      root: <%= ENV.fetch('DROP') %>/vpn/bob.whitelock-office-vpn
+      panes:
+        - sudo openvpn office.conf
