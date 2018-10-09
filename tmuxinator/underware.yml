@@ -1,0 +1,33 @@
+
+name: underware
+root: ~/
+startup_window: underware
+
+windows:
+  - notes:
+      root: <%= ENV.fetch('NOTES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - underware:
+      layout: even-horizontal
+      root: <%= ENV.fetch('ALCES') %>/underware
+      panes:
+        -
+        - vim
+
+  - metalware:
+      layout: even-horizontal
+      root: <%= ENV.fetch('ALCES') %>/metalware
+      panes:
+        -
+        - vim
+
+  - dotfiles:
+      root: <%= ENV.fetch('DOTFILES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
