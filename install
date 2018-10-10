@@ -65,6 +65,11 @@ link_files() {
     ln -sf "$NOTES"/todo/next_actions.todo ~/.todo
     ln -sf "$NOTES"/todo/report.todo ~/.todo
     ln -sf "$DOTFILES"/zsh/lib/todotxt.sh ~/.todo/config
+
+    # Link files in to `/etc`; cannot occur via `dotbot` as this doesn't
+    # support linking as root (see
+    # https://github.com/anishathalye/dotbot/issues/125).
+    sudo ln -sf "$DOTFILES"/etc/udevmon.yaml /etc/
 }
 
 enable_services() {
