@@ -15,7 +15,7 @@
 [alias]
 	amend = commit --verbose --amend -C HEAD
 	amend-and-edit = commit --verbose --amend
-	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
+	sed = git sed
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
 	update-submodules = "! git stash save && git pull-submodules && git commit -am 'Update submodules'; git stash apply"

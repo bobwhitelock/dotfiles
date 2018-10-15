@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+main() {
+    git grep -z --full-name -l '.' | xargs -0 sed -i -e "$@"
+}
+
+main "$@"
