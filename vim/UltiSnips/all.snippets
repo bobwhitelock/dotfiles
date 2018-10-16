@@ -5,18 +5,32 @@ set -euo pipefail
 IFS=$'\n\t'
 
 
+main() {
+    $1
+}
+
+main "$@"
 endsnippet
 
 snippet #!rb
 #!/usr/bin/env ruby
 
 
+def main
+  $1
+end
+
+main
 endsnippet
 
 snippet #!py
 #!/usr/bin/env python3
 
+def main():
+    $1
 
+if __name__ == '__main__':
+    main()
 endsnippet
 
 snippet modeline
