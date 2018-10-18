@@ -222,6 +222,8 @@ Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
 Plug 'dbeniamine/todo.txt-vim'
+Plug 'chrisbra/csv.vim'
+let g:no_csv_maps = 1
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
