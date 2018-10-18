@@ -1,0 +1,15 @@
+
+name: underware-secondary
+
+windows:
+  - underware:
+      layout: even-horizontal
+      root: <%= ENV.fetch('ALCES') %>/underware
+      panes:
+        - rspec
+
+  - metalware:
+      layout: even-horizontal
+      root: <%= ENV.fetch('ALCES') %>/metalware
+      panes:
+        - rspec
