@@ -638,7 +638,7 @@ function! TmuxInterruptAndRun(command)
   execute a:command
 endfunction
 command! -nargs=? TmuxInterruptAndRun call TmuxInterruptAndRun('Tmux '.<q-args>)
-command! -nargs=0 TmuxRunCurrentFile execute TmuxInterruptAndRun(expand('%:p'))
+command! -nargs=0 TmuxRunCurrentFile execute TmuxInterruptAndRun('Tmux '.expand('%:p'))
 
 function! TmuxInterrupt()
   execute 'Tmux'
@@ -730,7 +730,7 @@ nnoremap <leader>g/ :%s///gI<Left><Left><Left>
 " Similarly, quick find and replace of current visual selection. Adapted from
 " https://stackoverflow.com/a/676619.
 xnoremap <leader>gc "zy:%s/<C-r>z//gcI<Left><Left><Left><Left>
-xnoremap <leader>gc "zy:%s/<C-r>z//gI<Left><Left><Left>
+xnoremap <leader>gg "zy:%s/<C-r>z//gI<Left><Left><Left>
 
 " XXX remove, doesn't seem to work anyway?
 " " Shift-tab to indent left in insert mode.
