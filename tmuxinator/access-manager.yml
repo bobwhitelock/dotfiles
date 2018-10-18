@@ -1,6 +1,5 @@
 
 name: access-manager
-root: ~/
 
 on_project_start: >
   cd ~/projects/alces/access-manager-project/alces-access-manager/dev/multiple-nodes-el7/login-el7  &&

@@ -1,6 +1,5 @@
 
 name: flight-blueprint
-root: ~/
 on_project_start: sudo systemctl start postgresql docker
 startup_window: flight-blueprint
 

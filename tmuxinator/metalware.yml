@@ -1,6 +1,5 @@
 
 name: metalware
-root: ~/
 startup_window: metalware
 
 windows:

@@ -1,6 +1,5 @@
 
 name: elm-game-of-life
-root: ~/
 
 windows:
   - notes:

@@ -1,6 +1,5 @@
 
 name: flight-inventory
-root: ~/
 on_project_start: sudo systemctl start postgresql
 startup_window: flight-inventory
 

@@ -1,6 +1,5 @@
 
 name: underware
-root: ~/
 startup_window: underware
 
 windows:
