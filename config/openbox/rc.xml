@@ -314,7 +314,7 @@
         <command>terminator --maximise</command>
       </action>
     </keybind>
-    <keybind key="W-s">
+    <keybind key="W-S-s">
       <action name="Execute">
         <command>terminator --maximise --profile=secondary</command>
       </action>
@@ -380,7 +380,7 @@
         <command>keepassxc</command>
       </action>
     </keybind>
-    <keybind key="W-S-s">
+    <keybind key="W-s">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
