@@ -608,11 +608,6 @@ let test#strategy = 'tslime_and_cache'
 command! Failures cexpr readfile(s:output_file)
 nnoremap <leader>tF :Failures<CR>
 
-" Extra option when running suite tests is specific to Alces Metalware, but
-" shouldn't hurt in most other cases.
-let test#ruby#rspec#options = {
-  \ 'suite': "--exclude-pattern 'spec/slow/**/*, spec/integration/**/*'",
-\}
 
 let g:test#runner_commands = ['RSpec']
 
@@ -625,6 +620,9 @@ nnoremap <silent> <CR> :call TmuxInterruptAndRun('TestLast')<CR>
 " XXX have this as toggle with above (ToggleTdd vs ToggleRunCommand?)?
 " - or have command to map/unmap <CR> from running any command.
 " nnoremap <CR> :<Up><CR>
+
+" Metalware-specific - just run the quick tests.
+nnoremap <silent> <leader>tq :call TmuxInterruptAndRun("RSpec --exclude-pattern 'spec/slow/**/*, spec/integration/**/*'")<CR>
 
 " Run a command in the Tmux pane, sending an interrupt first.
 function! TmuxInterruptAndRun(command)
