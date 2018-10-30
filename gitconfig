@@ -51,6 +51,7 @@
 	today = changes-since 12hours
 	run = "!run-command-on-git-revisions"
 	current-branch = rev-parse --abbrev-ref HEAD
+	todos-since = todos-since
 
 [color]
 	ui = true
