@@ -289,6 +289,12 @@ set nostartofline " Don't move cursor to start of line after various commands.
 set ignorecase " Ignore case in searches...
 set smartcase " ...unless search includes a capital.
 
+" Better default indentation handling (indent is 2 spaces and expand tabs as
+" this); `vim-sleuth` will still pick up correct indentation settings for an
+" existing file if it is written in a different style.
+set expandtab
+set shiftwidth=2
+
 " Use correct language for spellcheck (cos to toggle; z= for corrections).
 set spelllang=en_gb
 
@@ -368,6 +374,9 @@ augroup autocmds
 
   " Make `3` in Markdown files trigger vim-surround maps for code blocks.
   autocmd FileType markdown let b:surround_51 = "```\n\r\n```"
+
+  " XXX Has been needed before for some reason; may be needed again.
+  " autocmd FileType javascript.jsx set syntax=javascript.jsx
 
   " Enable Goyo hook functions.
   autocmd User GoyoEnter nested call <SID>goyo_enter()
@@ -731,10 +740,6 @@ xnoremap <leader>gg "zy:%s/<C-r>z//gI<Left><Left><Left>
 " " Shift-tab to indent left in insert mode.
 " inoremap <S-Tab> <C-d>
 
-" Indent/dedent in insert mode.
-inoremap  >> <C-o>>><C-o>$
-inoremap  << <C-o><<<C-o>$
-
 " Tab/shift-tab to indent/unindent in visual mode.
 xnoremap <Tab> >gv
 xnoremap <S-Tab> <gv
@@ -1018,6 +1023,7 @@ abbreviate unneccessary unnecessary
 abbreviate uneccessary unnecessary
 
 abbreviate unecesarily unnecessarily
+abbreviate unnecesarily unnecessarily
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - simpler method works for me under Tmux,
