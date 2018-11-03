@@ -14,7 +14,6 @@ alias open='xdg-open'
 alias m='make'
 alias pacman='sudo pacman'
 alias p='pacman'
-alias v='vim'
 alias y='yaourt'
 
 # rsync="rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git"
@@ -31,6 +30,7 @@ alias apt-files='dpkg-query --listfiles'
 alias sz='source ~/.zshrc'
 source-libs() {
     for file in "$ZSH_LIB/"*; do
+        # shellcheck disable=SC1090
         source "$file"
     done
 }
@@ -40,6 +40,7 @@ alias simple-prompt="SIMPLE_PROMPT=true sz"
 alias simple-prompt-off="unset SIMPLE_PROMPT && sz"
 
 which-edit() {
+    # shellcheck disable=SC2230
     $EDITOR "$(which "$1")"
 }
 
@@ -165,4 +166,12 @@ most_used() {
         tac | \
         nl | \
         tac
+}
+
+# Compress and tar a directory.
+# XXX Make this better:
+# - check dir exists and use dir first
+# - abort if no arg given
+tar_dir() {
+    tar -zcvf "$1".tar.gz "$1"
 }

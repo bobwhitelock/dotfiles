@@ -1,6 +1,8 @@
 
-alias vs="vagrant status"
-alias vssh="vagrant ssh || vagrant up && vagrant ssh"
+alias v='vagrant'
+alias vs='vagrant status'
+alias vup='vagrant up'
+alias vssh='vagrant ssh || vagrant up && vagrant ssh'
 
 vagrant-rebuild() {
     vagrant destroy --force && vagrant up --provision
