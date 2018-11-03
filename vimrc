@@ -191,6 +191,9 @@ Plug 'wincent/scalpel'
 " Tweaks and commands for working with bulleted/numbered lists.
 Plug 'dkarter/bullets.vim'
 
+" Commands to hide/show lines of buffer using regexes (Hide / Show / ShowAll).
+Plug 'ctechols/vim-hideshow'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
