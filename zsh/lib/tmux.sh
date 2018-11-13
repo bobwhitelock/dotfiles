@@ -8,7 +8,7 @@ alias notes="aw \$NOTES"
 alias notesr="rw \$NOTES"
 
 # Utility function to be used by scripts.
-_tmux-create() {
+_tmux_create() {
     local tmux_command args window_path window_name
 
     tmux_command="$1"
@@ -33,7 +33,7 @@ _tmux-create() {
         \; send-keys -t 2 Enter
 }
 
-_find-window-id() {
+_tmux_find_window_id() {
     local filter
     filter="$1"
 

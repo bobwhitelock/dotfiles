@@ -20,7 +20,7 @@ main() {
         tmux_command='new-session'
     fi
 
-    _tmux-create "$tmux_command" "$*"
+    _tmux_create "$tmux_command" "$*"
 }
 
 main "$@"

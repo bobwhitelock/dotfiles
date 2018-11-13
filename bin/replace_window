@@ -13,10 +13,10 @@ main() {
     source "$ZSH_LIB/tmux.sh"
 
     # shellcheck disable=SC2063
-    current_window="$(_find-window-id "grep '*'")"
+    current_window="$(_tmux_find_window_id "grep '*'")"
 
     add_window "$*"
-    new_window="$(_find-window-id 'tail -n 1')"
+    new_window="$(_tmux_find_window_id 'tail -n 1')"
 
     tmux swap-window -t "$current_window" -s "$new_window"
     tmux kill-window -t "$new_window"

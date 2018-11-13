@@ -4,12 +4,12 @@ alias vs='vagrant status'
 alias vup='vagrant up'
 alias vssh='vagrant ssh || vagrant up && vagrant ssh'
 
-vagrant-rebuild() {
+vagrant_rebuild() {
     vagrant destroy --force && vagrant up --provision
 }
 
 # SSH into nth Vagrant VM.
-vagrant-ssh() {
+vagrant_ssh() {
     local vm_number port
     vm_number="${1:-1}"
     if [[ $vm_number -eq 1 ]]; then
@@ -21,7 +21,7 @@ vagrant-ssh() {
 }
 
 # Forward host port to same port on a Vagrant VM using SSH port forwarding.
-vagrant-forward-port() {
+vagrant_forward_port() {
     local port vagrant_ssh_port
     port="$1"
     vagrant_ssh_port="${2:-2222}"

@@ -67,7 +67,7 @@ stty stop '' -ixoff
 ttyctl -f
 
 source "$ZSH_LIB/main.sh"
-source-libs
+source_libs
 
 # Load completions.
 fpath=("$ZSH_DIR/completions" $fpath)

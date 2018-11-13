@@ -21,25 +21,25 @@ rsync="rsync -r --copy-links --delete --perms --human-readable --progress"
 # shellcheck disable=SC2139
 alias rsync="$rsync"
 # shellcheck disable=SC2139
-alias sync-dir="rerun --exit --pattern '**/*' -- $rsync ."
+alias sync_dir="rerun --exit --pattern '**/*' -- $rsync ."
 unset rsync
 
 # List files installed on system by given package.
-alias apt-files='dpkg-query --listfiles'
+alias apt_files='dpkg-query --listfiles'
 
 alias sz='source ~/.zshrc'
-source-libs() {
+source_libs() {
     for file in "$ZSH_LIB/"*; do
         # shellcheck disable=SC1090
         source "$file"
     done
 }
-alias sa="source-libs"
+alias sa="source_libs"
 
-alias simple-prompt="SIMPLE_PROMPT=true sz"
-alias simple-prompt-off="unset SIMPLE_PROMPT && sz"
+alias simple_prompt="SIMPLE_PROMPT=true sz"
+alias simple_prompt_off="unset SIMPLE_PROMPT && sz"
 
-which-edit() {
+which_edit() {
     # shellcheck disable=SC2230
     $EDITOR "$(which "$1")"
 }
@@ -69,7 +69,7 @@ du() {
 alias df='df --human-readable'
 
 # Explain the current rustc error.
-rustc-explain() {
+rustc_explain() {
     # Word splitting required here for this to work.
     # shellcheck disable=SC2046
     rustc --explain $( \
@@ -115,7 +115,7 @@ ssh_remove_last_key() {
         -R "$(history -n | tail -n 1 | cut -d@ -f2)"
 }
 
-absolute-path() {
+absolute_path() {
     readlink --canonicalize --no-newline "$@"
 }
 alias path='absolute-path'
