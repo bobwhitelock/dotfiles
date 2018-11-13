@@ -17,8 +17,6 @@ windows:
         - vm:
           - vagrant up
           - vagrant ssh
-          - sudo su -
-          - cd /tmp/underware
         -
         - vim
 
@@ -29,8 +27,6 @@ windows:
         - vm:
           - vagrant up
           - vagrant ssh
-          - sudo su -
-          - cd /tmp/metalware
         -
         - vim
 

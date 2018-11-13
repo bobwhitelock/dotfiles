@@ -17,8 +17,6 @@ windows:
         - controller:
           - ssh-add ~/.ssh/aws_ireland.pem
           - ssh dev@10.101.0.75
-          - sudo su -
-          - cd /tmp/metalware
         - make watch-rsync IP=10.101.0.75
         -
         - vim

@@ -19,8 +19,6 @@ windows:
         - vm:
           - vagrant up
           - vagrant ssh
-          # Don't need to become root or change dir for Cloudware as handled by
-          # Vagrantfile.
         -
         - vim
 
@@ -31,8 +29,6 @@ windows:
         - vm:
           - vagrant up
           - vagrant ssh
-          - sudo su -
-          - cd /tmp/underware
         -
         - vim
 
@@ -43,8 +39,6 @@ windows:
         - vm:
           - vagrant up
           - vagrant ssh
-          - sudo su -
-          - cd /tmp/metalware
         -
         - vim
 
