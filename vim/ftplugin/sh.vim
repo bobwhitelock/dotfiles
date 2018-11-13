@@ -10,7 +10,7 @@ function! ShowShellcheckWikiPage()
     execute '!xdg-open https://github.com/koalaman/shellcheck/wiki/' . l:issue
   endif
 endfunction
-nnoremap <buffer> <silent> <leader>sc :call ShowShellcheckWikiPage()<CR>
+Repeatable nnoremap <buffer> <silent> <leader>sc :call ShowShellcheckWikiPage()<CR>
 
 " Add a line above the current line to disable the current Shellcheck issue,
 " if any.
@@ -21,7 +21,7 @@ function! DisableShellcheckIssue()
     execute 'normal! mzO# shellcheck disable=' . l:issue . "\<esc>`z"
   endif
 endfunction
-nnoremap <buffer> <silent> <leader>sd :call DisableShellcheckIssue()<CR>
+Repeatable nnoremap <buffer> <silent> <leader>sd :call DisableShellcheckIssue()<CR>
 
 " Return the Shellcheck error code (SCxxxx) if the current line has a
 " Shellcheck issue, otherwise return -1.

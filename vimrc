@@ -1016,6 +1016,8 @@ nnoremap <leader>ea :A<CR>
 " insert mode in original position.
 inoremap <C-z> <esc>mzB1z=`za
 
+xnoremap <leader>rn :RenumberSelection<CR>
+
 " Apparently I can never spell these.
 abbreviate unecesary unnecessary
 abbreviate unnecesary unnecessary
