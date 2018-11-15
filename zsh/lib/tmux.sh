@@ -1,7 +1,14 @@
 
-alias mux="tmuxinator"
-alias aw="add_window"
-alias rw="replace_window"
+alias mux='tmuxinator'
+
+# Add new/replace current Tmux window, with pane for both shell and Vim.
+alias aw='add_window --vim-pane'
+alias rw='replace_window --vim-pane'
+
+# Add new/replace current Tmux window, with just shell pane.
+alias ap='add_window'
+alias rp='replace_window'
+
 alias dots="aw \$DOTFILES"
 alias dotsr="rw \$DOTFILES"
 alias notes="aw \$NOTES"
@@ -9,10 +16,18 @@ alias notesr="rw \$NOTES"
 
 # Utility function to be used by scripts.
 _tmux_create() {
-    local tmux_command args window_path window_name
+    local tmux_command vim_pane additional_commands args window_path window_name
 
     tmux_command="$1"
     shift
+
+    if [ $# -ne 0 ] && [ "$1" == '--vim-pane' ]; then
+        vim_pane='true'
+        shift
+    else
+        vim_pane='false'
+    fi
+
     args="$*"
 
     if [ -n "$args"  ]; then
@@ -25,12 +40,15 @@ _tmux_create() {
     window_path=$(realpath "${args:-$(pwd)}")
     window_name=$(basename "$window_path")
 
-    tmux "$tmux_command" \
-        -c "$window_path" \
-        -n "$window_name" \
-        \; split-window -hd -c "$window_path" \
-        \; send-keys -t 2 vim \
-        \; send-keys -t 2 Enter
+    if [ "$vim_pane" == 'true' ]; then
+        additional_commands="\\; split-window -hd -c $window_path \
+            \\; send-keys -t 2 vim \
+            \\; send-keys -t 2 Enter"
+    else
+        additional_commands=''
+    fi
+
+    eval "tmux $tmux_command -c $window_path -n $window_name $additional_commands"
 }
 
 _tmux_find_window_id() {

@@ -15,7 +15,7 @@ main() {
     # shellcheck disable=SC2063
     current_window="$(_tmux_find_window_id "grep '*'")"
 
-    add_window "$*"
+    add_window "$@"
     new_window="$(_tmux_find_window_id 'tail -n 1')"
 
     tmux swap-window -t "$current_window" -s "$new_window"
