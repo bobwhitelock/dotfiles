@@ -71,7 +71,12 @@ source_libs
 
 # Load completions.
 fpath=("$ZSH_DIR/completions" $fpath)
-autoload -U compinit && compinit
+autoload -Uz compinit bashcompinit
+compinit
+bashcompinit
+
+# XXX remove example completions before committing; unneeded
+source /etc/bash_completion.d/compleat_setup # XXX needed?
 
 # For advanced shell history - disabled for now as messes up environment.
 # export ASH_LOG_BIN=/usr/local/bin/_ash_log.py

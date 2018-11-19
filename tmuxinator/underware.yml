@@ -1,6 +1,8 @@
 
 name: underware
 startup_window: underware
+# XXX get secondary profile automatically launched and configured?
+# on_project_start: terminator --maximise --profile=secondary
 
 windows:
   - notes:
@@ -19,6 +21,11 @@ windows:
           - vagrant ssh
         -
         - vim
+        # - vim:
+        #   - vim
+        #   - ':TmuxReset'
+        #   - underware-secondary
+        #   - '1'
 
   - metalware:
       layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'

@@ -5,6 +5,7 @@ IFS=$'\n\t'
 
 # Replace current window with new window as created by `add_window`.
 
+# XXX inline in tmux.sh?
 
 main() {
     local current_window new_window

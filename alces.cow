@@ -1,0 +1,26 @@
+
+$the_cow = <<EOC;
+                          $thoughts
+                           $thoughts
+                            $thoughts                                             [1;37;40m [38;5;68m
+		`.:/+/       $thoughts
+	    ./oooo+`
+	  `/oooooo.
+	  /oooooo/
+	  ooooooo-
+	  +oooooo/`+ooo
+	  -oooooooooooo
+	   :ooooooooooo. `:+:`
+	    -+ooooooooo+:ooo`
+	     `:ooooooooooooo.                               `.
+	       `:+oooooooooo+`                              /o/
+		 `-+ooooooooo+-                 :.   .+/   -ooo:
+		    .:+oooooooo+-`            .+o: `:ooo  :oooo+
+		       `-/oooooooo/..-....-:/+ooo//oooo+/+ooooo/
+			   ./oooooooo+oooooooooooooooooooooooo/`
+			     .+oooooooooo++oooooooooooooooo+:.
+			       .:/+ooooooo-`..--::::::::-.`
+				     `-:/oo+
+					`-.
+
+EOC

@@ -6,6 +6,20 @@ CONFIG="install.conf.yaml"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTBOT="$BASEDIR/dotbot/bin/dotbot"
 
+# XXX want to automatically handle setting up Gem and Ruby ctags:
+# - see https://thoughtbot.com/upcase/videos/intelligent-navigation-with-ctags
+#
+# - https://github.com/tpope/rbenv-ctags and things linked from there
+# mkdir -p ~/.rbenv/plugins
+# git clone git://github.com/tpope/rbenv-ctags.git \
+  # ~/.rbenv/plugins/rbenv-ctags
+# rbenv ctags
+#
+# - https://github.com/tpope/gem-ctags
+# gem install gem-ctags
+# gem ctags
+
+
 main() {
     cd "${BASEDIR}"
 
@@ -45,7 +59,7 @@ install_dependencies() {
         xargs sudo "$package_manager" -S --noconfirm --needed < dependencies/"$package_manager"
     done
 
-    yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test
+    yarn global add elm@0.19 elm-format@exp create-elm-app elm-oracle elm-test
 }
 
 link_files() {

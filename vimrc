@@ -4,7 +4,9 @@ call plug#begin()
 Plug 'tpope/vim-sensible'
 
 " Handle surroundings (ys/cs/ds).
-Plug 'tpope/vim-surround'
+" XXX Needed? Sort of fixes https://github.com/tpope/vim-surround/issues/232
+" (check this, for Elm code)
+Plug 'jpassaro/vim-surround', { 'branch': 'issue_215' }
 
 " Various mappings for HTML/XML/ERB etc. In particular extra replacements for
 " vim-surround:
@@ -45,7 +47,7 @@ Plug 'tpope/vim-abolish'
 Plug 'airblade/vim-gitgutter'
 
 " Start screen and improved session management.
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 
 " Syntax checking.
 Plug 'scrooloose/syntastic'
@@ -117,6 +119,7 @@ let g:gsearch_ggrep_command = 'Ggrep!'
 Plug '~/projects/other/vim-lumberjack'
 map gl <Plug>(operator-print-below)
 map gL <Plug>(operator-print-above)
+let g:lumberjack_include_random_token=v:false
 
 " View tree of all undos.
 Plug 'sjl/gundo.vim/'
@@ -169,6 +172,7 @@ Plug 'honza/vim-snippets'
 
 " Commands to run tests in different ways.
 Plug 'janko-m/vim-test'
+Plug 'tpope/vim-dispatch'
 
 " Command to send a command to a given Tmux pane.
 Plug 'jgdavey/tslime.vim'
@@ -182,11 +186,17 @@ Plug 'rhysd/devdocs.vim'
 " nmap <C-a> <Plug>(trip-increment)
 " nmap <C-x> <Plug>(trip-decrement)
 
-Plug 'bobwhitelock/vim-lumberjack'
+" XXX document
+Plug '~/src/bobwhitelock/vim-lumberjack'
 
 " Slightly better `:%s/<cword>/foo/gc` - starts at current word and can scope
 " to visual selection.
 Plug 'wincent/scalpel'
+
+" Plug 'mattn/emmet-vim'
+
+" Plug 'vim-scripts/LargeFile'
+" let g:LargeFile = 0.5
 
 " Tweaks and commands for working with bulleted/numbered lists.
 Plug 'dkarter/bullets.vim'
@@ -215,12 +225,19 @@ Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
 Plug 'tell-k/vim-autopep8'
 Plug 'yaymukund/vim-rabl'
-Plug 'tpope/vim-rails'
-Plug 'ngmy/vim-rubocop'
-Plug 'Matt-Deacalion/vim-systemd-syntax'
-Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
-Plug 'tmux-plugins/vim-tmux'
 Plug 'killphi/vim-ruby-refactoring'
+Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
+Plug 'ngmy/vim-rubocop'
+" Bundler support - alters `path` and `tags` to include Gems etc.
+" XXX do I need all these - vim-rake, projectionist etc.?
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+" Project-specific configuration; dependency of `vim-rake`.
+Plug 'tpope/vim-projectionist'
+Plug 'vim-ruby/vim-ruby'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
+Plug 'tmux-plugins/vim-tmux'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
@@ -243,6 +260,7 @@ Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
 Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
 Plug 'ap/vim-css-color' " Highlight background of CSS colors.
 Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
+" Plug 'kmszk/CCSpellCheck.vim'
 
 " Indentation lines (Note: can seriously affect performance for files with
 " long lines, see https://github.com/Yggdroot/indentLine/issues/48)
@@ -604,6 +622,8 @@ let g:UltiSnipsJumpForwardTrigger='<C-d>'
 let g:UltiSnipsJumpBackwardTrigger='<C-u>'
 nnoremap <leader>ue :UltiSnipsEdit<CR>
 
+" let g:CCSpellCheckMatchGroupName = 'SpellBad'
+
 " Custom vim-test strategy; identical to `tslime` strategy except caches
 " results for loading into QuickFix window using `Failures` command below (so
 " can quickly jump between failures).
@@ -614,12 +634,35 @@ function! TslimeAndCacheStrategy(cmd)
   call test#strategy#tslime(l:test_command)
 endfunction
 
+" XXX prevents exiting command, and need to kill terminal, for elm-test (or at
+" least `elm-test --watch`) when there's an error running tests.
 let g:test#custom_strategies = {'tslime_and_cache': function('TslimeAndCacheStrategy')}
 let test#strategy = 'tslime_and_cache'
+" let test#strategy = 'tslime'
+
+function! DockerTransform(cmd) abort
+  " XXX make this work, copied from example but Vagrant-specific
+  " (https://github.com/janko-m/vim-test) - need to find container name of
+  " current project.
+  " let docker_project = get(matchlist(s:cat('Vagrantfile'), '\vconfig\.vm.synced_folder ["''].+[''"], ["''](.+)[''"]'), 1)
+  let docker_project='cloudware'
+  return "docker-compose exec ".docker_project.' '.a:cmd
+endfunction
+
+let g:test#custom_transformations = {'docker': function('DockerTransform')}
+let g:test#transformation = 'docker'
 
 command! Failures cexpr readfile(s:output_file)
 nnoremap <leader>tF :Failures<CR>
 
+" XXX keep in some way?
+" let test#elm#elmtest#options = {
+"   \ 'suite': "--watch",
+" \}
+
+" let ruby#minitest#options = {
+"       \ 'all': '-r minitest/pride',
+"       \}
 
 let g:test#runner_commands = ['RSpec']
 
@@ -739,7 +782,7 @@ nnoremap <leader>g/ :%s///gI<Left><Left><Left>
 xnoremap <leader>gc "zy:%s/<C-r>z//gcI<Left><Left><Left><Left>
 xnoremap <leader>gg "zy:%s/<C-r>z//gI<Left><Left><Left>
 
-" XXX remove, doesn't seem to work anyway?
+" XXX junk?
 " " Shift-tab to indent left in insert mode.
 " inoremap <S-Tab> <C-d>
 
@@ -976,6 +1019,8 @@ nmap <leader>` ysiW`
 nmap <leader>' ysiW'
 nmap <leader>) ysiW)
 nmap <leader>] ysiW]
+" Doesn't work due to nmap - but need to nmap for vim-surround
+" nmap <leader>} ysiW}
 
 " For some reason something in my config is causing `<Esc>b` in insert mode to
 " jump back into insert mode. Not sure what's doing this, but ensuring
@@ -1012,11 +1057,24 @@ nnoremap <leader>es :Espec<space>
 nnoremap <leader>ev :Eview<space>
 nnoremap <leader>ea :A<CR>
 
+" XXX Why won't these work??? Top ones aren't even from Vim itself?
+" noremap <M-PageUp> <Nop>
+" noremap <M-PageDown> <Nop>
+" nnoremap <C-Left> <Nop>
+" nnoremap <C-Right> <Nop>
+" nnoremap <S-Left> <Nop>
+" nnoremap <S-Right> <Nop>
+" nnoremap <A-Left> <Nop>
+" nnoremap <A-Right> <Nop>
+
 " Attempt to fix typo immediately after typing word, and then jump back into
 " insert mode in original position.
 inoremap <C-z> <esc>mzB1z=`za
 
 xnoremap <leader>rn :RenumberSelection<CR>
+
+nmap <leader>bu mmyyPgcc`m
+" xmap <leader>bu mmygv`<pgvgc`m
 
 " Apparently I can never spell these.
 abbreviate unecesary unnecessary
@@ -1041,6 +1099,12 @@ function! XTermPasteBegin()
   set paste
   return ''
 endfunction
+
+" XXX make work ¯\_(ツ)_/¯
+function! s:SearchForTodos()
+  execute '/\vXXX'
+endfunction
+command! Todos call s:SearchForTodos()
 
 " From http://stackoverflow.com/a/8459043/2620402.
 function! DeleteHiddenBuffers()

@@ -1,0 +1,14 @@
+##!/usr/bin/env ruby
+
+#require 'yaml'
+#require 'json'
+
+
+#def main
+#  yaml = File.read($1)
+#  YAML.load_stream(yaml) do
+#    puts YAML.load_file('$1').to_json
+#  end
+#end
+
+#main

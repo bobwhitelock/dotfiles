@@ -10,7 +10,7 @@ alias sls='AWS_CLIENT_TIMEOUT=600000 serverless --aws-profile personal'
 alias ipinfo='curl ipinfo.io | jq .'
 alias etc='sudo etckeeper vcs'
 alias open='xdg-open'
-
+alias sctl='sc'
 alias m='make'
 alias pacman='sudo pacman'
 alias p='pacman'
@@ -107,7 +107,16 @@ RUBY
 }
 
 alias sshaddbob='ssh-add ~/.ssh/id_rsa.bob'
+alias sshaddbob_and_pull='sshaddbob && gpl'
+alias sshaddbob_and_push='sshaddbob && gp'
 alias sshaddaws='ssh-add ~/.ssh/aws_ireland.pem'
+
+# _ssh_add_then_pull() {
+#     local key="$1"
+
+#     ssh-add ~/.ssh/"$key"
+#     git pull --prune
+# }
 
 ssh_remove_last_key() {
     ssh-keygen \

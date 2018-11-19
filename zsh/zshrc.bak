@@ -1,0 +1,5 @@
+
+plugins=(tmuxinator)
+ZSH_THEME="robbyrussell"
+export ZSH=/home/bob/src/bobwhitelock/dotfiles/oh-my-zsh
+source $ZSH/oh-my-zsh.sh

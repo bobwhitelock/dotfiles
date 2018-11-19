@@ -19,6 +19,7 @@ fi
 # include sbin in PATH
 if [ -d "/sbin" ] ; then
     PATH="/sbin:$PATH"
+
 fi
 if [ -d "/usr/sbin" ] ; then
     PATH="/usr/sbin:$PATH"

@@ -12,10 +12,15 @@ alias rdR='bin/rails db:reset'
 alias rgm='bin/rails g migration'
 alias routes='rake routes'
 
+alias rake='be rake'
 alias raket='rake -T'
 alias rakeall='raket -A'
 
 # Quickly run something with Ruby.
 r() {
-    ruby -e "p $*"
+    if [ -n "$*" ]; then
+        ruby -e "p $*"
+    else
+        pry
+    fi
 }

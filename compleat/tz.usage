@@ -1,0 +1,3 @@
+tz <zones>;
+
+zones = ! find /usr/share/zoneinfo | sed 's%/usr/share/zoneinfo/%%';

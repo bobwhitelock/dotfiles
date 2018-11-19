@@ -39,3 +39,12 @@ inoremap <buffer> -<space>[ <C-v>- <C-v>[ ]<space>
 " Indent/dedent in insert mode.
 inoremap <buffer> >> <C-o>>><C-o>$
 inoremap <buffer> << <C-o><<<C-o>$
+
+" Convert checklist in visual selection to numbered list.
+" XXX Make this work
+function! s:number_list()
+  echom "foo"
+  substitute "/\v%V^-/1\./g"
+  " execute "normal! :'<,'>s/\v%V^-/1\./g"
+endfunction
+command! -buffer NumberList call s:number_list()

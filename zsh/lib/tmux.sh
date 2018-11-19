@@ -14,6 +14,7 @@ alias dotsr="rw \$DOTFILES"
 alias notes="aw \$NOTES"
 alias notesr="rw \$NOTES"
 
+# XXX make this comment better
 # Utility function to be used by scripts.
 _tmux_create() {
     local tmux_command vim_pane additional_commands args window_path window_name
