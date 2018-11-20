@@ -3,6 +3,7 @@
 
 name: cloudware
 startup_window: cloudware
+on_project_start: sudo systemctl start docker
 
 windows:
   - notes:
@@ -13,12 +14,11 @@ windows:
         - vim
 
   - cloudware:
-      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
-      root: <%= ENV.fetch('ALCES') %>/cloudware
+      layout: '07bd,239x60,0,0{119x60,0,0[119x19,0,0,14,119x20,0,20,21,119x19,0,41,22],119x60,120,0,15}'
+      root: <%= ENV.fetch('ALCES') %>/cloudware/new
       panes:
-        - vm:
-          - vagrant up
-          - vagrant ssh
+        - docker-compose up
+        - rake docker:bash
         -
         - vim
 
