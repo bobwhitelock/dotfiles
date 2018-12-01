@@ -628,13 +628,29 @@ nnoremap <silent> <leader>ts :call TmuxInterruptAndRun('TestSuite')<CR>
 nnoremap <silent> <leader>tt :call TmuxInterruptAndRun('TestNearest')<CR>
 nnoremap <silent> <leader>tf :call TmuxInterruptAndRun('TestFile')<CR>
 nnoremap <silent> <leader>tv :call TmuxInterruptAndRun('TestVisit')<CR>
-nnoremap <silent> <CR> :call TmuxInterruptAndRun('TestLast')<CR>
-" XXX have this as toggle with above (ToggleTdd vs ToggleRunCommand?)?
-" - or have command to map/unmap <CR> from running any command.
-" nnoremap <CR> :<Up><CR>
 
 " Metalware-specific - just run the quick tests.
 nnoremap <silent> <leader>tq :call TmuxInterruptAndRun("RSpec --exclude-pattern 'spec/slow/**/*, spec/integration/**/*'")<CR>
+
+" Map <CR> to re-run most recently run tests (the default).
+function! s:CrTdd()
+  nnoremap <silent> <CR> :TestLast<CR>
+endfunction
+command! CrTdd call s:CrTdd()
+CrTdd
+
+" Map <CR> to attempt to execute the current file.
+function! s:CrRunCurrentFile()
+  nnoremap <silent> <CR> :TmuxRunCurrentFile<CR>
+endfunction
+command! CrRunCurrentFile call s:CrRunCurrentFile()
+
+" Map <CR> to run any arbitrary command.
+function! s:CrRunCommand(...)
+  let @z = join(a:000)
+  nnoremap <silent> <CR> :TmuxInterruptAndRun <C-r>z<CR>
+endfunction
+command! -nargs=? CrRunCommand call s:CrRunCommand(<q-args>)
 
 " Run a command in the Tmux pane, sending an interrupt first.
 function! TmuxInterruptAndRun(command)
