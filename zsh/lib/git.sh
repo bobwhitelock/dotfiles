@@ -1,7 +1,6 @@
 
 alias git='hub'
 alias g='git'
-alias gpl='git pull --prune'
 alias gg='git grep'
 alias gbl='git blame'
 alias gb='git branch'
@@ -15,6 +14,11 @@ alias gap='ga -p'
 
 alias gp='git push'
 alias gpf='gp --force-with-lease'
+alias gp_with_add='sshaddbob && gp'
+alias gpf_with_add='sshaddbob && gpf'
+
+alias gpl='git pull --prune'
+alias gpl_with_add='sshaddbob && gpl'
 
 alias gd='git diff --color'
 alias gdc='gd --cached'
