@@ -71,3 +71,5 @@
 	templatedir = ~/.git_template
 [rerere]
 	enabled = 1
+[interactive]
+	singleKey = true

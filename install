@@ -49,6 +49,9 @@ install_dependencies() {
     done
 
     yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test
+
+    # Required for `interactive.singleKey` Git option.
+    sudo cpan Term::ReadKey
 }
 
 link_files() {
