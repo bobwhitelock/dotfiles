@@ -606,28 +606,59 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " Custom vim-test strategy; identical to `tslime` strategy except caches
 " results for loading into QuickFix window using `Failures` command below (so
-" can quickly jump between failures).
+" can quickly jump between failures), and also interrupts anything currently
+" running so can cancel already running tests/any other running command.
 function! TslimeAndCacheStrategy(cmd)
+  " Interrupt twice to also send interrupt to e.g. RSpec's graceful interrupt
+  " handling.
+  TmuxInterrupt
+  TmuxInterrupt
+
   " TODO: Need to create new temp file each time? Should remove old temp file?
   let s:output_file = trim(system('mktemp'))
   let l:test_command = 'faketty '.a:cmd.' | tee >(stripcolours > '.s:output_file.')'
   call test#strategy#tslime(l:test_command)
+
+  " Uncomment this line and comment above to just run standard command without
+  " results caching performed by above (which is mostly transparent but has
+  " interacted badly with the test command before, with `elm-test`).
+  " call test#strategy#tslime(a:cmd)
 endfunction
 
 let g:test#custom_strategies = {'tslime_and_cache': function('TslimeAndCacheStrategy')}
 let test#strategy = 'tslime_and_cache'
 
+" XXX WIP, hacky, transform for seamlessly running tests within
+" Docker/`docker-compose` environment.
+function! DockerTransform(cmd) abort
+  " XXX make this line work for Docker, copied from Vagrant-specific example
+  " at https://github.com/janko-m/vim-test - need to find container name of
+  " current project rather than hard-coding `cloudware` below.
+  " let docker_project = get(matchlist(s:cat('Vagrantfile'), '\vconfig\.vm.synced_folder ["''].+[''"], ["''](.+)[''"]'), 1)
+  let docker_project='cloudware'
+  return "docker-compose exec ".docker_project.' '.a:cmd
+endfunction
+
+let g:test#custom_transformations = {'docker': function('DockerTransform')}
+" Uncomment to use hacky Docker test Transform above.
+" let g:test#transformation = 'docker'
+
 command! Failures cexpr readfile(s:output_file)
 nnoremap <leader>tF :Failures<CR>
 
+" Re-run entire Elm test suite on change; every Elm project I've worked on has
+" a fast test suite.
+let test#elm#elmtest#options = {
+  \ 'suite': "--watch",
+\}
 
 let g:test#runner_commands = ['RSpec']
 
 " Maps to run tests.
-nnoremap <silent> <leader>ts :call TmuxInterruptAndRun('TestSuite')<CR>
-nnoremap <silent> <leader>tt :call TmuxInterruptAndRun('TestNearest')<CR>
-nnoremap <silent> <leader>tf :call TmuxInterruptAndRun('TestFile')<CR>
-nnoremap <silent> <leader>tv :call TmuxInterruptAndRun('TestVisit')<CR>
+nnoremap <silent> <leader>ts :TestSuite<CR>
+nnoremap <silent> <leader>tt :TestNearest<CR>
+nnoremap <silent> <leader>tf :TestFile<CR>
+nnoremap <silent> <leader>tv :TestVisit<CR>
 
 " Metalware-specific - just run the quick tests.
 nnoremap <silent> <leader>tq :call TmuxInterruptAndRun("RSpec --exclude-pattern 'spec/slow/**/*, spec/integration/**/*'")<CR>
