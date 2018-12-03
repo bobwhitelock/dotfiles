@@ -647,8 +647,7 @@ command! CrRunCurrentFile call s:CrRunCurrentFile()
 
 " Map <CR> to run any arbitrary command.
 function! s:CrRunCommand(...)
-  let @z = join(a:000)
-  nnoremap <silent> <CR> :TmuxInterruptAndRun <C-r>z<CR>
+  execute 'nnoremap <silent> <CR> :TmuxInterruptAndRun clear;' join(a:000) '<CR>'
 endfunction
 command! -nargs=? CrRunCommand call s:CrRunCommand(<q-args>)
 
@@ -661,7 +660,7 @@ function! TmuxInterruptAndRun(command)
   execute a:command
 endfunction
 command! -nargs=? TmuxInterruptAndRun call TmuxInterruptAndRun('Tmux '.<q-args>)
-command! -nargs=0 TmuxRunCurrentFile execute TmuxInterruptAndRun('Tmux '.expand('%:p'))
+command! -nargs=0 TmuxRunCurrentFile execute TmuxInterruptAndRun('Tmux clear; '.expand('%:p'))
 
 function! TmuxInterrupt()
   execute 'Tmux'
