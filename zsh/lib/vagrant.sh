@@ -5,7 +5,7 @@ alias vup='vagrant up'
 alias vssh='vagrant ssh || vagrant up && vagrant ssh'
 
 vagrant_rebuild() {
-    vagrant destroy --force && vagrant up --provision
+    vagrant destroy --force && vagrant up --provision && vagrant ssh
 }
 
 # SSH into nth Vagrant VM.

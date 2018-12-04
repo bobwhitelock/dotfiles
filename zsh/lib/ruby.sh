@@ -12,6 +12,7 @@ alias rdR='bin/rails db:reset'
 alias rgm='bin/rails g migration'
 alias routes='rake routes'
 
+alias rake='be rake'
 alias raket='rake -T'
 alias rakeall='raket -A'
 

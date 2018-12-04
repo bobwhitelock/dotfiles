@@ -10,7 +10,6 @@ alias sls='AWS_CLIENT_TIMEOUT=600000 serverless --aws-profile personal'
 alias ipinfo='curl ipinfo.io | jq .'
 alias etc='sudo etckeeper vcs'
 alias open='xdg-open'
-
 alias m='make'
 alias pacman='sudo pacman'
 alias p='pacman'
@@ -62,6 +61,11 @@ alias :qa!="tmux kill-session"
 # middle-click clipboard).
 alias cbcopy='xclip -selection clipboard'
 alias cbpaste='xclip -selection clipboard -out'
+
+alias sys='systemctl'
+alias ss='sys status'
+alias sS='sys start'
+alias sr='sys restart'
 
 du() {
     command du -h "$@" | sort -h
@@ -118,7 +122,7 @@ ssh_remove_last_key() {
 absolute_path() {
     readlink --canonicalize --no-newline "$@"
 }
-alias path='absolute-path'
+alias path='absolute_path'
 
 weather() {
     curl "wttr.in/$1"

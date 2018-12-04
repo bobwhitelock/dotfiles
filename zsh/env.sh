@@ -48,7 +48,7 @@ export CHROME_BIN=chromium
 # export AWS_SECRET_ACCESS_KEY=$(aws_secret_key 2> /dev/null)
 
 export DOMAIN_VARS_FILE=/tmp/domain-vars
-cached-domain-vars 2> /dev/null
+# cached-domain-vars 2> /dev/null
 
 export ZSH_LIB="$ZSH_DIR/lib"
 
