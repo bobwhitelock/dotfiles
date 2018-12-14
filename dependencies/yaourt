@@ -4,6 +4,7 @@ dtrx
 git-extras
 interception-caps2esc
 interception-tools
+ipython
 pyenv
 python-grip
 rbenv
