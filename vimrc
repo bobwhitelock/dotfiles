@@ -223,6 +223,8 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'killphi/vim-ruby-refactoring'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
+let g:rust_clip_command = 'xclip -selection clipboard'
+Plug 'mattn/webapi-vim' " Required by rust.vim for :RustPlay.
 Plug 'fatih/vim-go'
 Plug 'dbeniamine/todo.txt-vim'
 Plug 'chrisbra/csv.vim'
@@ -652,7 +654,7 @@ let test#elm#elmtest#options = {
   \ 'suite': "--watch",
 \}
 
-let g:test#runner_commands = ['RSpec']
+let g:test#runner_commands = ['RSpec', 'CargoTest']
 
 " Maps to run tests.
 nnoremap <silent> <leader>ts :TestSuite<CR>
