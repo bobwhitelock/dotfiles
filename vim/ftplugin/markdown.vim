@@ -6,6 +6,9 @@
 " So can write `@tag` in markdown files and search for this with `*`.
 setlocal iskeyword+=@-@
 
+" Override Vimrc setting so can open URLs containing `#` with `gx`.
+setlocal isfname+=#
+
 nmap <buffer> <leader>3 ysip3
 
 " Convert a regular markdown bullet to a checkbox. Note:

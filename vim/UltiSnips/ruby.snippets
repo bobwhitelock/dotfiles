@@ -8,6 +8,11 @@ RSpec.describe $1 do
 end
 endsnippet
 
+snippet RSshared "Start new RSec shared examples file"
+RSpec.shared_examples '$1' do
+end
+endsnippet
+
 # Note: `sleep` sometimes seemingly required here if `save_and_open_page` at
 # end of test, and example will finish before browser opens.
 snippet open "Open browser in Capybara test"

@@ -870,6 +870,7 @@ nnoremap gz vip:'<,'>sort<CR>
 
 nnoremap <leader>tn :tabnew %<CR>
 nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>to :tabonly<CR>
 nnoremap <leader>t> :tabmove +<CR>
 nnoremap <leader>t< :tabmove -<CR>
 

@@ -5,6 +5,9 @@ let g:TodoTxtForceDoneName='done.todo'
 setlocal iskeyword+=@-@,-,+
 setlocal nofoldenable
 
+" Override Vimrc setting so can open URLs containing `#` with `gx`.
+setlocal isfname+=#
+
 " Make `gf` on project tag (`+project`) open corresponding project file or
 " directory.
 setlocal isfname-=+
