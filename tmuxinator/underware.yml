@@ -11,24 +11,25 @@ windows:
         - vim
 
   - underware:
-      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
+      layout: 'df8f,274x67,0,0{137x67,0,0[137x23,0,0,1,137x22,0,24,4,137x20,0,47,5],136x67,138,0,6}'
       root: <%= ENV.fetch('ALCES') %>/underware
       panes:
         - vm:
-          - vagrant up
-          - vagrant ssh
+          - ssh root@10.101.0.59
+          - cd /tmp/underware
+        - IP=10.101.0.59 make watch-rsync
         -
         - vim
 
-  - metalware:
-      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
-      root: <%= ENV.fetch('ALCES') %>/metalware
-      panes:
-        - vm:
-          - vagrant up
-          - vagrant ssh
-        -
-        - vim
+  <%# - metalware: %>
+  <%#     layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}' %>
+  <%#     root: <%= ENV.fetch('ALCES') %1>/metalware %>
+  <%#     panes: %>
+  <%#       - vm: %>
+  <%#         - vagrant up %>
+  <%#         - vagrant ssh %>
+  <%#       - %>
+  <%#       - vim %>
 
   - dotfiles:
       root: <%= ENV.fetch('DOTFILES') %>
@@ -36,3 +37,8 @@ windows:
       panes:
         -
         - vim
+
+  - vpn:
+      root: <%= ENV.fetch('DROP') %>/vpn/bob.whitelock-office-vpn
+      panes:
+        - sudo openvpn office.conf
