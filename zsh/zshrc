@@ -93,8 +93,7 @@ export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 # Enable thefuck.
 command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
 
-export NVM_DIR="/home/bob/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+source /usr/share/nvm/init-nvm.sh
 
 # Enable FZF.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

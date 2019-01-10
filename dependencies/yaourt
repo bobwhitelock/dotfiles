@@ -5,6 +5,7 @@ git-extras
 interception-caps2esc
 interception-tools
 ipython
+nvm
 pyenv
 python-grip
 rbenv
