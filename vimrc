@@ -768,10 +768,6 @@ endfunction
 " entering 'Ex' mode).
 nnoremap Q @q
 
-" Search with more magic.
-nnoremap / /\v
-nnoremap ? ?\v
-
 " Quick find and replace in file of current word with a new string, with and
 " without confirmation respectively.
 nnoremap <Leader>gc :Scalpel/\<<C-r><C-w>\>//<Left>
