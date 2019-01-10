@@ -44,9 +44,6 @@ Plug 'tpope/vim-abolish'
 " Show git changes in gutter.
 Plug 'airblade/vim-gitgutter'
 
-" Start screen and improved session management.
-Plug 'mhinz/vim-startify'
-
 " Syntax checking.
 Plug 'scrooloose/syntastic'
 
