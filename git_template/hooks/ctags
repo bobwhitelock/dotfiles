@@ -7,5 +7,5 @@ mkdir .git/tags_lock 2>/dev/null # || exit 0
 trap 'rmdir .git/tags_lock; rm -f "$dir/$$.tags"' EXIT
 
 git ls-files | \
-  ctags --tag-relative -L - -f"$dir/$$.tags"
+  ctags --tag-relative='always' -L - -f"$dir/$$.tags"
 mv "$dir/$$.tags" "$dir/tags"
