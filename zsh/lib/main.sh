@@ -15,6 +15,9 @@ alias pacman='sudo pacman'
 alias p='pacman'
 alias y='yaourt'
 
+# Make copy/paste-ing in commands from examples slightly more seamless.
+alias '$'=''
+
 # rsync="rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git"
 rsync="rsync -r --copy-links --delete --perms --human-readable --progress"
 # shellcheck disable=SC2139
