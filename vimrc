@@ -654,6 +654,8 @@ let test#elm#elmtest#options = {
   \ 'suite': "--watch",
 \}
 
+let test#python#djangotest#options = '--keepdb'
+
 let g:test#runner_commands = ['RSpec', 'CargoTest']
 
 " Maps to run tests.
