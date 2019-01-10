@@ -11,6 +11,7 @@
     ~/.vim:
         path: vim/
         create: true
+    ~/.ideavimrc: ideavimrc
     ~/.conkyrc: conkyrc
     ~/.screenrc: screenrc
     ~/.psqlrc: psqlrc
