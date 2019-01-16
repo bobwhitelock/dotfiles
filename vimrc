@@ -197,7 +197,6 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'ElmCast/elm-vim'
 Plug 'rdolgushin/gitignore.vim'
 Plug 'tpope/vim-haml'
-Plug 'andreimaxim/vim-io'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'gavocanov/vim-js-indent'
 Plug 'prettier/vim-prettier', {
