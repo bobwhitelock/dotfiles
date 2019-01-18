@@ -225,6 +225,7 @@ Plug 'fatih/vim-go'
 Plug 'dbeniamine/todo.txt-vim'
 Plug 'chrisbra/csv.vim'
 let g:no_csv_maps = 1
+Plug 'jmcomets/vim-pony' " Similar to `vim-rails` for Django.
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
@@ -387,7 +388,7 @@ augroup END
 " Create CamelCaseMotion maps name-spaced behind leader.
 call camelcasemotion#CreateMotionMappings('<leader>')
 
-" Toggle automatically formatting Python according to PEP8 (default enabled).
+" Toggle automatically formatting Python according to PEP8 (default disabled).
 " TODO Move this and `EnablePrettierAutoFormat` to appropriate ftplugin files?
 function! s:EnablePythonAutoFormat()
   augroup python_auto_format
@@ -396,7 +397,6 @@ function! s:EnablePythonAutoFormat()
   augroup END
 endfunction
 command! EnablePythonAutoFormat call s:EnablePythonAutoFormat()
-EnablePythonAutoFormat
 
 function! s:DisablePythonAutoFormat()
   augroup python_auto_format
@@ -652,7 +652,7 @@ let test#elm#elmtest#options = {
 
 let test#python#djangotest#options = '--keepdb'
 
-let g:test#runner_commands = ['RSpec', 'CargoTest']
+let g:test#runner_commands = ['RSpec', 'CargoTest', 'DjangoTest']
 
 " Maps to run tests.
 nnoremap <silent> <leader>ts :TestSuite<CR>
