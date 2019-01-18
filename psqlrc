@@ -5,6 +5,9 @@
 -- Improve appearance of results.
 \pset linestyle unicode
 
+-- Display results compactly and not line-wrapped by default.
+\pset format unaligned
+
 -- Display nulls differently to empty strings.
 \pset null [NULL]
 
