@@ -7,16 +7,21 @@
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
     ~/.git_template: git_template
-    ~/.vimrc: vimrc
+    ~/.vimrc:
+        path: vimrc
+        force: true
     ~/.vim:
         path: vim/
         create: true
+        force: true
     ~/.ideavimrc: ideavimrc
     ~/.conkyrc: conkyrc
     ~/.screenrc: screenrc
     ~/.psqlrc: psqlrc
     ~/.sqliterc: sqliterc
-    ~/.zshrc: zsh/zshrc
+    ~/.zshrc:
+        path: zsh/zshrc
+        force: true
     ~/src/bobwhitelock/dotfiles/oh-my-zsh/custom/themes/bob.zsh-theme:
       path: zsh/theme.zsh-theme
       create: true
@@ -36,6 +41,7 @@
         path: config/polybar/*
         glob: true
         create: true
+        force: true
     ~/.config/terminator:
         path: config/terminator
         create: true

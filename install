@@ -19,6 +19,9 @@ DOTBOT="$BASEDIR/dotbot/bin/dotbot"
 # gem install gem-ctags
 # gem ctags
 
+# XXX link in notes repo too?
+# XXX link in ssh dir from dropbox?
+
 
 main() {
     cd "${BASEDIR}"
@@ -65,7 +68,13 @@ install_dependencies() {
     yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test
 
     # Required for `interactive.singleKey` Git option.
+    # XXX On last install, cpan required configuration but could do this
+    # automatically by typing `yes` - automate this?
     sudo cpan Term::ReadKey
+
+    sudo pip install autopep8
+
+    gem install tmuxinator
 }
 
 link_files() {
@@ -76,9 +85,9 @@ link_files() {
     source 'zsh/env.sh'
     set -u
 
-    ln -sf "$DROP"/.aws ~/.aws
-    ln -sf "$DROP"/.ssh/ ~/.ssh
-    ln -sf "$DROP"/vim/spell/ ~/.vim/spell
+    ln -sf "$DROP"/.aws ~
+    ln -sf "$DROP"/.ssh/ ~
+    ln -sf "$DROP"/vim/spell/ ~/.vim
 
     mkdir -p ~/.todo/
     ln -sf "$NOTES"/todo/done.todo ~/.todo
@@ -90,6 +99,9 @@ link_files() {
     # support linking as root (see
     # https://github.com/anishathalye/dotbot/issues/125).
     sudo ln -sf "$DOTFILES"/etc/udevmon.yaml /etc/
+
+    # Primarily so `etckeeper` (which runs as `root`) uses my Git config.
+    sudo ln -sf ~bob/.gitconfig ~root
 }
 
 tweak_system_files() {
