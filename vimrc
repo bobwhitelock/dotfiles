@@ -211,12 +211,18 @@ Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
 Plug 'tell-k/vim-autopep8'
 Plug 'yaymukund/vim-rabl'
-Plug 'tpope/vim-rails'
 Plug 'ngmy/vim-rubocop'
-Plug 'Matt-Deacalion/vim-systemd-syntax'
-Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
-Plug 'tmux-plugins/vim-tmux'
+Plug 'vim-ruby/vim-ruby'
+" Bundler support - alters `path` and `tags` to include Gems etc.
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+" Project-specific configuration; dependency of `vim-rake`.
+Plug 'tpope/vim-projectionist'
 Plug 'killphi/vim-ruby-refactoring'
+Plug 'nelstrom/vim-textobj-rubyblock' " Ruby block text object (ir / ar).
+Plug 'Matt-Deacalion/vim-systemd-syntax'
+Plug 'tmux-plugins/vim-tmux'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 let g:rust_clip_command = 'xclip -selection clipboard'
