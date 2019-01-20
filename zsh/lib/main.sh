@@ -182,3 +182,8 @@ most_used() {
 tar_dir() {
     tar -zcvf "$1".tar.gz "$1"
 }
+
+# Show output of `ps` for all processes matching `pgrep`.
+pshow() {
+    pgrep "$@" | xargs --no-run-if-empty ps -l
+}
