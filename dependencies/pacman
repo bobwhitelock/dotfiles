@@ -3,6 +3,7 @@ bind-tools
 cloc
 cmake
 ctags
+docker
 etckeeper
 gpaste
 gthumb
@@ -15,6 +16,7 @@ moreutils
 net-tools
 npm
 openvpn
+pinta
 python-pip
 ripgrep
 ruby
@@ -24,6 +26,7 @@ tex-gyre-fonts
 texlive-most
 tmux
 tree
+vlc
 whois
 xcape
 xclip
