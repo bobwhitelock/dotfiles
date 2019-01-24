@@ -1067,18 +1067,6 @@ inoremap <C-z> <esc>mzB1z=`za
 
 xnoremap <leader>rn :RenumberSelection<CR>
 
-" Apparently I can never spell these.
-abbreviate unecesary unnecessary
-abbreviate unnecesary unnecessary
-abbreviate unecessary unnecessary
-abbreviate uneccesary unnecessary
-abbreviate unneccesary unnecessary
-abbreviate unneccessary unnecessary
-abbreviate uneccessary unnecessary
-
-abbreviate unecesarily unnecessarily
-abbreviate unnecesarily unnecessarily
-
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - simpler method works for me under Tmux,
 " and more complex one doesn't).
