@@ -1,0 +1,20 @@
+
+snippet suite
+from __future__ import unicode_literals
+
+from common.tests.utils import TestCase
+
+
+class $1Test(TestCase):
+    def setUp(self):
+        pass
+
+    def test_$2(self):
+        pass
+endsnippet
+
+snippet inspect
+import inspect
+for name, value in inspect.getmembers($1):
+    print("{}: {}".format(name, value))
+endsnippet
