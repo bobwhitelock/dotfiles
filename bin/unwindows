@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Convert any Windows (CRLF) line endings in file to Unix (LF) line endings.
+
+main() {
+    local file
+    file="$1"
+    tr -d '\15\32' < "$file" | sponge "$file"
+}
+
+main "$@"

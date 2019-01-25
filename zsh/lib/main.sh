@@ -150,13 +150,6 @@ echoerr() {
     echo "$@" >&2
 }
 
-# Convert any Windows (CRLF) line endings in file to Unix (LF) line endings.
-unwindows() {
-    local file
-    file="$1"
-    tr -d '\15\32' < "$file" | sponge "$file"
-}
-
 alias urlencode='ruby -r cgi -e "puts CGI.escape(ARGV[0])"'
 alias urldecode='ruby -r cgi -e "puts CGI.unescape(ARGV[0])"'
 
