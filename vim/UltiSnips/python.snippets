@@ -1,4 +1,8 @@
 
+snippet unicode
+from __future__ import unicode_literals
+endsnippet
+
 snippet suite
 from __future__ import unicode_literals
 
@@ -13,8 +17,17 @@ class $1Test(TestCase):
         pass
 endsnippet
 
+# Print names and values of all members (i.e. properties and methods) of an
+# object.
 snippet inspect
 import inspect
 for name, value in inspect.getmembers($1):
     print("{}: {}".format(name, value))
+endsnippet
+
+# Dump object as JSON to file with corresponding name.
+snippet json_dump
+import json
+with open('$1.json', 'w') as f:
+    json.dump($1, f, indent=2)
 endsnippet
