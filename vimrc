@@ -272,6 +272,12 @@ set hlsearch
 highlight clear Search
 highlight Search gui=underline cterm=underline
 
+" Reset gitgutter highlighting to what it used to be (see
+" https://github.com/airblade/vim-gitgutter/commit/afa4f2ddf0fecb37914ec37357636abb18013422).
+highlight GitGutterAdd    guifg=#009900 guibg=#232526 ctermfg=2 ctermbg=236
+highlight GitGutterChange guifg=#bbbb00 guibg=#232526 ctermfg=3 ctermbg=236
+highlight GitGutterDelete guifg=#ff2222 guibg=#232526 ctermfg=1 ctermbg=236
+
 set number " Show current line number.
 set numberwidth=8 " Spacing always given to these numbers.
 
