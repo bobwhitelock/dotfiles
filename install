@@ -2,9 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-CONFIG="install.conf.yaml"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTBOT="$BASEDIR/dotbot/bin/dotbot"
 
 # XXX want to automatically handle setting up Gem and Ruby ctags:
 # - see https://thoughtbot.com/upcase/videos/intelligent-navigation-with-ctags
@@ -30,7 +28,7 @@ main() {
     install_dependencies
 
     header 'Installing dotfiles'
-    bin/faketty "$DOTBOT" -d "${BASEDIR}" -c "${CONFIG}" "${@}" | indent
+    ./sync | indent
 
     # Copy example private environment variable file (if needed), so these can be
     # set but not committed.
