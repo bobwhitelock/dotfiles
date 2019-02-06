@@ -18,9 +18,9 @@ if [ -z "$(git status --porcelain)" ]; then
   # Just create the branch if nothing to commit.
   git branch "$snapshot_branch"
 else
-  git checkout -b "$snapshot_branch"
+  git checkout -B "$snapshot_branch"
   git add .
-  git commit -m "Snapshot"
+  git commit -m "Snapshot" --no-verify
   git branch -f "$current_branch"
   git checkout -
   git reset HEAD~
