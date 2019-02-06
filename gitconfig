@@ -18,7 +18,7 @@
 	sed = git sed
 	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
 	pull-submodules = submodule foreach git pull
-	update-submodules = "! git stash save && git pull-submodules && git commit -am 'Update submodules'; git stash apply"
+	update-submodules = "! git stash save && git submodule foreach 'git checkout master' && git pull-submodules && git commit -am 'Update submodules'; git stash apply"
 	snapshot = snapshot
 	clear-snapshots = clear-snapshots
 	revisions = log --oneline --follow --
@@ -51,6 +51,7 @@
 	today = changes-since 12hours
 	run = "!run-command-on-git-revisions"
 	current-branch = rev-parse --abbrev-ref HEAD
+	set-upstream = !git branch --set-upstream-to=origin/"$(git current-branch)"
 	todos-since = todos-since
 
 [color]
