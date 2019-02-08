@@ -1,0 +1,35 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Outputs and saves report with JSON object with brief info on every available
+# instance in every AWS region. Core part of script adapted from
+# https://stackoverflow.com/a/48125089/2620402.
+
+main() {
+  local report_file='aws_instances_report.json'
+
+  set +m
+  for region in $(aws ec2 describe-regions --query "Regions[*].[RegionName]" --output text); do
+    aws ec2 describe-instances --region "$region" | \
+      jq "
+          .Reservations[].Instances[] |
+            {
+              id: .InstanceId,
+              type: .InstanceType,
+              state: .State.Name,
+              tags: .Tags,
+              zone: .Placement.AvailabilityZone
+            }
+         " | \
+      tee "$report_file" | \
+      jq . &
+  done
+  wait
+  set -m
+
+  echo
+  echo "[Output also saved to \`$report_file\`]" >&2
+}
+
+main "$@"
