@@ -34,6 +34,7 @@ command! -buffer -nargs=0 ClearChecklist %s/\[x\]/\[ \]/g
 " Iterate through all checked/unchecked checboxes respectively.
 command! -buffer -nargs=0 Checked /\[x]
 command! -buffer -nargs=0 Unchecked /\[ ]
+command! -buffer -nargs=0 Ignored /\[-]
 
 " Easily allow inserting checkbox in insert mode (without `auto-pairs` messing
 " this up).

@@ -40,6 +40,9 @@ Plug 'tpope/vim-rsi'
 "   snake_case (crs), UPPER_CASE (cru), dash-case (cr-), dot.case (cr.), space
 "   case (cr<space>), and Title Case (crt).
 Plug 'tpope/vim-abolish'
+" Have either of these work to convert to camelCase, since I always mix these
+" up.
+nmap crC crc
 
 " Show git changes in gutter.
 Plug 'airblade/vim-gitgutter'
@@ -110,11 +113,6 @@ map gr <Plug>(operator-ggrep)
 " TODO: annoying: opens shell, jumps to first match
 let g:gsearch_ggrep_command = 'Ggrep!'
 
-" Operator to log motion as output.
-Plug '~/projects/other/vim-lumberjack'
-map gl <Plug>(operator-print-below)
-map gL <Plug>(operator-print-above)
-
 " View tree of all undos.
 Plug 'sjl/gundo.vim/'
 
@@ -179,7 +177,12 @@ Plug 'rhysd/devdocs.vim'
 " nmap <C-a> <Plug>(trip-increment)
 " nmap <C-x> <Plug>(trip-decrement)
 
-Plug 'bobwhitelock/vim-lumberjack'
+" Plug 'bobwhitelock/vim-lumberjack'
+" Operator to log motion as output.
+Plug '~/src/bobwhitelock/vim-lumberjack'
+map gl <Plug>(operator-print-below)
+map gL <Plug>(operator-print-above)
+
 
 " Slightly better `:%s/<cword>/foo/gc` - starts at current word and can scope
 " to visual selection.
@@ -400,7 +403,7 @@ augroup END
 " Create CamelCaseMotion maps name-spaced behind leader.
 call camelcasemotion#CreateMotionMappings('<leader>')
 
-" Toggle automatically formatting Python according to PEP8 (default disabled).
+" Toggle automatically formatting Python according to PEP8 (default enabled).
 " TODO Move this and `EnablePrettierAutoFormat` to appropriate ftplugin files?
 function! s:EnablePythonAutoFormat()
   augroup python_auto_format
@@ -409,6 +412,7 @@ function! s:EnablePythonAutoFormat()
   augroup END
 endfunction
 command! EnablePythonAutoFormat call s:EnablePythonAutoFormat()
+EnablePythonAutoFormat
 
 function! s:DisablePythonAutoFormat()
   augroup python_auto_format
@@ -672,9 +676,6 @@ nnoremap <silent> <leader>tt :TestNearest<CR>
 nnoremap <silent> <leader>tf :TestFile<CR>
 nnoremap <silent> <leader>tv :TestVisit<CR>
 
-" Metalware-specific - just run the quick tests.
-nnoremap <silent> <leader>tq :call TmuxInterruptAndRun("RSpec --exclude-pattern 'spec/slow/**/*, spec/integration/**/*'")<CR>
-
 " Map <CR> to re-run most recently run tests (the default).
 function! s:CrTdd()
   nnoremap <silent> <CR> :TestLast<CR>
@@ -814,7 +815,7 @@ noremap ]<Backspace> mzjdd`z
 nnoremap <silent> <C-p> :GitFiles --cached --others --exclude-standard<CR>
 nnoremap <silent> <C-f> :History<CR>
 nnoremap <leader>fh :Helptags<CR>
-nnoremap <leader>fb :BLines<CR>
+nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fm :Maps<CR>
 nnoremap <leader>fc :Commits<CR>
@@ -888,7 +889,7 @@ nnoremap gd :Gdiff<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gS :Gwrite<CR>:edit!<CR>
 nnoremap <leader>gR :Gread<CR>
-nnoremap <silent> <leader>gC :call GitStatus()<CR>
+nnoremap <silent> <leader>gC :GitChanged<CR>
 
 function! s:git_status_line_to_quickfix_entry(_line_index, line)
   let l:words = split(a:line)
@@ -901,7 +902,7 @@ function! s:git_status_line_to_quickfix_entry(_line_index, line)
         \ }
 endfunction
 
-function! GitStatus()
+function! s:GitChanged()
   let l:status_lines = systemlist('git status --short')
 
   let l:qf_entries = map(
@@ -912,6 +913,7 @@ function! GitStatus()
   call setqflist([], 'r', {'title': 'git status', 'items': l:qf_entries})
   call ResizeQuickFix()
 endfunction
+command! GitChanged call s:GitChanged()
 
 " Grep for current filename, less extension if present.
 nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
@@ -1001,8 +1003,6 @@ xnoremap <leader>gh :'<,'>OpenGithubFile<CR><CR>
 
 nnoremap <leader>do :diffoff<CR>
 nnoremap <leader>dt :diffthis<CR>
-nnoremap <leader>dp :diffput<CR>
-nnoremap <leader>dg :diffget<CR>
 
 " TODO: do better, just have `z=` and `1z=` maps which enable spell first
 nmap z+ cos1z=cos
