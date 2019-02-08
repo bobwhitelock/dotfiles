@@ -34,6 +34,10 @@ export SRC="$HOME/src"
 export BOB="$SRC/bobwhitelock"
 export NOTES="$BOB/life"
 export ALCES="$SRC/alces-software"
+export RESCALE="$SRC/rescale"
+
+# Duplicated from `zshrc` in case source this file directly.
+export DOTFILES="$BOB/dotfiles"
 
 # Duplicated from `zshrc` in case source this file directly.
 export DOTFILES="$BOB/dotfiles"
@@ -62,6 +66,8 @@ export ZSH_PRIVATE_LIB="$DOTFILES_PRIVATE/zsh/lib"
 export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+
+export M2_HOME='/opt/maven/'
 
 # Load private environment variables if present.
 # shellcheck disable=SC1090
