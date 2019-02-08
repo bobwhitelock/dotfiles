@@ -8,6 +8,7 @@ tz() {
 }
 
 alias sanfrancisco='tz America/Los_Angeles'
+alias sf='sanfrancisco'
 alias denver='tz America/Denver'
 alias chicago='tz America/Chicago'
 alias minnesota='chicago'

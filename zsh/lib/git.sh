@@ -37,6 +37,7 @@ alias gstl='gst list'
 alias gc='git commit --verbose'
 alias gcm='gc -m'
 alias gca='gc --all'
+alias gcnv='gc --no-verify' # Skips any `pre-commit` and `commit-msg` hooks.
 
 alias gco='git checkout'
 alias gcot='gco --track'

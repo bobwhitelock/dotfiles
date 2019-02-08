@@ -66,9 +66,15 @@ alias cbcopy='xclip -selection clipboard'
 alias cbpaste='xclip -selection clipboard -out'
 
 alias sys='systemctl'
-alias ss='sys status'
-alias sS='sys start'
-alias sr='sys restart'
+alias sS='sys status'
+
+ss() {
+    sys start "$@" && sS "$@"
+}
+
+sr() {
+    sys restart "$@" && sS "$@"
+}
 
 du() {
     command du -h "$@" | sort -h
