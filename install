@@ -18,7 +18,6 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # gem ctags
 
 # XXX link in notes repo too?
-# XXX link in ssh dir from dropbox?
 
 
 main() {
