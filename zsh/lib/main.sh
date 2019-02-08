@@ -31,7 +31,7 @@ alias apt_files='dpkg-query --listfiles'
 
 alias sz='source ~/.zshrc'
 source_libs() {
-    for file in "$ZSH_LIB/"*; do
+    for file in "$ZSH_LIB/"* "$ZSH_PRIVATE_LIB"/*; do
         # shellcheck disable=SC1090
         source "$file"
     done

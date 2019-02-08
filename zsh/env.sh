@@ -55,6 +55,9 @@ export DOMAIN_VARS_FILE=/tmp/domain-vars
 
 export ZSH_LIB="$ZSH_DIR/lib"
 
+export DOTFILES_PRIVATE="$BOB/dotfiles-private"
+export ZSH_PRIVATE_LIB="$DOTFILES_PRIVATE/zsh/lib"
+
 # See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \

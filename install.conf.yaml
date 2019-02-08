@@ -27,7 +27,12 @@
       create: true
     ~/.tmux.conf: tmux.conf
     ~/.tmuxinator:
-        path: tmuxinator/
+        path: tmuxinator/*
+        glob: true
+        create: true
+    ~/.tmuxinator/:
+        path: ../dotfiles-private/tmuxinator/*
+        glob: true
         create: true
     ~/bin/:
         path: bin/*
