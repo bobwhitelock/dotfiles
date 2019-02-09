@@ -164,6 +164,7 @@ Plug 'honza/vim-snippets'
 
 " Commands to run tests in different ways.
 Plug 'janko-m/vim-test'
+Plug 'tpope/vim-dispatch' " Recommended for use by `vim-test`.
 
 " Command to send a command to a given Tmux pane.
 Plug 'jgdavey/tslime.vim'
@@ -182,7 +183,6 @@ Plug 'rhysd/devdocs.vim'
 Plug '~/src/bobwhitelock/vim-lumberjack'
 map gl <Plug>(operator-print-below)
 map gL <Plug>(operator-print-above)
-
 
 " Slightly better `:%s/<cword>/foo/gc` - starts at current word and can scope
 " to visual selection.
@@ -235,6 +235,8 @@ Plug 'https://gitlab.com/dbeniamine/todo.txt-vim.git'
 Plug 'chrisbra/csv.vim'
 let g:no_csv_maps = 1
 Plug 'jmcomets/vim-pony' " Similar to `vim-rails` for Django.
+Plug 'neovimhaskell/haskell-vim'
+Plug 'alx741/vim-hindent' " Haskell auto-formatting, with `hindent` installed.
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
@@ -1043,8 +1045,6 @@ nnoremap ]+  /^+ <CR>
 nnoremap [+  ?^+ <CR>
 nnoremap ]-  /^- <CR>
 nnoremap [-  ?^- <CR>
-
-nnoremap <leader>; :<Up><CR>
 
 nnoremap <leader><leader> :e!<CR>
 
