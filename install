@@ -99,12 +99,12 @@ link_files() {
 }
 
 tweak_system_files() {
-  # It's possible a global, system Zshrc will exist (possibly due to updating
-  # system and an updated version of this also being updated); move this out
-  # the way if so, so it doesn't interfere with my own config.
-  if [ -f /etc/zsh/zshrc ]; then
-    sudo mv -f /etc/zsh/zshrc{,.bak}
-  fi
+    # It's possible a global, system Zshrc will exist (possibly due to updating
+    # system and an updated version of this also being updated); move this out
+    # the way if so, so it doesn't interfere with my own config.
+    if [ -f /etc/zsh/zshrc ]; then
+      sudo mv -f /etc/zsh/zshrc{,.bak}
+    fi
 }
 
 enable_services() {
