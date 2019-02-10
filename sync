@@ -6,7 +6,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTBOT="$BASEDIR/dotbot/bin/dotbot"
 
 main() {
-    bin/faketty "$DOTBOT" -d "${BASEDIR}" -c "install.conf.yaml"
+    "$DOTBOT" -d "${BASEDIR}" -c "install.conf.yaml"
 }
 
 main "$@"
