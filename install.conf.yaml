@@ -30,10 +30,6 @@
         path: tmuxinator/*
         glob: true
         create: true
-    ~/.tmuxinator/:
-        path: ../dotfiles-private/tmuxinator/*
-        glob: true
-        create: true
     ~/bin/:
         path: bin/*
         glob: true
@@ -58,4 +54,12 @@
         create: true
     ~/.compleat:
         path: compleat
+        create: true
+
+# Link in any files from `dotfiles-private`; in separate `link` section for
+# clarity and to avoid clashes in destination dir names with above.
+- link:
+    ~/.tmuxinator:
+        path: ../dotfiles-private/tmuxinator/*
+        glob: true
         create: true
