@@ -54,13 +54,10 @@ main() {
 }
 
 install_dependencies() {
-    local package_manager
-
     git submodule update --init --recursive
 
-    for package_manager in pacman yaourt; do
-        xargs sudo "$package_manager" -S --noconfirm --needed < dependencies/"$package_manager"
-    done
+    xargs sudo pacman -S --noconfirm --needed < dependencies/pacman
+    xargs yaourt -S --noconfirm --needed < dependencies/yaourt
 
     yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test
 
