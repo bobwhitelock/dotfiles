@@ -2,30 +2,28 @@
 - clean: ['~', '~/bin']
 
 - link:
-    ~/.ctags: ctags
-    ~/.profile: profile
-    ~/.gitconfig: gitconfig
-    ~/.gitignore: gitignore
-    ~/.git_template: git_template
+    ~/.ctags:
+    ~/.profile:
+    ~/.gitconfig:
+    ~/.gitignore:
+    ~/.git_template:
     ~/.vimrc:
-        path: vimrc
         force: true
     ~/.vim:
-        path: vim/
         create: true
         force: true
-    ~/.ideavimrc: ideavimrc
-    ~/.conkyrc: conkyrc
-    ~/.screenrc: screenrc
-    ~/.psqlrc: psqlrc
-    ~/.sqliterc: sqliterc
+    ~/.ideavimrc:
+    ~/.conkyrc:
+    ~/.screenrc:
+    ~/.psqlrc:
+    ~/.sqliterc:
     ~/.zshrc:
         path: zsh/zshrc
         force: true
     ~/src/bobwhitelock/dotfiles/oh-my-zsh/custom/themes/bob.zsh-theme:
       path: zsh/theme.zsh-theme
       create: true
-    ~/.tmux.conf: tmux.conf
+    ~/.tmux.conf:
     ~/.tmuxinator:
         path: tmuxinator/*
         glob: true
@@ -53,7 +51,6 @@
         path: tmux/plugins
         create: true
     ~/.compleat:
-        path: compleat
         create: true
 
 # Link in any files from `dotfiles-private`; in separate `link` section for
