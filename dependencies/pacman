@@ -1,11 +1,13 @@
 acpi
-evince
+archlabs-polybar
+archlabs-scripts
 bind-tools
 cloc
 cmake
 ctags
 docker
 etckeeper
+evince
 gpaste
 gthumb
 gvim
