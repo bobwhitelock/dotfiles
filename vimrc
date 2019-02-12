@@ -253,6 +253,7 @@ Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
 Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
 Plug 'ap/vim-css-color' " Highlight background of CSS colors.
 Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
+Plug 'unblevable/quick-scope' " Highlight useful chars to jump to for `f`/`F`/`t`/`T`.
 
 " Indentation lines (Note: can seriously affect performance for files with
 " long lines, see https://github.com/Yggdroot/indentLine/issues/48)
@@ -282,6 +283,10 @@ highlight Search gui=underline cterm=underline
 highlight GitGutterAdd    guifg=#009900 guibg=#232526 ctermfg=2 ctermbg=236
 highlight GitGutterChange guifg=#bbbb00 guibg=#232526 ctermfg=3 ctermbg=236
 highlight GitGutterDelete guifg=#ff2222 guibg=#232526 ctermfg=1 ctermbg=236
+
+" Subtle highlighting for `quick-scope` characters.
+highlight QuickScopePrimary gui=underline cterm=underline
+highlight QuickScopeSecondary ctermbg=236
 
 set number " Show current line number.
 set numberwidth=8 " Spacing always given to these numbers.
