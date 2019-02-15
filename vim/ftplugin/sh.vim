@@ -28,10 +28,9 @@ Repeatable nnoremap <buffer> <silent> <leader>sd :call DisableShellcheckIssue()<
 function! s:LineHasShellcheckIssue()
   let l:error_regex = line('.') . ' col'
 
-  Errors
   lopen
   let l:has_issue = search(l:error_regex)
-  normal! $b"zyiw
+  normal! 0f:B"zyt:
   let l:issue = execute('echon @z')
   lclose
 

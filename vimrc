@@ -47,8 +47,8 @@ nmap crC crc
 " Show git changes in gutter.
 Plug 'airblade/vim-gitgutter'
 
-" Syntax checking.
-Plug 'scrooloose/syntastic'
+" Asynchronous linting/fixing.
+Plug 'w0rp/ale'
 
 " Single command for grabbing then swapping windows.
 Plug 'wesQ3/vim-windowswap'
@@ -132,14 +132,6 @@ Plug 'wellle/visual-split.vim'
 " Numerous extra text objects (see
 " https://github.com/wellle/targets.vim/blob/master/cheatsheet.md).
 Plug 'wellle/targets.vim'
-
-" Make syntastic use local rather than global eslint - means uses installed
-" eslint plugins as well.
-Plug 'pmsorhaindo/syntastic-local-eslint.vim'
-
-" Run eslint --fix for current JavaScript buffer.
-" XXX Disabled in favour of vim-prettier at the moment.
-" Plug 'ruanyl/vim-fixmyjs'
 
 " Fuzzy finder for many different sources.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -535,24 +527,8 @@ let g:startify_list_order = []
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 0
 
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_vim_checkers = ['vint']
-" Other Syntastic checkers:
-" - ruby: rubocop
-" - rust: rustc
-" - shell: shellcheck
-
-" let g:fixmyjs_use_local = 1
-
 let g:prettier#autoformat = 0
 let g:prettier#exec_cmd_path = "~/.yarn/bin/prettier"
-
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Populate loc list with errors so can jump between with unimpaired's
-" `[l` / `]l` (see https://github.com/scrooloose/syntastic/issues/341).
-let g:syntastic_always_populate_loc_list = 1
 
 let g:windowswap_map_keys = 0 " Prevent default bindings.
 nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>
@@ -589,7 +565,6 @@ let g:AutoPairs = {
     \}
 
 let g:elm_setup_keybindings = 0
-let g:elm_syntastic_show_warnings = 1
 let g:elm_format_autosave = 1
 
 let g:hl_matchit_enable_on_vim_startup = 1
