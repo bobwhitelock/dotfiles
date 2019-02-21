@@ -65,7 +65,7 @@ alias :qa!="tmux kill-session"
 alias cbcopy='xclip -selection clipboard'
 alias cbpaste='xclip -selection clipboard -out'
 
-alias sys='systemctl'
+alias sys='sudo systemctl'
 alias sS='sys status'
 
 ss() {

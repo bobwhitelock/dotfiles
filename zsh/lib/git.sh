@@ -19,6 +19,7 @@ alias gpf_with_add='sshaddbob && gpf'
 
 alias gpl='git pull --prune'
 alias gpl_with_add='sshaddbob && gpl'
+alias gplr='gpl --rebase=true'
 
 alias gd='git diff --color'
 alias gdc='gd --cached'
