@@ -4,7 +4,6 @@ alias g='git'
 alias gg='git grep'
 alias gbl='git blame'
 alias gb='git branch'
-alias gs='git status -sb'
 alias gcp='git cherry-pick'
 alias gm='git merge'
 
