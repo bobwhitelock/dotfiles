@@ -334,6 +334,9 @@ set modelines=50
 " bottom right corner.
 set showcmd
 
+" Always show sign column, to avoid shift when signs appear.
+set signcolumn=yes
+
 " Do not treat `#` as part of a file name so can e.g. use `gF` while cursor in
 " `foo.md#5` to jump to line 5 of `foo.md`.
 set isfname-=#
@@ -358,19 +361,6 @@ augroup autocmds
 
   " oh-my-zsh themes are shell.
   autocmd BufNewFile,BufRead *.zsh-theme set filetype=sh
-
-  " Clusterware serviceware metadata files are YAML with shell in, and the
-  " shell is the more interesting part.
-  autocmd BufNewFile,BufRead metadata.yml set filetype=sh
-
-  " Clusterware modulefiles are Tcl.
-  autocmd BufNewFile,BufRead *-module.template set filetype=tcl
-
-  " Clusterware rc files are shell.
-  autocmd BufNewFile,BufRead *.rc set filetype=sh
-
-  " Metalware repo files can contain embedded ERB.
-  autocmd BufNewFile,BufRead **/config/*.yaml,*/default,files/** if &filetype !~ '.eruby'| set filetype+=.eruby | endif
 
   " Tmuxinator configs can contain embedded ERB.
   autocmd BufNewFile,BufRead **/tmuxinator/*.yml set filetype=yaml.eruby
@@ -985,7 +975,11 @@ nnoremap <leader>gh :OpenGithubFile<CR><CR>
 xnoremap <leader>gh :'<,'>OpenGithubFile<CR><CR>
 
 nnoremap <leader>do :diffoff<CR>
+" XXX Conditionally enable these only when in diff mode? Can conflict with
+" other `<leader>d` maps.
 nnoremap <leader>dt :diffthis<CR>
+nnoremap <leader>dg :diffget<CR>
+nnoremap <leader>dp :diffput<CR>
 
 " TODO: do better, just have `z=` and `1z=` maps which enable spell first
 nmap z+ cos1z=cos
@@ -1053,6 +1047,9 @@ nnoremap <leader>ea :A<CR>
 inoremap <C-z> <esc>mzB1z=`za
 
 xnoremap <leader>rn :RenumberSelection<CR>
+
+" Re-run last command, whatever that was.
+nnoremap <leader>; :<up><CR>
 
 " Automatically set/unset paste when pasting in insert mode
 " (see http://superuser.com/a/904446 - simpler method works for me under Tmux,

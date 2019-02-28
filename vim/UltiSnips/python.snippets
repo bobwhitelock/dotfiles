@@ -31,3 +31,9 @@ import json
 with open('$1.json', 'w') as f:
     json.dump($1, f, indent=2)
 endsnippet
+
+snippet skip
+from unittest import skip
+
+@skip('$1')
+endsnippet
