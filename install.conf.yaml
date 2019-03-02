@@ -23,6 +23,9 @@
     ~/src/bobwhitelock/dotfiles/oh-my-zsh/custom/themes/bob.zsh-theme:
       path: zsh/theme.zsh-theme
       create: true
+    ~/.ipython/profile_default/ipython_config.py:
+        path: ipython_config.py
+        create: true
     ~/.tmux.conf:
     ~/.tmuxinator:
         path: tmuxinator/*
