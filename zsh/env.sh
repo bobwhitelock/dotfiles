@@ -39,9 +39,6 @@ export RESCALE="$SRC/rescale"
 # Duplicated from `zshrc` in case source this file directly.
 export DOTFILES="$BOB/dotfiles"
 
-# Duplicated from `zshrc` in case source this file directly.
-export DOTFILES="$BOB/dotfiles"
-
 export GITHUB_USER='bobwhitelock'
 
 # Required for Karma to work when Chromium is installed but Chrome isn't.
