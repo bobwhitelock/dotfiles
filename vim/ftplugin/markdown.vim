@@ -28,10 +28,14 @@ Repeatable nnoremap <buffer> <leader>cfc mz>>0f-<<2hf[xf]xhxx<esc>`z4h
 " Format and renumber a list (so long as all in one paragraph).
 Repeatable nnoremap <buffer> <leader>F mzgqipvip:RenumberSelection<CR>`z
 
+" Ignore checkbox (mark with `-` rather than checked or unchecked, but leave
+" in place for reference).
+Repeatable nnoremap <buffer> <leader>- mz:SelectCheckbox<CR>h<Esc>r-`z
+
 " Uncheck all checked checkboxes (`[x]`) in a checklist.
 command! -buffer -nargs=0 ClearChecklist %s/\[x\]/\[ \]/g
 
-" Iterate through all checked/unchecked checboxes respectively.
+" Iterate through all checked/unchecked/ignored checkboxes respectively.
 command! -buffer -nargs=0 Checked /\[x]
 command! -buffer -nargs=0 Unchecked /\[ ]
 command! -buffer -nargs=0 Ignored /\[-]
