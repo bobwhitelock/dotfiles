@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Script intended to be used with `sudo` by `etc_push` alias to push etckeeper
+# changes.
+
+main() {
+  # Use same ssh-agent started in zshrc.
+  # shellcheck disable=SC2034
+  export SSH_AUTH_SOCK=~bob/.ssh/ssh_auth_sock
+
+  etckeeper vcs push
+}
+
+main "$@"
