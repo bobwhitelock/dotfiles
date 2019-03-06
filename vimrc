@@ -365,6 +365,9 @@ augroup autocmds
   " Tmuxinator configs can contain embedded ERB.
   autocmd BufNewFile,BufRead **/tmuxinator/*.yml set filetype=yaml.eruby
 
+  " Graphviz files use `dot` language.
+  autocmd BufNewFile,BufRead *.gv set filetype=dot
+
   " Always want spellcheck for text files.
   autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst,*.todo setlocal spell
   autocmd FileType gitcommit setlocal spell
