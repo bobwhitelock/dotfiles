@@ -16,7 +16,7 @@
 	amend = commit --verbose --amend -C HEAD
 	amend-and-edit = commit --verbose --amend
 	sed = git sed
-	fix-conflicts = ! $EDITOR $(git diff --name-only | uniq)
+	fix-conflicts = "! vim +DisablePythonAutoFormat $(git diff --name-only | uniq)"
 	pull-submodules = submodule foreach git pull
 	update-submodules = "! git stash save && git submodule foreach 'git checkout master' && git pull-submodules && git commit -am 'Update submodules'; git stash apply"
 	snapshot = snapshot
