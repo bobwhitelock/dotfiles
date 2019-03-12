@@ -788,16 +788,16 @@ noremap ]<Backspace> mzjdd`z
 
 " FZF maps.
 nnoremap <silent> <C-p> :GitFiles --cached --others --exclude-standard<CR>
-nnoremap <silent> <C-f> :History<CR>
+nnoremap <silent> <C-f> :Tags<CR>
 nnoremap <leader>fh :Helptags<CR>
 nnoremap <leader>fb :Buffers<CR>
-nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fm :Maps<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fC :BCommits<CR>
 nnoremap <leader>ff :Filetypes<CR>
 nnoremap <leader>fs :Snippets<CR>
 nnoremap <leader>fF :Files<CR>
+nnoremap <leader>fH :History<CR>
 nnoremap <leader>/ :BLines<CR>
 " Fuzz files in Git repo of same language as current file (or at least with
 " same extension, which is 90% of the way there).
@@ -851,6 +851,8 @@ nnoremap <leader>gu :GundoToggle<CR>
 xnoremap gz :sort<CR>
 nnoremap gz vip:'<,'>sort<CR>
 
+" XXX ideally this would fall back to just opening new tab if current buffer
+" doesn't have file.
 nnoremap <leader>tn :tabnew %<CR>
 nnoremap <leader>tc :tabclose<CR>
 nnoremap <leader>to :tabonly<CR>

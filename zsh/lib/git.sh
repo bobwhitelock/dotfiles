@@ -6,6 +6,7 @@ alias gbl='git blame'
 alias gb='git branch'
 alias gcp='git cherry-pick'
 alias gm='git merge'
+alias gscp='git am --show-current-patch'
 
 alias ga='git add'
 alias gan='ga --intent-to-add'
