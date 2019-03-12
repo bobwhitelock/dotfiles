@@ -1,2 +1,7 @@
 #!/bin/sh
 .git/hooks/ctags >/dev/null 2>&1 &
+
+# Remove all `pyc` files to prevent any leftover ones for Python files which
+# aren't present on the new branch being picked up and used, which can
+# potentially break things.
+find . -name "*.pyc" -delete
