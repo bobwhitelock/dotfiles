@@ -68,13 +68,12 @@ alias groot='cd "$(git rev-parse --show-toplevel)"'
 # TODO set `g:fzf_layout` here so this fills screen?
 alias gf='vim +Commits'
 
-alias glogf="git log \
+alias gl="git log \
     --graph \
     --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%ar / %cr)%Creset' \
     --abbrev-commit \
     --date=relative"
-alias glogall='glogf --all'
-alias glog='glogf --color=always | head -n 25'
+alias gla='gl --all'
 
 alias gbi='git bisect'
 alias gbis='gbi start'
