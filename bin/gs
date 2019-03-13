@@ -26,5 +26,5 @@ awk -vOFS='' '
         }
     }
 ' \
-    <(git diff --color --stat HEAD | sed '$d; s/^ //')\
+    <(git diff --color --stat=$(($(tput cols) - 3)) HEAD | sed '$d; s/^ //')\
     <(git -c color.status=always status -sb)
