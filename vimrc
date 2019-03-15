@@ -786,23 +786,6 @@ noremap ]<Backspace> mzjdd`z
 " all with some changed
 " nnoremap * <Plug>(indexed-search-*)N
 
-" FZF maps.
-nnoremap <silent> <C-p> :GitFiles --cached --others --exclude-standard<CR>
-nnoremap <silent> <C-f> :Tags<CR>
-nnoremap <leader>fh :Helptags<CR>
-nnoremap <leader>fb :Buffers<CR>
-nnoremap <leader>fm :Maps<CR>
-nnoremap <leader>fc :Commits<CR>
-nnoremap <leader>fC :BCommits<CR>
-nnoremap <leader>ff :Filetypes<CR>
-nnoremap <leader>fs :Snippets<CR>
-nnoremap <leader>fF :Files<CR>
-nnoremap <leader>fH :History<CR>
-nnoremap <leader>/ :BLines<CR>
-" Fuzz files in Git repo of same language as current file (or at least with
-" same extension, which is 90% of the way there).
-nnoremap <leader>fl :execute "GitFiles --cached --others --exclude-standard '*." . expand("%:e") . "'"<CR>
-
 " Quick close/open of special windows.
 nnoremap <leader>q :cclose \| lclose \| pclose<CR>
 nnoremap <leader>Q :copen<CR>
