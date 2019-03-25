@@ -4,7 +4,5 @@
 let b:ale_linters = ['eslint']
 
 " Have eslint ignore current line.
-nnoremap <buffer> <leader>i mzA // eslint-disable-line<esc>`z`
-
-" `eslint --fix` current file.
-nnoremap <buffer> <leader>f :Fixmyjs<CR>
+" XXX need both maps?
+nnoremap <buffer> <leader>i mzO// eslint-disable-next-line<esc>`z

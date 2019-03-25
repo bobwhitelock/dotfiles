@@ -18,6 +18,7 @@ nmap <buffer> <leader>3 ysip3
 "
 " - Use `4l` to negate the `a [ ]`, so cursor moved back to same original
 "   position.
+" XXX Doesn't work if line is not already a bullet.
 Repeatable nnoremap <buffer> <leader>ctc mz>>0f-<<2ha [ ]<esc>`z4l
 
 " Convert from a checkbox to a regular markdown bullet. Use `x` multiple times
@@ -43,7 +44,3 @@ command! -buffer -nargs=0 Ignored /\[-]
 " Easily allow inserting checkbox in insert mode (without `auto-pairs` messing
 " this up).
 inoremap <buffer> -<space>[ <C-v>- <C-v>[ ]<space>
-
-" Indent/dedent in insert mode.
-inoremap <buffer> >> <C-o>>><C-o>$
-inoremap <buffer> << <C-o><<<C-o>$

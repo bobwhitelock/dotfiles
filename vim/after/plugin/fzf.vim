@@ -3,11 +3,15 @@ nnoremap <silent> <C-p> :GitFiles --cached --others --exclude-standard<CR>
 nnoremap <silent> <C-f> :Tags<CR>
 
 nnoremap <leader>/ :BLines<CR>
-nnoremap <leader>fC :BCommits<CR>
+
 nnoremap <leader>fF :Files<CR>
-nnoremap <leader>fH :History<CR>
 nnoremap <leader>fb :Buffers<CR>
+" 'Fuzz recent'.
+nnoremap <leader>fr :History<CR>
+
 nnoremap <leader>fc :Commits<CR>
+nnoremap <leader>fC :BCommits<CR>
+
 nnoremap <leader>ff :Filetypes<CR>
 nnoremap <leader>fh :Helptags<CR>
 nnoremap <leader>fm :Maps<CR>
