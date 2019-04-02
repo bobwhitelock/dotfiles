@@ -873,6 +873,7 @@ function! s:GitChanged()
 
   call setqflist([], 'r', {'title': 'git status', 'items': l:qf_entries})
   call ResizeQuickFix()
+  execute 'cc 1'
 endfunction
 command! GitChanged call s:GitChanged()
 
