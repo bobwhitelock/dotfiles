@@ -74,3 +74,5 @@
 	enabled = 1
 [interactive]
 	singleKey = true
+[rebase]
+	autoSquash = true
