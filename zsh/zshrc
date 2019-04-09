@@ -116,7 +116,3 @@ command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 
 # OPAM configuration
 . /home/bob/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-# Workaround for this completion not being loaded by default; see
-# https://github.com/robbyrussell/oh-my-zsh/issues/7308.
-source "$ZSH/plugins/tmuxinator/_tmuxinator"
