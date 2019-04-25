@@ -1,0 +1,26 @@
+
+name: gotv-dashboard
+startup_window: gotv-dashboard
+
+windows:
+  - notes:
+      root: <%= ENV.fetch('NOTES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - gotv-dashboard:
+      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
+      root: <%= ENV.fetch('SRC') %>/CampaignLab/gotv-dashboard
+      panes:
+        - rails server
+        -
+        - vim
+
+  - dotfiles:
+      root: <%= ENV.fetch('DOTFILES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
