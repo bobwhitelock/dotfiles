@@ -1110,3 +1110,12 @@ function! FollowSymlink(...)
   endif
 endfunction
 command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
+
+" Edit a file for a new 1-to-1 meeting, with today's date. Assumes Vim has
+" been opened in my notes directory.
+function! s:OneToOne(with)
+  let todays_file_name = strftime('%Y-%m-%d').'.md'
+  let path = join(['reference/rescale/1-to-1s', a:with, l:todays_file_name], '/')
+  execute 'edit '.l:path
+endfunction
+command! -nargs=1 OneToOne call s:OneToOne(<q-args>)

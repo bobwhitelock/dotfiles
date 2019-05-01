@@ -22,6 +22,11 @@ main() {
     mkdir -p "$owner_path"
     cd "$owner_path"
 
+    # XXX This script doesn't work correctly for URLs like
+    # `git@github.com:alces-software/flight-blueprint.git` - this test will
+    # always pass, `hub clone` will then fail if it has already been cloned,
+    # and `add_window` below will fail as there is no `flight-blueprint.git`
+    # dir.
     if [ ! -d "$name" ]; then
         hub clone "$repo"
     fi
