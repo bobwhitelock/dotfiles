@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+main() {
+  find . -wholename "**/*.pyc" -delete
+}
+
+main "$@"
