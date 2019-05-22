@@ -32,6 +32,10 @@ with open('$1.json', 'w') as f:
     json.dump($1, f, indent=2)
 endsnippet
 
+snippet raise
+raise RuntimeError($1)
+endsnippet
+
 snippet trace
 raise RuntimeError($1)
 endsnippet
@@ -44,4 +48,8 @@ endsnippet
 
 snippet fail
 self.assertTrue(False)
+endsnippet
+
+snippet super
+super($1, self).$2(*args, **kwargs)
 endsnippet
