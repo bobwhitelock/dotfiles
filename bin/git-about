@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+main() {
+   if [ ! -e "$@" ]; then
+      echo "Error: Path does not exist: $*"
+      exit 1
+   fi
+
+   git summary "$@"
+   git cloc "$@"
+}
+
+main "$@"

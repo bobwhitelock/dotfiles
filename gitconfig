@@ -43,7 +43,7 @@
 	discard = reset --hard HEAD~
 	just-index = stash save --keep-index
 	wip = ! git add . && git commit -m WIP
-	about = ! git summary && git cloc
+	about = git-about
 	discard-unresolved = discard-unresolved
 	diff-since=diff-since
 	changes-since=changes-since
