@@ -7,7 +7,7 @@ setlocal iskeyword+=@-@,?
 set path+=spec/shared_examples
 
 " Run only failing RSpec tests from last run, using vim-test.
-nnoremap <buffer> <leader>tb :call TmuxInterruptAndRun('RSpec --only-failures')<CR>
+nnoremap <buffer> <leader>tb :call :CrTdd<CR>TmuxInterruptAndRun('RSpec --only-failures')<CR>
 
 " Rubocop bindings - `<leader>ru` binding to lint current buffer defined by
 " `vim-rubocop` plugin.

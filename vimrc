@@ -646,10 +646,10 @@ let test#python#djangotest#options = '--keepdb'
 let g:test#runner_commands = ['RSpec', 'CargoTest', 'DjangoTest']
 
 " Maps to run tests.
-nnoremap <silent> <leader>ts :TestSuite<CR>
-nnoremap <silent> <leader>tt :TestNearest<CR>
-nnoremap <silent> <leader>tf :TestFile<CR>
-nnoremap <silent> <leader>tv :TestVisit<CR>
+nnoremap <silent> <leader>ts :CrTdd<CR>:TestSuite<CR>
+nnoremap <silent> <leader>tt :CrTdd<CR>:TestNearest<CR>
+nnoremap <silent> <leader>tf :CrTdd<CR>:TestFile<CR>
+nnoremap <silent> <leader>tv :CrTdd<CR>:TestVisit<CR>
 
 " Map <CR> to re-run most recently run tests (the default).
 function! s:CrTdd()

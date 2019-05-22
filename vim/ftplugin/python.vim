@@ -9,4 +9,4 @@ augroup global_python_autocmds
   autocmd BufNewFile,BufRead *.html set filetype=htmldjango
 augroup END
 
-nnoremap <buffer> <leader>tF :TestFile --failfast<CR>
+nnoremap <buffer> <leader>tF :CrTdd<CR>:TestFile --failfast<CR>
