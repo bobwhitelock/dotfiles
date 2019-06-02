@@ -17,9 +17,14 @@ alias gpf='gp --force-with-lease'
 alias gp_with_add='sshaddbob && gp'
 alias gpf_with_add='sshaddbob && gpf'
 
-alias gpl='git pull --prune'
-alias gpl_with_add='sshaddbob && gpl'
-alias gplr='gpl --rebase=true'
+# Pull, or try adding key and then pulling if this fails.
+gpl() {
+    \git pull --prune || (ssh-add ~/.ssh/id_rsa.bob && \git pull --prune)
+}
+
+gplr() {
+    \gpl --rebase=true || (ssh-add ~/.ssh/id_rsa.bob && \gpl --rebase=true)
+}
 
 alias gd='git diff --color'
 alias gdc='gd --cached'
