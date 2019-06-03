@@ -26,7 +26,7 @@ for name, value in inspect.getmembers($1):
 endsnippet
 
 # Dump object as JSON to file with corresponding name.
-snippet json_dump
+snippet json
 import json
 with open('$1.json', 'w') as f:
     json.dump($1, f, indent=2)
