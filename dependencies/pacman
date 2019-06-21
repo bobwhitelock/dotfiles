@@ -2,6 +2,9 @@ acpi
 archlabs-polybar
 archlabs-scripts
 bind-tools
+blueman
+bluez
+bluez-utils
 cloc
 cmake
 ctags
