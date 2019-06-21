@@ -510,13 +510,6 @@ let g:markdown_fenced_languages = [
     \]
 let g:markdown_syntax_conceal = 0
 
-let g:startify_session_persistence = 1 " Save Session.vim on quit or new session load (if exists already).
-let g:startify_session_autoload = 1 " Autoload Session.vim on start, if it is present.
-let g:startify_change_to_vcs_root = 1 " Change to VCS root on file load.
-" Show minimal stuff on landing page; only want landing page quote and session
-" persistence from Startify.
-let g:startify_list_order = []
-
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 0
 
