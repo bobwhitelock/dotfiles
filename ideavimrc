@@ -1,4 +1,8 @@
 
+" Source `vim-sensible` as not loaded by just sourcing Vimrc, so options from
+" this (that also exist in IDEA vim emulation) are set.
+source ~/.vim/plugged/vim-sensible/plugin/sensible.vim
+
 source ~/.vimrc
 
 " Enable `vim-surround` emulation.
