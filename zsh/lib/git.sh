@@ -47,6 +47,8 @@ alias gcnv='gc --no-verify' # Skips any `pre-commit` and `commit-msg` hooks.
 
 alias gco='git checkout'
 alias gcot='gco --track'
+# Fuzz checkout.
+alias fco="git branch | fzf | awk '{ print \$NF }' | xargs git checkout"
 
 alias gr='git reset'
 

@@ -14,6 +14,7 @@ alias chicago='tz America/Chicago'
 alias minnesota='chicago'
 alias newyork='tz America/New_York'
 alias london='tz Europe/London'
+alias uk='london'
 alias japan='tz Asia/Tokyo'
 
 america() {
