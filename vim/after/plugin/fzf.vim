@@ -2,11 +2,12 @@
 nnoremap <silent> <C-p> :GitFiles --cached --others --exclude-standard<CR>
 nnoremap <silent> <C-f> :Tags<CR>
 
-nnoremap <leader>/ :BLines<CR>
-nnoremap <leader>? :BTags<CR>
+nnoremap <leader>fb :BLines<CR>
+nnoremap <leader>/ :BTags<CR>
+nnoremap <leader>f/ :BTags<CR>
 
 nnoremap <leader>fF :Files<CR>
-nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fB :Buffers<CR>
 " 'Fuzz recent'.
 nnoremap <leader>fr :History<CR>
 
