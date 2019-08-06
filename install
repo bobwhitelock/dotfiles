@@ -105,6 +105,10 @@ tweak_system_files() {
     if [ -f /etc/zsh/zshrc ]; then
       sudo mv -f /etc/zsh/zshrc{,.bak}
     fi
+
+    # Make this from `git-extras` non-executable, so own alias takes
+    # precedence.
+    chmod -x /usr/bin/git-touch
 }
 
 enable_services() {

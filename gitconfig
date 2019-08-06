@@ -15,6 +15,7 @@
 [alias]
 	amend = commit --verbose --amend -C HEAD
 	amend-and-edit = commit --verbose --amend
+	touch = "! git reset && git amend"
 	sed = git sed
 	fix-conflicts = "! vim +DisablePythonAutoFormat $(git diff --name-only | uniq)"
 	pull-submodules = submodule foreach git pull
