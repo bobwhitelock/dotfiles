@@ -745,8 +745,9 @@ function! YRRunAfterMaps()
 endfunction
 
 " Easier macro executing (with added benefit of preventing accidentally
-" entering 'Ex' mode).
-nnoremap Q @q
+" entering 'Ex' mode). Rerun macro in `p` rather than `q` register to avoid
+" accidentally overriting this if hit `qq`.
+nnoremap Q @p
 
 " Quick find and replace in file of current word with a new string, with and
 " without confirmation respectively.
@@ -881,6 +882,8 @@ nnoremap <leader>I :Ggrep! -i<space>
 nmap <leader>gl :Ggrep!  -- '*.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
 " As above, but only in production code files.
 nmap <leader>gP :Ggrep!  -- :^'**/tests/**' '*.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
+" As above, but only in test code files.
+nmap <leader>gT :Ggrep!  -- '**/tests/**.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
 
 let g:gitgutter_map_keys = 0
 nmap <leader>gs <Plug>GitGutterStageHunk
