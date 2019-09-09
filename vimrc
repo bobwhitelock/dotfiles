@@ -457,6 +457,10 @@ let g:loaded_getscript         = 1 "$VIMRUNTIME/autoload/getscript.vim
 let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
 let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
 let g:loaded_vimballPlugin     = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
+let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
+let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
+let g:loaded_netrwPlugin       = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
+let g:loaded_netrwSettings     = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
 
 " Low vim-plug timeout to get around issue where installing fails sometimes
 " and have to wait 60 seconds for timeout.
@@ -896,7 +900,6 @@ omap ah <Plug>GitGutterTextObjectOuterPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
 
-let g:netrw_nogx = 1 " Disable netrw's gx mapping. XXX disable netrw entirely above?
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 
