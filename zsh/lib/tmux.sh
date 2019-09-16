@@ -14,7 +14,9 @@ alias dotsr="rw \$DOTFILES"
 alias notes="aw \$NOTES"
 alias notesr="rw \$NOTES"
 
-# Utility function to be used by scripts.
+# Utility function to create a new Tmux pane in the given directory, named
+# after that directory, with optional Vim pane on right (when `--vim-pane`
+# option passed).
 _tmux_create() {
     local tmux_command vim_pane additional_commands args window_path window_name
 
