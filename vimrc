@@ -341,6 +341,9 @@ set signcolumn=yes
 " `foo.md#5` to jump to line 5 of `foo.md`.
 set isfname-=#
 
+" Include tags from `.git/tags`.
+set tags^=./.git/tags
+
 " Highlight shell scripts as bash by default unless specified otherwise.
 let g:is_bash=1
 
