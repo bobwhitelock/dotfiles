@@ -108,7 +108,7 @@ tweak_system_files() {
 
     # Make this from `git-extras` non-executable, so own alias takes
     # precedence.
-    chmod -x /usr/bin/git-touch
+    sudo chmod -x /usr/bin/git-touch
 }
 
 enable_services() {
