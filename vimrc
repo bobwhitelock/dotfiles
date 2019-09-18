@@ -342,7 +342,7 @@ set signcolumn=yes
 set isfname-=#
 
 " Include tags from `.git/tags`.
-set tags^=./.git/tags
+set tags^=./.git/tags;
 
 " Highlight shell scripts as bash by default unless specified otherwise.
 let g:is_bash=1
