@@ -893,15 +893,15 @@ nmap <leader>gP :Ggrep!  -- :^'**/tests/**' '*.<C-R>=expand("%:e")<CR>'<C-A><A-f
 nmap <leader>gT :Ggrep!  -- '**/tests/**.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
 
 let g:gitgutter_map_keys = 0
-nmap <leader>gs <Plug>GitGutterStageHunk
-nmap <leader>gr <Plug>GitGutterUndoHunk
-nmap <leader>gp <Plug>GitGutterPreviewHunk
-nmap [h <Plug>GitGutterPrevHunk
-nmap ]h <Plug>GitGutterNextHunk
-omap ih <Plug>GitGutterTextObjectInnerPending
-omap ah <Plug>GitGutterTextObjectOuterPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
-xmap ah <Plug>GitGutterTextObjectOuterVisual
+nmap <leader>gs <Plug>(GitGutterStageHunk)
+nmap <leader>gr <Plug>(GitGutterUndoHunk)
+nmap <leader>gp <Plug>(GitGutterPreviewHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
+omap ih <Plug>(GitGutterTextObjectInnerPending)
+omap ah <Plug>(GitGutterTextObjectOuterPending)
+xmap ih <Plug>(GitGutterTextObjectInnerVisual)
+xmap ah <Plug>(GitGutterTextObjectOuterVisual)
 
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
