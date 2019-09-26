@@ -1,4 +1,5 @@
 experimental.sh
+vim/black
 vim/.netrwhist
 vim/plugged
 vim/plugin/experimental.vim

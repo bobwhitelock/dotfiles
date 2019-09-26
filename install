@@ -66,8 +66,6 @@ install_dependencies() {
     # automatically by typing `yes` - automate this?
     sudo cpan Term::ReadKey
 
-    sudo pip install autopep8
-
     gem install tmuxinator
 }
 

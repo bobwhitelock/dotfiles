@@ -204,7 +204,7 @@ Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
-Plug 'tell-k/vim-autopep8'
+Plug 'psf/black'
 Plug 'yaymukund/vim-rabl'
 Plug 'ngmy/vim-rubocop'
 Plug 'vim-ruby/vim-ruby'
@@ -398,12 +398,13 @@ augroup END
 " Create CamelCaseMotion maps name-spaced behind leader.
 call camelcasemotion#CreateMotionMappings('<leader>')
 
-" Toggle automatically formatting Python according to PEP8 (default enabled).
+" Toggle automatically formatting Python with Black (default enabled).
 " TODO Move this and `EnablePrettierAutoFormat` to appropriate ftplugin files?
+" - Not sure how this would work with making these toggle-able though.
 function! s:EnablePythonAutoFormat()
   augroup python_auto_format
     autocmd!
-    autocmd BufWritePre *.py call Autopep8()
+    autocmd BufWritePre *.py execute ':Black'
   augroup END
 endfunction
 command! EnablePythonAutoFormat call s:EnablePythonAutoFormat()
@@ -581,8 +582,6 @@ let g:ycm_filetype_blacklist = {
 let g:ycm_semantic_triggers = {
     \   'todo': [ '@', '+' ],
     \ }
-
-let g:autopep8_disable_show_diff=1
 
 let g:zv_disable_mapping = 1
 
