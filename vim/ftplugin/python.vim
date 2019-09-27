@@ -11,3 +11,5 @@ augroup global_python_autocmds
 augroup END
 
 nnoremap <buffer> <leader>tF :CrTdd<CR>:TestFile --failfast<CR>
+
+nnoremap <buffer> <C-i> mz:%!isort --atomic -<CR>:w<CR>`z
