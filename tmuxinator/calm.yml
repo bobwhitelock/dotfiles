@@ -15,7 +15,7 @@ windows:
       root: <%= ENV.fetch('SRC') %>/bobwhitelock/calm-website
       panes:
         - make start
-        - xdg-open http://localhost:4000
+        -
         - vim
 
   - dotfiles:
