@@ -2,7 +2,7 @@
 setlocal iskeyword+=$
 
 " Open the ShellCheck wiki page for the error detected on the current line, as
-" reported by Syntastic.
+" reported by ALE.
 function! ShowShellcheckWikiPage()
   let l:issue = s:LineHasShellcheckIssue()
 
