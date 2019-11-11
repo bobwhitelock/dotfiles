@@ -15,6 +15,9 @@ alias m='make'
 alias pacman='sudo pacman'
 alias p='pacman'
 alias y='yaourt'
+alias shell='./manage.py shell'
+alias psql='psql -U postgres'
+alias jqless='jq . --color-output | less -R'
 
 # Make copy/paste-ing in commands from examples slightly more seamless.
 alias '$'=''
@@ -39,6 +42,7 @@ source_libs() {
 }
 alias sa="source_libs"
 
+# XXX Don't work in Rescale session (or other Tmuxinator sessions?).
 alias simple_prompt="SIMPLE_PROMPT=true sz"
 alias simple_prompt_off="unset SIMPLE_PROMPT && sz"
 
