@@ -12,18 +12,22 @@ alias ga='git add'
 alias gan='ga --intent-to-add'
 alias gap='ga -p'
 
-alias gp='git push'
-alias gpf='gp --force-with-lease'
-alias gp_with_add='sshaddbob && gp'
-alias gpf_with_add='sshaddbob && gpf'
+# Functions to push/pull, or try adding key and then doing the same action if
+# this fails.
+gp() {
+    \git push || (ssh-add ~/.ssh/id_rsa.bob && \git push)
+}
 
-# Pull, or try adding key and then pulling if this fails.
+gpf() {
+    \git push --force-with-lease || (ssh-add ~/.ssh/id_rsa.bob && \git push --force-with-lease)
+}
+
 gpl() {
     \git pull --prune || (ssh-add ~/.ssh/id_rsa.bob && \git pull --prune)
 }
 
 gplr() {
-    \gpl --rebase=true || (ssh-add ~/.ssh/id_rsa.bob && \gpl --rebase=true)
+    \git pull --rebase=true || (ssh-add ~/.ssh/id_rsa.bob && \git pull --rebase=true)
 }
 
 alias gd='git diff --color'
