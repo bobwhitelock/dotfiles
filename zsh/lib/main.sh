@@ -15,7 +15,6 @@ alias m='make'
 alias pacman='sudo pacman'
 alias p='pacman'
 alias y='yaourt'
-alias shell='./manage.py shell'
 alias psql='psql -U postgres'
 alias jqless='jq . --color-output | less -R'
 
