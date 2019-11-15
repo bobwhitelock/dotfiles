@@ -1,4 +1,6 @@
 
+# Note: need to initially run `./sync` for this session to be available.
+
 name: access-manager
 
 on_project_start: >

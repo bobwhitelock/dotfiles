@@ -1,4 +1,5 @@
 
+# Note: need to initially run `./sync` for this session to be available.
 # Note: adapted from and very similar to `tmuxinator/underware.yml`.
 
 name: cloudware
