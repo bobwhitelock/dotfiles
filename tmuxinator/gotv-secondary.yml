@@ -1,0 +1,8 @@
+
+name: gotv-dashboard-secondary
+
+windows:
+  - tests:
+      root: <%= ENV.fetch('SRC') %>/CampaignLab/gotv-dashboard
+      panes:
+        - rspec
