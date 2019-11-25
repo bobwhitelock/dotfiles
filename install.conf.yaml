@@ -64,3 +64,7 @@
         path: ../dotfiles-private/tmuxinator/*
         glob: true
         create: true
+    ~/bin/:
+        path: ../dotfiles-private/bin/*
+        glob: true
+        create: true
