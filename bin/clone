@@ -11,8 +11,13 @@ main() {
     # Can be URL or just `owner/name`.
     repo_identifier="$1"
 
-    owner="$(basename "$(dirname "$repo_identifier")")"
-    name="$(basename "$repo_identifier")"
+    # Extract `owner` and `name` from URLs/repo identifiers in any of the
+    # following forms:
+    # - https://github.com/owner/name
+    # - git@github.com:owner/name.git
+    # - owner/name
+    owner="$(basename "$(dirname "$repo_identifier")" | awk -F: '{ print $NF }')"
+    name="$(basename "$repo_identifier" | cut -d. -f1)"
 
     # Standardize repo name so `hub` can figure out method should use to clone;
     # avoids being unnecessarily prompted for password.
@@ -22,11 +27,6 @@ main() {
     mkdir -p "$owner_path"
     cd "$owner_path"
 
-    # XXX This script doesn't work correctly for URLs like
-    # `git@github.com:alces-software/flight-blueprint.git` - this test will
-    # always pass, `hub clone` will then fail if it has already been cloned,
-    # and `add_window` below will fail as there is no `flight-blueprint.git`
-    # dir.
     if [ ! -d "$name" ]; then
         hub clone "$repo"
     fi
