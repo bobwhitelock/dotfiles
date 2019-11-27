@@ -67,9 +67,6 @@ bindkey '^F' forward-word
 stty stop '' -ixoff
 ttyctl -f
 
-source "$ZSH_LIB/main.sh"
-source_libs
-
 # Load completions.
 fpath=("$ZSH_DIR/completions" $fpath)
 autoload -Uz compinit bashcompinit
@@ -116,3 +113,12 @@ command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 
 # OPAM configuration
 . /home/bob/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Source all other custom Zsh files. Do this at the end so any other
+# environment setup from above has happened before any custom setup of this
+# environment from these files (e.g. Pyenv has been enabled and so the correct
+# Python version will automatically be used, prior to one of these files
+# attempting to do something in this environment such as sourcing a
+# virtualenv).
+source "$ZSH_LIB/main.sh"
+source_libs
