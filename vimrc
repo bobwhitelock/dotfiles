@@ -518,6 +518,7 @@ let g:markdown_fenced_languages = [
     \ 'ruby',
     \ 'xml',
     \ 'yaml',
+    \ 'qf',
     \]
 let g:markdown_syntax_conceal = 0
 
