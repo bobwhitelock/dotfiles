@@ -97,6 +97,9 @@ command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
 # Enable FZF.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Load Poetry (for Python package management).
+[ -f ~/.poetry/env ] && source ~/.poetry/env
+
 # Source script to set up all Zsh packages.
 source "$ZSH_DIR/packages.sh"
 
