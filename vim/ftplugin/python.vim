@@ -12,4 +12,8 @@ augroup END
 
 nnoremap <buffer> <leader>tF :CrTdd<CR>:TestFile --failfast<CR>
 
-nnoremap <buffer> <C-i> mz:%!isort --atomic -<CR>:w<CR>`z
+" This is not a buffer-specific mapping, so that once any Python has been
+" opened this will be available in any buffer.
+nnoremap <leader>ep :edit platformweb/environment.properties<CR>
+
+" nnoremap <buffer> <C-i> mz:%!isort --atomic -<CR>:w<CR>`z

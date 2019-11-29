@@ -194,6 +194,8 @@ Plug 'rdolgushin/gitignore.vim'
 Plug 'tpope/vim-haml'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'gavocanov/vim-js-indent'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
@@ -229,6 +231,7 @@ let g:no_csv_maps = 1
 Plug 'jmcomets/vim-pony' " Similar to `vim-rails` for Django.
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent' " Haskell auto-formatting, with `hindent` installed.
+Plug 'saltstack/salt-vim'
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
@@ -461,10 +464,10 @@ let g:loaded_getscript         = 1 "$VIMRUNTIME/autoload/getscript.vim
 let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
 let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
 let g:loaded_vimballPlugin     = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
-let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
-let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
-let g:loaded_netrwPlugin       = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
-let g:loaded_netrwSettings     = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
+" let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
+" let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
+" let g:loaded_netrwPlugin       = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
+" let g:loaded_netrwSettings     = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
 
 " Low vim-plug timeout to get around issue where installing fails sometimes
 " and have to wait 60 seconds for timeout.
