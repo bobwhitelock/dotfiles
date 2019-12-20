@@ -420,11 +420,12 @@ function! s:DisablePythonAutoFormat()
 endfunction
 command! DisablePythonAutoFormat call s:DisablePythonAutoFormat()
 
-" Toggle automatically formatting JavaScript with Prettier (default enabled).
+" Toggle automatically formatting JavaScript/TypeScript with Prettier (default
+" enabled).
 function! s:EnablePrettierAutoFormat()
   augroup prettier_auto_format
     autocmd!
-    autocmd BufWritePre *.js PrettierAsync
+    autocmd BufWritePre *.js,*.ts,*.tsx PrettierAsync
   augroup END
 endfunction
 command! EnablePrettierAutoFormat call s:EnablePrettierAutoFormat()
