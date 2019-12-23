@@ -232,6 +232,8 @@ Plug 'jmcomets/vim-pony' " Similar to `vim-rails` for Django.
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent' " Haskell auto-formatting, with `hindent` installed.
 Plug 'saltstack/salt-vim'
+Plug 'vim-python/python-syntax'
+let g:python_highlight_all = 1
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
