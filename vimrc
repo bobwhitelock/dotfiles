@@ -206,7 +206,8 @@ Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
-Plug 'psf/black'
+Plug 'tell-k/vim-autopep8'
+" Plug 'psf/black'
 Plug 'yaymukund/vim-rabl'
 Plug 'ngmy/vim-rubocop'
 Plug 'vim-ruby/vim-ruby'
@@ -403,13 +404,19 @@ augroup END
 " Create CamelCaseMotion maps name-spaced behind leader.
 call camelcasemotion#CreateMotionMappings('<leader>')
 
-" Toggle automatically formatting Python with Black (default enabled).
+" Toggle automatically formatting Python according to PEP8 (default enabled).
 " TODO Move this and `EnablePrettierAutoFormat` to appropriate ftplugin files?
 " - Not sure how this would work with making these toggle-able though.
 function! s:EnablePythonAutoFormat()
   augroup python_auto_format
     autocmd!
-    autocmd BufWritePre *.py execute ':Black'
+    autocmd BufWritePre *.py call Autopep8()
+
+    " TODO Use this again if/when using Black on a project (not actually
+    " working, in Rescale venv at least - investigate
+    " https://github.com/psf/black/issues?utf8=%E2%9C%93&q=is%3Aissue+%22ModuleNotFoundError%3A+No+module+named+%27black%27%22)
+    "
+    " autocmd BufWritePre *.py execute ':Black'
   augroup END
 endfunction
 command! EnablePythonAutoFormat call s:EnablePythonAutoFormat()
@@ -589,6 +596,8 @@ let g:ycm_filetype_blacklist = {
 let g:ycm_semantic_triggers = {
     \   'todo': [ '@', '+' ],
     \ }
+
+let g:autopep8_disable_show_diff=1
 
 " Ensure YCM server uses Python 2 (as it requires), no matter what default
 " `python` version is.
