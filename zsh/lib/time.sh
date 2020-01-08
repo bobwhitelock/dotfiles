@@ -21,6 +21,7 @@ alias utc='tz'
 alias berlin='tz Europe/Berlin'
 alias moscow='tz Europe/Moscow'
 alias japan='tz Asia/Tokyo'
+alias korea='tz Asia/Seoul'
 
 america() {
     echo "San Francisco:  $(sanfrancisco)"
