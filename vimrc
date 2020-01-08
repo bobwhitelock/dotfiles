@@ -54,6 +54,8 @@ Plug 'w0rp/ale'
 Plug 'wesQ3/vim-windowswap'
 
 " Autocompletion.
+" Need to make sure venv will use YouCompleteMe in is sourced at point this is
+" installed, otherwise things won't work right.
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Reopen last-closed window (C-w u)
@@ -151,6 +153,8 @@ Plug 'tyru/open-browser.vim'
 Plug 'tyru/open-browser-github.vim'
 
 " Snippets.
+" Need to make sure venv will use UltiSnips in is sourced at point this is
+" installed, otherwise things won't work right.
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
