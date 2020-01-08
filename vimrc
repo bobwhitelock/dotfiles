@@ -210,6 +210,8 @@ Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
+" XXX Could replace this, and vim-prettier, maybe other things (vim-rubocop,
+" Black etc?) with just using ALE?
 Plug 'tell-k/vim-autopep8'
 " Plug 'psf/black'
 Plug 'yaymukund/vim-rabl'
