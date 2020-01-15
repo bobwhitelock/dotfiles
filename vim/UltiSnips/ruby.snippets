@@ -19,6 +19,10 @@ snippet open "Open browser in Capybara test"
 save_and_open_page; sleep 1000
 endsnippet
 
+snippet source "Print source location for method"
+  puts "\`$1\` source_location: #{instance_method(:$1).source_location}"
+endsnippet
+
 snippet concern "Create ActiveSupport::Concern"
 module $1
   extend ActiveSupport::Concern
