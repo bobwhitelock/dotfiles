@@ -5,6 +5,10 @@ IFS=$'\n\t'
 # Clone a GitHub repo into standard directory structure, then create Tmux
 # window for new repo.
 
+# XXX Does not work with repos with a `.` as part of the name - e.g. `clone
+# https://github.com/junegunn/fzf.vim` will actually clone
+# https://github.com/junegunn/fzf.
+
 main() {
     local repo_identifier owner name repo owner_path
 
