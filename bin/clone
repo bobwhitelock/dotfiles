@@ -3,11 +3,16 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # Clone a GitHub repo into standard directory structure, then create Tmux
-# window for new repo.
+# window for new repo. Just open existing repo if already previously cloned.
 
 # XXX Does not work with repos with a `.` as part of the name - e.g. `clone
 # https://github.com/junegunn/fzf.vim` will actually clone
 # https://github.com/junegunn/fzf.
+
+# Test cases:
+# `clone https://github.com/junegunn/fzf`     -> `$SRC/junegunn/fzf`
+# `clone git@github.com:junegunn/fzf.git`     -> `$SRC/junegunn/fzf`
+# `clone junegunn/fzf`                        -> `$SRC/junegunn/fzf`
 
 main() {
     local repo_identifier owner name repo owner_path
