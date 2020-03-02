@@ -35,6 +35,12 @@ alias gdc='gd --cached'
 alias gds='gd --shortstat'
 alias gdcs='gdc --shortstat'
 
+# Grep for files making given change (e.g. `gdgrep TODO`), since we branched
+# from `master`.
+gdgrep() {
+    gd --name-only -G "$@" master
+}
+
 alias gst='git stash'
 alias gstk='gst save --keep-index'
 alias gsti='gst save --include-untracked'

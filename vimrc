@@ -911,6 +911,7 @@ nnoremap <leader>I :Ggrep! -i<space>
 
 " Grep in files in Git repo of same language as current file (similar to
 " `<leader>fl` map). Need to use `nmap` so `vim-rsi` maps available.
+" XXX broken
 nmap <leader>gl :Ggrep!  -- '*.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
 " As above, but only in production code files.
 nmap <leader>gP :Ggrep!  -- :^'**/tests/**' '*.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
@@ -1147,9 +1148,36 @@ command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_sym
 
 " Edit a file for a new 1-to-1 meeting, with today's date. Assumes Vim has
 " been opened in my notes directory.
+" XXX DRY up this and following functions
 function! s:OneToOne(with)
+  " XXX Have this be copied into new 1-to-1 file (and then cleared up), iff
+  " that doesn't already exist (in which case this is for next week)
+  let next_path = join(['reference/rescale/1-to-1s', a:with, 'next.md'])
+
   let todays_file_name = strftime('%Y-%m-%d').'.md'
   let path = join(['reference/rescale/1-to-1s', a:with, l:todays_file_name], '/')
   execute 'edit '.l:path
 endfunction
 command! -nargs=1 OneToOne call s:OneToOne(<q-args>)
+
+" Edit a file for work tasks to do today, with today's date. Assumes Vim has
+" been opened in my notes directory.
+function! s:WorkTodo()
+  let todays_file_name = strftime('%Y-%m-%d').'.todo'
+  let path = join(['reference/rescale/daily-tasks', l:todays_file_name], '/')
+  execute 'edit '.l:path
+  " Disable map to archive tasks, as not relevant here.
+  unmap <buffer> <localleader>D
+endfunction
+command! -nargs=0 WorkTodo call s:WorkTodo()
+
+" Edit a file for personal tasks to do today, with today's date. Assumes Vim
+" has been opened in my notes directory.
+function! s:Todo()
+  let todays_file_name = strftime('%Y-%m-%d').'.todo'
+  let path = join(['reference/daily-tasks', l:todays_file_name], '/')
+  execute 'edit '.l:path
+  " Disable map to archive tasks, as not relevant here.
+  unmap <buffer> <localleader>D
+endfunction
+command! -nargs=0 Todo call s:Todo()

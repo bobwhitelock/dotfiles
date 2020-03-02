@@ -1,6 +1,7 @@
 
 nnoremap <silent> <C-p> :GitFiles --cached --others --exclude-standard<CR>
 nnoremap <silent> <C-f> :Tags<CR>
+nnoremap <leader>rg :Rg<CR>
 
 nnoremap <leader>fb :BLines<CR>
 nnoremap <leader>/ :BTags<CR>
