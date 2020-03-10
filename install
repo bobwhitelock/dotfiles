@@ -56,9 +56,12 @@ main() {
 install_dependencies() {
     git submodule update --init --recursive
 
+    xargs sudo yaourt -Syu --noconfirm
+
     xargs sudo pacman -S --noconfirm --needed < dependencies/pacman
     xargs yaourt -S --noconfirm --needed < dependencies/yaourt
 
+    # XXX Should all these be installed - could break things?
     yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test
 
     # Required for `interactive.singleKey` Git option.
