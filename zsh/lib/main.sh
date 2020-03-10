@@ -36,6 +36,7 @@ alias apt_files='dpkg-query --listfiles'
 
 alias sz='source ~/.zshrc'
 source_libs() {
+    # XXX conditionally load private files?
     for file in "$ZSH_LIB/"* "$ZSH_PRIVATE_LIB"/*; do
         # shellcheck disable=SC1090
         source "$file"
@@ -145,6 +146,8 @@ weather() {
 
 # Create, output name of, and edit a temporary file, with optional extension
 # and part of name from args.
+# XXX allow optional piping in to pre-seed file (see
+# https://stackoverflow.com/questions/19619490/how-to-read-stdin-when-no-arguments-are-passed)
 scratch() {
     local extension name file
 

@@ -37,6 +37,8 @@ alias gdcs='gdc --shortstat'
 
 # Grep for files making given change (e.g. `gdgrep TODO`), since we branched
 # from `master`.
+# XXX Will show both additions and deletions, want to only show additions
+# (maybe?)
 gdgrep() {
     gd --name-only -G "$@" master
 }
