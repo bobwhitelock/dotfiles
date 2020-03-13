@@ -1005,7 +1005,7 @@
     </application>
     <application name="zoom">
       <desktop>all</desktop>
-      <maximized>yes</maximized>
+      <maximized>no</maximized>
     </application>
     <application class="Gimp" name="gimp" role="gimp-toolbox" type="utility">
       <maximized>vertical</maximized>
