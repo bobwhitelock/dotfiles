@@ -1,0 +1,30 @@
+
+# Note: need to initially run `./sync` for this session to be available.
+
+name: todotxt-ui
+startup_window: todotxt-ui
+
+windows:
+  - notes:
+      root: <%= ENV.fetch('NOTES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - todotxt:
+      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
+      root: <%= ENV.fetch('BOB') %>/todotxt-ui
+      panes:
+        - server:
+          - export AUTH_USER=bob AUTH_PASSWORD=password TODO_FILE='<%= ENV.fetch('NOTES') %>/todo/next_actions.todo'
+          - bin/rails server -b '0.0.0.0'
+        -
+        - vim
+
+  - dotfiles:
+      root: <%= ENV.fetch('DOTFILES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
