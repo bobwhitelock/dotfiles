@@ -7,25 +7,41 @@ tz() {
     TZ="$1" date
 }
 
-alias sanfrancisco='tz America/Los_Angeles'
+# PST (UTC-8) or PDT (UTC-7)
+alias pt='tz America/Los_Angeles'
+alias california='pt'
+alias sanfrancisco='california'
 alias sf='sanfrancisco'
-alias denver='tz America/Denver'
-alias chicago='tz America/Chicago'
-alias minnesota='chicago'
-alias texas='chicago'
-alias newyork='tz America/New_York'
+# MST (UTC-7) or MDT (UTC-6)
+alias mt='tz America/Denver'
+alias colorado='mt'
+alias denver='colorado'
+alias utah='mt'
+# CST (UTC-6) or CDT (UTC-5)
+alias ct='tz America/Chicago'
+alias chicago='ct'
+alias minnesota='ct'
+alias texas='ct'
+# EST (UTC-5) or EDT (UTC-4)
+alias et='tz America/New_York'
+alias newyork='et'
 alias ny='newyork'
-alias london='tz Europe/London'
-alias uk='london'
+# UTC/GMT or BST (UTC+1)
+alias uk='tz Europe/London'
+alias london='uk'
+# UTC
 alias utc='tz'
+# CET (UTC+1) or CEST (UTC+2)
 alias berlin='tz Europe/Berlin'
+# MSK (UTC+3)
 alias moscow='tz Europe/Moscow'
-alias japan='tz Asia/Tokyo'
+# JST/KST (UTC+9)
 alias korea='tz Asia/Seoul'
+alias japan='tz Asia/Tokyo'
 
 america() {
-    echo "San Francisco:  $(sanfrancisco)"
-    echo "Denver:         $(denver)"
-    echo "Chicago:        $(chicago)"
-    echo "New York:       $(newyork)"
+    echo "California                  PT    $(pt)"
+    echo "Colorado/Utah               MT    $(mt)"
+    echo "Minnesota/Illinois/Texas    CT    $(ct)"
+    echo "New York                    ET    $(et)"
 }
