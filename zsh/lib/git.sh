@@ -15,19 +15,19 @@ alias gap='ga -p'
 # Functions to push/pull, or try adding key and then doing the same action if
 # this fails.
 gp() {
-    \git push || (ssh-add ~/.ssh/id_rsa.bob && \git push)
+    \git push "$@" || (ssh-add ~/.ssh/id_rsa.bob && \git push "$@")
 }
 
 gpf() {
-    \git push --force-with-lease || (ssh-add ~/.ssh/id_rsa.bob && \git push --force-with-lease)
+    \git push --force-with-lease "$@" || (ssh-add ~/.ssh/id_rsa.bob && \git push --force-with-lease "$@")
 }
 
 gpl() {
-    \git pull --prune || (ssh-add ~/.ssh/id_rsa.bob && \git pull --prune)
+    \git pull --prune "$@" || (ssh-add ~/.ssh/id_rsa.bob && \git pull --prune "$@")
 }
 
 gplr() {
-    \git pull --rebase=true || (ssh-add ~/.ssh/id_rsa.bob && \git pull --rebase=true)
+    \git pull --rebase=true "$@" || (ssh-add ~/.ssh/id_rsa.bob && \git pull --rebase=true "$@")
 }
 
 alias gd='git diff --color'
