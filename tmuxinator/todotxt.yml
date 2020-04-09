@@ -1,8 +1,8 @@
 
 # Note: need to initially run `./sync` for this session to be available.
 
-name: todotxt-ui
-startup_window: todotxt-ui
+name: todotxt
+startup_window: todotxt
 
 windows:
   - notes:
