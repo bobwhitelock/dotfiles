@@ -17,7 +17,7 @@ windows:
       root: <%= ENV.fetch('BOB') %>/todotxt-ui
       panes:
         - server:
-          - export AUTH_USER=bob AUTH_PASSWORD=password TODO_FILE='<%= ENV.fetch('NOTES') %>/todo/next_actions.todo'
+          - export AUTH_USER=bob AUTH_PASSWORD=password TODO_FILE='<%= ENV.fetch('SRC') %>/tmp/test/foo.todo' GIT_EMAIL='bob.whitelock1+todotxt-dev@gmail.com'
           - bin/rails server -b '0.0.0.0'
         -
         - vim
