@@ -79,3 +79,5 @@
 	autoSquash = true
 [branch]
 	sort = -authordate:iso8601
+[advice]
+	detachedHead = false
