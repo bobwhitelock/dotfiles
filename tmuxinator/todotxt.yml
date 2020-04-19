@@ -13,12 +13,13 @@ windows:
         - vim
 
   - todotxt:
-      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
+      layout: 'be91,274x72,0,0{137x72,0,0[137x33,0,0,4,137x4,0,34,7,137x33,0,39,6],136x72,138,0,5}'
       root: <%= ENV.fetch('BOB') %>/todotxt-ui
       panes:
         - server:
           - export AUTH_USER=bob AUTH_PASSWORD=password TODO_FILE='<%= ENV.fetch('SRC') %>/tmp/test/foo.todo' GIT_EMAIL='bob.whitelock1+todotxt-dev@gmail.com'
           - bin/rails server -b '0.0.0.0'
+        - bin/webpack-dev-server
         -
         - vim
 
