@@ -186,6 +186,7 @@ Plug 'wincent/scalpel'
 
 " Tweaks and commands for working with bulleted/numbered lists.
 Plug 'dkarter/bullets.vim'
+let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-', 'std-']
 
 " Commands to hide/show lines of buffer using regexes (Hide / Show / ShowAll).
 Plug 'ctechols/vim-hideshow'
