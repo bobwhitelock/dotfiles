@@ -19,6 +19,7 @@ alias psql='psql -U postgres'
 alias jqless='jq . --color-output | less -R'
 alias split_words="sed 's/\s/\n/g'"
 alias spark='sparklines'
+alias unixtime='date +%s'
 
 # Make copy/paste-ing in commands from examples slightly more seamless.
 alias '$'=''
