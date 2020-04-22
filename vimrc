@@ -606,10 +606,6 @@ let g:ycm_semantic_triggers = {
 
 let g:autopep8_disable_show_diff=1
 
-" Ensure YCM server uses Python 2 (as it requires), no matter what default
-" `python` version is.
-let g:ycm_server_python_interpreter = trim(system('which python2'))
-
 let g:zv_disable_mapping = 1
 
 let g:gundo_prefer_python3 = 1
