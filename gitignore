@@ -7,3 +7,4 @@ __LAST__
 npm-debug.log
 tags
 .mypy_cache
+__pycache__
