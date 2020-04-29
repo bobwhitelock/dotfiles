@@ -99,8 +99,7 @@ alias gf='vim +Commits'
 alias gl="git log \
     --graph \
     --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%ar / %cr)%Creset' \
-    --abbrev-commit \
-    --date=relative"
+    --abbrev-commit"
 alias gla='gl --all'
 
 alias gbi='git bisect'
