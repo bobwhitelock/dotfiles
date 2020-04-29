@@ -43,3 +43,10 @@ nnoremap <script> <silent> <buffer> <localleader>D :call todo#RemoveCompleted()<
 
 nnoremap <script> <silent> <buffer> <localleader>s@ :sort /.\{-}\ze@/ <CR>
 nnoremap <script> <silent> <buffer> <localleader>s+ :sort /.\{-}\ze+/ <CR>
+
+" Todo file filtering maps, using commands from `vim-hideshow`.
+nnoremap <buffer> <leader>sa :ShowAll<CR>
+nnoremap <buffer> <leader>ss :Show<space>
+nnoremap <buffer> <leader>st :ShowAll<CR>:Show @today<CR>
+nnoremap <buffer> <leader>sww :ShowAll<CR>:Show @work<CR>
+nnoremap <buffer> <leader>swt :ShowAll<CR>:Show @work.*@today<CR>
