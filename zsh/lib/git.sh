@@ -71,6 +71,22 @@ fco() {
         xargs git checkout
 }
 
+# Fuzz show, with preview.
+fsh() {
+    git log \
+        --all \
+        --pretty=format:'%Cred%H%Creset %an / %cn %s%C(yellow)%d%Creset %Cgreen%ar / %cr%Creset' \
+        --color=always | \
+        fzf \
+        --query="$*" \
+        --exact \
+        --ansi \
+        --preview="echo {} | cut -d' ' -f1 | xargs git show --color=always" \
+        --preview-window=top:40% | \
+        awk '{ print $1 }' | \
+        xargs git show
+}
+
 alias gr='git reset'
 
 alias gcf=' git clean -d --force'
