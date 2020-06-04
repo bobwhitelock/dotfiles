@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+main() {
+  yaourt -Syu --noconfirm
+  cd "$NOTES" && git pull
+  cd "$DOTFILES_PRIVATE" && git pull
+  cd "$DOTFILES" && git pull && ./install
+  sudo "$LIBEXEC"/etc-push
+}
+
+main "$@"
