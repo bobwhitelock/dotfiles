@@ -81,3 +81,6 @@
 	sort = -authordate:iso8601
 [advice]
 	detachedHead = false
+[grep]
+	extendedRegexp = true
+	lineNumber = true

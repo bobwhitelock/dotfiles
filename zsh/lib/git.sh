@@ -1,7 +1,7 @@
 
 alias git='hub'
 alias g='git'
-alias gg='git grep'
+alias gg='git grep --break --heading'
 alias gbl='git blame'
 alias gb='git branch'
 alias gcp='git cherry-pick'
