@@ -50,7 +50,7 @@ Plug 'airblade/vim-gitgutter'
 " Asynchronous linting/fixing.
 Plug 'w0rp/ale'
 
-" Single command for grabbing then swapping windows.
+" Single command (gw) for grabbing then swapping windows.
 Plug 'wesQ3/vim-windowswap'
 
 " Autocompletion.
