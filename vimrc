@@ -191,6 +191,12 @@ let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-', 'std-
 " Commands to hide/show lines of buffer using regexes (Hide / Show / ShowAll).
 Plug 'ctechols/vim-hideshow'
 
+" Easily filter quickfix list:
+" <Leader>g to filter entries;
+" <Leader>v to inverted filter entries;
+" <Leader>r to restore original quickfix list before filtering.
+Plug 'sk1418/QFGrep'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'kchmck/vim-coffee-script'
@@ -905,15 +911,6 @@ nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
 
 nnoremap <leader>G :Ggrep!<space>
 nnoremap <leader>I :Ggrep! -i<space>
-
-" Grep in files in Git repo of same language as current file (similar to
-" `<leader>fl` map). Need to use `nmap` so `vim-rsi` maps available.
-" XXX broken
-nmap <leader>gl :Ggrep!  -- '*.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
-" As above, but only in production code files.
-nmap <leader>gP :Ggrep!  -- :^'**/tests/**' '*.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
-" As above, but only in test code files.
-nmap <leader>gT :Ggrep!  -- '**/tests/**.<C-R>=expand("%:e")<CR>'<C-A><A-f><Right>
 
 let g:gitgutter_map_keys = 0
 nmap <leader>gs <Plug>(GitGutterStageHunk)
