@@ -1,7 +1,8 @@
 
 export GITHUB_PASSWORD=XXX
 
-export RESCALE_API_TOKEN=XXX
+export RESCALE_API_TOKEN_DEV=XXX
+export RESCALE_API_TOKEN_PROD=XXX
 
 # For Rescale integration tests.
 export UI_TEST_ACCOUNT_EMAIL=XXX
