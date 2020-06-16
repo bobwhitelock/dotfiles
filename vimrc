@@ -353,7 +353,7 @@ set suffixesadd+=.js
 " Allow modeline settings.
 " TODO: Apparently insecure sometimes.
 set modeline
-set modelines=50
+set modelines=20
 
 " Show current key strokes, or size of select area when in visual mode, in
 " bottom right corner.
