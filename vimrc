@@ -1,4 +1,10 @@
 
+" Force Vim to use Python 3 rather than have plugins (like UltiSnips)
+" sporadically blow up and complain depending on which plugins are already
+" loaded. See https://robertbasic.com/blog/force-python-version-in-vim/.
+if has('python3')
+endif
+
 call plug#begin()
 " Sensible defaults.
 Plug 'tpope/vim-sensible'
