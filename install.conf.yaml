@@ -51,6 +51,9 @@
     ~/.config/htop:
         path: config/htop
         create: true
+    ~/.config/coc/extensions/package.json:
+        path: config/coc/extensions/package.json
+        create: true
     ~/.tmux/plugins:
         path: tmux/plugins
         create: true

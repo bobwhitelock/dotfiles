@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "coc-css": ">=1.2.3",
+    "coc-eslint": ">=1.2.7",
+    "coc-html": ">=1.2.4",
+    "coc-json": ">=1.2.6",
+    "coc-python": ">=1.2.12",
+    "coc-snippets": ">=2.1.28",
+    "coc-sql": ">=0.2.24",
+    "coc-svg": ">=0.0.13",
+    "coc-tailwindcss": ">=0.6.0",
+    "coc-tsserver": ">=1.5.1",
+    "coc-vimlsp": ">=0.8.0",
+    "coc-yaml": ">=1.0.4"
+  }
+}

@@ -60,9 +60,7 @@ Plug 'w0rp/ale'
 Plug 'wesQ3/vim-windowswap'
 
 " Autocompletion.
-" Need to make sure venv will use YouCompleteMe in is sourced at point this is
-" installed, otherwise things won't work right.
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
@@ -369,6 +367,10 @@ set isfname-=#
 " Include tags from `.git/tags`.
 set tags^=./.git/tags;
 
+" Other settings recommended by coc (https://github.com/neoclide/coc.nvim).
+set nowritebackup
+set cmdheight=2
+
 " Highlight shell scripts as bash by default unless specified otherwise.
 let g:is_bash=1
 
@@ -581,7 +583,7 @@ let g:yankring_replace_n_pkey = '<C-u>'
 let g:yankring_replace_n_nkey = '<C-d>'
 nnoremap <C-y> :YRShow<CR>
 
-let g:AutoPairsShortcutToggle = '<leader>ap'
+let g:AutoPairsShortcutToggle = ''
 
 " Default maps minus quote maps, which were getting in the way.
 let g:AutoPairs = {
@@ -597,24 +599,6 @@ let g:elm_format_autosave = 1
 let g:hl_matchit_enable_on_vim_startup = 1
 let g:hl_matchit_hl_groupname = 'MatchParen'
 let g:hl_matchit_speed_level = 2
-
- " `gitcommit` included here to prevent weird issue where YCM was causing
- " characters to be duplicated when gitcommit ftplugin auto-splits lines.
-let g:ycm_filetype_blacklist = {
-      \ 'gitcommit' : 1,
-      \ 'infolog' : 1,
-      \ 'mail' : 1,
-      \ 'notes' : 1,
-      \ 'pandoc' : 1,
-      \ 'qf' : 1,
-      \ 'tagbar' : 1,
-      \ 'unite' : 1,
-      \ 'vimwiki' : 1,
-      \}
-
-let g:ycm_semantic_triggers = {
-    \   'todo': [ '@', '+' ],
-    \ }
 
 let g:autopep8_disable_show_diff=1
 
