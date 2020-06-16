@@ -262,7 +262,8 @@ Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
 Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
 Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
-Plug 'BobWhitelock/HiCursorWords' " Highlight occurrences of word under cursor.
+Plug 'jkerian/HiCursorWords' " Highlight occurrences of word under cursor.
+let g:HiCursorWords_linkStyle='ColorColumn'
 " TODO disabled for now as was slowing things down.
 " Plug 'vimtaku/hl_matchit.vim' " Highlight matchit.vim matches.
 Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attempt to access.
