@@ -31,7 +31,7 @@ main() {
   install_dependencies
 
   header 'Installing dotfiles'
-  bin/faketty ./sync | indent
+  bin/faketty sync_dotbot | indent
 
   # Copy example private environment variable file (if needed), so these can be
   # set but not committed.

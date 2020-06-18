@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+main() {
+  "$DOTFILES/dotbot/bin/dotbot" -d "$DOTFILES" -c "install.conf.yaml"
+}
+
+main "$@"

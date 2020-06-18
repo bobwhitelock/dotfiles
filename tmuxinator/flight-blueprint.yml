@@ -1,5 +1,5 @@
 
-# Note: need to initially run `./sync` for this session to be available.
+# Note: need to run `sync` for this session to be available.
 
 name: flight-blueprint
 on_project_start: sudo systemctl start postgresql docker
