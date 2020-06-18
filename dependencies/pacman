@@ -1,5 +1,4 @@
 acpi
-archlabs-polybar
 archlabs-scripts
 bat
 bind-tools
@@ -24,7 +23,6 @@ net-tools
 npm
 openvpn
 peek
-pinta
 python-pip
 ripgrep
 ruby

@@ -21,6 +21,10 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 
 main() {
+    # Request `sudo` access pre-emptively, so password isn't re-prompted for at
+    # some arbitrary time for later uses of `sudo`.
+    sudo true
+
     cd "${BASEDIR}"
 
     header 'Installing dependencies'
@@ -56,7 +60,7 @@ main() {
 install_dependencies() {
     git submodule update --init --recursive
 
-    xargs sudo yaourt -Syu --noconfirm
+    sudo yaourt -Syu --noconfirm
 
     xargs sudo pacman -S --noconfirm --needed < dependencies/pacman
     xargs yaourt -S --noconfirm --needed < dependencies/yaourt

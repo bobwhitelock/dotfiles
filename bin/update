@@ -4,7 +4,10 @@ IFS=$'\n\t'
 
 
 main() {
-  yaourt -Syu --noconfirm
+  # Request `sudo` access pre-emptively, so password isn't re-prompted for at
+  # some arbitrary time for later uses of `sudo`.
+  sudo true
+
   cd "$NOTES" && git pull
   cd "$DOTFILES_PRIVATE" && git pull
   cd "$DOTFILES" && git pull && ./install
