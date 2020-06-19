@@ -8,10 +8,21 @@ main() {
   # some arbitrary time for later uses of `sudo`.
   sudo true
 
-  cd "$NOTES" && git pull
-  cd "$DOTFILES_PRIVATE" && git pull
-  cd "$DOTFILES" && git pull && ./install
-  sudo "$LIBEXEC"/etc-push
+  run "cd '$NOTES' && git pull"
+  run "cd '$DOTFILES_PRIVATE' && git pull"
+  run "cd '$DOTFILES' && git pull && ./install"
+  run sudo "$LIBEXEC"/etc-push
+}
+
+# Duplicated from `install`.
+run() {
+  echo
+  echo '>' "$@"
+  eval "$@" 2>&1 | indent
+}
+
+indent() {
+  sed 's/^/       /'
 }
 
 main "$@"
