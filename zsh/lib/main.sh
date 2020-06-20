@@ -20,6 +20,7 @@ alias jqless='jq . --color-output | less -R'
 alias split_words="sed 's/\s/\n/g'"
 alias spark='sparklines'
 alias unixtime='date +%s'
+alias cat='bat'
 
 # Make copy/paste-ing in commands from examples slightly more seamless.
 alias '$'=''
