@@ -41,8 +41,7 @@ main() {
   fi
 
   header 'Setting up Vim'
-  run mkdir -p vim/{session,undodir,view}
-  run "vim +':PlugInstall | :PlugUpdate | :qa!'"
+  setup_vim
 
   header 'Setting up Tmux'
   run ~/.tmux/plugins/tpm/bin/install_plugins
@@ -74,6 +73,11 @@ install_dependencies() {
   run sudo pip install autopep8
 
   run gem install tmuxinator
+}
+
+setup_vim() {
+  run mkdir -p vim/{session,undodir,view}
+  run "vim +':PlugInstall | :PlugUpdate | :qa!'"
 }
 
 link_files() {
