@@ -60,8 +60,6 @@ main() {
 install_dependencies() {
   run git submodule update --init --recursive
 
-  run sudo yaourt -Syu --noconfirm
-
   run 'xargs sudo pacman -S --noconfirm --needed < dependencies/pacman'
   run 'xargs yaourt -S --noconfirm --needed < dependencies/yaourt'
 
