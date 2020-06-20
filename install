@@ -78,6 +78,7 @@ install_dependencies() {
 setup_vim() {
   run mkdir -p vim/{session,undodir,view}
   run "vim +':PlugInstall | :PlugUpdate | :qa!'"
+  run 'cd ~/.config/coc/extensions && yarn install'
 }
 
 link_files() {
