@@ -64,6 +64,8 @@
 [diff]
 	tool = vimdiff
 	algorithm = patience
+	mnemonicprefix = true
+	colorMoved = zebra
 [merge]
 	ff = false
 	conflictstyle = diff3
