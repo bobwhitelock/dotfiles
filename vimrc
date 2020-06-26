@@ -683,6 +683,13 @@ function! s:CrRunCurrentFile()
 endfunction
 command! CrRunCurrentFile call s:CrRunCurrentFile()
 
+" Map <CR> to send content of current buffer to another Tmux pane (useful for
+" sending code to a REPL).
+function! s:CrSendCurrentFile()
+  execute 'nnoremap <silent> <CR> ggyG:TmuxInterruptAndRun <C-q><C-l><C-r>0<CR>'
+endfunction
+command! CrSendCurrentFile call s:CrSendCurrentFile()
+
 " Map <CR> to run any arbitrary command.
 function! s:CrRunCommand(...)
   execute 'nnoremap <silent> <CR> :TmuxInterruptAndRun clear;' join(a:000) '<CR>'
