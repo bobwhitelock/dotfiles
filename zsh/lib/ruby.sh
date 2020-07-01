@@ -4,16 +4,20 @@ alias be='bundle exec'
 alias rspec='be rspec'
 
 alias rc='bin/rails console'
-# XXX Make this do `db:migrate` or `db:migrate:with_data` depending on whether
-# the latter is valid - i.e. either attempt the latter and fallback to former,
-# or check for presence of `data_migrate` Gem to decide.
-alias rdm='bin/rails db:migrate:with_data'
 alias rdr='bin/rails db:rollback'
 alias rdms='bin/rails db:migrate:status'
 alias rdc='bin/rails dbconsole'
 alias rdR='bin/rails db:reset'
 alias rgm='bin/rails g migration'
 alias routes='rake routes'
+
+rdm() {
+    if bin/rails -T | grep db:migrate:with_data -q; then
+        bin/rails db:migrate:with_data
+    else
+        bin/rails db:migrate
+    fi
+}
 
 alias rake='be rake'
 alias raket='rake -T'
