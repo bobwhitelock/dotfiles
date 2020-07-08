@@ -77,6 +77,14 @@ alias cbpaste='xclip -selection clipboard -out'
 alias sys='sudo systemctl'
 alias sS='sys status'
 
+vim() {
+    if [ -f 'Session.vim' ]; then
+        command vim -S "$@"
+    else
+        command vim "$@"
+    fi
+}
+
 ss() {
     sys start "$@" && sleep 1 && sS "$@"
 }
