@@ -216,7 +216,7 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 Plug 'elzr/vim-json'
-Plug 'mxw/vim-jsx'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tangledhelix/vim-kickstart'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
