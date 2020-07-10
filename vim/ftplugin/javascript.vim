@@ -10,5 +10,4 @@ let b:ale_linters = ['eslint']
 " let b:ale_linters = ['prettier', 'eslint']
 
 " Have eslint ignore current line.
-" XXX need both maps?
 nnoremap <buffer> <leader>i mzO// eslint-disable-next-line<esc>`z
