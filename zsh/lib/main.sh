@@ -78,8 +78,8 @@ alias sys='sudo systemctl'
 alias sS='sys status'
 
 vim() {
-    if [ -f 'Session.vim' ]; then
-        command vim -S "$@"
+    if [ -f 'Session.vim' ] && [ "$*" = "" ]; then
+        command vim -S
     else
         command vim "$@"
     fi
