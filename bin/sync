@@ -12,6 +12,8 @@ main() {
   run "cd '$NOTES' && git pull"
   run "cd '$DOTFILES_PRIVATE' && git pull"
   run "cd '$DOTFILES' && git pull && ./install"
+  # XXX `sudo` access is normally lost by the time get here, and need to
+  # re-enter password - fix this.
   run sudo "$LIBEXEC"/etc-push
 }
 
