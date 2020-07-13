@@ -22,6 +22,7 @@ alias ct='tz America/Chicago'
 alias chicago='ct'
 alias minnesota='ct'
 alias texas='ct'
+alias louisiana='ct'
 # EST (UTC-5) or EDT (UTC-4)
 alias et='tz America/New_York'
 alias newyork='et'
