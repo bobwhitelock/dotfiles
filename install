@@ -17,9 +17,6 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # gem install gem-ctags
 # gem ctags
 
-# XXX link in notes repo too?
-
-
 main() {
   # Request `sudo` access pre-emptively, so password isn't re-prompted for at
   # some arbitrary time for later uses of `sudo`.
