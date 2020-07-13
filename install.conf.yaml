@@ -2,7 +2,7 @@
 - clean: ['~', '~/bin']
 
 - link:
-    ~/.ctags:
+    ~/.ctags.d: ctags.d
     ~/.profile:
     ~/.gitconfig:
     ~/.gitignore:
