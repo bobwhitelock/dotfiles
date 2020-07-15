@@ -30,10 +30,10 @@ gplr() {
     \git pull --rebase=true "$@" || (ssh-add ~/.ssh/id_rsa.bob && \git pull --rebase=true "$@")
 }
 
-alias gd='git diff --color'
+alias gd='git diff --color --patch-with-stat'
 alias gdc='gd --cached'
-alias gds='gd --shortstat'
-alias gdcs='gdc --shortstat'
+alias gds='git diff --color --shortstat'
+alias gdcs='gds --cached'
 
 # Grep for files making given change (e.g. `gdgrep TODO`), since we branched
 # from `master`.
