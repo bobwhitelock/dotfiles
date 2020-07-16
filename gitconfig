@@ -19,6 +19,8 @@
 	sed = git sed
 	fix-conflicts = "! vim +DisablePythonAutoFormat $(git diff --name-only | uniq)"
 	pull-submodules = submodule foreach git pull
+	# XXX If working directory clean so no changes to stash, this will
+	# finish by applying whatever changes were last stashed.
 	update-submodules = "! git stash save && git submodule foreach 'git checkout master' && git pull-submodules && git commit -am 'Update submodules'; git stash apply"
 	snapshot = snapshot
 	clear-snapshots = clear-snapshots
