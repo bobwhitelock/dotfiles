@@ -3,7 +3,11 @@ set -euo pipefail
 IFS=$'\n\t'
 
 main() {
-    git grep -z --full-name -l '.' | xargs -0 sed -i -e "$@"
+    local sed_expression file_filter
+    sed_expression="$1"
+    file_filter="${2:-}"
+
+    git ls-files | grep -F "$file_filter" | xargs sed -i -e "$sed_expression"
 }
 
 main "$@"
