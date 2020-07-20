@@ -33,7 +33,11 @@ alias london='uk'
 # UTC
 alias utc='tz'
 # CET (UTC+1) or CEST (UTC+2)
-alias berlin='tz Europe/Berlin'
+alias cet='tz Europe/Berlin'
+alias germany='cet'
+alias berlin='germany'
+alias france='cet'
+alias spain='cet'
 # MSK (UTC+3)
 alias moscow='tz Europe/Moscow'
 # JST/KST (UTC+9)
