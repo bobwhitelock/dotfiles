@@ -1142,6 +1142,9 @@ command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_sym
 
 " Edit a file for a new 1-to-1 meeting, with today's date. Assumes Vim has
 " been opened in my notes directory.
+" XXX Allow creating this file for days other than today. Alternatively have
+" this be created for one week after last 1-to-1, if that's in the future (and
+" otherwise create for today).
 function! s:OneToOne(with)
   " XXX Have this be copied into new 1-to-1 file (and then cleared up), iff
   " that doesn't already exist (in which case this is for next week)
