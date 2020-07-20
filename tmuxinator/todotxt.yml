@@ -23,6 +23,13 @@ windows:
         - unset TODO_FILE
         - vim
 
+  - test-repo:
+      root: <%= ENV.fetch('SRC') %>/tmp/test
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
   - dotfiles:
       root: <%= ENV.fetch('DOTFILES') %>
       layout: even-horizontal
