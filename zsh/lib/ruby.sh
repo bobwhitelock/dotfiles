@@ -1,7 +1,6 @@
 
 alias b='bundle'
 alias be='bundle exec'
-alias rspec='be rspec'
 
 alias rc='bin/rails console'
 alias rdr='bin/rails db:rollback'
@@ -19,7 +18,6 @@ rdm() {
     fi
 }
 
-alias rake='be rake'
 alias raket='rake -T'
 alias rakeall='raket -A'
 
