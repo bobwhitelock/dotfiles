@@ -47,6 +47,6 @@ nnoremap <script> <silent> <buffer> <localleader>s+ :sort /.\{-}\ze+/ <CR>
 " Todo file filtering maps, using commands from `vim-hideshow`.
 nnoremap <buffer> <leader>sa :ShowAll<CR>
 nnoremap <buffer> <leader>ss :Show<space>
-nnoremap <buffer> <leader>st :ShowAll<CR>:Show @today<CR>
-nnoremap <buffer> <leader>sww :ShowAll<CR>:Show @work<CR>
-nnoremap <buffer> <leader>swt :ShowAll<CR>:Show @work.*@today<CR>
+nnoremap <buffer> <leader>st :ShowAll<CR>:Show @today<CR>/@today<CR>
+nnoremap <buffer> <leader>sww :ShowAll<CR>:Show @work<CR>/@work<CR>
+nnoremap <buffer> <leader>swt :ShowAll<CR>:Show @work.*@today<CR>/@work.*@today<CR>
