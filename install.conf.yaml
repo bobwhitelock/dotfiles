@@ -18,6 +18,8 @@
     ~/.screenrc:
     ~/.psqlrc:
     ~/.sqliterc:
+    ~/.irbrc:
+    ~/.pryrc:
     ~/.zshrc:
         path: zsh/zshrc
         force: true
