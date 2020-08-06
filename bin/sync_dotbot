@@ -5,7 +5,10 @@ IFS=$'\n\t'
 
 main() {
   (cd "$DOTFILES" && \
-    "$DOTFILES/dotbot/bin/dotbot" -d "$DOTFILES" -c "install.conf.yaml"
+    "$DOTFILES/dotbot/bin/dotbot" \
+    -d "$DOTFILES" \
+    -c "install.conf.yaml" \
+    --verbose
   )
 }
 
