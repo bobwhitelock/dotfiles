@@ -251,7 +251,6 @@ Plug 'fatih/vim-go'
 Plug 'https://gitlab.com/dbeniamine/todo.txt-vim.git'
 Plug 'chrisbra/csv.vim'
 let g:no_csv_maps = 1
-Plug 'jmcomets/vim-pony' " Similar to `vim-rails` for Django.
 Plug 'neovimhaskell/haskell-vim'
 Plug 'alx741/vim-hindent' " Haskell auto-formatting, with `hindent` installed.
 Plug 'saltstack/salt-vim'
