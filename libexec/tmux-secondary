@@ -1,0 +1,30 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Utility script to launch secondary Tmux session; called from secondary
+# profile in `config/terminator/config` and intended to be triggered either by
+# `TmuxLaunchTerminal` command in `vimrc` (will use name from
+# "$SESSION_NAME_FILE"), or `W-S-s` Openbox key binding (will use next default
+# Tmux session name).
+
+SESSION_NAME_FILE='/tmp/tmux_session_name'
+
+main() {
+  local tmux_session_name=''
+  if [ -f "$SESSION_NAME_FILE" ]; then
+    tmux_session_name="$(tr -d '\n' < "$SESSION_NAME_FILE")"
+    rm -f "$SESSION_NAME_FILE"
+  fi
+
+  unset TMUX
+  export TERM=xterm-256color
+
+  if [ -n "$tmux_session_name" ]; then
+    tmux new-session -s "$tmux_session_name"
+  else
+    tmux new-session
+  fi
+}
+
+main "$@"
