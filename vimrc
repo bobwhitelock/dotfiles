@@ -727,7 +727,7 @@ command! TmuxReset execute "normal <Plug>SetTmuxVars"
 " Launch another terminal on leftmost monitor, running Tmux with the same
 " working directory, and set this to be where tslime commands will run.
 function! TmuxLaunchTerminal()
-  execute '!terminator --maximise --profile secondary --geometry  1x1+0+0 &'
+  call system('terminator --maximise --profile secondary --geometry  1x1+0+0 &')
   let g:tslime = {}
   let g:tslime['session'] = 'secondary'
   let g:tslime['window'] = 1
