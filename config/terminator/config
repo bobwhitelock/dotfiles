@@ -87,7 +87,7 @@
     color_scheme = custom
     cursor_color = "#ff6600"
     cursor_color_fg = False
-    custom_command = "$DOTFILES"/libexec/tmux-secondary
+    custom_command = ~/src/bobwhitelock/dotfiles/libexec/tmux-secondary
     font = DejaVu Sans Mono 15
     foreground_color = "#ffffff"
     login_shell = True
