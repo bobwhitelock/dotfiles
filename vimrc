@@ -50,6 +50,10 @@ Plug 'tpope/vim-abolish'
 " up.
 nmap crC crc
 
+" Continuously updating session files (record with `Obsess`; stop recording
+" with `Obsess!`)
+Plug 'tpope/vim-obsession'
+
 " Show git changes in gutter.
 Plug 'airblade/vim-gitgutter'
 
@@ -274,6 +278,8 @@ Plug 'junegunn/vim-peekaboo' " Popup window showing all registers whenever attem
 Plug 'ap/vim-css-color' " Highlight background of CSS colors.
 Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
 Plug 'unblevable/quick-scope' " Highlight useful chars to jump to for `f`/`F`/`t`/`T`.
+" Handle opening GitHub links (like those passed to `Plug`) with `gx`.
+Plug 'gabebw/vim-github-link-opener', {'branch': 'main'}
 
 " Indentation lines (Note: can seriously affect performance for files with
 " long lines, see https://github.com/Yggdroot/indentLine/issues/48)
