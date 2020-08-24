@@ -8,6 +8,7 @@ main() {
     "$DOTFILES/dotbot/bin/dotbot" \
     -d "$DOTFILES" \
     -c "install.conf.yaml" \
+    --force-color \
     --verbose
   )
 }

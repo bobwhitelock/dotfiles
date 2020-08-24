@@ -28,8 +28,7 @@ main() {
   install_dependencies
 
   header 'Installing dotfiles'
-  # XXX For some reason this appears to sometimes suspend terminal now.
-  run bin/faketty sync_dotbot
+  run sync_dotbot
 
   # Copy example private environment variable file (if needed), so these can be
   # set but not committed.
