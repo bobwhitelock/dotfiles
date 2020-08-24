@@ -72,7 +72,8 @@ install_dependencies() {
   # Need `rbenv shell system` so Tmuxinator is installed for system Ruby, and
   # need to do this via `zsh -ic` so this is done in an interactive shell and
   # therefore `rbenv` is initialized correctly.
-  run 'zsh -ic "rbenv shell system && gem install tmuxinator"'
+  # XXX Doesn't actually work; fix.
+  # run 'zsh -ic "rbenv shell system && gem install tmuxinator"'
 }
 
 setup_vim() {
