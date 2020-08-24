@@ -729,6 +729,7 @@ nnoremap <leader>T :Tmux<space>
 vmap <leader>tS <Plug>SendSelectionToTmux
 
 command! TmuxReset execute "normal <Plug>SetTmuxVars"
+nnoremap <leader>tr :TmuxReset<CR>
 
 " Launch another terminal on leftmost monitor, running Tmux session with
 " unique name and same working directory, and set this to be where tslime
