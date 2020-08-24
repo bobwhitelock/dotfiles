@@ -17,3 +17,6 @@ nnoremap <buffer> <leader>tF :CrTdd<CR>:TestFile --failfast<CR>
 nnoremap <leader>ep :edit platformweb/environment.properties<CR>
 
 " nnoremap <buffer> <C-i> mz:%!isort --atomic -<CR>:w<CR>`z
+
+" 'go ignore' - have mypy ignore current line.
+nnoremap gi mzA  # type: ignore<Esc>`z:write<CR>
