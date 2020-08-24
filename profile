@@ -28,6 +28,6 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-TZ='Europe/London'; export TZ
+export TZ='Europe/London'
 
 # vim: set filetype=sh :
