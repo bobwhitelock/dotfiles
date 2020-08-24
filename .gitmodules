@@ -19,6 +19,7 @@
 [submodule "git-recover"]
 	path = git-recover
 	url = https://github.com/ethomson/git-recover
+	branch = main
 [submodule "zsh/packages/elm-bash-completion"]
 	path = zsh/packages/elm-bash-completion
 	url = https://github.com/eeue56/elm-bash-completion.git
