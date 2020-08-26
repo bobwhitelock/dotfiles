@@ -1095,15 +1095,15 @@ function! XTermPasteBegin()
   return ''
 endfunction
 
-" From http://stackoverflow.com/a/8459043/2620402.
-function! DeleteHiddenBuffers()
+" Adapted from http://stackoverflow.com/a/8459043/2620402.
+function! DeleteHiddenBuffers(bwipeout_command)
     let tpbl=[]
     call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
     for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-        silent execute 'bwipeout' buf
+        silent execute a:bwipeout_command buf
     endfor
 endfunction
-command! DeleteHiddenBuffers call DeleteHiddenBuffers()
+command! -bang DeleteHiddenBuffers call DeleteHiddenBuffers('bwipeout<bang>')
 
 " From http://vim.wikia.com/wiki/Underline_using_dashes_automatically.
 function! s:Underline(chars)
