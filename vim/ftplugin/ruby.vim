@@ -7,13 +7,11 @@ setlocal iskeyword+=@-@,?
 set path+=spec/shared_examples
 
 " Run only failing RSpec tests from last run, using vim-test.
-nnoremap <buffer> <leader>tb :CrTdd<CR>:call TmuxInterruptAndRun('RSpec --only-failures')<CR>
+nnoremap <buffer> <leader>tb :call RunTests('RSpec --only-failures')<CR>
 
-" Run only specific directories of tests for a Rails app (possibly these
-" should be more complex like map above, or possibly that should be less
-" complex).
-nnoremap <buffer> <leader>tm :CrTdd<CR>:RSpec spec/models/<CR>
-nnoremap <buffer> <leader>te :CrTdd<CR>:RSpec spec/features/<CR>
+" Run only specific directories of tests for a Rails app.
+nnoremap <buffer> <leader>tm :call RunTests('RSpec spec/models/')<CR>
+nnoremap <buffer> <leader>te :call RunTests('RSpec spec/features/')<CR>
 
 " Rubocop bindings - `<leader>ru` binding to lint current buffer defined by
 " `vim-rubocop` plugin.

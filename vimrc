@@ -674,10 +674,25 @@ let test#python#djangotest#options = '--keepdb'
 let g:test#runner_commands = ['RSpec', 'CargoTest', 'DjangoTest']
 
 " Maps to run tests.
-nnoremap <silent> <leader>ts :CrTdd<CR>:TestSuite<CR>
-nnoremap <silent> <leader>tt :CrTdd<CR>:TestNearest<CR>
-nnoremap <silent> <leader>tf :CrTdd<CR>:TestFile<CR>
-nnoremap <silent> <leader>tv :CrTdd<CR>:TestVisit<CR>
+nnoremap <silent> <leader>ts :call RunTests('TestSuite')<CR>
+nnoremap <silent> <leader>tt :call RunTests('TestNearest')<CR>
+nnoremap <silent> <leader>tf :call RunTests('TestFile')<CR>
+
+nnoremap <silent> <leader>tv :TestVisit<CR>
+
+function! RunTests(test_command)
+  " Enable TDD mode.
+  CrTdd
+
+  " Launch terminal for tests to run in, unless this has already been
+  " configured.
+  if !exists('g:tslime')
+    call TmuxLaunchTerminal()
+    sleep 2 " Give terminal time to launch before running tests in it.
+  endif
+
+  execute a:test_command
+endfunction
 
 " Map <CR> to re-run most recently run tests (the default).
 function! s:CrTdd()
