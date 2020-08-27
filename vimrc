@@ -27,7 +27,7 @@ Plug 'tpope/vim-eunuch'
 " Git command helpers (:G*)
 Plug 'tpope/vim-fugitive'
 
-" GitHub :Gbrowse handling for the above.
+" GitHub :GBrowse handling for the above.
 Plug 'tpope/vim-rhubarb'
 
 " Various paired bracket mappings.
@@ -910,8 +910,8 @@ nnoremap <leader>t< :tabmove -<CR>
 nnoremap <leader>rr :Rename <C-R>=expand('%:t')<CR>
 
 " Git mappings.
-nnoremap gb :Gblame<CR>
-nnoremap gd :Gdiff<CR>
+nnoremap gb :Git blame<CR>
+nnoremap gd :Gdiffsplit<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gS :Gwrite<CR>:edit!<CR>
 nnoremap <leader>gR :Gread<CR>
