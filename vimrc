@@ -159,9 +159,8 @@ Plug 'bronson/vim-visual-star-search'
 " A Vim function to automatically commit to Git
 Plug 'tlvince/vim-auto-commit'
 
-" Commands to open browser + open specific pages on Github.
+" Commands/maps for opening browser.
 Plug 'tyru/open-browser.vim'
-Plug 'tyru/open-browser-github.vim'
 
 " Snippets.
 " Need to make sure venv will use UltiSnips in is sourced at point this is
@@ -1026,8 +1025,8 @@ nnoremap K mzkJ`z
 nmap gK <Plug>(devdocs-under-cursor)
 
 " Open current file/current visual selection of current file in Github.
-nnoremap <leader>gh :OpenGithubFile<CR><CR>
-xnoremap <leader>gh :'<,'>OpenGithubFile<CR><CR>
+nnoremap <leader>gh :GBrowse<CR><CR>
+xnoremap <leader>gh :'<,'>GBrowse<CR><CR>
 
 nnoremap <leader>do :diffoff<CR>
 " XXX Conditionally enable these only when in diff mode? Can conflict with
