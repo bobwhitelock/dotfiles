@@ -1,2 +1,2 @@
 
-nnoremap <leader>f mzIfixup! <esc>`z
+nnoremap <buffer> <leader>f mzIfixup! <esc>`z

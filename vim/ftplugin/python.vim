@@ -19,11 +19,11 @@ nnoremap <leader>ep :edit platformweb/environment.properties<CR>
 " nnoremap <buffer> <C-i> mz:%!isort --atomic -<CR>:w<CR>`z
 
 " 'go ignore' - have mypy ignore current line.
-nnoremap gi mzA  # type: ignore<Esc>`z:write<CR>
+nnoremap <buffer> gi mzA  # type: ignore<Esc>`z:write<CR>
 
 " Copy dotted path of current Python module (e.g. so can be passed to a test
 " runner).
-nnoremap <leader>cm :let @+ = CurrentPythonModulePath()<CR>:echo "copied module name!"<CR>
+nnoremap <buffer> <leader>cm :let @+ = CurrentPythonModulePath()<CR>:echo "copied module name!"<CR>
 
 function! CurrentPythonModulePath()
   let current_path = expand('%:p')
