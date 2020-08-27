@@ -20,3 +20,20 @@ nnoremap <leader>ep :edit platformweb/environment.properties<CR>
 
 " 'go ignore' - have mypy ignore current line.
 nnoremap gi mzA  # type: ignore<Esc>`z:write<CR>
+
+" Copy dotted path of current Python module (e.g. so can be passed to a test
+" runner).
+nnoremap <leader>cm :let @+ = CurrentPythonModulePath()<CR>:echo "copied module name!"<CR>
+
+function! CurrentPythonModulePath()
+  let current_path = expand('%:p')
+  let git_root_path = system("git rev-parse --show-toplevel | tr -d '\\n'")
+  let path_relative_to_root = trim(substitute(
+        \ l:current_path, l:git_root_path, '', 'g'
+        \ ), '/')
+  let path_without_extension = substitute(
+        \ l:path_relative_to_root, '.py$', '', ''
+        \ )
+  let dotted_path = substitute(l:path_without_extension, '/', '.', 'g')
+  return l:dotted_path
+endfunction
