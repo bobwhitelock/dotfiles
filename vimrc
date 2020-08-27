@@ -688,7 +688,7 @@ function! RunTests(test_command)
   " configured.
   if !exists('g:tslime')
     call TmuxLaunchTerminal()
-    sleep 2 " Give terminal time to launch before running tests in it.
+    sleep 4 " Give terminal time to launch before running tests in it.
   endif
 
   execute a:test_command
@@ -749,13 +749,23 @@ nnoremap <leader>tr :TmuxReset<CR>
 " unique name and same working directory, and set this to be where tslime
 " commands will run.
 function! TmuxLaunchTerminal()
-  let l:tmux_session_name = 'secondary-' . trim(system('echo $$'))
-  call system('echo '.l:tmux_session_name.' > /tmp/tmux_session_name')
+  let current_tmux_session_name = trim(system('tmux display-message -p "#S"'))
+  let secondary_tmux_session_name = join([
+        \ l:current_tmux_session_name,
+        \ 'secondary',
+        \ trim(system('echo $$'))
+        \ ], '-')
+  let save_secondary_name_command = join([
+        \ 'echo',
+        \ l:secondary_tmux_session_name,
+        \ '> /tmp/tmux_session_name'
+        \ ])
 
+  call system(save_secondary_name_command)
   call system('terminator --maximise --profile secondary --geometry  1x1+0+0 &')
 
   let g:tslime = {}
-  let g:tslime['session'] = l:tmux_session_name
+  let g:tslime['session'] = l:secondary_tmux_session_name
   let g:tslime['window'] = 1
   let g:tslime['pane'] = 1
 endfunction
