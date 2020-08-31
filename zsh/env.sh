@@ -70,6 +70,8 @@ export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
 
 export M2_HOME='/opt/maven/'
 
+export SHELLCHECK_OPTS='--shell=bash'
+
 # Load private environment variables if present.
 # shellcheck disable=SC1090
 source "$ZSH_DIR/env.private.sh" 2> /dev/null

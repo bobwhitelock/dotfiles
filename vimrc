@@ -62,6 +62,7 @@ let g:ale_linters = {'ruby': ['standardrb']}
 let g:ale_fixers = {'ruby': ['standardrb']}
 let g:ale_fix_on_save = 1
 let g:ruby_indent_assignment_style = 'variable'
+let g:ale_sh_shellcheck_options = '--shell=bash'
 
 " Single command (gw) for grabbing then swapping windows.
 Plug 'wesQ3/vim-windowswap'
