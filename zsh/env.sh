@@ -34,7 +34,7 @@ export SAVEHIST=$HISTSIZE
 
 export SRC="$HOME/src"
 export BOB="$SRC/bobwhitelock"
-export NOTES="$BOB/life"
+export NOTES="$BOB/notes"
 export ALCES="$SRC/alces-software"
 export RESCALE="$SRC/rescale"
 
