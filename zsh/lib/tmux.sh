@@ -14,6 +14,8 @@ alias dotsr="rw \$DOTFILES"
 alias notes="aw \$NOTES"
 alias notesr="rw \$NOTES"
 
+alias tmux_session_name="tmux display-message -p '#S'"
+
 # Utility function to create a new Tmux pane in the given directory, named
 # after that directory, with optional Vim pane on right (when `--vim-pane`
 # option passed).
