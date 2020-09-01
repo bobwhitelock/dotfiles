@@ -93,6 +93,7 @@ alias gcf=' git clean -d --force'
 alias gci=' git clean -d --interactive'
 
 alias gsh='git show --pretty=fuller --patch-with-stat'
+alias gshs='git show --shortstat'
 alias gsh~='gsh HEAD~'
 alias gsh2='gsh HEAD~2'
 alias gsh3='gsh HEAD~3'
