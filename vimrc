@@ -900,13 +900,19 @@ nnoremap <leader>gu :GundoToggle<CR>
 xnoremap gz :sort<CR>
 nnoremap gz vip:'<,'>sort<CR>
 
-" XXX ideally this would fall back to just opening new tab if current buffer
-" doesn't have file.
-nnoremap <leader>tn :tabnew %<CR>
+nnoremap <leader>tn :call CreateNewTab()<CR>
 nnoremap <leader>tc :tabclose<CR>
 nnoremap <leader>to :tabonly<CR>
 nnoremap <leader>t> :tabmove +<CR>
 nnoremap <leader>t< :tabmove -<CR>
+
+function! CreateNewTab()
+  if empty(bufname())
+    tabnew
+  else
+    tabnew %
+  endif
+endfunction
 
 nnoremap <leader>rr :Rename <C-R>=expand('%:t')<CR>
 
