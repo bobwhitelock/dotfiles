@@ -118,10 +118,12 @@ alias gla='gl --all'
 
 _git_log() {
     local dates_format="$1"
+    shift
 
     git log --graph \
         --pretty=format:"%Cred%h%Creset %an: %s%C(yellow)%d%Creset %Cgreen($dates_format)%Creset" \
-        --abbrev-commit
+        --abbrev-commit \
+        "$@"
 }
 
 alias gbi='git bisect'
