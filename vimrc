@@ -199,6 +199,7 @@ Plug 'wincent/scalpel'
 Plug 'dkarter/bullets.vim'
 let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-', 'std-']
 let g:bullets_renumber_on_change = 0
+let g:bullets_nested_checkboxes = 0
 
 " Commands to hide/show lines of buffer using regexes (Hide / Show / ShowAll).
 Plug 'ctechols/vim-hideshow'
