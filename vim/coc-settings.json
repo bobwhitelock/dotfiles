@@ -1,0 +1,11 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "html",
+    "javascript",
+    "json",
+    "jsx",
+    "typescript",
+    "yaml"
+  ],
+  "prettier.disableSuccessMessage": true
+}

@@ -220,9 +220,6 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'gavocanov/vim-js-indent'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 Plug 'elzr/vim-json'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tangledhelix/vim-kickstart'
@@ -230,8 +227,8 @@ Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
-" XXX Could replace this, and vim-prettier, maybe other things (vim-rubocop,
-" Black etc?) with just using ALE?
+" XXX Could replace this, maybe other things (vim-rubocop, Black etc?) with
+" just using ALE/COC?
 Plug 'tell-k/vim-autopep8'
 " Plug 'psf/black'
 Plug 'yaymukund/vim-rabl'
@@ -396,7 +393,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead *.zsh set filetype=sh
   autocmd BufNewFile,BufRead *.pyconf set filetype=conf
   autocmd BufNewFile,BufRead *cloud.cfg set filetype=yaml
-  autocmd BufNewFile,BufRead .prettierrc set filetype=yaml
+  autocmd BufNewFile,BufRead .prettierrc set filetype=json
   autocmd BufNewFile,BufRead *.mm set filetype=xml
   autocmd BufNewFile,BufRead *.todo set filetype=todo
 
@@ -437,8 +434,8 @@ augroup END
 call camelcasemotion#CreateMotionMappings('<leader>')
 
 " Toggle automatically formatting Python according to PEP8 (default enabled).
-" TODO Move this and `EnablePrettierAutoFormat` to appropriate ftplugin files?
-" - Not sure how this would work with making these toggle-able though.
+" TODO Move this to appropriate ftplugin file?
+" - Not sure how this would work with making this toggle-able though.
 function! s:EnablePythonAutoFormat()
   augroup python_auto_format
     autocmd!
@@ -461,24 +458,6 @@ function! s:DisablePythonAutoFormat()
 endfunction
 command! DisablePythonAutoFormat call s:DisablePythonAutoFormat()
 
-" Toggle automatically formatting JavaScript/TypeScript with Prettier (default
-" enabled).
-function! s:EnablePrettierAutoFormat()
-  augroup prettier_auto_format
-    autocmd!
-    autocmd BufWritePre *.js,*.ts,*.tsx PrettierAsync
-  augroup END
-endfunction
-command! EnablePrettierAutoFormat call s:EnablePrettierAutoFormat()
-EnablePrettierAutoFormat
-
-function! s:DisablePrettierAutoFormat()
-  augroup prettier_auto_format
-    autocmd!
-  augroup END
-endfunction
-command! DisablePrettierAutoFormat call s:DisablePrettierAutoFormat()
-
 " Commands to enable/disable auto-committing on every save in git repos -
 " useful when developing something where changes won't take effect until a
 " commit is made, and can then squash when finished.
@@ -499,6 +478,8 @@ command! DisableAutoCommit call s:DisableAutoCommit()
 
 " When searching for ctags include generated tag files in neighbouring repos.
 command! IncludeNeighbourTags set tags+=../*/.git/tags
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Disable some built in plugins.
 " As dicussed in https://www.reddit.com/r/vim/comments/7anxss.
@@ -566,9 +547,6 @@ let g:markdown_syntax_conceal = 0
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 0
-
-let g:prettier#autoformat = 0
-let g:prettier#exec_cmd_path = "~/.yarn/bin/prettier"
 
 let g:windowswap_map_keys = 0 " Prevent default bindings.
 nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>

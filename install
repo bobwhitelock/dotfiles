@@ -60,7 +60,7 @@ install_dependencies() {
   run 'xargs yaourt -S --noconfirm --needed < dependencies/aur'
 
   # XXX Should all these be installed - could break things?
-  run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test
+  run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test prettier
 
   # Required for `interactive.singleKey` Git option.
   # XXX On last install, cpan required configuration but could do this
