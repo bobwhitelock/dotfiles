@@ -5,6 +5,7 @@
     "json",
     "jsx",
     "typescript",
+    "typescriptreact",
     "yaml"
   ],
   "prettier.disableSuccessMessage": true
