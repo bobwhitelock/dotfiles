@@ -16,6 +16,14 @@ alias notesr="rw \$NOTES"
 
 alias tmux_session_name="tmux display-message -p '#S'"
 
+tmux_kill_unattached_sessions() {
+    local session
+    for session in $(tmux list-sessions | grep -v '(attached)' | cut -d: -f 1); do
+        echo "Killing '$session'" >&2
+        tmux kill-session -t "$session"
+    done
+}
+
 # Utility function to create a new Tmux pane in the given directory, named
 # after that directory, with optional Vim pane on right (when `--vim-pane`
 # option passed).
