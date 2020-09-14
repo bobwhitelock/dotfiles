@@ -150,6 +150,7 @@ Plug 'wellle/targets.vim'
 " Fuzzy finder for many different sources.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+let g:fzf_layout = { 'down': '40%' }
 
 " Distraction-free writing mode.
 Plug 'junegunn/goyo.vim'
