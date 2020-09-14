@@ -19,6 +19,7 @@
     ~/.sqliterc:
     ~/.irbrc:
     ~/.pryrc:
+    ~/.pdbrc:
     ~/.zshrc:
       path: zsh/zshrc
       force: true

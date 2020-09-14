@@ -1,0 +1,14 @@
+# vim:set ft=python:
+
+import IPython
+from traitlets.config import get_config
+
+# Adapted from
+# https://www.nnja.io/post/2020/pycon2020-goodbye-print-hello-debugger/.
+
+cfg = get_config()
+cfg.InteractiveShellEmbed.colors = "Linux"  # Syntax highlighting.
+cfg.InteractiveShellEmbed.confirm_exit = False
+
+# Start IPython shell at current location in code.
+alias ipy IPython.embed(config=cfg)
