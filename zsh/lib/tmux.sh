@@ -17,10 +17,10 @@ alias notesr="rw \$NOTES"
 # Fuzzy select repo from all cloned repos, then open new window for selected
 # repo with shell and Vim panes.
 repo() {
-    tree "$SRC" -fL 2 | \
+    command tree "$SRC" -fCL 2 | \
         fzf --ansi | \
         awk '{ print $NF }' | \
-        xargs add_window --vim-pane
+        ifne xargs add_window --vim-pane
 }
 
 alias tmux_session_name="tmux display-message -p '#S'"
