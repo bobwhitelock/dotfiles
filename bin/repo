@@ -1,0 +1,30 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Fuzzy select repo from all cloned repos, then open new window for selected
+# repo with shell and Vim panes.
+
+main() {
+    # shellcheck disable=SC2012
+    ls "$SRC"/*/* -d1 --color=always | \
+        # Drop $SRC prefix.
+        sed "s%$SRC/%%" | \
+        # Drop trailing slash.
+        sed "s%/$%%" | \
+        fzf --ansi | \
+        _add_window
+}
+
+_add_window() {
+    local repo
+
+    repo="$(cat)"
+    if [ -z "$repo" ]; then
+        exit 1
+    fi
+
+    add_window --vim-pane "$SRC/$repo"
+}
+
+main "$@"

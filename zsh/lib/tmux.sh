@@ -14,15 +14,6 @@ alias dotsr="rw \$DOTFILES"
 alias notes="aw \$NOTES"
 alias notesr="rw \$NOTES"
 
-# Fuzzy select repo from all cloned repos, then open new window for selected
-# repo with shell and Vim panes.
-repo() {
-    command tree "$SRC" -fCL 2 | \
-        fzf --ansi | \
-        awk '{ print $NF }' | \
-        ifne xargs add_window --vim-pane
-}
-
 alias tmux_session_name="tmux display-message -p '#S'"
 
 tmux_kill_unattached_sessions() {
