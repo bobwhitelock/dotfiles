@@ -72,6 +72,9 @@ export M2_HOME='/opt/maven/'
 
 export SHELLCHECK_OPTS='--shell=bash'
 
+# Make ipdb (which uses IPython) the default Python debugger.
+export PYTHONBREAKPOINT=ipdb.set_trace
+
 # Load private environment variables if present.
 # shellcheck disable=SC1090
 source "$ZSH_DIR/env.private.sh" 2> /dev/null
