@@ -65,6 +65,7 @@ fco() {
     # shellcheck disable=SC2033
     git branch | \
         fzf \
+        -1 \
         --query="$*" \
         --preview="echo {} | xargs git show --color=always" | \
         awk '{ print $NF }' | \
