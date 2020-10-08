@@ -528,6 +528,11 @@ nmap co yo
 " `cursorline`.
 nnoremap cox :set cursorcolumn!<CR>
 
+" Unimpaired-style maps to jump to next/previous file in quickfix list
+" (Unimpaired defaults for this conflict with my Tmux prefix).
+nnoremap ]f :cnfile<CR>
+nnoremap [f :cpfile<CR>
+
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
 
 let g:markdown_fenced_languages = [
