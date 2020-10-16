@@ -258,6 +258,7 @@ Plug 'alx741/vim-hindent' " Haskell auto-formatting, with `hindent` installed.
 Plug 'saltstack/salt-vim'
 Plug 'vim-python/python-syntax'
 let g:python_highlight_all = 1
+Plug 'martinda/Jenkinsfile-vim-syntax'
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
@@ -398,6 +399,9 @@ augroup autocmds
   autocmd BufNewFile,BufRead *.mm set filetype=xml
   autocmd BufNewFile,BufRead *.todo set filetype=todo
 
+  " Set Rescale Jenkins configs to be Jenkins-specific filetype.
+  autocmd BufNewFile,BufRead **/jenkins-jobs/**/*.groovy set filetype=Jenkinsfile
+
   " oh-my-zsh themes are shell.
   autocmd BufNewFile,BufRead *.zsh-theme set filetype=sh
 
@@ -425,6 +429,11 @@ augroup autocmds
 
   " XXX Has been needed before for some reason; may be needed again.
   " autocmd FileType javascript.jsx set syntax=javascript.jsx
+
+  " Force syntax highlighting to synchronize from start on entering a buffer;
+  " fixes issue where syntax highlighting can break sometimes (see
+  " https://stackoverflow.com/questions/27235102/vim-randomly-breaks-syntax-highlighting).
+  autocmd BufEnter * syntax sync fromstart
 
   " Enable Goyo hook functions.
   autocmd User GoyoEnter nested call <SID>goyo_enter()
