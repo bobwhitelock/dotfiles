@@ -1,5 +1,6 @@
 
 alias mux='tmuxinator'
+alias attach='tmux switch-client -t'
 
 # Add new/replace current Tmux window, with pane for both shell and Vim.
 alias aw='add_window --vim-pane'
