@@ -27,6 +27,7 @@
     ~/.sqliterc:
     ~/.irbrc:
     ~/.pryrc:
+    ~/.pylintrc:
     ~/.pdbrc:
     ~/.zshrc:
       path: zsh/zshrc

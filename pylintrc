@@ -1,0 +1,14 @@
+# Not actually TOML but this seems to give the best syntax highlighting.
+# vim:set ft=toml:
+
+[MASTER]
+
+disable=
+
+    import-outside-toplevel,
+    line-too-long,
+    missing-class-docstring,
+    missing-function-docstring,
+    missing-module-docstring,
+    too-many-lines,
+    too-many-public-methods
