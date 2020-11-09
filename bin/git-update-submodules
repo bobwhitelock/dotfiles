@@ -4,11 +4,28 @@ IFS=$'\n\t'
 
 
 main() {
-  git stash save # XXX Only do this and `apply` when repo dirty
-  git submodule foreach 'git checkout master'
+  local repo_dirty_at_start
+
+  repo_dirty_at_start=0
+  git diff-files --quiet || repo_dirty_at_start="$?"
+
+  if [ "$repo_dirty_at_start" -ne 0 ]; then
+    git stash save > /dev/null
+  fi
+
+  # Pull `main` if it exists, otherwise pull `master`.
+  git submodule foreach 'if git branch | grep main -q ; then git checkout main; else git checkout master; fi'
   git pull-submodules
-  git commit -am 'Update submodules'
-  git stash apply
+  if ! git diff-files --quiet; then
+    git commit -am 'Update submodules'
+  else
+    echo
+    echo "git update-submodules: No updates found."
+  fi
+
+  if [ "$repo_dirty_at_start" -ne 0 ]; then
+    git stash apply > /dev/null
+  fi
 }
 
 
