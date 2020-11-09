@@ -33,9 +33,6 @@ alias rsync="$rsync"
 alias sync_dir="rerun --exit --pattern '**/*' -- $rsync ."
 unset rsync
 
-# List files installed on system by given package.
-alias apt_files='dpkg-query --listfiles'
-
 alias sz='source ~/.zshrc'
 source_libs() {
     # XXX conditionally load private files?
