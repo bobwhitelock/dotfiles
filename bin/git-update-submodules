@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+main() {
+  git stash save # XXX Only do this and `apply` when repo dirty
+  git submodule foreach 'git checkout master'
+  git pull-submodules
+  git commit -am 'Update submodules'
+  git stash apply
+}
+
+
+main "$@"
