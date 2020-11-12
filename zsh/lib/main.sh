@@ -43,9 +43,9 @@ source_libs() {
 }
 alias sa="source_libs"
 
-# XXX Don't work in Rescale session (or other Tmuxinator sessions?).
-alias simple_prompt="SIMPLE_PROMPT=true sz"
-alias simple_prompt_off="unset SIMPLE_PROMPT && sz"
+# Switch to minimal prompt, most useful for copying terminal output to share
+# elsewhere. Run `sz` to revert to normal prompt.
+alias simple_prompt='PS1="$ "'
 
 which_edit() {
     # shellcheck disable=SC2230
