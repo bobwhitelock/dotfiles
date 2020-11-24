@@ -1,3 +1,10 @@
 
 alias shell='./manage.py shell_plus'
-alias urls='faketty ./manage.py show_urls | $PAGER'
+
+urls() {
+    local temp_file
+    temp_file="$(mktemp)"
+
+    faketty ./manage.py show_urls > "$temp_file"
+    "$PAGER" "$temp_file"
+}
