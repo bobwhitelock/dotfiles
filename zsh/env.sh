@@ -11,7 +11,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export EDITOR="vim"
 export VISUAL="vim"
-export PAGER="less"
+export PAGER="bat"
 export LESS="-K"
 
 # Let git find repos split across filesystems.

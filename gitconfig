@@ -3,7 +3,6 @@
 	email = bob.whitelock1@gmail.com
 
 [core]
-	pager = less -FRSX
 	excludesfile = ~/.gitignore
 
 [push]

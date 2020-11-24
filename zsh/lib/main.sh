@@ -16,7 +16,7 @@ alias pacman='sudo pacman'
 alias p='pacman'
 alias y='yaourt'
 alias psql='psql -U postgres'
-alias jqless='jq . --color-output | less -R'
+alias jqp='jq . --color-output | $PAGER'
 alias split_words="sed 's/\s/\n/g'"
 alias spark='sparklines'
 alias unixtime='date +%s'
@@ -107,7 +107,7 @@ rustc_explain() {
 }
 
 rgp() {
-    rg --pretty "$@" | less
+    rg --pretty "$@" | "$PAGER"
 }
 
 # Swap 2 filenames around, if they exist (from
