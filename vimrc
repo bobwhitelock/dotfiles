@@ -763,7 +763,8 @@ function! TmuxLaunchTerminal()
   let g:tslime['window'] = 1
   let g:tslime['pane'] = 1
 endfunction
-nnoremap <leader>tT :call TmuxLaunchTerminal()<CR>
+command! TmuxLaunchTerminal call TmuxLaunchTerminal()
+nnoremap <leader>tT :TmuxLaunchTerminal<CR>
 
 " See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
 let $PAGER=''
