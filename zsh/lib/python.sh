@@ -6,5 +6,5 @@ urls() {
     temp_file="$(mktemp)"
 
     faketty ./manage.py show_urls > "$temp_file"
-    "$PAGER" "$temp_file"
+    bat "$temp_file"
 }

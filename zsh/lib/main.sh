@@ -16,7 +16,6 @@ alias pacman='sudo pacman'
 alias p='pacman'
 alias y='yaourt'
 alias psql='psql -U postgres'
-alias jqp='jq . --color-output | $PAGER'
 alias split_words="sed 's/\s/\n/g'"
 alias spark='sparklines'
 alias unixtime='date +%s'
@@ -106,8 +105,14 @@ rustc_explain() {
     )
 }
 
+# "jq pretty", i.e. pretty print/page JSON file.
+jqp() {
+    jq . --color-output "$@" | bat
+}
+
+# "ripgrep pretty", i.e. with output always coloured and piped to `bat`.
 rgp() {
-    rg --pretty "$@" | "$PAGER"
+    rg --pretty "$@" | bat
 }
 
 # Swap 2 filenames around, if they exist (from
