@@ -681,7 +681,7 @@ function! RunTests(test_command)
   " Launch terminal for tests to run in, unless this has already been
   " configured.
   if !exists('g:tslime')
-    call TmuxLaunchTerminal()
+    TmuxLaunchTerminal
     sleep 4 " Give terminal time to launch before running tests in it.
   endif
 
