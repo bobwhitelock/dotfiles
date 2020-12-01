@@ -647,7 +647,7 @@ function! DockerTransform(cmd) abort
   " current project rather than hard-coding `cloudware` below.
   " let docker_project = get(matchlist(s:cat('Vagrantfile'), '\vconfig\.vm.synced_folder ["''].+[''"], ["''](.+)[''"]'), 1)
   let docker_project='cloudware'
-  return "docker-compose exec ".docker_project.' '.a:cmd
+  return 'docker-compose exec '.docker_project.' '.a:cmd
 endfunction
 
 let g:test#custom_transformations = {'docker': function('DockerTransform')}
@@ -660,7 +660,7 @@ nnoremap <leader>tF :Failures<CR>
 " Re-run entire Elm test suite on change; every Elm project I've worked on has
 " a fast test suite.
 let test#elm#elmtest#options = {
-  \ 'suite': "--watch",
+  \ 'suite': '--watch',
 \}
 
 let test#python#djangotest#options = '--keepdb'
