@@ -19,7 +19,8 @@ export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 
 export DROP="$HOME/Dropbox"
 
-export STEAMAPPS="$HOME/.local/share/Steam/steamapps"
+export STEAM="$HOME/.local/share/Steam"
+export STEAMAPPS="$STEAM/steamapps"
 
 # Set history file depending on if zsh or bash (although bash file will be used
 # if in anything other than zsh; doesn't happen currently and don't really care
