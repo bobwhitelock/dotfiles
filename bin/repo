@@ -12,7 +12,7 @@ main() {
         sed "s%$SRC/%%" | \
         # Drop trailing slash.
         sed "s%/$%%" | \
-        fzf --ansi | \
+        fzf --ansi --query="$*" | \
         _add_window
 }
 
