@@ -57,7 +57,6 @@ xrandr_off() {
             xrandr --output "$output" --off
         done
     done
-    conkywonky
 }
 
 # Ease transition between shell and vim.

@@ -21,7 +21,6 @@
     ~/.vim:
       force: true
     ~/.ideavimrc:
-    ~/.conkyrc:
     ~/.screenrc:
     ~/.psqlrc:
     ~/.sqliterc:
