@@ -5,7 +5,6 @@
     "coc-html": ">=1.2.4",
     "coc-json": ">=1.2.6",
     "coc-prettier": ">=1.1.17",
-    "coc-python": ">=1.2.12",
     "coc-snippets": ">=2.1.28",
     "coc-sql": ">=0.2.24",
     "coc-svg": ">=0.0.13",
