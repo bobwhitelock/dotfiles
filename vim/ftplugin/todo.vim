@@ -50,3 +50,5 @@ nnoremap <buffer> <leader>ss :Show<space>
 nnoremap <buffer> <leader>st :ShowAll<CR>:Show @today<CR>/@today<CR>
 nnoremap <buffer> <leader>sww :ShowAll<CR>:Show @work<CR>/@work<CR>
 nnoremap <buffer> <leader>swt :ShowAll<CR>:Show @work.*@today<CR>/@work.*@today<CR>
+
+nnoremap <buffer> <leader>tt mzA @today<esc>`z
