@@ -5,6 +5,7 @@
 
 disable=
 
+    expression-not-assigned,
     import-outside-toplevel,
     invalid-name,
     line-too-long,
@@ -12,6 +13,8 @@ disable=
     missing-function-docstring,
     missing-module-docstring,
     no-member,
+    pointless-statement,
+    too-few-public-methods,
     too-many-ancestors,
     too-many-instance-attributes,
     too-many-lines,
