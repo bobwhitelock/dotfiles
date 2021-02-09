@@ -207,8 +207,8 @@ let g:bullets_nested_checkboxes = 0
 Plug 'ctechols/vim-hideshow'
 
 " Easily filter quickfix list:
-" <Leader>g to filter entries;
-" <Leader>v to inverted filter entries;
+" <Leader>gg to filter entries (defined in `vim/ftplugin/qf.vim`);
+" <Leader>gi to inverted filter entries (defined in `vim/ftplugin/qf.vim`);
 " <Leader>r to restore original quickfix list before filtering.
 Plug 'sk1418/QFGrep'
 
@@ -664,6 +664,7 @@ let test#elm#elmtest#options = {
 \}
 
 let test#python#djangotest#options = '--keepdb'
+" let test#python#djangotest#options = '--keepdb --debug-sql'
 
 let g:test#runner_commands = ['RSpec', 'CargoTest', 'DjangoTest']
 

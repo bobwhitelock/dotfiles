@@ -21,8 +21,8 @@ nnoremap <leader>ep :edit platformweb/environment.properties<CR>
 " 'Go Ignore' - have mypy ignore current line.
 nnoremap <buffer> gi mzA  # type: ignore<Esc>`z:write<CR>
 
-" 'Go noQa' - add `noqa` comment to current line.
-nnoremap <buffer> gq mzA  # noqa<Esc>`z:write<CR>
+" 'Go Noqa' - add `noqa` comment to current line.
+nnoremap <buffer> gn mzA  # noqa<Esc>`z:write<CR>
 
 " Copy dotted path of current Python module (e.g. so can be passed to a test
 " runner).
