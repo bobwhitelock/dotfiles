@@ -757,7 +757,7 @@ function! TmuxLaunchTerminal()
         \ ])
 
   call system(save_secondary_name_command)
-  call system('terminator --maximise --profile secondary --geometry  1x1+0+0 &')
+  call system('terminator --maximise --profile secondary --geometry  1x1+0+0 --working-directory '.getcwd().' &')
 
   let g:tslime = {}
   let g:tslime['session'] = l:secondary_tmux_session_name
