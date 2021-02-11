@@ -103,7 +103,7 @@ link_files() {
   # Link files in to `/etc`; cannot occur via `dotbot` as this doesn't
   # support linking as root (see
   # https://github.com/anishathalye/dotbot/issues/125).
-  run sudo ln -sf "$DOTFILES"/etc/udevmon.yaml /etc/
+  run sudo ln -sf "$DOTFILES"/etc/udevmon.yaml /etc/interception/
 
   # Primarily so `etckeeper` (which runs as `root`) uses my Git config.
   run sudo ln -sf ~bob/.gitconfig ~root

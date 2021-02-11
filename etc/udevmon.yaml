@@ -1,5 +1,6 @@
-
-- JOB: "intercept -g $DEVNODE | caps2esc -n | uinput -d $DEVNODE"
+# `-m 1` = minimal mode - caps is esc/ctrl, all other keys unchanged. See
+# https://gitlab.com/interception/linux/plugins/caps2esc.
+- JOB: intercept -g $DEVNODE | caps2esc -m 1 | uinput -d $DEVNODE
   DEVICE:
     EVENTS:
       EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
