@@ -1,0 +1,28 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Sync each of the `master`, `candidate`, and `release` branches to match the
+# remote. Should probably stash any uncommitted changes before running this.
+
+main() {
+    starting_branch="$(git current-branch)"
+
+    _sync_branch master
+    _sync_branch candidate
+    _sync_branch release
+
+    git checkout "$starting_branch"
+}
+
+_sync_branch() {
+    local branch
+    branch="$1"
+
+    git checkout "$branch"
+    git merge --ff-only
+}
+
+
+main "$@"
+

@@ -1,0 +1,44 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Usage: git release-status SHA
+#
+# Get whether commit with given SHA (or fragment of a SHA, though that may be
+# inaccurate if this is part of multiple SHAs) is present on each of the
+# `master`, `candidate`, and `release` branches.
+#
+# May require running `git sync-branches` first to ensure these branches are
+# up-to-date with the remote, for accurate results.
+#
+# Should probably stash any uncommitted changes before running this.
+
+main() {
+    local sha
+    sha="$1"
+
+    starting_branch="$(git current-branch)"
+
+    echo "master: $(_sha_on_branch "$sha" master)"
+    echo "candidate: $(_sha_on_branch "$sha" candidate)"
+    echo "release: $(_sha_on_branch "$sha" release)"
+
+    git checkout "$starting_branch" --quiet
+}
+
+_sha_on_branch() {
+    local sha branch
+    sha="$1"
+    branch="$2"
+
+    git checkout "$branch" --quiet
+
+    if git log --pretty="%H" | grep "$sha" > /dev/null; then
+        echo true
+    else
+        echo false
+    fi
+}
+
+
+main "$@"

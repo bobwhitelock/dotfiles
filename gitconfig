@@ -54,6 +54,8 @@
 	current-branch = rev-parse --abbrev-ref HEAD
 	set-upstream = !git branch --set-upstream-to=origin/"$(git current-branch)"
 	todos-since = todos-since
+	release-status = release-status
+	sync-branches = sync-branches
 
 [color]
 	ui = true
