@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+main() {
+  # Need to explicitly specify driver to use - was getting same error as this,
+  # and top answer solved it:
+  # https://www.reddit.com/r/archlinux/comments/g3u729/mesa_issues/.
+  export MESA_LOADER_DRIVER_OVERRIDE=i965
+
+  # Steam must be running first for game to launch.
+  if ! pgrep steam > /dev/null; then
+    steam &
+    sleep 5
+  fi
+
+  (cd ~/.local/share/Steam/steamapps/common/WormsWMD/ && ./Worms\ W.M.Dx64)
+}
+
+
+main "$@"

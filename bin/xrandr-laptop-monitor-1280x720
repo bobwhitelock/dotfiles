@@ -1,0 +1,40 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Use single main monitor at low resolution; useful for playing old games like
+# Worms Armageddon.
+
+# XXX Mostly identical to `xrandr-laptop-monitor` apart from mode - get rid of
+# superficial differences and DRY these up?
+
+xrandr \
+    --output DP1 --mode 1280x720 --pos 0x0 --rotate normal \
+    --output DP2 --off \
+    --output HDMI1 --off \
+    --output HDMI2 --off \
+    --output VIRTUAL1 --off \
+    --output eDP1 --off \
+    || xrandr \
+    --output DP1 --off \
+    --output DP1 --mode 1280x720 --pos 0x0 --rotate normal \
+    --output HDMI1 --off \
+    --output HDMI2 --off \
+    --output VIRTUAL1 --off \
+    --output eDP1 --off \
+    || xrandr \
+    --output VIRTUAL1 --off \
+    --output eDP1 --off \
+    --output DP1 --off \
+    --output HDMI2 --off \
+    --output DP1 --mode 1280x720 --pos 0x0 --rotate normal \
+    --output eDP1 --off \
+    || xrandr \
+    --output DP1 --off \
+    --output DP2 --off \
+    --output HDMI1 --off \
+    --output HDMI2 --off \
+    --output VIRTUAL1 --off \
+    --output eDP1 --primary --mode 1280x720 --pos 0x0 --rotate normal
+
+al-polybar-session &
