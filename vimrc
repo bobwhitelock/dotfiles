@@ -259,6 +259,7 @@ Plug 'saltstack/salt-vim'
 Plug 'vim-python/python-syntax'
 let g:python_highlight_all = 1
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'hashivim/vim-terraform'
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
