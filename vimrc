@@ -858,6 +858,11 @@ nnoremap <leader>L :lopen<CR>
 nnoremap <silent> [Q :colder<CR>
 nnoremap <silent> ]Q :cnewer<CR>
 
+" 'go quickfix' = open new tab with full size quickfix window on right, and
+" first item in quickfix window open and focused on left; useful for browsing
+" through quickfix list.
+nnoremap <leader>gq :tabnew<CR>:wincmd v<CR>:copen<CR>:wincmd k<CR>:q<CR>:wincmd l<CR><CR>
+
 " Reload files in all windows.
 " TODO: go back to original window afterwards
 " TODO: do in other tabs?
