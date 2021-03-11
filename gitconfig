@@ -75,6 +75,7 @@
 	ff = only
 [init]
 	templatedir = ~/.git_template
+	defaultBranch = main
 [rerere]
 	enabled = 1
 [interactive]
