@@ -699,7 +699,12 @@ CrTdd
 
 " Map <CR> to attempt to execute the current file.
 function! s:CrRunCurrentFile()
-  nnoremap <silent> <CR> :TmuxRunCurrentFile<CR>
+  " Expand current file and then save and use this in mapping, rather than
+  " just using `TmuxRunCurrentFile`, as want <CR> to always execute the
+  " current file at the point this function is run, not whatever file the
+  " cursor is in at the point the mapping is run.
+  let g:current_file = expand('%:p')
+  nnoremap <silent> <CR> :execute TmuxInterruptAndRun('Tmux clear; '.g:current_file)<CR>
 endfunction
 command! CrRunCurrentFile call s:CrRunCurrentFile()
 
