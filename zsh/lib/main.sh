@@ -137,6 +137,15 @@ yaml_to_json() {
 RUBY
 }
 
+# Pretty-print a JSON file as YAML.
+json_to_yaml() {
+    cat <<-RUBY | ruby | bat --language yaml --decorations never
+        require 'yaml'
+        require 'json'
+        puts JSON.load(File.read('$1')).to_yaml
+RUBY
+}
+
 alias sshaddbob='ssh-add ~/.ssh/id_rsa.bob'
 alias sshaddaws='ssh-add ~/.ssh/aws_ireland.pem'
 
