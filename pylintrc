@@ -12,6 +12,8 @@ disable=
     missing-class-docstring,
     missing-function-docstring,
     missing-module-docstring,
+    no-else-raise,
+    no-else-return,
     no-member,
     pointless-statement,
     too-few-public-methods,
