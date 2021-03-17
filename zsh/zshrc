@@ -123,5 +123,11 @@ command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 # Python version will automatically be used, prior to one of these files
 # attempting to do something in this environment such as sourcing a
 # virtualenv).
-source "$ZSH_LIB/main.sh"
+source_libs() {
+    # XXX conditionally load private files?
+    for file in "$ZSH_LIB/"* "$ZSH_PRIVATE_LIB"/*; do
+        # shellcheck disable=SC1090
+        source "$file"
+    done
+}
 source_libs

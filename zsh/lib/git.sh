@@ -12,6 +12,8 @@ alias ga='git add'
 alias gan='ga --intent-to-add'
 alias gap='ga -p'
 
+alias grip="grip --browser --user \"\$GITHUB_USER\" --pass \"\$GITHUB_PASSWORD\""
+
 # Functions to push/pull, or try adding key and then doing the same action if
 # this fails.
 gp() {

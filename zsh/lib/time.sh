@@ -1,4 +1,6 @@
 
+alias unixtime='date +%s'
+
 # Show current time in given time zone, with completion of available time zones
 # provided by `compleat/tz.usage`.
 # XXX Add validation that `TZ` argument is passed, and is a valid time zone in
