@@ -231,7 +231,7 @@ Plug 'nvie/vim-flake8'
 " XXX Could replace this, maybe other things (vim-rubocop, Black etc?) with
 " just using ALE/COC?
 Plug 'tell-k/vim-autopep8'
-" Plug 'psf/black'
+Plug 'psf/black'
 Plug 'yaymukund/vim-rabl'
 Plug 'ngmy/vim-rubocop'
 Plug 'vim-ruby/vim-ruby'
@@ -444,23 +444,27 @@ augroup END
 " Create CamelCaseMotion maps name-spaced behind leader.
 call camelcasemotion#CreateMotionMappings('<leader>')
 
-" Toggle automatically formatting Python according to PEP8 (default enabled).
+" Toggle automatically formatting Python according to PEP8 (default), using
+" Black, or disabling auto-formatting.
 " TODO Move this to appropriate ftplugin file?
 " - Not sure how this would work with making this toggle-able though.
-function! s:EnablePythonAutoFormat()
+" TODO Make these work for Python files without an extension.
+function! s:EnablePythonAutoFormatAutopep8()
   augroup python_auto_format
     autocmd!
     autocmd BufWritePre *.py call Autopep8()
-
-    " TODO Use this again if/when using Black on a project (not actually
-    " working, in Rescale venv at least - investigate
-    " https://github.com/psf/black/issues?utf8=%E2%9C%93&q=is%3Aissue+%22ModuleNotFoundError%3A+No+module+named+%27black%27%22)
-    "
-    " autocmd BufWritePre *.py execute ':Black'
   augroup END
 endfunction
-command! EnablePythonAutoFormat call s:EnablePythonAutoFormat()
-EnablePythonAutoFormat
+command! EnablePythonAutoFormatAutopep8 call s:EnablePythonAutoFormatAutopep8()
+EnablePythonAutoFormatAutopep8
+
+function! s:EnablePythonAutoFormatBlack()
+  augroup python_auto_format
+    autocmd!
+    autocmd BufWritePre *.py execute ':Black'
+  augroup END
+endfunction
+command! EnablePythonAutoFormatBlack call s:EnablePythonAutoFormatBlack()
 
 function! s:DisablePythonAutoFormat()
   augroup python_auto_format
