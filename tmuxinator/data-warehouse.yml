@@ -1,0 +1,35 @@
+
+# Note: need to run `sync` for this session to be available.
+
+name: data-warehouse
+startup_window: data-warehouse
+
+windows:
+  - notes:
+      root: <%= ENV.fetch('NOTES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - data-warehouse:
+      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
+      root: <%= ENV.fetch('BOB') %>/data-warehouse
+      panes:
+        - datasette . --open --reload
+        -
+        - vim
+
+  - datasette:
+      root: <%= ENV.fetch('SRC') %>/simonw/datasette
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
+  - dotfiles:
+      root: <%= ENV.fetch('DOTFILES') %>
+      layout: even-horizontal
+      panes:
+        -
+        - vim
