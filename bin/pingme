@@ -1,0 +1,30 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+# Ping my phone about something happening.
+#
+# Usage: pingme [MESSAGE]
+#
+# Example:
+# - `long_running_process; pingme "It's done! Exit code: $?"`
+
+
+PUSHOVER_ENDPOINT="https://api.pushover.net/1/messages.json"
+DEFAULT_MESSAGE="Something happened (you didn't specify what)"
+
+
+main() {
+  local message
+  message="${*:-$DEFAULT_MESSAGE}"
+
+  http --form --verbose "$PUSHOVER_ENDPOINT" \
+    token="$PUSHOVER_TOKEN" \
+    user="$PUSHOVER_USER" \
+    title="pingme" \
+    message="$message"
+}
+
+
+main "$@"
