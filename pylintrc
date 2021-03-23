@@ -15,6 +15,7 @@ disable=
     no-else-raise,
     no-else-return,
     no-member,
+    no-self-argument,
     pointless-statement,
     too-few-public-methods,
     too-many-ancestors,
