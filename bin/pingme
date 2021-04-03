@@ -18,8 +18,9 @@ DEFAULT_MESSAGE="Something happened (you didn't specify what)"
 main() {
   local message
   message="${*:-$DEFAULT_MESSAGE}"
+  echo "pingme: message=\"$message\"" >&2
 
-  http --form --verbose "$PUSHOVER_ENDPOINT" \
+  http --body --form "$PUSHOVER_ENDPOINT" \
     token="$PUSHOVER_TOKEN" \
     user="$PUSHOVER_USER" \
     title="pingme" \
