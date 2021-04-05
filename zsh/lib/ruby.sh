@@ -8,7 +8,7 @@ alias rdms='bin/rails db:migrate:status'
 alias rdc='bin/rails dbconsole'
 alias rdR='bin/rails db:reset'
 alias rgm='bin/rails g migration'
-alias routes='rake routes'
+alias routes='bin/rails routes'
 
 rdm() {
     if bin/rails -T | grep db:migrate:with_data -q; then
