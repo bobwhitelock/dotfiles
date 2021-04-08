@@ -10,6 +10,6 @@
     "coc-svg": ">=0.0.13",
     "coc-tailwindcss": ">=0.7.0",
     "coc-tsserver": ">=1.6.8",
-    "coc-vimlsp": ">=0.11.1"
+    "coc-vimlsp": ">=0.12.1"
   }
 }
