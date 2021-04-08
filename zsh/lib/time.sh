@@ -42,6 +42,8 @@ alias france='cet'
 alias spain='cet'
 # MSK (UTC+3)
 alias moscow='tz Europe/Moscow'
+# CST (UTC+8)
+alias china='tz Asia/Shanghai'
 # JST/KST (UTC+9)
 alias korea='tz Asia/Seoul'
 alias japan='tz Asia/Tokyo'
