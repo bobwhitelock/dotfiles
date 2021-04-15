@@ -1,4 +1,5 @@
 
+# shellcheck disable=SC2032
 alias git='hub'
 alias g='git'
 alias gg='git grep --break --heading'
@@ -96,6 +97,7 @@ fco() {
 
 # Fuzz show, with preview.
 fsh() {
+    # shellcheck disable=SC2033
     git log \
         --all \
         --pretty=format:'%Cred%H%Creset %an / %cn %s%C(yellow)%d%Creset %Cgreen%ar / %cr%Creset' \
@@ -112,8 +114,7 @@ fsh() {
 
 alias gr='git reset'
 
-alias gcf=' git clean -d --force'
-alias gci=' git clean -d --interactive'
+alias gci='git clean -d --interactive'
 
 alias gsh='git show --pretty=fuller --patch-with-stat'
 alias gshs='git show --shortstat'
@@ -168,3 +169,4 @@ alias grei6='grei HEAD~6'
 alias grei7='grei HEAD~7'
 alias grei8='grei HEAD~8'
 alias grei9='grei HEAD~9'
+alias grein='grei --no-autosquash'
