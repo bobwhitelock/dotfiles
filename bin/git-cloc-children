@@ -6,12 +6,8 @@ IFS=$'\n\t'
 # results.
 
 reports_dir=/tmp/cloc
+rm -rf "$reports_dir"
 mkdir -p "$reports_dir"
-
-# Tests if any matches; refer to http://stackoverflow.com/a/34195247.
-if compgen -G "$reports_dir/*" > /dev/null; then
-  rm $reports_dir/*
-fi
 
 for file in *; do
   if [[ -d  "$file" ]]; then
@@ -19,4 +15,4 @@ for file in *; do
   fi
 done
 
-cloc --sum-reports $reports_dir/*
+(cd $reports_dir && cloc --sum-reports -- *)
