@@ -13,18 +13,20 @@ windows:
         - vim
 
   - todotxt:
-      layout: 'be91,274x72,0,0{137x72,0,0[137x33,0,0,4,137x4,0,34,7,137x33,0,39,6],136x72,138,0,5}'
+      layout: '47a5,274x69,0,0{137x69,0,0[137x22,0,0,2,137x23,0,23,6,137x22,0,47,7],136x69,138,0,8}'
       root: <%= ENV.fetch('BOB') %>/todotxt-ui
       panes:
         - server:
           - unset TODO_FILE
           - bin/rails server -b '0.0.0.0'
-        - bin/webpack-dev-server
+        - client:
+          - cd client
+          - yarn start
         - unset TODO_FILE
         - vim
 
   - test-repo:
-      root: <%= ENV.fetch('SRC') %>/tmp/test
+      root: <%= ENV.fetch('BOB') %>/todotxt-ui/tmp/test-repo
       layout: even-horizontal
       panes:
         -
