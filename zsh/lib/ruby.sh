@@ -19,6 +19,7 @@ rails() {
 }
 
 alias rc='rails console'
+alias rds='rails db:setup'
 alias rdr='rails db:rollback'
 alias rdms='rails db:migrate:status'
 alias rdc='rails dbconsole'
