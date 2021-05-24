@@ -34,8 +34,10 @@ snippet trace
 raise RuntimeError($1)
 endsnippet
 
+# Can change this to just `breakpoint()` once using Python 3.7+ everywhere.
 snippet debug
-breakpoint()
+import ipdb
+ipdb.set_trace()
 endsnippet
 
 snippet skip
