@@ -55,6 +55,8 @@
       path: config/htop
     ~/.config/coc/extensions/package.json:
       path: config/coc/extensions/package.json
+    ~/.config/pgcli/config:
+      path: config/pgcli/config
     ~/.tmux/plugins:
       path: tmux/plugins
     ~/.compleat:

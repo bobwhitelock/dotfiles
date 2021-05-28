@@ -67,7 +67,7 @@ install_dependencies() {
   # automatically by typing `yes` - automate this?
   run sudo cpan Term::ReadKey
 
-  run sudo pip install autopep8 ipdb grip
+  run sudo pip install autopep8 ipdb grip pgcli
 
   # Need `rbenv shell system` so Tmuxinator is installed for system Ruby, and
   # need to do this via `zsh -ic` so this is done in an interactive shell and
