@@ -7,6 +7,7 @@ disable=
 
     expression-not-assigned,
     import-outside-toplevel,
+    inherit-non-class,
     invalid-name,
     line-too-long,
     missing-class-docstring,
