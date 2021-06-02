@@ -7,7 +7,7 @@ main() {
     sed_expression="$1"
     file_filter="${2:-}"
 
-    git ls-files | grep -F "$file_filter" | xargs sed -i -e "$sed_expression"
+    git ls-files | grep -F "$file_filter" | xargs sed -i -r -e "$sed_expression"
 }
 
 main "$@"
