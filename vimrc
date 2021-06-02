@@ -555,10 +555,11 @@ let g:markdown_fenced_languages = [
     \ 'js=javascript',
     \ 'json',
     \ 'python',
-    \ 'ruby',
-    \ 'xml',
-    \ 'yaml',
     \ 'qf',
+    \ 'ruby',
+    \ 'sql',
+    \ 'xml',
+    \ 'yaml'
     \]
 let g:markdown_syntax_conceal = 0
 
