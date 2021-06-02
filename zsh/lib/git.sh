@@ -6,8 +6,10 @@ alias gg='git grep --break --heading'
 alias gbl='git blame'
 alias gb='git branch'
 alias gcp='git cherry-pick'
-alias gm='git merge'
 alias gscp='git am --show-current-patch'
+
+alias gm='git merge'
+alias gmf='gm --ff-only'
 
 alias ga='git add'
 alias gan='ga --intent-to-add'
