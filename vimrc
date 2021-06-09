@@ -632,6 +632,8 @@ function! TslimeAndCacheStrategy(cmd)
   " TODO: Need to create new temp file each time? Should remove old temp file?
   let s:output_file = trim(system('mktemp'))
   let l:test_command = 'faketty '.a:cmd.' | tee >(stripcolours > '.s:output_file.')'
+  " Uncomment for developing Datasette plugin.
+  " let l:test_command = "python3 -m pip install -e '.[test]' && ".a:cmd
   call test#strategy#tslime(l:test_command)
 
   " Uncomment this line and comment above to just run standard command without
