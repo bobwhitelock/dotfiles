@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+# Git log alias with dates relative to now.
+
+main() {
+    "$DOTFILES"/libexec/git_log '%ar / %cr' "$@"
+}
+
+
+main "$@"

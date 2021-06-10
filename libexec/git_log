@@ -1,0 +1,17 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+
+main() {
+    local dates_format="$1"
+    shift
+
+    git log --graph \
+        --pretty=format:"%Cred%h%Creset %an: %s%C(yellow)%d%Creset %Cgreen($dates_format)%Creset" \
+        --abbrev-commit \
+        "$@"
+}
+
+
+main "$@"
