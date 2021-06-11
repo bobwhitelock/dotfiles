@@ -9,6 +9,7 @@ disable=
     import-outside-toplevel,
     inherit-non-class,
     invalid-name,
+    invalid-str-returned,
     line-too-long,
     missing-class-docstring,
     missing-function-docstring,
