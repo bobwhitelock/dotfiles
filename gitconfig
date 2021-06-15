@@ -13,6 +13,7 @@
 	helper = cache --timeout=3600
 
 [alias]
+	absorb = absorb
 	amend = commit --verbose --amend -C HEAD
 	amend-and-edit = commit --verbose --amend
 	touch = "! git reset && git amend"
