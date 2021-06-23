@@ -8,7 +8,7 @@ windows:
       root: ~/projects/other/life
       layout: even-horizontal
       panes:
-        -
+        - gpl
         - vim
 
   - app:
@@ -24,5 +24,5 @@ windows:
       root: ~/.dotfiles
       layout: even-horizontal
       panes:
-        -
+        - gpl
         - vim

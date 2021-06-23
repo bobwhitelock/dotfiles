@@ -9,7 +9,7 @@ windows:
       root: <%= ENV.fetch('NOTES') %>
       layout: even-horizontal
       panes:
-        -
+        - gpl
         - vim
 
   - todotxt:
@@ -36,5 +36,5 @@ windows:
       root: <%= ENV.fetch('DOTFILES') %>
       layout: even-horizontal
       panes:
-        -
+        - gpl
         - vim
