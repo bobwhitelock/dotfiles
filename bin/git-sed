@@ -7,7 +7,12 @@ main() {
     sed_expression="$1"
     file_filter="${2:-}"
 
-    git ls-files | grep -F "$file_filter" | xargs sed -i -r -e "$sed_expression"
+    git ls-files \
+        | xargs -n 1 file \
+        | grep text \
+        | cut -d: -f1 \
+        | grep -F "$file_filter" \
+        | xargs sed -i -r -e "$sed_expression"
 }
 
 main "$@"
