@@ -44,3 +44,9 @@ command! -buffer -nargs=0 Ignored /\[-]
 " Easily allow inserting checkbox in insert mode (without `auto-pairs` messing
 " this up).
 inoremap <buffer> -<space>[ <C-v>- <C-v>[ ]<space>
+
+" Convert repo-relative path (e.g. `some/path.md`) to a link that will link to
+" the correct file when followed on GitHub (e.g.
+" `[some/path.md](/some/path.md)`; see
+" https://stackoverflow.com/a/7658676/2620402).
+Repeatable nmap <buffer> <leader>l mz"zyiWysiW]f]a(/<C-r>z)<esc>gqip`z
