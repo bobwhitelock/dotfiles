@@ -1,5 +1,7 @@
 
-alias mypy='mypy --show-error-codes'
+mypy() {
+    dmypy run -- --show-error-codes "${@:-.}"
+}
 
 alias activate='source venv/bin/activate'
 alias shell='./manage.py shell_plus'
