@@ -85,10 +85,10 @@ alias gcnv='gc --no-verify' # Skips any `pre-commit` and `commit-msg` hooks.
 alias gco='git checkout'
 alias gcot='gco --track'
 
-# Fuzz checkout, with preview of latest commit on each branch.
+# Fuzz checkout, with preview of latest commit on each branch/tag.
 fco() {
     # shellcheck disable=SC2033
-    git branch | \
+    ( git branch ; git tag ) | \
         fzf \
         -1 \
         --query="$*" \
