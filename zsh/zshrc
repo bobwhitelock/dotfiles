@@ -125,7 +125,7 @@ command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 # virtualenv).
 source_libs() {
     # XXX conditionally load private files?
-    for file in "$ZSH_LIB/"* "$ZSH_PRIVATE_LIB"/*; do
+    for file in "$ZSH_PRIVATE_LIB"/* "$ZSH_LIB/"*; do
         # shellcheck disable=SC1090
         source "$file"
     done
