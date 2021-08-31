@@ -92,3 +92,6 @@
 [grep]
 	extendedRegexp = true
 	lineNumber = true
+
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
