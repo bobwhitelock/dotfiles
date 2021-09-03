@@ -44,7 +44,7 @@
 	pop = reset HEAD~
 	drop = reset --hard HEAD~
 	just-index = stash save --keep-index
-	wip = commit --no-verify -m WIP
+	wip = wip
 	about = git-about
 	discard-unresolved = discard-unresolved
 	diff-since=diff-since

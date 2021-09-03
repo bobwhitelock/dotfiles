@@ -1,0 +1,11 @@
+#!/bin/bash
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+
+main() {
+    git commit --no-verify -m "WIP $*"
+}
+
+
+main "$@"
