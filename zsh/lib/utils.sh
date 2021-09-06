@@ -21,11 +21,6 @@ alias '$'=''
 # elsewhere. Run `sz` to revert to normal prompt.
 alias simple_prompt='PS1="$ "'
 
-# Ease transition between shell and vim.
-alias :q="exit"
-alias :qa="tmux kill-window"
-alias :qa!="tmux kill-session"
-
 # Copy/paste to/from system clipboard (xclip default is primary clipboard, i.e.
 # middle-click clipboard).
 alias cbcopy='xclip -selection clipboard'
