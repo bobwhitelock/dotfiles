@@ -19,6 +19,10 @@ main() {
 
     starting_branch="$(git current-branch)"
 
+    # shellcheck disable=SC2016
+    echo 'WARNING: Below will only be as up-to-date as the last time you ran `git sync-branches`; may want to `git stash` before running that.' >&2
+    echo >&2
+
     echo "master: $(_sha_on_branch "$sha" master)"
     echo "candidate: $(_sha_on_branch "$sha" candidate)"
     echo "release: $(_sha_on_branch "$sha" release)"
