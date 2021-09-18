@@ -26,7 +26,7 @@ windows:
         - vim
 
   - test-repo:
-      root: <%= ENV.fetch('BOB') %>/todotxt-ui/tmp/test-repo
+      root: <%= ENV.fetch('BOB') %>/todotxt-ui/tmp/todo_repo
       layout: even-horizontal
       panes:
         -
