@@ -17,7 +17,7 @@ alias dots="aw \$DOTFILES"
 alias dotsr="rw \$DOTFILES"
 alias notes="aw \$NOTES"
 alias notesr="rw \$NOTES"
-alias gamesr="rw \$BOB/games"
+alias gamesr="rw \$GAMES"
 
 alias tmux_session_name="tmux display-message -p '#S'"
 

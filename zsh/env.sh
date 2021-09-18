@@ -38,6 +38,7 @@ export SAVEHIST=$HISTSIZE
 export SRC="$HOME/src"
 export BOB="$SRC/bobwhitelock"
 export NOTES="$BOB/notes"
+export GAMES="$BOB/games"
 export ALCES="$SRC/alces-software"
 export RESCALE="$SRC/rescale"
 
