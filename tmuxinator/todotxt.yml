@@ -19,9 +19,7 @@ windows:
         - server:
           - unset TODO_FILE
           - bin/rails server -b '0.0.0.0'
-        - client:
-          - cd client
-          - yarn start
+        - yarn start
         - unset TODO_FILE
         - vim
 
