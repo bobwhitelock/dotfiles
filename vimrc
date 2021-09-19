@@ -69,7 +69,9 @@ let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 Plug 'wesQ3/vim-windowswap'
 
 " Autocompletion.
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Pin to commit just before issue was introduced to work around
+" https://github.com/bobwhitelock/dotfiles/issues/29.
+Plug 'neoclide/coc.nvim', {'commit': 'f8e339d0', 'do': 'yarn install --frozen-lockfile'}
 
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
