@@ -4,7 +4,9 @@ IFS=$'\n\t'
 
 
 main() {
-    git commit --no-verify -m "WIP $*"
+    local message
+    message="WIP $@"
+    git commit --no-verify -m "$message"
 }
 
 
