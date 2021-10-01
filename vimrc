@@ -635,6 +635,7 @@ function! TslimeAndCacheStrategy(cmd)
   " TODO: Need to create new temp file each time? Should remove old temp file?
   let s:output_file = trim(system('mktemp'))
   let l:test_command = 'faketty '.a:cmd.' | tee >(stripcolours > '.s:output_file.')'
+  " let l:test_command = 'faketty '.a:cmd.' | tee >(stripcolours > '.s:output_file.') ; pingme "Tests complete\!"'
   " Uncomment for developing Datasette plugin.
   " let l:test_command = "python3 -m pip install -e '.[test]' && ".a:cmd
   call test#strategy#tslime(l:test_command)
@@ -673,6 +674,9 @@ let test#elm#elmtest#options = {
 \}
 
 let test#python#djangotest#options = '--keepdb'
+" Useful in some situations, but these can also cause weird test failures
+" sometimes.
+" let test#python#djangotest#options = '--keepdb --debug-mode'
 " let test#python#djangotest#options = '--keepdb --debug-sql'
 
 let g:test#runner_commands = ['RSpec', 'CargoTest', 'DjangoTest']
@@ -1084,6 +1088,7 @@ nmap <leader>` ysiW`
 nmap <leader>' ysiW'
 nmap <leader>) ysiW)
 nmap <leader>] ysiW]
+nmap <leader>> ysiW>
 
 " For some reason something in my config is causing `<Esc>b` in insert mode to
 " jump back into insert mode. Not sure what's doing this, but ensuring
