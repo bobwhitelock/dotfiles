@@ -3,6 +3,8 @@
 
 name: todotxt
 startup_window: todotxt
+# XXX Don't reprompt for this when it's already added.
+on_project_start: ssh-add ~/.ssh/id_rsa.bob
 
 windows:
   - notes:
