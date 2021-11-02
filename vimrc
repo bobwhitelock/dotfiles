@@ -141,6 +141,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Better file browser than netrw.
 Plug 'justinmk/vim-dirvish'
+let g:dirvish_mode = ':sort'
 
 " Adds commands to resize/create splits to/for current visual selection
 " (VSResize, VSSplit etc).
