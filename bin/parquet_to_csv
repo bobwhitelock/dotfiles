@@ -20,7 +20,7 @@ def main():
         except BrokenPipeError:
             # This will happen if only part of the result needs to be piped
             # somewhere, e.g. `parquet_to_csv $file | head`.
-            sys.stderr.buffer.write(b'\nAborting...\n')
+            pass
 
 
 if __name__ == '__main__':
