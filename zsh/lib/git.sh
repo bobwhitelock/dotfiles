@@ -138,7 +138,7 @@ alias groot='cd "$(git rev-parse --show-toplevel)"'
 # TODO set `g:fzf_layout` here so this fills screen?
 alias gf='vim +Commits'
 
-# Also see `bin/gl` and `libexec/git-log`.
+alias gl="\$DOTFILES/libexec/git-log '%ar / %cr'" # Git log alias with dates relative to now.
 alias gli="\$DOTFILES/libexec/git-log '%ai / %ci'" # Git log alias with ISO 8601 dates.
 alias gla='gl --all'
 
