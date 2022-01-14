@@ -69,7 +69,7 @@ let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 Plug 'wesQ3/vim-windowswap'
 
 " Autocompletion.
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'do': 'source /usr/share/nvm/init-nvm.sh && nvm use system && yarn install --frozen-lockfile'}
 
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
