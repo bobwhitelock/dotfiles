@@ -557,6 +557,7 @@ let g:markdown_fenced_languages = [
     \ 'erb=eruby',
     \ 'js=javascript',
     \ 'json',
+    \ 'log',
     \ 'python',
     \ 'qf',
     \ 'ruby',
