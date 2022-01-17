@@ -916,7 +916,7 @@ nnoremap <leader>gu :GundoToggle<CR>
 
 " Sort visual selection/current paragraph.
 xnoremap gz :sort<CR>
-nnoremap gz vip:'<,'>sort<CR>
+nnoremap gz vip:sort<CR>
 
 nnoremap <leader>tn :call CreateNewTab()<CR>
 nnoremap <leader>tc :tabclose<CR>
@@ -1050,8 +1050,7 @@ nnoremap K mzkJ`z
 nmap gK <Plug>(devdocs-under-cursor)
 
 " Open current file/current visual selection of current file in Github.
-nnoremap <leader>gh :GBrowse<CR><CR>
-xnoremap <leader>gh :'<,'>GBrowse<CR><CR>
+noremap <leader>gh :GBrowse<CR><CR>
 
 nnoremap <leader>do :diffoff<CR>
 " XXX Conditionally enable these only when in diff mode? Can conflict with
