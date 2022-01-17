@@ -11,6 +11,7 @@ disable=
     invalid-name,
     invalid-str-returned,
     line-too-long,
+    logging-fstring-interpolation,
     missing-class-docstring,
     missing-function-docstring,
     missing-kwoa,
