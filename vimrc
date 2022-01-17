@@ -941,32 +941,7 @@ nnoremap gd :Gdiffsplit<CR>
 nnoremap <leader>ge :Gedit<CR>
 nnoremap <leader>gS :Gwrite<CR>:edit!<CR>
 nnoremap <leader>gR :Gread<CR>
-nnoremap <silent> <leader>gC :GitChanged<CR>
-
-function! s:git_status_line_to_quickfix_entry(_line_index, line)
-  let l:words = split(a:line)
-  " XXX Would be nice to also jump to line of first change - would need to
-  " find, possibly with `]h` or `git diff` and then set this as `lnum` in dict
-  " below.
-  return {
-        \ 'filename': l:words[-1],
-        \ 'text': a:line,
-        \ }
-endfunction
-
-function! s:GitChanged()
-  let l:status_lines = systemlist('git status --short')
-
-  let l:qf_entries = map(
-        \ copy(l:status_lines),
-        \ function('s:git_status_line_to_quickfix_entry')
-        \ )
-
-  call setqflist([], 'r', {'title': 'git status', 'items': l:qf_entries})
-  call ResizeQuickFix()
-  execute 'cc 1'
-endfunction
-command! GitChanged call s:GitChanged()
+nnoremap <silent> <leader>gC :GitGutterQuickFix<CR>:call ResizeQuickFix()<CR>:cc 1<CR>
 
 " Grep for current filename, less extension if present.
 nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
