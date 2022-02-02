@@ -140,6 +140,7 @@ alias gf='vim +Commits'
 
 alias gl="\$DOTFILES/libexec/git-log '%ar / %cr'" # Git log alias with dates relative to now.
 alias gli="\$DOTFILES/libexec/git-log '%ai / %ci'" # Git log alias with ISO 8601 dates.
+alias gld="\$DOTFILES/libexec/git-log '%ad / %cd'" # Git log alias with full dates including day of week.
 alias gla='gl --all'
 
 alias gbi='git bisect'
