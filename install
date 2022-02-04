@@ -57,7 +57,7 @@ install_dependencies() {
   run git submodule update --init --recursive
 
   run 'xargs sudo pacman -S --noconfirm --needed < dependencies/pacman'
-  run 'xargs yaourt -S --noconfirm --needed < dependencies/aur'
+  run 'xargs yay -S --noconfirm --needed < dependencies/aur'
 
   # XXX Should all these be installed - could break things?
   run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test prettier
