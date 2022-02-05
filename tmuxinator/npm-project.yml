@@ -1,0 +1,37 @@
+
+# Note: need to run `sync` for this session to be available.
+
+<%
+project_path = @args[0] or abort "Usage: mux start npm-project PATH"
+project_name = File.basename(project_path)
+%>
+
+name: npm-project
+startup_window: <%= project_name %>
+# XXX Don't reprompt for this when it's already added.
+on_project_start: ssh-add ~/.ssh/id_rsa.bob
+
+windows:
+  - notes:
+      root: <%= ENV.fetch('NOTES') %>
+      layout: even-horizontal
+      panes:
+        - gpl
+        - vim
+
+  - <%= project_name %>:
+      layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
+      root: <%= project_path %>
+      panes:
+        - npm:
+          - npm install
+          - npm start
+        -
+        - vim
+
+  - dotfiles:
+      root: <%= ENV.fetch('DOTFILES') %>
+      layout: even-horizontal
+      panes:
+        - gpl
+        - vim
