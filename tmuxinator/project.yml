@@ -2,8 +2,21 @@
 # Note: need to run `sync` for this session to be available.
 
 <%
-project_path = @args[0] or abort "Usage: mux start npm-project PATH"
+require "json"
+
+abort "Usage: mux start project PATH" unless @args.size == 1 && File.exist?(@args[0])
+
+project_path = File.expand_path(@args[0])
 project_name = File.basename(project_path)
+
+project_specific_setup = \
+  if File.exist?("#{project_path}/package-lock.json")
+    {npm: ["npm install", "npm start"]}
+  elsif File.exist?("#{project_path}/Makefile")
+    ["make"]
+  else
+    nil
+  end.to_json
 %>
 
 name: npm-project
@@ -23,9 +36,7 @@ windows:
       layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
       root: <%= project_path %>
       panes:
-        - npm:
-          - npm install
-          - npm start
+        - <%= project_specific_setup %>
         -
         - vim
 
