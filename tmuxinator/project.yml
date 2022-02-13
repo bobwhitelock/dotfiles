@@ -19,7 +19,7 @@ project_specific_setup = \
   end.to_json
 %>
 
-name: npm-project
+name: <%= project_name %>
 startup_window: <%= project_name %>
 # XXX Don't reprompt for this when it's already added.
 on_project_start: ssh-add ~/.ssh/id_rsa.bob
