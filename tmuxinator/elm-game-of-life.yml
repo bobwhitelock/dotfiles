@@ -11,7 +11,7 @@ windows:
       layout: even-horizontal
       panes:
         - gpl
-        - vim
+        - vim 'todo/next_actions.todo'
 
   - app:
       root: ~/projects/other/elm-game-of-life
