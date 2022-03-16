@@ -94,6 +94,9 @@
 	lineNumber = true
 
 [url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
+	insteadOf = https://github.com/
+[url "ssh://git@github.com/"]
+	insteadOf = git://github.com/
+
 [hub]
 	protocol = ssh
