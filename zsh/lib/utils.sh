@@ -14,6 +14,9 @@ alias sz='source ~/.zshrc'
 alias urldecode='ruby -r cgi -e "puts CGI.unescape(ARGV[0])"'
 alias urlencode='ruby -r cgi -e "puts CGI.escape(ARGV[0])"'
 
+# From https://unix.stackexchange.com/a/102021/229081.
+alias trim="sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'"
+
 # Make copy/paste-ing in commands from examples slightly more seamless.
 alias '$'=''
 
