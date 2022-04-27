@@ -1202,3 +1202,17 @@ function! s:OneToOne(with)
   execute 'edit '.l:path
 endfunction
 command! -nargs=1 OneToOne call s:OneToOne(<q-args>)
+
+function! s:ProfileVim(arg)
+  let l:profile_file = 'profile.log'
+  if a:arg ==? 'stop'
+    echom 'Profile saved as ' . l:profile_file
+    profile pause
+  else
+    echom 'Started profiling...'
+    profile start l:profile_file
+    profile func *
+    profile file *
+  endif
+endfunction
+command! -nargs=? ProfileVim call s:ProfileVim(<q-args>)
