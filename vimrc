@@ -263,6 +263,7 @@ let g:python_highlight_all = 1
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'hashivim/vim-terraform'
 Plug 'google/vim-jsonnet'
+Plug 'MTDL9/vim-log-highlighting'
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
