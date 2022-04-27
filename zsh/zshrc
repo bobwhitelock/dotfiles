@@ -132,6 +132,8 @@ source "$ZSH_DIR/env.sh"
 
 # Enable Pyenv.
 command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
+# XXX needed?
+command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init --path)"
 
 # Enable Rbenv.
 # XXX or could use omz plugin, for this and pyenv
@@ -154,3 +156,5 @@ source_libs() {
     done
 }
 source_libs
+
+export PATH="$HOME/.poetry/bin:$PATH"

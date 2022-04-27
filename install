@@ -59,6 +59,8 @@ main() {
 install_dependencies() {
   run git submodule update --init --recursive
 
+  # TODO Install each dependency via independent call, so changes for earlier
+  # packages still committed when later install fails?
   run 'xargs sudo pacman -S --noconfirm --needed < dependencies/pacman'
   run 'xargs yay -S --noconfirm --needed < dependencies/aur'
 

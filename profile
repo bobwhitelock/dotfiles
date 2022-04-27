@@ -31,3 +31,5 @@ fi
 export TZ='Europe/London'
 
 # vim: set filetype=sh :
+
+export PATH="$HOME/.poetry/bin:$PATH"

@@ -69,6 +69,7 @@ let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 Plug 'wesQ3/vim-windowswap'
 
 " Autocompletion.
+" XXX Was slowing things down?
 Plug 'neoclide/coc.nvim', {'do': 'source /usr/share/nvm/init-nvm.sh && nvm use system && yarn install --frozen-lockfile'}
 
 " Reopen last-closed window (C-w u)
@@ -264,6 +265,10 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'hashivim/vim-terraform'
 Plug 'google/vim-jsonnet'
 Plug 'MTDL9/vim-log-highlighting'
+" TODO: Remove some of above in favour of this?
+" Breaks markdown formatting, snippets, maybe other things - due to duplicate
+" plugin installs?
+" Plug 'sheerun/vim-polyglot'
 
 " Passive features.
 Plug 'tpope/vim-endwise' " Automatically end certain structures.
@@ -731,6 +736,7 @@ command! CrRunCurrentFile call s:CrRunCurrentFile()
 
 " Map <CR> to send content of current buffer to another Tmux pane (useful for
 " sending code to a REPL).
+" TODO Doesn't handle escaping or multiline file correctly.
 function! s:CrSendCurrentFile()
   execute 'nnoremap <silent> <CR> ggyG:TmuxInterruptAndRun <C-q><C-l><C-r>0<CR>'
 endfunction
@@ -1064,6 +1070,8 @@ Repeatable nnoremap gs[ f[a<CR><Esc>
 Repeatable nnoremap gs] f]i<CR><Esc>
 Repeatable nnoremap gs, f,a<CR><Esc>
 Repeatable nnoremap gs. f.i<CR><Esc>
+" XXX doesn't work ¯\_(ツ)_/¯
+" Repeatable nnoremap gs| echom hey<CR>f\|i<CR><Esc>
 Repeatable nnoremap gss i<CR><Esc>
 Repeatable nnoremap gs<space> hf<space>xi<CR><Esc>
 

@@ -24,7 +24,7 @@
 	# finish by applying whatever changes were last stashed.
 	update-submodules = update-submodules
 	revisions = log --oneline --follow --
-	history = log -p --follow --
+	history = log -p --follow
 	add-deleted = ! git rm $(git ls-files --deleted)
 	tracked-files = ls-tree --full-tree -r HEAD
 	ls-revisions = ls-revisions
