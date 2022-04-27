@@ -24,6 +24,9 @@ main() {
 
   cd "${BASEDIR}"
 
+  header 'Linking other needed files'
+  link_files
+
   header 'Installing dependencies'
   install_dependencies
 
@@ -45,9 +48,6 @@ main() {
 
   header 'Setting up Tmux'
   run ~/.tmux/plugins/tpm/bin/install_plugins
-
-  header 'Linking other needed files'
-  link_files
 
   header 'Tweaking system files'
   tweak_system_files
@@ -153,6 +153,7 @@ link_files() {
   # support linking as root (see
   # https://github.com/anishathalye/dotbot/issues/125).
   run sudo ln -sf "$DOTFILES"/etc/udevmon.yaml /etc/interception/
+  run sudo ln -sf "$DOTFILES"/etc/pacman.conf /etc/pacman.conf
 
   # Primarily so `etckeeper` (which runs as `root`) uses my Git config.
   run sudo ln -sf ~bob/.gitconfig ~root
