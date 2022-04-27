@@ -213,6 +213,10 @@ Plug 'ctechols/vim-hideshow'
 " <Leader>r to restore original quickfix list before filtering.
 Plug 'sk1418/QFGrep'
 
+" Expand braces on current line/visual selection (Expand) - e.g.
+" `function {add,remove}_user()` -> 2 function definitions.
+Plug 'Olical/vim-expand'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'ElmCast/elm-vim'
