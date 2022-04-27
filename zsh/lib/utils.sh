@@ -2,7 +2,7 @@
 # Misc aliases.
 alias cat='bat'
 alias df='df --human-readable'
-alias diff='vimdiff'
+alias diff='diff --color=always'
 alias m='make'
 alias open='xdg-open'
 alias pyserver="python -m http.server"
