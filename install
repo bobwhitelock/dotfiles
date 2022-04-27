@@ -30,6 +30,9 @@ main() {
   header 'Installing dotfiles'
   run sync_dotbot
 
+  # header 'Configuring fonts'
+  # configure_fonts
+
   # Copy example private environment variable file (if needed), so these can be
   # set but not committed.
   if [ ! -f zsh/env.private.sh ]; then
@@ -74,6 +77,50 @@ install_dependencies() {
   # therefore `rbenv` is initialized correctly.
   # XXX Doesn't actually work; fix.
   # run 'zsh -ic "rbenv shell system && gem install tmuxinator"'
+}
+
+configure_fonts() {
+  # Adapted from
+  # https://dev.to/darksmile92/get-emojis-working-on-arch-linux-with-noto-fonts-emoji-2a9.
+
+  # XXX This doesn't work, but manually creating file with this did
+  run sudo echo "<?xml version=\"1.0\"?>
+  <!DOCTYPE fontconfig SYSTEM \"fonts.dtd\">
+  <fontconfig>
+   <alias>
+     <family>sans-serif</family>
+     <prefer>
+       <family>Noto Sans</family>
+       <family>Noto Color Emoji</family>
+       <family>Noto Emoji</family>
+       <family>DejaVu Sans</family>
+     </prefer>
+   </alias>
+
+   <alias>
+     <family>serif</family>
+     <prefer>
+       <family>Noto Serif</family>
+       <family>Noto Color Emoji</family>
+       <family>Noto Emoji</family>
+       <family>DejaVu Serif</family>
+     </prefer>
+   </alias>
+
+   <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>Noto Mono</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+      <family>DejaVu Sans Mono</family>
+     </prefer>
+   </alias>
+  </fontconfig>
+  " > /etc/fonts/local.conf
+
+  # Update font cache.
+  run fc-cache
 }
 
 setup_vim() {
