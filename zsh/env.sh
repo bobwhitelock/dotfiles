@@ -3,7 +3,7 @@ export ZSH_DIR="$DOTFILES/zsh"
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/
 
-export PATH="$JAVA_HOME/bin:$HOME/.local/bin:$HOME/.rbenv/bin:/usr/local/go/bin:$PATH:$HOME/bin:/usr/local/bin:$HOME/.rvm/bin:./node_modules/.bin:$HOME/.cargo/bin"
+export PATH="$JAVA_HOME/bin:$HOME/.local/bin:$HOME/.rbenv/bin:/usr/local/go/bin:$HOME/bin:$PATH:/usr/local/bin:$HOME/.rvm/bin:./node_modules/.bin:$HOME/.cargo/bin"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # As suggested to make Yeoman work in
