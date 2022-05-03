@@ -67,7 +67,7 @@ install_dependencies() {
   # TODO Install each dependency via independent call, so changes for earlier
   # packages still committed when later install fails?
   run 'xargs sudo pacman -S --noconfirm --needed < dependencies/pacman'
-  run 'xargs yay -S --noconfirm --needed < dependencies/aur'
+  run 'xargs yay -S --noconfirm --noredownload --norebuild < dependencies/aur'
 
   # XXX Should all these be installed - could break things?
   run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test prettier
