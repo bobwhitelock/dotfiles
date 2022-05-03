@@ -37,7 +37,7 @@ main() {
     cd "$owner_path"
 
     if [ ! -d "$name" ]; then
-        hub clone "$repo"
+        gh repo clone "$repo"
     fi
 
     # shellcheck disable=SC1090
