@@ -24,6 +24,18 @@ main() {
 
   cd "${BASEDIR}"
 
+  # Copy example private environment variables file (if needed), so these can
+  # be set but not committed.
+  if [ ! -f zsh/env.private.sh ]; then
+    header 'Copying private environment variables file'
+    run cp zsh/env.private.{example.,}sh
+  fi
+
+  set +u
+  # shellcheck disable=SC1091
+  run source 'zsh/env.sh'
+  set -u
+
   header 'Linking other needed files'
   link_files
 
@@ -31,17 +43,10 @@ main() {
   install_dependencies
 
   header 'Installing dotfiles'
-  run sync_dotbot
+  run bin/sync_dotbot
 
   # header 'Configuring fonts'
   # configure_fonts
-
-  # Copy example private environment variable file (if needed), so these can be
-  # set but not committed.
-  if [ ! -f zsh/env.private.sh ]; then
-    header 'Copying private environment variables file'
-    run cp zsh/env.private.{example.,}sh
-  fi
 
   header 'Setting up Vim'
   setup_vim
@@ -134,14 +139,11 @@ setup_vim() {
 link_files() {
   # XXX Move doing all this into `install.conf.yaml`?
 
-  set +u
-  # shellcheck disable=SC1091
-  run source 'zsh/env.sh'
-  set -u
-
-  run ln -sf "$DROP"/.aws ~
-  run ln -sf "$DROP"/.ssh/ ~
-  run ln -sf "$DROP"/vim/spell/ ~/.vim
+  # XXX Disabled for now as no longer using Dropbox, need to copy these over
+  # manually for now.
+  # run ln -sf "$DROP"/.aws ~
+  # run ln -sf "$DROP"/.ssh/ ~
+  # run ln -sf "$DROP"/vim/spell/ ~/.vim
 
   run mkdir -p ~/.todo/
   run ln -sf "$NOTES"/todo/done.todo ~/.todo
