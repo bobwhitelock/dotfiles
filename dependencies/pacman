@@ -8,6 +8,7 @@ bluez-utils
 cloc
 cmake
 ctags
+dmenu
 docker
 etckeeper
 evince
@@ -23,6 +24,8 @@ noto-fonts-emoji
 npm
 openvpn
 peek
+postgresql
+postgresql-libs
 python-pip
 ripgrep
 ruby
@@ -30,6 +33,7 @@ shellcheck
 terminator
 tex-gyre-fonts
 texlive-most
+thunar
 tmux
 tree
 vint
