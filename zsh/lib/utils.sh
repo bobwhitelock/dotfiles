@@ -29,6 +29,10 @@ alias simple_prompt='PS1="$ "'
 alias cbcopy='xclip -selection clipboard'
 alias cbpaste='xclip -selection clipboard -out'
 
+# Quickly switch between UK and US keyboard layouts.
+alias ukk='setxkbmap gb'
+alias usk='setxkbmap us'
+
 du() {
     command du -h "$@" | sort -h
 }
