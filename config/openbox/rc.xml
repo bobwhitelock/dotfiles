@@ -371,15 +371,6 @@
         <command>pactl set-sink-mute @DEFAULT_SINK@ toggle</command>
       </action>
     </keybind>
-    <keybind key="W-S-k">
-      <action name="Execute">
-        <startupnotify>
-          <enabled>true</enabled>
-          <name>KeepassXC</name>
-        </startupnotify>
-        <command>keepassxc</command>
-      </action>
-    </keybind>
     <keybind key="W-s">
       <action name="Execute">
         <startupnotify>
@@ -407,11 +398,6 @@
     <keybind key="W-b">
       <action name="Execute">
         <command>blueman-manager</command>
-      </action>
-    </keybind>
-    <keybind key="W-c">
-      <action name="Execute">
-        <command>slack</command>
       </action>
     </keybind>
     <keybind key="W-Tab">
