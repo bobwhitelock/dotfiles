@@ -24,30 +24,35 @@ main() {
 
   cd "${BASEDIR}"
 
-  header 'Installing dependencies'
-  install_dependencies
-
-  header 'Installing dotfiles'
-  run sync_dotbot
-
-  # header 'Configuring fonts'
-  # configure_fonts
-
-  # Copy example private environment variable file (if needed), so these can be
-  # set but not committed.
+  # Copy example private environment variables file (if needed), so these can
+  # be set but not committed.
   if [ ! -f zsh/env.private.sh ]; then
     header 'Copying private environment variables file'
     run cp zsh/env.private.{example.,}sh
   fi
+
+  set +u
+  # shellcheck disable=SC1091
+  run source 'zsh/env.sh'
+  set -u
+
+  header 'Linking other needed files'
+  link_files
+
+  header 'Installing dependencies'
+  install_dependencies
+
+  header 'Installing dotfiles'
+  run bin/sync_dotbot
+
+  # header 'Configuring fonts'
+  # configure_fonts
 
   header 'Setting up Vim'
   setup_vim
 
   header 'Setting up Tmux'
   run ~/.tmux/plugins/tpm/bin/install_plugins
-
-  header 'Linking other needed files'
-  link_files
 
   header 'Tweaking system files'
   tweak_system_files
@@ -62,7 +67,7 @@ install_dependencies() {
   # TODO Install each dependency via independent call, so changes for earlier
   # packages still committed when later install fails?
   run 'xargs sudo pacman -S --noconfirm --needed < dependencies/pacman'
-  run 'xargs yay -S --noconfirm --needed < dependencies/aur'
+  run 'xargs yay -S --noconfirm --noredownload --norebuild < dependencies/aur'
 
   # XXX Should all these be installed - could break things?
   run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test prettier
@@ -134,14 +139,11 @@ setup_vim() {
 link_files() {
   # XXX Move doing all this into `install.conf.yaml`?
 
-  set +u
-  # shellcheck disable=SC1091
-  run source 'zsh/env.sh'
-  set -u
-
-  run ln -sf "$DROP"/.aws ~
-  run ln -sf "$DROP"/.ssh/ ~
-  run ln -sf "$DROP"/vim/spell/ ~/.vim
+  # XXX Disabled for now as no longer using Dropbox, need to copy these over
+  # manually for now.
+  # run ln -sf "$DROP"/.aws ~
+  # run ln -sf "$DROP"/.ssh/ ~
+  # run ln -sf "$DROP"/vim/spell/ ~/.vim
 
   run mkdir -p ~/.todo/
   run ln -sf "$NOTES"/todo/done.todo ~/.todo
@@ -153,6 +155,7 @@ link_files() {
   # support linking as root (see
   # https://github.com/anishathalye/dotbot/issues/125).
   run sudo ln -sf "$DOTFILES"/etc/udevmon.yaml /etc/interception/
+  run sudo ln -sf "$DOTFILES"/etc/pacman.conf /etc/pacman.conf
 
   # Primarily so `etckeeper` (which runs as `root`) uses my Git config.
   run sudo ln -sf ~bob/.gitconfig ~root
