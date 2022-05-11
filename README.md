@@ -38,8 +38,7 @@ If you are me, or you just want to ignore this and try things out locally:
 
   # Everything below definitely won't work if you aren't me ¯\_(ツ)_/¯.
 
-  # Setup Dropbox (should have been installed by above), and sync files so have
-  # SSH keys available locally.
+  # Copy over private files, SSH keys, AWS credentials etc.
 
   ssh-add ~/.ssh/id_rsa.bob
   clone bobwhitelock/dotfiles-private

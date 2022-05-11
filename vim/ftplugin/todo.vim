@@ -14,8 +14,7 @@ setlocal isfname-=+
 setlocal path+=projects/
 setlocal suffixesadd+=.md
 
-" Regardless of current file line endings use Unix line endings; needed as
-" Dropbox and/or Simpletask always converts line endings to CRLF.
+" Regardless of current file line endings use Unix line endings.
 setlocal fileformat=unix
 
 " Use completion function from https://github.com/dbeniamine/todo.txt-vim.
