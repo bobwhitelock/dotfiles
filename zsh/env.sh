@@ -25,15 +25,6 @@ export DROP="$HOME/Dropbox"
 export STEAM="$HOME/.local/share/Steam"
 export STEAMAPPS="$STEAM/steamapps"
 
-# Set history file depending on if zsh or bash (although bash file will be used
-# if in anything other than zsh; doesn't happen currently and don't really care
-# about).
-if [ -n "$ZSH_VERSION" ]; then
-    export HISTFILE="$DROP/.zsh_history"
-else
-    export HISTFILE="$DROP/.bash_history"
-fi
-
 # Effectively store unlimited history.
 export HISTSIZE=999999999
 export SAVEHIST=$HISTSIZE
