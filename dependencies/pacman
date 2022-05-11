@@ -23,6 +23,7 @@ noto-fonts-emoji
 npm
 openvpn
 peek
+pkgfile
 postgresql
 postgresql-libs
 python-pip
