@@ -110,6 +110,10 @@ Plug 'michaeljsmith/vim-indent-object'
 " ERB text object (iE / aE).
 Plug 'whatyouhide/vim-textobj-erb'
 
+" Text object for pairs of quotes of any type (single, double, or backtick; iq
+" / aq).
+Plug 'beloglazov/vim-textobj-quotes'
+
 " For custom operators, needed for all vim-operator plugins.
 Plug 'kana/vim-operator-user'
 
