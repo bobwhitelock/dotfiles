@@ -18,13 +18,13 @@ Plug 'tpope/vim-surround'
 " - `#` -> `<%# ^ %>`
 Plug 'tpope/vim-ragtag'
 
-" Comment and uncomment (gc*)
+" Comment and uncomment (gc*).
 Plug 'tpope/vim-commentary'
 
 " Unix command helpers (e.g. SudoWrite).
 Plug 'tpope/vim-eunuch'
 
-" Git command helpers (:G*)
+" Git command helpers (:G*).
 Plug 'tpope/vim-fugitive'
 
 " GitHub :GBrowse handling for the above.
@@ -50,7 +50,7 @@ Plug 'tpope/vim-abolish'
 nmap crC crc
 
 " Continuously updating session files (record with `Obsess`; stop recording
-" with `Obsess!`)
+" with `Obsess!`).
 Plug 'tpope/vim-obsession'
 
 " Show git changes in gutter.
@@ -95,7 +95,7 @@ Plug 'kana/vim-textobj-user'
 " Variable (CamelCase or underscore) segment text object (iv / av).
 Plug 'Julian/vim-textobj-variable-segment'
 
-" Comment text object (ic / ac / aC)
+" Comment text object (ic / ac / aC).
 Plug 'glts/vim-textobj-comment'
 
 " Entire buffer text object (ie / ae).
@@ -104,10 +104,10 @@ Plug 'kana/vim-textobj-entire'
 " HTML/XML attribute text object (ix / ax).
 Plug 'whatyouhide/vim-textobj-xmlattr'
 
-" Indent-level text object (ai / ii / aI / iI)
+" Indent-level text object (ai / ii / aI / iI).
 Plug 'michaeljsmith/vim-indent-object'
 
-" ERB text object (iE / aE)
+" ERB text object (iE / aE).
 Plug 'whatyouhide/vim-textobj-erb'
 
 " For custom operators, needed for all vim-operator plugins.
@@ -161,7 +161,7 @@ Plug 'junegunn/goyo.vim'
 " Search for current visual selection with */#.
 Plug 'bronson/vim-visual-star-search'
 
-" A Vim function to automatically commit to Git
+" A Vim function to automatically commit to Git.
 Plug 'tlvince/vim-auto-commit'
 
 " Commands/maps for opening browser.
