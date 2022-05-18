@@ -126,7 +126,6 @@ let g:wwwsearch_command_to_open_uri = 'xdg-open {uri}'
 " Operator to search using Ag/Ack/CtrlSF/Ggrep/etc.
 Plug 'rgrinberg/vim-operator-gsearch'
 map gr <Plug>(operator-ggrep)
-" TODO: annoying: opens shell, jumps to first match
 let g:gsearch_ggrep_command = 'Ggrep!'
 
 " View tree of all undos.
