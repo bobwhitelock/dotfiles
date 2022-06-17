@@ -410,6 +410,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead *cloud.cfg set filetype=yaml
   autocmd BufNewFile,BufRead .prettierrc set filetype=json
   autocmd BufNewFile,BufRead *.mm set filetype=xml
+  autocmd BufNewFile,BufRead *.xaml set filetype=xml
   autocmd BufNewFile,BufRead *.todo set filetype=todo
 
   " Set Rescale Jenkins configs to be Jenkins-specific filetype.
