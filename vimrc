@@ -698,6 +698,7 @@ let test#python#djangotest#options = '--keepdb'
 let g:test#runner_commands = ['RSpec', 'CargoTest', 'DjangoTest']
 
 let test#java#runner = 'gradletest'
+let test#javascript#jest#executable = 'npm run test'
 
 " Maps to run tests.
 nnoremap <silent> <leader>ts :call RunTests('TestSuite')<CR>
