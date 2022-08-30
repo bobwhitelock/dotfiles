@@ -85,17 +85,27 @@ alias gcnv='gc --no-verify' # Skips any `pre-commit` and `commit-msg` hooks.
 alias gco='git checkout'
 alias gcot='gco --track'
 
-# Fuzz checkout, with preview of latest commit on each branch/tag.
-fco() {
+# Run given Git subcommand, with fuzz select of branch/tag/SHA to pass as
+# argument, and preview of latest commit for selected item.
+# Usage: `fgit SUBCOMMAND [FZF_ARGS]`
+fgit() {
+    local subcommand
+    subcommand="$1"
+    shift
+
     # shellcheck disable=SC2033
-    ( git branch ; git tag ) | \
+    ( git branch ; git tag ; git log --format="%H") | \
         fzf \
         -1 \
         --query="$*" \
         --preview="echo {} | xargs git show --color=always" | \
         awk '{ print $NF }' | \
-        xargs git checkout
+        xargs git "$subcommand"
 }
+
+# Aliases using above.
+alias fco="fgit checkout"
+alias fl="fgit log"
 
 # Fuzz show, with preview.
 fsh() {
