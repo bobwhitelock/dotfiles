@@ -1023,11 +1023,11 @@ nmap <leader>Y "+Y
 " Move last thing yanked to system clipboard.
 nnoremap <leader>cc :let @+=@"<cr>:echo "copied!"<cr>
 
-" Copy current absolute or relative file path, or file name, to system
-" clipboard.
+" Copy various permutations of file name/path to system clipboard.
 nnoremap <leader>ca :let @+ = expand("%:p")<CR>:echo "copied absolute filepath!"<CR>
 nnoremap <leader>cp :let @+ = expand("%")<CR>:echo "copied relative filepath!"<CR>
 nnoremap <leader>cf :let @+ = expand("%:t")<CR>:echo "copied filename!"<CR>
+nnoremap <leader>cn :let @+ = expand("%:t:r")<CR>:echo "copied file basename!"<CR>
 
 " Copy SHA or path to current object using Fugitive.
 nmap <leader>ch "+y<C-g>:echo "copied SHA/current object path!"<CR>
