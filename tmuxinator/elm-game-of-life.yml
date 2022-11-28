@@ -11,7 +11,7 @@ windows:
       layout: even-horizontal
       panes:
         - gpl
-        - vim 'todo/next_actions.todo'
+        - vim 'stream.md'
 
   - app:
       root: ~/projects/other/elm-game-of-life
