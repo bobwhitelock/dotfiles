@@ -1,6 +1,7 @@
 
 # Misc aliases.
 alias cat='bat'
+alias bat='batcat' # Called this on Ubuntu, for some reason.
 alias df='df --human-readable'
 alias diff='diff --color=always'
 alias m='make'
