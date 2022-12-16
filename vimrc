@@ -237,7 +237,10 @@ Plug 'nvie/vim-flake8'
 " XXX Could replace this, maybe other things (vim-rubocop, Black etc?) with
 " just using ALE/COC?
 Plug 'tell-k/vim-autopep8'
-Plug 'psf/black'
+" XXX Manually edited `vim/plugged/black/autoload/black.vim` to set `pyver =
+" (3,9,12)`; see
+" https://github.com/psf/black/issues/2876#issuecomment-1102356294.
+Plug 'psf/black', { 'branch': 'stable' }
 Plug 'yaymukund/vim-rabl'
 Plug 'ngmy/vim-rubocop'
 Plug 'vim-ruby/vim-ruby'
