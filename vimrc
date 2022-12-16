@@ -69,8 +69,8 @@ let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 Plug 'wesQ3/vim-windowswap'
 
 " Autocompletion.
-" XXX Was slowing things down?
-Plug 'neoclide/coc.nvim', {'do': 'source /usr/share/nvm/init-nvm.sh && nvm use system && yarn install --frozen-lockfile'}
+" XXX Was slowing things down? And also erroring sometimes
+" Plug 'neoclide/coc.nvim', {'do': 'source /usr/share/nvm/init-nvm.sh && nvm use system && yarn install --frozen-lockfile'}
 
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
