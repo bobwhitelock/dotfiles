@@ -73,7 +73,7 @@ autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
 
-source /etc/bash_completion.d/compleat_setup
+# source /etc/bash_completion.d/compleat_setup
 
 # For advanced shell history - disabled for now as messes up environment.
 # export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
