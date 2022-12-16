@@ -145,12 +145,6 @@ link_files() {
   # run ln -sf "$DROP"/.ssh/ ~
   # run ln -sf "$DROP"/vim/spell/ ~/.vim
 
-  run mkdir -p ~/.todo/
-  run ln -sf "$NOTES"/todo/done.todo ~/.todo
-  run ln -sf "$NOTES"/todo/next_actions.todo ~/.todo
-  run ln -sf "$NOTES"/todo/report.todo ~/.todo
-  run ln -sf "$DOTFILES"/zsh/lib/todotxt.sh ~/.todo/config
-
   # Link files in to `/etc`; cannot occur via `dotbot` as this doesn't
   # support linking as root (see
   # https://github.com/anishathalye/dotbot/issues/125).
