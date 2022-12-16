@@ -92,7 +92,8 @@ export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
 
 # Load NVM.
-[ -s /usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Have NVM automatically use `.nvmrc` if present - from
 # https://github.com/nvm-sh/nvm#deeper-shell-integration.
@@ -131,9 +132,9 @@ source "$ZSH_DIR/packages.sh"
 source "$ZSH_DIR/env.sh"
 
 # Enable Pyenv.
-command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
-# XXX needed?
-command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init --path)"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # Enable Rbenv.
 # XXX or could use omz plugin, for this and pyenv
@@ -158,3 +159,4 @@ source_libs() {
 source_libs
 
 export PATH="$HOME/.poetry/bin:$PATH"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
