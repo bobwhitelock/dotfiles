@@ -167,7 +167,8 @@ tweak_system_files() {
   fi
 
   # Make this from `git-extras` non-executable, so own alias takes precedence.
-  run sudo chmod -x /usr/bin/git-touch
+  # XXX `git-extras` is not currently installed.
+  # run sudo chmod -x /usr/bin/git-touch
 }
 
 # XXX Obsolete, was for Arch (using "Gnome tweaks" for same effect on Ubuntu
