@@ -11,7 +11,6 @@
 
 - link:
     ~/.ctags.d: ctags.d
-    ~/.profile:
     ~/.gitconfig:
     ~/.gitignore:
     ~/.git_template:
