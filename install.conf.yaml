@@ -41,13 +41,6 @@
     ~/bin/:
       path: bin/*
       glob: true
-    ~/.config/openbox/:
-      path: config/openbox/*
-      glob: true
-    ~/.config/polybar/:
-      path: config/polybar/*
-      glob: true
-      force: true
     ~/.config/terminator:
       path: config/terminator
     ~/.config/htop:
