@@ -57,8 +57,8 @@ main() {
   header 'Tweaking system files'
   tweak_system_files
 
-  header 'Enabling services'
-  enable_services
+  # header 'Enabling services'
+  # enable_services
 }
 
 install_dependencies() {
@@ -66,8 +66,9 @@ install_dependencies() {
 
   # TODO Install each dependency via independent call, so changes for earlier
   # packages still committed when later install fails?
-  run 'xargs sudo pacman -S --noconfirm --needed < dependencies/pacman'
-  run 'xargs yay -S --noconfirm --noredownload --norebuild < dependencies/aur'
+  # XXX Obsolete, was for Arch.
+  # run 'xargs sudo pacman -S --noconfirm --needed < dependencies/pacman'
+  # run 'xargs yay -S --noconfirm --noredownload --norebuild < dependencies/aur'
 
   # XXX Should all these be installed - could break things?
   run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test prettier
@@ -145,17 +146,13 @@ link_files() {
   # run ln -sf "$DROP"/.ssh/ ~
   # run ln -sf "$DROP"/vim/spell/ ~/.vim
 
-  run mkdir -p ~/.todo/
-  run ln -sf "$NOTES"/todo/done.todo ~/.todo
-  run ln -sf "$NOTES"/todo/next_actions.todo ~/.todo
-  run ln -sf "$NOTES"/todo/report.todo ~/.todo
-  run ln -sf "$DOTFILES"/zsh/lib/todotxt.sh ~/.todo/config
-
   # Link files in to `/etc`; cannot occur via `dotbot` as this doesn't
   # support linking as root (see
   # https://github.com/anishathalye/dotbot/issues/125).
-  run sudo ln -sf "$DOTFILES"/etc/udevmon.yaml /etc/interception/
-  run sudo ln -sf "$DOTFILES"/etc/pacman.conf /etc/pacman.conf
+  # XXX Obsolete, was for Arch.
+  # run sudo mkdir -p /etc/interception/
+  # run sudo ln -sf "$DOTFILES"/etc/udevmon.yaml /etc/interception/
+  # run sudo ln -sf "$DOTFILES"/etc/pacman.conf /etc/pacman.conf
 
   # Primarily so `etckeeper` (which runs as `root`) uses my Git config.
   run sudo ln -sf ~bob/.gitconfig ~root
@@ -170,12 +167,15 @@ tweak_system_files() {
   fi
 
   # Make this from `git-extras` non-executable, so own alias takes precedence.
-  run sudo chmod -x /usr/bin/git-touch
+  # XXX `git-extras` is not currently installed.
+  # run sudo chmod -x /usr/bin/git-touch
 }
 
-enable_services() {
-  run sudo systemctl enable --now udevmon
-}
+# XXX Obsolete, was for Arch (using "Gnome tweaks" for same effect on Ubuntu
+# now and working well).
+# enable_services() {
+#   run sudo systemctl enable --now udevmon
+# }
 
 header() {
   echo

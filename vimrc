@@ -69,8 +69,8 @@ let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 Plug 'wesQ3/vim-windowswap'
 
 " Autocompletion.
-" XXX Was slowing things down?
-Plug 'neoclide/coc.nvim', {'do': 'source /usr/share/nvm/init-nvm.sh && nvm use system && yarn install --frozen-lockfile'}
+" XXX Was slowing things down? And also erroring sometimes
+" Plug 'neoclide/coc.nvim', {'do': 'source /usr/share/nvm/init-nvm.sh && nvm use system && yarn install --frozen-lockfile'}
 
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
@@ -237,7 +237,10 @@ Plug 'nvie/vim-flake8'
 " XXX Could replace this, maybe other things (vim-rubocop, Black etc?) with
 " just using ALE/COC?
 Plug 'tell-k/vim-autopep8'
-Plug 'psf/black'
+" XXX Manually edited `vim/plugged/black/autoload/black.vim` to set `pyver =
+" (3,9,12)`; see
+" https://github.com/psf/black/issues/2876#issuecomment-1102356294.
+Plug 'psf/black', { 'branch': 'stable' }
 Plug 'yaymukund/vim-rabl'
 Plug 'ngmy/vim-rubocop'
 Plug 'vim-ruby/vim-ruby'
@@ -697,7 +700,8 @@ let test#python#djangotest#options = '--keepdb'
 
 let g:test#runner_commands = ['RSpec', 'CargoTest', 'DjangoTest']
 
-let test#java#runner = 'gradletest'
+" XXX Was being used when not in Java, for some reason.
+" let test#java#runner = 'gradletest'
 let test#javascript#jest#executable = 'npm run test'
 
 " Maps to run tests.

@@ -1,6 +1,6 @@
 
 # shellcheck disable=SC2032
-alias git='hub'
+# alias git='hub'
 alias g='git'
 alias gg='git grep --break --heading'
 alias gbl='git blame'
