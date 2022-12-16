@@ -700,7 +700,8 @@ let test#python#djangotest#options = '--keepdb'
 
 let g:test#runner_commands = ['RSpec', 'CargoTest', 'DjangoTest']
 
-let test#java#runner = 'gradletest'
+" XXX Was being used when not in Java, for some reason.
+" let test#java#runner = 'gradletest'
 let test#javascript#jest#executable = 'npm run test'
 
 " Maps to run tests.
