@@ -236,7 +236,7 @@ Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
 " XXX Could replace this, maybe other things (vim-rubocop, Black etc?) with
 " just using ALE/COC?
-Plug 'tell-k/vim-autopep8'
+" Plug 'tell-k/vim-autopep8'
 " XXX Manually edited `vim/plugged/black/autoload/black.vim` to set `pyver =
 " (3,9,12)`; see
 " https://github.com/psf/black/issues/2876#issuecomment-1102356294.
@@ -472,7 +472,6 @@ function! s:EnablePythonAutoFormatAutopep8()
   augroup END
 endfunction
 command! EnablePythonAutoFormatAutopep8 call s:EnablePythonAutoFormatAutopep8()
-EnablePythonAutoFormatAutopep8
 
 function! s:EnablePythonAutoFormatBlack()
   augroup python_auto_format
@@ -481,6 +480,7 @@ function! s:EnablePythonAutoFormatBlack()
   augroup END
 endfunction
 command! EnablePythonAutoFormatBlack call s:EnablePythonAutoFormatBlack()
+EnablePythonAutoFormatBlack
 
 function! s:DisablePythonAutoFormat()
   augroup python_auto_format
