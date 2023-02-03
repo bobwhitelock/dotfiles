@@ -17,6 +17,9 @@ alias gap='ga -p'
 
 alias grip="grip --browser --user \"\$GITHUB_USER\" --pass \"\$GITHUB_PASSWORD\""
 
+# "quick commit" all changes to current repo.
+alias qc="git add . && git commit -m 'Add/do some things' && git push"
+
 # Functions to push/pull, or try adding key and then doing the same action if
 # this fails.
 gp() {
