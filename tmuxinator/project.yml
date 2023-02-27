@@ -7,6 +7,7 @@ require "json"
 abort "Usage: mux start project PATH" unless @args.size == 1 && File.exist?(@args[0])
 
 project_path = File.expand_path(@args[0])
+project_owner = File.basename(File.dirname(project_path))
 project_name = File.basename(project_path)
 
 project_specific_setup = \
@@ -19,7 +20,7 @@ project_specific_setup = \
   end.to_json
 %>
 
-name: <%= project_name %>
+name: <%= [project_owner, project_name].join('/') %>
 startup_window: <%= project_name %>
 # XXX Don't reprompt for this when it's already added.
 on_project_start: ssh-add ~/.ssh/id_rsa.bob
