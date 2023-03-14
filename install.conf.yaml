@@ -62,3 +62,5 @@
     ~/bin/:
       path: ../dotfiles-private/bin/*
       glob: true
+    ~/.aws/config:
+      path: ../dotfiles-private/aws/config
