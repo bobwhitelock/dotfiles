@@ -40,7 +40,7 @@ du() {
 
 # "ripgrep pretty", i.e. with output always coloured and piped to `bat`.
 rgp() {
-    rg --pretty "$@" | bat
+    rg --pretty "$@" | batcat
 }
 
 # Swap 2 filenames around, if they exist (from
