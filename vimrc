@@ -939,9 +939,12 @@ noremap <silent> =J :%!python -m json.tool<CR> :setfiletype json<CR>
 
 nnoremap <leader>gu :GundoToggle<CR>
 
-" Sort visual selection/current paragraph.
+" Sort visual selection/current paragraph, by locale or numerically
+" respectively.
 xnoremap gz :sort<CR>
 nnoremap gz vip:sort<CR>
+xnoremap gZ :sort n<CR>
+nnoremap gZ vip:sort n<CR>
 
 nnoremap <leader>tn :call CreateNewTab()<CR>
 nnoremap <leader>tc :tabclose<CR>
