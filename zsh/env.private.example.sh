@@ -1,6 +1,19 @@
 
+#
+# Personal
+#
+
 export GITHUB_PASSWORD=XXX
 
+export PUSHOVER_TOKEN=XXX
+export PUSHOVER_USER=XXX
+
+#
+# Rescale
+#
+
+# Platform API keys; will also be aliased in
+# `dotfiles-private/zsh/lib/rescale.sh` for different tools.
 export RESCALE_API_TOKEN_LOCALDEV=XXX
 export RESCALE_API_TOKEN_DEV=XXX
 export RESCALE_API_TOKEN_STAGE=XXX
@@ -9,13 +22,3 @@ export RESCALE_API_TOKEN_DEPROD=XXX
 export RESCALE_API_TOKEN_JPPROD=XXX
 export RESCALE_API_TOKEN_KRPROD=XXX
 
-# For Rescale integration tests.
-export UI_TEST_ACCOUNT_EMAIL=XXX
-export UI_TEST_ACCOUNT_PASSWORD=XXX
-
-export AWS_ACCESS_KEY_ID=XXX
-export AWS_SECRET_ACCESS_KEY=XXX
-export AWS_DEFAULT_REGION=XXX
-
-export PUSHOVER_TOKEN=XXX
-export PUSHOVER_USER=XXX
