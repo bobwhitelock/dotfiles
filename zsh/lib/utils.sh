@@ -30,6 +30,12 @@ alias simple_prompt='PS1="$ "'
 alias cbcopy='xclip -selection clipboard'
 alias cbpaste='xclip -selection clipboard -out'
 
+# Copy full path to file/current directory to system clipboard.
+cppath() {
+    readlink -f "$@" | cbcopy
+}
+alias cpdir='pwd | cbcopy'
+
 # Quickly switch between UK and US keyboard layouts.
 alias ukk='setxkbmap gb'
 alias usk='setxkbmap us'
