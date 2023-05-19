@@ -221,6 +221,9 @@ Plug 'sk1418/QFGrep'
 " `function {add,remove}_user()` -> 2 function definitions.
 Plug 'Olical/vim-expand'
 
+" GitHub Copilot.
+Plug 'github/copilot.vim'
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'ElmCast/elm-vim'
