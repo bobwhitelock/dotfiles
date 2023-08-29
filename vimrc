@@ -222,7 +222,7 @@ Plug 'sk1418/QFGrep'
 Plug 'Olical/vim-expand'
 
 " GitHub Copilot.
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 " Language-specific.
 Plug 'markcornick/vim-bats'
