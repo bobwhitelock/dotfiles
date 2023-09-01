@@ -14,6 +14,7 @@ alias split_words="sed 's/\s/\n/g'"
 alias sz='source ~/.zshrc'
 alias urldecode='ruby -r cgi -e "puts CGI.unescape(ARGV[0])"'
 alias urlencode='ruby -r cgi -e "puts CGI.escape(ARGV[0])"'
+alias tf='terraform'
 
 # From https://unix.stackexchange.com/a/102021/229081.
 alias trim="sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'"
