@@ -29,6 +29,13 @@ windows:
         -
         - vim
 
+  - personal-infra:
+      root: <%= ENV.fetch('BOB') %>/personal-infra
+      layout: even-horizontal
+      panes:
+        -
+        - vim
+
   - dotfiles:
       root: <%= ENV.fetch('DOTFILES') %>
       layout: even-horizontal
