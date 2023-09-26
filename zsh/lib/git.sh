@@ -1,4 +1,18 @@
 
+gh_login_personal() {
+    _gh_login "$GITHUB_CLI_TOKEN_PERSONAL"
+}
+
+gh_login_rescale() {
+    _gh_login "$GITHUB_CLI_TOKEN_RESCALE"
+}
+
+_gh_login() {
+    local gh_cli_token
+    gh_cli_token="$1"
+    echo "$gh_cli_token" | gh auth login --with-token
+}
+
 alias g='git'
 alias gg='git grep --break --heading'
 alias gbl='git blame'
