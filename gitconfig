@@ -8,10 +8,6 @@
 
 [push]
 	default = current
-
-[credential]
-	helper = store
-
 [alias]
 	absorb = absorb
 	amend = commit --verbose --amend -C HEAD
@@ -98,3 +94,7 @@
 
 [hub]
 	protocol = ssh
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !/usr/bin/gh auth git-credential
