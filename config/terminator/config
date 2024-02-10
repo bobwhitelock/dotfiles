@@ -1,7 +1,6 @@
 [global_config]
   custom_url_handler = google-chrome
   enabled_plugins = APTURLHandler, LaunchpadBugURLHandler
-  focus = mouse
   handle_size = 3
   inactive_color_offset = 0.61
   title_inactive_bg_color = "#000000"
