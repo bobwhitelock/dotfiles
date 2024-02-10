@@ -57,7 +57,7 @@ Plug 'tpope/vim-obsession'
 Plug 'airblade/vim-gitgutter'
 
 " Asynchronous linting/fixing.
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 let g:ale_linters = {'ruby': ['standardrb']}
 let g:ale_fixers = {'ruby': ['standardrb']}
 let g:ale_fix_on_save = 1
@@ -70,7 +70,7 @@ Plug 'wesQ3/vim-windowswap'
 
 " Autocompletion.
 " XXX Was slowing things down? And also erroring sometimes
-" Plug 'neoclide/coc.nvim', {'do': 'source /usr/share/nvm/init-nvm.sh && nvm use system && yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'do': 'source /usr/share/nvm/init-nvm.sh && nvm use system && yarn install --frozen-lockfile'}
 
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
