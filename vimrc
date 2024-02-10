@@ -669,7 +669,8 @@ function! TslimeAndCacheStrategy(cmd)
 endfunction
 
 let g:test#custom_strategies = {'tslime_and_cache': function('TslimeAndCacheStrategy')}
-let test#strategy = 'tslime_and_cache'
+" let test#strategy = 'tslime_and_cache'
+let test#strategy = 'tslime'
 
 " XXX WIP, hacky, transform for seamlessly running tests within
 " Docker/`docker-compose` environment.
