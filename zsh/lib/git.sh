@@ -113,6 +113,12 @@ alias gcnv='gc --no-verify' # Skips any `pre-commit` and `commit-msg` hooks.
 alias gco='git checkout'
 alias gcot='gco --track'
 
+# Create new/move existing branch to current HEAD and check this out, whether
+# it exists already or not.
+gcof() {
+    gco -b "$@" || (gb -f "$@" && gco "$@")
+}
+
 # Run given Git subcommand, with fuzz select of branch/tag/SHA to pass as
 # argument, and preview of latest commit for selected item.
 # Usage: `fgit SUBCOMMAND [FZF_ARGS]`
