@@ -743,7 +743,7 @@ function! s:CrRunCurrentFile()
   " current file at the point this function is run, not whatever file the
   " cursor is in at the point the mapping is run.
   let g:current_file = expand('%:p')
-  nnoremap <silent> <CR> :execute TmuxInterruptAndRun('Tmux clear; '.g:current_file)<CR>
+  nnoremap <silent> <CR> :execute TmuxInterruptAndRun('Tmux '.g:current_file)<CR>
 endfunction
 command! CrRunCurrentFile call s:CrRunCurrentFile()
 
@@ -757,7 +757,7 @@ command! CrSendCurrentFile call s:CrSendCurrentFile()
 
 " Map <CR> to run any arbitrary command.
 function! s:CrRunCommand(...)
-  execute 'nnoremap <silent> <CR> :TmuxInterruptAndRun clear;' join(a:000) '<CR>'
+  execute 'nnoremap <silent> <CR> :TmuxInterruptAndRun ' join(a:000) '<CR>'
 endfunction
 command! -nargs=? CrRunCommand call s:CrRunCommand(<q-args>)
 
@@ -770,7 +770,7 @@ function! TmuxInterruptAndRun(command)
   execute a:command
 endfunction
 command! -nargs=? TmuxInterruptAndRun call TmuxInterruptAndRun('Tmux '.<q-args>)
-command! -nargs=0 TmuxRunCurrentFile execute TmuxInterruptAndRun('Tmux clear; '.expand('%:p'))
+command! -nargs=0 TmuxRunCurrentFile execute TmuxInterruptAndRun('Tmux '.expand('%:p'))
 
 function! TmuxInterrupt()
   execute 'Tmux'
