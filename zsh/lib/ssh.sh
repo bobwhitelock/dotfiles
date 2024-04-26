@@ -22,5 +22,5 @@ start_or_reuse_ssh_agent() {
     fi
     export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
 
-    ssh-add ~/.ssh/rescale
+    # ssh-add ~/.ssh/rescale
 }
