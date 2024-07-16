@@ -38,6 +38,9 @@ windows:
       root: <%= project_path %>
       panes:
         - <%= project_specific_setup %>
+        # XXX Add ability to have custom per-project config here, which can
+        # also be specified in dotfiles-private as well - and can then resolve
+        # https://github.com/bobwhitelock/dotfiles-private/issues/2.
         -
         - vim
 
