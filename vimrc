@@ -577,13 +577,13 @@ let g:markdown_fenced_languages = [
     \ 'elm',
     \ 'erb=eruby',
     \ 'js=javascript',
-    \ 'ts=typescript',
     \ 'json',
     \ 'log',
     \ 'python',
     \ 'qf',
     \ 'ruby',
     \ 'sql',
+    \ 'ts=typescript',
     \ 'xml',
     \ 'yaml'
     \]
