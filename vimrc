@@ -234,7 +234,6 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'elzr/vim-json'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-liquid'
-Plug 'tpope/vim-markdown'
 Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
 " XXX Could replace this, maybe other things (vim-rubocop, Black etc?) with
