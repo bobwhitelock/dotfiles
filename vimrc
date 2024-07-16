@@ -582,6 +582,7 @@ let g:markdown_fenced_languages = [
     \ 'python',
     \ 'qf',
     \ 'ruby',
+    \ 'sh',
     \ 'sql',
     \ 'ts=typescript',
     \ 'xml',
