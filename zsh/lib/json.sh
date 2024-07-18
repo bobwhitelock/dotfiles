@@ -9,7 +9,9 @@ yaml_to_json() {
     cat <<-RUBY | ruby | jq .
         require 'yaml'
         require 'json'
-        puts YAML.load_file('$1').to_json
+        YAML.load_stream(File.read('$1')) do |document|
+          puts document.to_json
+        end
 RUBY
 }
 
