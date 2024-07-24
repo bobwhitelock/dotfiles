@@ -565,7 +565,7 @@ nnoremap cox :set cursorcolumn!<CR>
 nnoremap ]f :cnfile<CR>
 nnoremap [f :cpfile<CR>
 
-let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.jsx,*.tsx,*.html.erb,*.md'
+let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.jsx,*.tsx,*.html.erb'
 let g:closetag_xhtml_filenames = '*.js,*.jsx,*.tsx'
 
 let g:markdown_fenced_languages = [
