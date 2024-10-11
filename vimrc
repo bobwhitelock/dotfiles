@@ -417,6 +417,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead *.mm set filetype=xml
   autocmd BufNewFile,BufRead *.xaml set filetype=xml
   autocmd BufNewFile,BufRead *.todo set filetype=todo
+  autocmd BufNewFile,BufRead .sqlfluff set filetype=confini
 
   " Set Rescale Jenkins configs to be Jenkins-specific filetype.
   autocmd BufNewFile,BufRead **/jenkins-jobs/**/*.groovy set filetype=Jenkinsfile
