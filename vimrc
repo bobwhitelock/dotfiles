@@ -273,6 +273,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'hashivim/vim-terraform'
 Plug 'google/vim-jsonnet'
 Plug 'MTDL9/vim-log-highlighting'
+Plug 'kyoh86/vim-jsonl'
 " TODO: Remove some of above in favour of this?
 " Breaks markdown formatting, snippets, maybe other things - due to duplicate
 " plugin installs?
