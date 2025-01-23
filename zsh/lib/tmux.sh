@@ -25,8 +25,8 @@ alias notes="aw \$NOTES"
 alias notesr="rw \$NOTES"
 alias gamesr="rw \$GAMES"
 
-alias repo="\$DOTFILES/libexec/open-repo 'add_window --vim-pane'"
-alias repor="\$DOTFILES/libexec/open-repo 'replace_window --vim-pane'"
+alias repo="\$DOTFILES/libexec/fuzz-repo-and-run 'add_window --vim-pane'"
+alias repor="\$DOTFILES/libexec/fuzz-repo-and-run 'replace_window --vim-pane'"
 
 alias tmux_session_name="tmux display-message -p '#S'"
 

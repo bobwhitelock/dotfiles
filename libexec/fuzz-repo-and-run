@@ -2,12 +2,12 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Fuzzy select repo from all cloned repos, then open window for repo with
-# provided command.
+# Fuzzy select repo from all cloned repos, then run given command on full path
+# to repo.
 
 main() {
-    local open_command
-    open_command="$1"
+    local command_to_run
+    command_to_run="$1"
     shift
 
     # shellcheck disable=SC2012
@@ -17,19 +17,19 @@ main() {
         # Drop trailing slash.
         sed "s%/$%%" | \
         fzf --ansi --query="$*" | \
-        _add_window "$open_command"
+        _run_command_on_repo "$command_to_run"
 }
 
-_add_window() {
-    local repo open_command
-    open_command="$1"
+_run_command_on_repo() {
+    local repo command_to_run
+    command_to_run="$1"
 
     repo="$(cat)"
     if [ -z "$repo" ]; then
         exit 1
     fi
 
-    eval "$open_command" "$SRC/$repo"
+    eval "$command_to_run" "$SRC/$repo"
 }
 
 main "$@"
