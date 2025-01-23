@@ -2,6 +2,7 @@
 alias activate='source venv/bin/activate'
 alias shell='./manage.py shell_plus'
 alias pyprofile='sudo env PATH="$PATH" py-spy record --subprocesses -o "profile-$(date --iso-8601=seconds).svg"'
+alias poetry_cache_clear="rm -rf ~/.cache/pypoetry/"
 
 # If there is a local venv present when a new shell is started (e.g.
 # `add_window` has just been run for a Python project), then activate it.
