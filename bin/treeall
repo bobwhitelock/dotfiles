@@ -1,0 +1,11 @@
+#!/bin/bash
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+
+main() {
+    tree -C -a -I .git "$@" | less -RF
+}
+
+
+main "$@"

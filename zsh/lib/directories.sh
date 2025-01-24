@@ -5,10 +5,6 @@ alias l='ls'
 alias ll='ls -l --all --human-readable'
 alias la='ls --almost-all'
 
-treeall() {
-    command tree -C -a -I .git "$@" | less -RF
-}
-
 tree() {
     treeall --filelimit 50  "$@"
 }
