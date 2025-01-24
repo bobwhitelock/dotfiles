@@ -76,10 +76,3 @@ _tmux_create() {
 
     eval "tmux $tmux_command -c $window_path -n $window_name $additional_commands"
 }
-
-_tmux_find_window_id() {
-    local filter
-    filter="$1"
-
-    tmux list-windows | eval "$filter" | cut -d: -f1
-}

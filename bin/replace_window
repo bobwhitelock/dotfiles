@@ -22,4 +22,13 @@ main() {
     tmux kill-window -t "$new_window"
 }
 
+
+_tmux_find_window_id() {
+    local filter
+    filter="$1"
+
+    tmux list-windows | eval "$filter" | cut -d: -f1
+}
+
+
 main "$@"
