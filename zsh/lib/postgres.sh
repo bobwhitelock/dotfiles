@@ -1,6 +1,6 @@
 
-# alias psql='psql -U postgres'
-# alias pgcli='pgcli -U postgres'
+alias psql='psql -U postgres'
+alias pgcli='pgcli -U postgres'
 
 # Tail Postgres logs, with syntax-highlighting.
 #
