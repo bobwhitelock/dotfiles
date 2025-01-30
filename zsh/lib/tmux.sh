@@ -1,11 +1,6 @@
 
 alias mux='tmuxinator'
-# Define this as function rather than alias to avoid usual Tmuxinator
-# auto-completion being used to try to select project path, and have standard
-# Zsh path completion used instead.
-project() {
-    mux start project "$@"
-}
+alias project="\$DOTFILES/libexec/fuzz-repo-and-run 'tmuxinator start project'"
 
 alias attach='tmux switch-client -t'
 alias kill_window='tmux kill-window'
