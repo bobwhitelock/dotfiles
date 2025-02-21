@@ -135,6 +135,13 @@ command -v rbenv >/dev/null 2>&1 && eval "$(rbenv init -)"
 # OPAM configuration
 . /home/bob/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
+# Junk automatically added by installing a Perl module one time.
+PATH="/home/bob/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/bob/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/bob/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/bob/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/bob/perl5"; export PERL_MM_OPT;
+
 # Source all other custom Zsh files. Do this at the end so any other
 # environment setup from above has happened before any custom setup of this
 # environment from these files (e.g. Pyenv has been enabled and so the correct
