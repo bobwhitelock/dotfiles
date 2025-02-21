@@ -1,0 +1,2781 @@
+#compdef atuin
+
+autoload -U is-at-least
+
+_atuin() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_atuin_commands" \
+"*::: :->atuin" \
+&& ret=0
+    case $state in
+    (atuin)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-command-$line[1]:"
+        case $line[1] in
+            (history)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__history_commands" \
+"*::: :->history" \
+&& ret=0
+
+    case $state in
+    (history)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-history-command-$line[1]:"
+        case $line[1] in
+            (start)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::command:' \
+&& ret=0
+;;
+(end)
+_arguments "${_arguments_options[@]}" : \
+'-e+[]:EXIT: ' \
+'--exit=[]:EXIT: ' \
+'-d+[]:DURATION: ' \
+'--duration=[]:DURATION: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id:' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-r+[]' \
+'--reverse=[]' \
+'--timezone=[Display the command time in another timezone other than the configured default]:TIMEZONE: ' \
+'--tz=[Display the command time in another timezone other than the configured default]:TIMEZONE: ' \
+'-f+[Available variables\: {command}, {directory}, {duration}, {user}, {host}, {exit} and {time}. Example\: --format "{time} - \[{duration}\] - {directory}\$\\t{command}"]:FORMAT: ' \
+'--format=[Available variables\: {command}, {directory}, {duration}, {user}, {host}, {exit} and {time}. Example\: --format "{time} - \[{duration}\] - {directory}\$\\t{command}"]:FORMAT: ' \
+'-c[]' \
+'--cwd[]' \
+'-s[]' \
+'--session[]' \
+'--human[]' \
+'--cmd-only[Show only the text of the command]' \
+'--print0[Terminate the output with a null, for better multiline support]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(last)
+_arguments "${_arguments_options[@]}" : \
+'--timezone=[Display the command time in another timezone other than the configured default]:TIMEZONE: ' \
+'--tz=[Display the command time in another timezone other than the configured default]:TIMEZONE: ' \
+'-f+[Available variables\: {command}, {directory}, {duration}, {user}, {host} and {time}. Example\: --format "{time} - \[{duration}\] - {directory}\$\\t{command}"]:FORMAT: ' \
+'--format=[Available variables\: {command}, {directory}, {duration}, {user}, {host} and {time}. Example\: --format "{time} - \[{duration}\] - {directory}\$\\t{command}"]:FORMAT: ' \
+'--human[]' \
+'--cmd-only[Show only the text of the command]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(init-store)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(prune)
+_arguments "${_arguments_options[@]}" : \
+'-n[List matching history lines without performing the actual deletion]' \
+'--dry-run[List matching history lines without performing the actual deletion]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__history__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-history-help-command-$line[1]:"
+        case $line[1] in
+            (start)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(end)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(last)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(init-store)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(prune)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(import)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__import_commands" \
+"*::: :->import" \
+&& ret=0
+
+    case $state in
+    (import)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-import-command-$line[1]:"
+        case $line[1] in
+            (auto)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(zsh)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(zsh-hist-db)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(bash)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(replxx)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(resh)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(fish)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(nu)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(nu-hist-db)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(xonsh)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(xonsh-sqlite)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__import__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-import-help-command-$line[1]:"
+        case $line[1] in
+            (auto)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(zsh)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(zsh-hist-db)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(bash)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(replxx)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(resh)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(fish)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(nu)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(nu-hist-db)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(xonsh)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(xonsh-sqlite)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(stats)
+_arguments "${_arguments_options[@]}" : \
+'-c+[How many top commands to list]:COUNT: ' \
+'--count=[How many top commands to list]:COUNT: ' \
+'-n+[The number of consecutive commands to consider]:NGRAM_SIZE: ' \
+'--ngram-size=[The number of consecutive commands to consider]:NGRAM_SIZE: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::period -- Compute statistics for the specified period, leave blank for statistics since the beginning. See \[this\](https\://docs.atuin.sh/reference/stats/) for more details:' \
+&& ret=0
+;;
+(search)
+_arguments "${_arguments_options[@]}" : \
+'-c+[Filter search result by directory]:CWD: ' \
+'--cwd=[Filter search result by directory]:CWD: ' \
+'--exclude-cwd=[Exclude directory from results]:EXCLUDE_CWD: ' \
+'-e+[Filter search result by exit code]:EXIT: ' \
+'--exit=[Filter search result by exit code]:EXIT: ' \
+'--exclude-exit=[Exclude results with this exit code]:EXCLUDE_EXIT: ' \
+'-b+[Only include results added before this date]:BEFORE: ' \
+'--before=[Only include results added before this date]:BEFORE: ' \
+'--after=[Only include results after this date]:AFTER: ' \
+'--limit=[How many entries to return at most]:LIMIT: ' \
+'--offset=[Offset from the start of the results]:OFFSET: ' \
+'--filter-mode=[Allow overriding filter mode over config]:FILTER_MODE:(global host session directory workspace)' \
+'--search-mode=[Allow overriding search mode over config]:SEARCH_MODE:(prefix full-text fuzzy skim)' \
+'--keymap-mode=[Notify the keymap at the shell'\''s side]:KEYMAP_MODE:(emacs vim-normal vim-insert auto)' \
+'--timezone=[Display the command time in another timezone other than the configured default]:TIMEZONE: ' \
+'--tz=[Display the command time in another timezone other than the configured default]:TIMEZONE: ' \
+'-f+[Available variables\: {command}, {directory}, {duration}, {user}, {host}, {time}, {exit} and {relativetime}. Example\: --format "{time} - \[{duration}\] - {directory}\$\\t{command}"]:FORMAT: ' \
+'--format=[Available variables\: {command}, {directory}, {duration}, {user}, {host}, {time}, {exit} and {relativetime}. Example\: --format "{time} - \[{duration}\] - {directory}\$\\t{command}"]:FORMAT: ' \
+'--inline-height=[Set the maximum number of lines Atuin'\''s interface should take up]:INLINE_HEIGHT: ' \
+'-i[Open interactive search UI]' \
+'--interactive[Open interactive search UI]' \
+'--shell-up-key-binding[Marker argument used to inform atuin that it was invoked from a shell up-key binding (hidden from help to avoid confusion)]' \
+'--human[Use human-readable formatting for time]' \
+'--cmd-only[Show only the text of the command]' \
+'--delete[Delete anything matching this query. Will not print out the match]' \
+'--delete-it-all[Delete EVERYTHING!]' \
+'-r[Reverse the order of results, oldest first]' \
+'--reverse[Reverse the order of results, oldest first]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::query:' \
+&& ret=0
+;;
+(sync)
+_arguments "${_arguments_options[@]}" : \
+'-f[Force re-download everything]' \
+'--force[Force re-download everything]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(login)
+_arguments "${_arguments_options[@]}" : \
+'-u+[]:USERNAME: ' \
+'--username=[]:USERNAME: ' \
+'-p+[]:PASSWORD: ' \
+'--password=[]:PASSWORD: ' \
+'-k+[The encryption key for your account]:KEY: ' \
+'--key=[The encryption key for your account]:KEY: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(logout)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(register)
+_arguments "${_arguments_options[@]}" : \
+'-u+[]:USERNAME: ' \
+'--username=[]:USERNAME: ' \
+'-p+[]:PASSWORD: ' \
+'--password=[]:PASSWORD: ' \
+'-e+[]:EMAIL: ' \
+'--email=[]:EMAIL: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(key)
+_arguments "${_arguments_options[@]}" : \
+'--base64[Switch to base64 output of the key]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(status)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(account)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__account_commands" \
+"*::: :->account" \
+&& ret=0
+
+    case $state in
+    (account)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-account-command-$line[1]:"
+        case $line[1] in
+            (login)
+_arguments "${_arguments_options[@]}" : \
+'-u+[]:USERNAME: ' \
+'--username=[]:USERNAME: ' \
+'-p+[]:PASSWORD: ' \
+'--password=[]:PASSWORD: ' \
+'-k+[The encryption key for your account]:KEY: ' \
+'--key=[The encryption key for your account]:KEY: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(register)
+_arguments "${_arguments_options[@]}" : \
+'-u+[]:USERNAME: ' \
+'--username=[]:USERNAME: ' \
+'-p+[]:PASSWORD: ' \
+'--password=[]:PASSWORD: ' \
+'-e+[]:EMAIL: ' \
+'--email=[]:EMAIL: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(logout)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(change-password)
+_arguments "${_arguments_options[@]}" : \
+'-c+[]:CURRENT_PASSWORD: ' \
+'--current-password=[]:CURRENT_PASSWORD: ' \
+'-n+[]:NEW_PASSWORD: ' \
+'--new-password=[]:NEW_PASSWORD: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(verify)
+_arguments "${_arguments_options[@]}" : \
+'-t+[]:TOKEN: ' \
+'--token=[]:TOKEN: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__account__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-account-help-command-$line[1]:"
+        case $line[1] in
+            (login)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(register)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(logout)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(change-password)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(verify)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(kv)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__kv_commands" \
+"*::: :->kv" \
+&& ret=0
+
+    case $state in
+    (kv)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-kv-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+'-k+[]:KEY: ' \
+'--key=[]:KEY: ' \
+'-n+[]:NAMESPACE: ' \
+'--namespace=[]:NAMESPACE: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+':value:' \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+'-n+[]:NAMESPACE: ' \
+'--namespace=[]:NAMESPACE: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+':key:' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-n+[]:NAMESPACE: ' \
+'--namespace=[]:NAMESPACE: ' \
+'-a[]' \
+'--all-namespaces[]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__kv__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-kv-help-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(store)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__store_commands" \
+"*::: :->store" \
+&& ret=0
+
+    case $state in
+    (store)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-store-command-$line[1]:"
+        case $line[1] in
+            (status)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(rebuild)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':tag:' \
+&& ret=0
+;;
+(rekey)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'::key -- The new key to use for encryption. Omit for a randomly-generated key:' \
+&& ret=0
+;;
+(purge)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(verify)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(push)
+_arguments "${_arguments_options[@]}" : \
+'-t+[The tag to push (eg, '\''history'\''). Defaults to all tags]:TAG: ' \
+'--tag=[The tag to push (eg, '\''history'\''). Defaults to all tags]:TAG: ' \
+'--host=[The host to push, in the form of a UUID host ID. Defaults to the current host]:HOST: ' \
+'--force[Force push records This will override both host and tag, to be all hosts and all tags. First clear the remote store, then upload all of the local store]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(pull)
+_arguments "${_arguments_options[@]}" : \
+'-t+[The tag to push (eg, '\''history'\''). Defaults to all tags]:TAG: ' \
+'--tag=[The tag to push (eg, '\''history'\''). Defaults to all tags]:TAG: ' \
+'--force[Force push records This will first wipe the local store, and then download all records from the remote]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__store__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-store-help-command-$line[1]:"
+        case $line[1] in
+            (status)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(rebuild)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(rekey)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(purge)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(verify)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(push)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(pull)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(dotfiles)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__dotfiles_commands" \
+"*::: :->dotfiles" \
+&& ret=0
+
+    case $state in
+    (dotfiles)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-dotfiles-command-$line[1]:"
+        case $line[1] in
+            (alias)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__dotfiles__alias_commands" \
+"*::: :->alias" \
+&& ret=0
+
+    case $state in
+    (alias)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-dotfiles-alias-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':name:' \
+':value:' \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':name:' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__dotfiles__alias__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-dotfiles-alias-help-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(var)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__dotfiles__var_commands" \
+"*::: :->var" \
+&& ret=0
+
+    case $state in
+    (var)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-dotfiles-var-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+'-n[]' \
+'--no-export[]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':name:' \
+':value:' \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':name:' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__dotfiles__var__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-dotfiles-var-help-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__dotfiles__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-dotfiles-help-command-$line[1]:"
+        case $line[1] in
+            (alias)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__dotfiles__help__alias_commands" \
+"*::: :->alias" \
+&& ret=0
+
+    case $state in
+    (alias)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-dotfiles-help-alias-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(var)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__dotfiles__help__var_commands" \
+"*::: :->var" \
+&& ret=0
+
+    case $state in
+    (var)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-dotfiles-help-var-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(init)
+_arguments "${_arguments_options[@]}" : \
+'--disable-ctrl-r[Disable the binding of CTRL-R to atuin]' \
+'--disable-up-arrow[Disable the binding of the Up Arrow key to atuin]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':shell:((zsh\:"Zsh setup"
+bash\:"Bash setup"
+fish\:"Fish setup"
+nu\:"Nu setup"
+xonsh\:"Xonsh setup"))' \
+&& ret=0
+;;
+(info)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(doctor)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(wrapped)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'::year:' \
+&& ret=0
+;;
+(daemon)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(default-config)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(server)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_atuin__server_commands" \
+"*::: :->server" \
+&& ret=0
+
+    case $state in
+    (server)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-server-command-$line[1]:"
+        case $line[1] in
+            (start)
+_arguments "${_arguments_options[@]}" : \
+'--host=[The host address to bind]:HOST: ' \
+'-p+[The port to bind]:PORT: ' \
+'--port=[The port to bind]:PORT: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(default-config)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__server__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-server-help-command-$line[1]:"
+        case $line[1] in
+            (start)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(default-config)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(uuid)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(contributors)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(gen-completions)
+_arguments "${_arguments_options[@]}" : \
+'-s+[Set the shell for generating completions]:SHELL:(bash elvish fish nushell powershell zsh)' \
+'--shell=[Set the shell for generating completions]:SHELL:(bash elvish fish nushell powershell zsh)' \
+'-o+[Set the output directory]:OUT_DIR: ' \
+'--out-dir=[Set the output directory]:OUT_DIR: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-command-$line[1]:"
+        case $line[1] in
+            (history)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__history_commands" \
+"*::: :->history" \
+&& ret=0
+
+    case $state in
+    (history)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-history-command-$line[1]:"
+        case $line[1] in
+            (start)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(end)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(last)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(init-store)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(prune)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(import)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__import_commands" \
+"*::: :->import" \
+&& ret=0
+
+    case $state in
+    (import)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-import-command-$line[1]:"
+        case $line[1] in
+            (auto)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(zsh)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(zsh-hist-db)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(bash)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(replxx)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(resh)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(fish)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(nu)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(nu-hist-db)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(xonsh)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(xonsh-sqlite)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(stats)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(search)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(sync)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(login)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(logout)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(register)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(key)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(status)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(account)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__account_commands" \
+"*::: :->account" \
+&& ret=0
+
+    case $state in
+    (account)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-account-command-$line[1]:"
+        case $line[1] in
+            (login)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(register)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(logout)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(change-password)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(verify)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(kv)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__kv_commands" \
+"*::: :->kv" \
+&& ret=0
+
+    case $state in
+    (kv)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-kv-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(store)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__store_commands" \
+"*::: :->store" \
+&& ret=0
+
+    case $state in
+    (store)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-store-command-$line[1]:"
+        case $line[1] in
+            (status)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(rebuild)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(rekey)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(purge)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(verify)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(push)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(pull)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(dotfiles)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__dotfiles_commands" \
+"*::: :->dotfiles" \
+&& ret=0
+
+    case $state in
+    (dotfiles)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-dotfiles-command-$line[1]:"
+        case $line[1] in
+            (alias)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__dotfiles__alias_commands" \
+"*::: :->alias" \
+&& ret=0
+
+    case $state in
+    (alias)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-dotfiles-alias-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(var)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__dotfiles__var_commands" \
+"*::: :->var" \
+&& ret=0
+
+    case $state in
+    (var)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-dotfiles-var-command-$line[1]:"
+        case $line[1] in
+            (set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(init)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(info)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(doctor)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(wrapped)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(daemon)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(default-config)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(server)
+_arguments "${_arguments_options[@]}" : \
+":: :_atuin__help__server_commands" \
+"*::: :->server" \
+&& ret=0
+
+    case $state in
+    (server)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:atuin-help-server-command-$line[1]:"
+        case $line[1] in
+            (start)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(default-config)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(uuid)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(contributors)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(gen-completions)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_atuin_commands] )) ||
+_atuin_commands() {
+    local commands; commands=(
+'history:Manipulate shell history' \
+'import:Import shell history from file' \
+'stats:Calculate statistics for your history' \
+'search:Interactive history search' \
+'sync:Sync with the configured server' \
+'login:Login to the configured server' \
+'logout:Log out' \
+'register:Register with the configured server' \
+'key:Print the encryption key for transfer to another machine' \
+'status:Display the sync status' \
+'account:Manage your sync account' \
+'kv:Get or set small key-value pairs' \
+'store:Manage the atuin data store' \
+'dotfiles:Manage your dotfiles with Atuin' \
+'init:Print Atuin'\''s shell init script' \
+'info:Information about dotfiles locations and ENV vars' \
+'doctor:Run the doctor to check for common issues' \
+'wrapped:' \
+'daemon:*Experimental* Start the background daemon' \
+'default-config:Print the default atuin configuration (config.toml)' \
+'server:Start an atuin server' \
+'uuid:Generate a UUID' \
+'contributors:' \
+'gen-completions:Generate shell completions' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin commands' commands "$@"
+}
+(( $+functions[_atuin__account_commands] )) ||
+_atuin__account_commands() {
+    local commands; commands=(
+'login:Login to the configured server' \
+'register:Register a new account' \
+'logout:Log out' \
+'delete:Delete your account, and all synced data' \
+'change-password:Change your password' \
+'verify:Verify your account' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin account commands' commands "$@"
+}
+(( $+functions[_atuin__account__change-password_commands] )) ||
+_atuin__account__change-password_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account change-password commands' commands "$@"
+}
+(( $+functions[_atuin__account__delete_commands] )) ||
+_atuin__account__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account delete commands' commands "$@"
+}
+(( $+functions[_atuin__account__help_commands] )) ||
+_atuin__account__help_commands() {
+    local commands; commands=(
+'login:Login to the configured server' \
+'register:Register a new account' \
+'logout:Log out' \
+'delete:Delete your account, and all synced data' \
+'change-password:Change your password' \
+'verify:Verify your account' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin account help commands' commands "$@"
+}
+(( $+functions[_atuin__account__help__change-password_commands] )) ||
+_atuin__account__help__change-password_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account help change-password commands' commands "$@"
+}
+(( $+functions[_atuin__account__help__delete_commands] )) ||
+_atuin__account__help__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account help delete commands' commands "$@"
+}
+(( $+functions[_atuin__account__help__help_commands] )) ||
+_atuin__account__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account help help commands' commands "$@"
+}
+(( $+functions[_atuin__account__help__login_commands] )) ||
+_atuin__account__help__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account help login commands' commands "$@"
+}
+(( $+functions[_atuin__account__help__logout_commands] )) ||
+_atuin__account__help__logout_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account help logout commands' commands "$@"
+}
+(( $+functions[_atuin__account__help__register_commands] )) ||
+_atuin__account__help__register_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account help register commands' commands "$@"
+}
+(( $+functions[_atuin__account__help__verify_commands] )) ||
+_atuin__account__help__verify_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account help verify commands' commands "$@"
+}
+(( $+functions[_atuin__account__login_commands] )) ||
+_atuin__account__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account login commands' commands "$@"
+}
+(( $+functions[_atuin__account__logout_commands] )) ||
+_atuin__account__logout_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account logout commands' commands "$@"
+}
+(( $+functions[_atuin__account__register_commands] )) ||
+_atuin__account__register_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account register commands' commands "$@"
+}
+(( $+functions[_atuin__account__verify_commands] )) ||
+_atuin__account__verify_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin account verify commands' commands "$@"
+}
+(( $+functions[_atuin__contributors_commands] )) ||
+_atuin__contributors_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin contributors commands' commands "$@"
+}
+(( $+functions[_atuin__daemon_commands] )) ||
+_atuin__daemon_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin daemon commands' commands "$@"
+}
+(( $+functions[_atuin__default-config_commands] )) ||
+_atuin__default-config_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin default-config commands' commands "$@"
+}
+(( $+functions[_atuin__doctor_commands] )) ||
+_atuin__doctor_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin doctor commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles_commands] )) ||
+_atuin__dotfiles_commands() {
+    local commands; commands=(
+'alias:Manage shell aliases with Atuin' \
+'var:Manage shell and environment variables with Atuin' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin dotfiles commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias_commands] )) ||
+_atuin__dotfiles__alias_commands() {
+    local commands; commands=(
+'set:Set an alias' \
+'delete:Delete an alias' \
+'list:List all aliases' \
+'clear:Delete all aliases' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin dotfiles alias commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__clear_commands] )) ||
+_atuin__dotfiles__alias__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles alias clear commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__delete_commands] )) ||
+_atuin__dotfiles__alias__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles alias delete commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__help_commands] )) ||
+_atuin__dotfiles__alias__help_commands() {
+    local commands; commands=(
+'set:Set an alias' \
+'delete:Delete an alias' \
+'list:List all aliases' \
+'clear:Delete all aliases' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin dotfiles alias help commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__help__clear_commands] )) ||
+_atuin__dotfiles__alias__help__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles alias help clear commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__help__delete_commands] )) ||
+_atuin__dotfiles__alias__help__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles alias help delete commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__help__help_commands] )) ||
+_atuin__dotfiles__alias__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles alias help help commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__help__list_commands] )) ||
+_atuin__dotfiles__alias__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles alias help list commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__help__set_commands] )) ||
+_atuin__dotfiles__alias__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles alias help set commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__list_commands] )) ||
+_atuin__dotfiles__alias__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles alias list commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__alias__set_commands] )) ||
+_atuin__dotfiles__alias__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles alias set commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help_commands] )) ||
+_atuin__dotfiles__help_commands() {
+    local commands; commands=(
+'alias:Manage shell aliases with Atuin' \
+'var:Manage shell and environment variables with Atuin' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin dotfiles help commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__alias_commands] )) ||
+_atuin__dotfiles__help__alias_commands() {
+    local commands; commands=(
+'set:Set an alias' \
+'delete:Delete an alias' \
+'list:List all aliases' \
+'clear:Delete all aliases' \
+    )
+    _describe -t commands 'atuin dotfiles help alias commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__alias__clear_commands] )) ||
+_atuin__dotfiles__help__alias__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles help alias clear commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__alias__delete_commands] )) ||
+_atuin__dotfiles__help__alias__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles help alias delete commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__alias__list_commands] )) ||
+_atuin__dotfiles__help__alias__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles help alias list commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__alias__set_commands] )) ||
+_atuin__dotfiles__help__alias__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles help alias set commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__help_commands] )) ||
+_atuin__dotfiles__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles help help commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__var_commands] )) ||
+_atuin__dotfiles__help__var_commands() {
+    local commands; commands=(
+'set:Set a variable' \
+'delete:Delete a variable' \
+'list:List all variables' \
+    )
+    _describe -t commands 'atuin dotfiles help var commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__var__delete_commands] )) ||
+_atuin__dotfiles__help__var__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles help var delete commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__var__list_commands] )) ||
+_atuin__dotfiles__help__var__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles help var list commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__help__var__set_commands] )) ||
+_atuin__dotfiles__help__var__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles help var set commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__var_commands] )) ||
+_atuin__dotfiles__var_commands() {
+    local commands; commands=(
+'set:Set a variable' \
+'delete:Delete a variable' \
+'list:List all variables' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin dotfiles var commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__var__delete_commands] )) ||
+_atuin__dotfiles__var__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles var delete commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__var__help_commands] )) ||
+_atuin__dotfiles__var__help_commands() {
+    local commands; commands=(
+'set:Set a variable' \
+'delete:Delete a variable' \
+'list:List all variables' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin dotfiles var help commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__var__help__delete_commands] )) ||
+_atuin__dotfiles__var__help__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles var help delete commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__var__help__help_commands] )) ||
+_atuin__dotfiles__var__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles var help help commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__var__help__list_commands] )) ||
+_atuin__dotfiles__var__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles var help list commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__var__help__set_commands] )) ||
+_atuin__dotfiles__var__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles var help set commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__var__list_commands] )) ||
+_atuin__dotfiles__var__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles var list commands' commands "$@"
+}
+(( $+functions[_atuin__dotfiles__var__set_commands] )) ||
+_atuin__dotfiles__var__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin dotfiles var set commands' commands "$@"
+}
+(( $+functions[_atuin__gen-completions_commands] )) ||
+_atuin__gen-completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin gen-completions commands' commands "$@"
+}
+(( $+functions[_atuin__help_commands] )) ||
+_atuin__help_commands() {
+    local commands; commands=(
+'history:Manipulate shell history' \
+'import:Import shell history from file' \
+'stats:Calculate statistics for your history' \
+'search:Interactive history search' \
+'sync:Sync with the configured server' \
+'login:Login to the configured server' \
+'logout:Log out' \
+'register:Register with the configured server' \
+'key:Print the encryption key for transfer to another machine' \
+'status:Display the sync status' \
+'account:Manage your sync account' \
+'kv:Get or set small key-value pairs' \
+'store:Manage the atuin data store' \
+'dotfiles:Manage your dotfiles with Atuin' \
+'init:Print Atuin'\''s shell init script' \
+'info:Information about dotfiles locations and ENV vars' \
+'doctor:Run the doctor to check for common issues' \
+'wrapped:' \
+'daemon:*Experimental* Start the background daemon' \
+'default-config:Print the default atuin configuration (config.toml)' \
+'server:Start an atuin server' \
+'uuid:Generate a UUID' \
+'contributors:' \
+'gen-completions:Generate shell completions' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin help commands' commands "$@"
+}
+(( $+functions[_atuin__help__account_commands] )) ||
+_atuin__help__account_commands() {
+    local commands; commands=(
+'login:Login to the configured server' \
+'register:Register a new account' \
+'logout:Log out' \
+'delete:Delete your account, and all synced data' \
+'change-password:Change your password' \
+'verify:Verify your account' \
+    )
+    _describe -t commands 'atuin help account commands' commands "$@"
+}
+(( $+functions[_atuin__help__account__change-password_commands] )) ||
+_atuin__help__account__change-password_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help account change-password commands' commands "$@"
+}
+(( $+functions[_atuin__help__account__delete_commands] )) ||
+_atuin__help__account__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help account delete commands' commands "$@"
+}
+(( $+functions[_atuin__help__account__login_commands] )) ||
+_atuin__help__account__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help account login commands' commands "$@"
+}
+(( $+functions[_atuin__help__account__logout_commands] )) ||
+_atuin__help__account__logout_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help account logout commands' commands "$@"
+}
+(( $+functions[_atuin__help__account__register_commands] )) ||
+_atuin__help__account__register_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help account register commands' commands "$@"
+}
+(( $+functions[_atuin__help__account__verify_commands] )) ||
+_atuin__help__account__verify_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help account verify commands' commands "$@"
+}
+(( $+functions[_atuin__help__contributors_commands] )) ||
+_atuin__help__contributors_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help contributors commands' commands "$@"
+}
+(( $+functions[_atuin__help__daemon_commands] )) ||
+_atuin__help__daemon_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help daemon commands' commands "$@"
+}
+(( $+functions[_atuin__help__default-config_commands] )) ||
+_atuin__help__default-config_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help default-config commands' commands "$@"
+}
+(( $+functions[_atuin__help__doctor_commands] )) ||
+_atuin__help__doctor_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help doctor commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles_commands] )) ||
+_atuin__help__dotfiles_commands() {
+    local commands; commands=(
+'alias:Manage shell aliases with Atuin' \
+'var:Manage shell and environment variables with Atuin' \
+    )
+    _describe -t commands 'atuin help dotfiles commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles__alias_commands] )) ||
+_atuin__help__dotfiles__alias_commands() {
+    local commands; commands=(
+'set:Set an alias' \
+'delete:Delete an alias' \
+'list:List all aliases' \
+'clear:Delete all aliases' \
+    )
+    _describe -t commands 'atuin help dotfiles alias commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles__alias__clear_commands] )) ||
+_atuin__help__dotfiles__alias__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help dotfiles alias clear commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles__alias__delete_commands] )) ||
+_atuin__help__dotfiles__alias__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help dotfiles alias delete commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles__alias__list_commands] )) ||
+_atuin__help__dotfiles__alias__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help dotfiles alias list commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles__alias__set_commands] )) ||
+_atuin__help__dotfiles__alias__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help dotfiles alias set commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles__var_commands] )) ||
+_atuin__help__dotfiles__var_commands() {
+    local commands; commands=(
+'set:Set a variable' \
+'delete:Delete a variable' \
+'list:List all variables' \
+    )
+    _describe -t commands 'atuin help dotfiles var commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles__var__delete_commands] )) ||
+_atuin__help__dotfiles__var__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help dotfiles var delete commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles__var__list_commands] )) ||
+_atuin__help__dotfiles__var__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help dotfiles var list commands' commands "$@"
+}
+(( $+functions[_atuin__help__dotfiles__var__set_commands] )) ||
+_atuin__help__dotfiles__var__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help dotfiles var set commands' commands "$@"
+}
+(( $+functions[_atuin__help__gen-completions_commands] )) ||
+_atuin__help__gen-completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help gen-completions commands' commands "$@"
+}
+(( $+functions[_atuin__help__help_commands] )) ||
+_atuin__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help help commands' commands "$@"
+}
+(( $+functions[_atuin__help__history_commands] )) ||
+_atuin__help__history_commands() {
+    local commands; commands=(
+'start:Begins a new command in the history' \
+'end:Finishes a new command in the history (adds time, exit code)' \
+'list:List all items in history' \
+'last:Get the last command ran' \
+'init-store:' \
+'prune:Delete history entries matching the configured exclusion filters' \
+    )
+    _describe -t commands 'atuin help history commands' commands "$@"
+}
+(( $+functions[_atuin__help__history__end_commands] )) ||
+_atuin__help__history__end_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help history end commands' commands "$@"
+}
+(( $+functions[_atuin__help__history__init-store_commands] )) ||
+_atuin__help__history__init-store_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help history init-store commands' commands "$@"
+}
+(( $+functions[_atuin__help__history__last_commands] )) ||
+_atuin__help__history__last_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help history last commands' commands "$@"
+}
+(( $+functions[_atuin__help__history__list_commands] )) ||
+_atuin__help__history__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help history list commands' commands "$@"
+}
+(( $+functions[_atuin__help__history__prune_commands] )) ||
+_atuin__help__history__prune_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help history prune commands' commands "$@"
+}
+(( $+functions[_atuin__help__history__start_commands] )) ||
+_atuin__help__history__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help history start commands' commands "$@"
+}
+(( $+functions[_atuin__help__import_commands] )) ||
+_atuin__help__import_commands() {
+    local commands; commands=(
+'auto:Import history for the current shell' \
+'zsh:Import history from the zsh history file' \
+'zsh-hist-db:Import history from the zsh history file' \
+'bash:Import history from the bash history file' \
+'replxx:Import history from the replxx history file' \
+'resh:Import history from the resh history file' \
+'fish:Import history from the fish history file' \
+'nu:Import history from the nu history file' \
+'nu-hist-db:Import history from the nu history file' \
+'xonsh:Import history from xonsh json files' \
+'xonsh-sqlite:Import history from xonsh sqlite db' \
+    )
+    _describe -t commands 'atuin help import commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__auto_commands] )) ||
+_atuin__help__import__auto_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import auto commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__bash_commands] )) ||
+_atuin__help__import__bash_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import bash commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__fish_commands] )) ||
+_atuin__help__import__fish_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import fish commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__nu_commands] )) ||
+_atuin__help__import__nu_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import nu commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__nu-hist-db_commands] )) ||
+_atuin__help__import__nu-hist-db_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import nu-hist-db commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__replxx_commands] )) ||
+_atuin__help__import__replxx_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import replxx commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__resh_commands] )) ||
+_atuin__help__import__resh_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import resh commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__xonsh_commands] )) ||
+_atuin__help__import__xonsh_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import xonsh commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__xonsh-sqlite_commands] )) ||
+_atuin__help__import__xonsh-sqlite_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import xonsh-sqlite commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__zsh_commands] )) ||
+_atuin__help__import__zsh_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import zsh commands' commands "$@"
+}
+(( $+functions[_atuin__help__import__zsh-hist-db_commands] )) ||
+_atuin__help__import__zsh-hist-db_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help import zsh-hist-db commands' commands "$@"
+}
+(( $+functions[_atuin__help__info_commands] )) ||
+_atuin__help__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help info commands' commands "$@"
+}
+(( $+functions[_atuin__help__init_commands] )) ||
+_atuin__help__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help init commands' commands "$@"
+}
+(( $+functions[_atuin__help__key_commands] )) ||
+_atuin__help__key_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help key commands' commands "$@"
+}
+(( $+functions[_atuin__help__kv_commands] )) ||
+_atuin__help__kv_commands() {
+    local commands; commands=(
+'set:' \
+'get:' \
+'list:' \
+    )
+    _describe -t commands 'atuin help kv commands' commands "$@"
+}
+(( $+functions[_atuin__help__kv__get_commands] )) ||
+_atuin__help__kv__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help kv get commands' commands "$@"
+}
+(( $+functions[_atuin__help__kv__list_commands] )) ||
+_atuin__help__kv__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help kv list commands' commands "$@"
+}
+(( $+functions[_atuin__help__kv__set_commands] )) ||
+_atuin__help__kv__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help kv set commands' commands "$@"
+}
+(( $+functions[_atuin__help__login_commands] )) ||
+_atuin__help__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help login commands' commands "$@"
+}
+(( $+functions[_atuin__help__logout_commands] )) ||
+_atuin__help__logout_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help logout commands' commands "$@"
+}
+(( $+functions[_atuin__help__register_commands] )) ||
+_atuin__help__register_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help register commands' commands "$@"
+}
+(( $+functions[_atuin__help__search_commands] )) ||
+_atuin__help__search_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help search commands' commands "$@"
+}
+(( $+functions[_atuin__help__server_commands] )) ||
+_atuin__help__server_commands() {
+    local commands; commands=(
+'start:Start the server' \
+'default-config:Print server example configuration' \
+    )
+    _describe -t commands 'atuin help server commands' commands "$@"
+}
+(( $+functions[_atuin__help__server__default-config_commands] )) ||
+_atuin__help__server__default-config_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help server default-config commands' commands "$@"
+}
+(( $+functions[_atuin__help__server__start_commands] )) ||
+_atuin__help__server__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help server start commands' commands "$@"
+}
+(( $+functions[_atuin__help__stats_commands] )) ||
+_atuin__help__stats_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help stats commands' commands "$@"
+}
+(( $+functions[_atuin__help__status_commands] )) ||
+_atuin__help__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help status commands' commands "$@"
+}
+(( $+functions[_atuin__help__store_commands] )) ||
+_atuin__help__store_commands() {
+    local commands; commands=(
+'status:Print the current status of the record store' \
+'rebuild:Rebuild a store (eg atuin store rebuild history)' \
+'rekey:Re-encrypt the store with a new key (potential for data loss!)' \
+'purge:Delete all records in the store that cannot be decrypted with the current key' \
+'verify:Verify that all records in the store can be decrypted with the current key' \
+'push:Push all records to the remote sync server (one way sync)' \
+'pull:Pull records from the remote sync server (one way sync)' \
+    )
+    _describe -t commands 'atuin help store commands' commands "$@"
+}
+(( $+functions[_atuin__help__store__pull_commands] )) ||
+_atuin__help__store__pull_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help store pull commands' commands "$@"
+}
+(( $+functions[_atuin__help__store__purge_commands] )) ||
+_atuin__help__store__purge_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help store purge commands' commands "$@"
+}
+(( $+functions[_atuin__help__store__push_commands] )) ||
+_atuin__help__store__push_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help store push commands' commands "$@"
+}
+(( $+functions[_atuin__help__store__rebuild_commands] )) ||
+_atuin__help__store__rebuild_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help store rebuild commands' commands "$@"
+}
+(( $+functions[_atuin__help__store__rekey_commands] )) ||
+_atuin__help__store__rekey_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help store rekey commands' commands "$@"
+}
+(( $+functions[_atuin__help__store__status_commands] )) ||
+_atuin__help__store__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help store status commands' commands "$@"
+}
+(( $+functions[_atuin__help__store__verify_commands] )) ||
+_atuin__help__store__verify_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help store verify commands' commands "$@"
+}
+(( $+functions[_atuin__help__sync_commands] )) ||
+_atuin__help__sync_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help sync commands' commands "$@"
+}
+(( $+functions[_atuin__help__uuid_commands] )) ||
+_atuin__help__uuid_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help uuid commands' commands "$@"
+}
+(( $+functions[_atuin__help__wrapped_commands] )) ||
+_atuin__help__wrapped_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin help wrapped commands' commands "$@"
+}
+(( $+functions[_atuin__history_commands] )) ||
+_atuin__history_commands() {
+    local commands; commands=(
+'start:Begins a new command in the history' \
+'end:Finishes a new command in the history (adds time, exit code)' \
+'list:List all items in history' \
+'last:Get the last command ran' \
+'init-store:' \
+'prune:Delete history entries matching the configured exclusion filters' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin history commands' commands "$@"
+}
+(( $+functions[_atuin__history__end_commands] )) ||
+_atuin__history__end_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history end commands' commands "$@"
+}
+(( $+functions[_atuin__history__help_commands] )) ||
+_atuin__history__help_commands() {
+    local commands; commands=(
+'start:Begins a new command in the history' \
+'end:Finishes a new command in the history (adds time, exit code)' \
+'list:List all items in history' \
+'last:Get the last command ran' \
+'init-store:' \
+'prune:Delete history entries matching the configured exclusion filters' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin history help commands' commands "$@"
+}
+(( $+functions[_atuin__history__help__end_commands] )) ||
+_atuin__history__help__end_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history help end commands' commands "$@"
+}
+(( $+functions[_atuin__history__help__help_commands] )) ||
+_atuin__history__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history help help commands' commands "$@"
+}
+(( $+functions[_atuin__history__help__init-store_commands] )) ||
+_atuin__history__help__init-store_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history help init-store commands' commands "$@"
+}
+(( $+functions[_atuin__history__help__last_commands] )) ||
+_atuin__history__help__last_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history help last commands' commands "$@"
+}
+(( $+functions[_atuin__history__help__list_commands] )) ||
+_atuin__history__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history help list commands' commands "$@"
+}
+(( $+functions[_atuin__history__help__prune_commands] )) ||
+_atuin__history__help__prune_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history help prune commands' commands "$@"
+}
+(( $+functions[_atuin__history__help__start_commands] )) ||
+_atuin__history__help__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history help start commands' commands "$@"
+}
+(( $+functions[_atuin__history__init-store_commands] )) ||
+_atuin__history__init-store_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history init-store commands' commands "$@"
+}
+(( $+functions[_atuin__history__last_commands] )) ||
+_atuin__history__last_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history last commands' commands "$@"
+}
+(( $+functions[_atuin__history__list_commands] )) ||
+_atuin__history__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history list commands' commands "$@"
+}
+(( $+functions[_atuin__history__prune_commands] )) ||
+_atuin__history__prune_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history prune commands' commands "$@"
+}
+(( $+functions[_atuin__history__start_commands] )) ||
+_atuin__history__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin history start commands' commands "$@"
+}
+(( $+functions[_atuin__import_commands] )) ||
+_atuin__import_commands() {
+    local commands; commands=(
+'auto:Import history for the current shell' \
+'zsh:Import history from the zsh history file' \
+'zsh-hist-db:Import history from the zsh history file' \
+'bash:Import history from the bash history file' \
+'replxx:Import history from the replxx history file' \
+'resh:Import history from the resh history file' \
+'fish:Import history from the fish history file' \
+'nu:Import history from the nu history file' \
+'nu-hist-db:Import history from the nu history file' \
+'xonsh:Import history from xonsh json files' \
+'xonsh-sqlite:Import history from xonsh sqlite db' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin import commands' commands "$@"
+}
+(( $+functions[_atuin__import__auto_commands] )) ||
+_atuin__import__auto_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import auto commands' commands "$@"
+}
+(( $+functions[_atuin__import__bash_commands] )) ||
+_atuin__import__bash_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import bash commands' commands "$@"
+}
+(( $+functions[_atuin__import__fish_commands] )) ||
+_atuin__import__fish_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import fish commands' commands "$@"
+}
+(( $+functions[_atuin__import__help_commands] )) ||
+_atuin__import__help_commands() {
+    local commands; commands=(
+'auto:Import history for the current shell' \
+'zsh:Import history from the zsh history file' \
+'zsh-hist-db:Import history from the zsh history file' \
+'bash:Import history from the bash history file' \
+'replxx:Import history from the replxx history file' \
+'resh:Import history from the resh history file' \
+'fish:Import history from the fish history file' \
+'nu:Import history from the nu history file' \
+'nu-hist-db:Import history from the nu history file' \
+'xonsh:Import history from xonsh json files' \
+'xonsh-sqlite:Import history from xonsh sqlite db' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin import help commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__auto_commands] )) ||
+_atuin__import__help__auto_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help auto commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__bash_commands] )) ||
+_atuin__import__help__bash_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help bash commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__fish_commands] )) ||
+_atuin__import__help__fish_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help fish commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__help_commands] )) ||
+_atuin__import__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help help commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__nu_commands] )) ||
+_atuin__import__help__nu_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help nu commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__nu-hist-db_commands] )) ||
+_atuin__import__help__nu-hist-db_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help nu-hist-db commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__replxx_commands] )) ||
+_atuin__import__help__replxx_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help replxx commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__resh_commands] )) ||
+_atuin__import__help__resh_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help resh commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__xonsh_commands] )) ||
+_atuin__import__help__xonsh_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help xonsh commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__xonsh-sqlite_commands] )) ||
+_atuin__import__help__xonsh-sqlite_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help xonsh-sqlite commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__zsh_commands] )) ||
+_atuin__import__help__zsh_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help zsh commands' commands "$@"
+}
+(( $+functions[_atuin__import__help__zsh-hist-db_commands] )) ||
+_atuin__import__help__zsh-hist-db_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import help zsh-hist-db commands' commands "$@"
+}
+(( $+functions[_atuin__import__nu_commands] )) ||
+_atuin__import__nu_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import nu commands' commands "$@"
+}
+(( $+functions[_atuin__import__nu-hist-db_commands] )) ||
+_atuin__import__nu-hist-db_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import nu-hist-db commands' commands "$@"
+}
+(( $+functions[_atuin__import__replxx_commands] )) ||
+_atuin__import__replxx_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import replxx commands' commands "$@"
+}
+(( $+functions[_atuin__import__resh_commands] )) ||
+_atuin__import__resh_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import resh commands' commands "$@"
+}
+(( $+functions[_atuin__import__xonsh_commands] )) ||
+_atuin__import__xonsh_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import xonsh commands' commands "$@"
+}
+(( $+functions[_atuin__import__xonsh-sqlite_commands] )) ||
+_atuin__import__xonsh-sqlite_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import xonsh-sqlite commands' commands "$@"
+}
+(( $+functions[_atuin__import__zsh_commands] )) ||
+_atuin__import__zsh_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import zsh commands' commands "$@"
+}
+(( $+functions[_atuin__import__zsh-hist-db_commands] )) ||
+_atuin__import__zsh-hist-db_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin import zsh-hist-db commands' commands "$@"
+}
+(( $+functions[_atuin__info_commands] )) ||
+_atuin__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin info commands' commands "$@"
+}
+(( $+functions[_atuin__init_commands] )) ||
+_atuin__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin init commands' commands "$@"
+}
+(( $+functions[_atuin__key_commands] )) ||
+_atuin__key_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin key commands' commands "$@"
+}
+(( $+functions[_atuin__kv_commands] )) ||
+_atuin__kv_commands() {
+    local commands; commands=(
+'set:' \
+'get:' \
+'list:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin kv commands' commands "$@"
+}
+(( $+functions[_atuin__kv__get_commands] )) ||
+_atuin__kv__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin kv get commands' commands "$@"
+}
+(( $+functions[_atuin__kv__help_commands] )) ||
+_atuin__kv__help_commands() {
+    local commands; commands=(
+'set:' \
+'get:' \
+'list:' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin kv help commands' commands "$@"
+}
+(( $+functions[_atuin__kv__help__get_commands] )) ||
+_atuin__kv__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin kv help get commands' commands "$@"
+}
+(( $+functions[_atuin__kv__help__help_commands] )) ||
+_atuin__kv__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin kv help help commands' commands "$@"
+}
+(( $+functions[_atuin__kv__help__list_commands] )) ||
+_atuin__kv__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin kv help list commands' commands "$@"
+}
+(( $+functions[_atuin__kv__help__set_commands] )) ||
+_atuin__kv__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin kv help set commands' commands "$@"
+}
+(( $+functions[_atuin__kv__list_commands] )) ||
+_atuin__kv__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin kv list commands' commands "$@"
+}
+(( $+functions[_atuin__kv__set_commands] )) ||
+_atuin__kv__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin kv set commands' commands "$@"
+}
+(( $+functions[_atuin__login_commands] )) ||
+_atuin__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin login commands' commands "$@"
+}
+(( $+functions[_atuin__logout_commands] )) ||
+_atuin__logout_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin logout commands' commands "$@"
+}
+(( $+functions[_atuin__register_commands] )) ||
+_atuin__register_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin register commands' commands "$@"
+}
+(( $+functions[_atuin__search_commands] )) ||
+_atuin__search_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin search commands' commands "$@"
+}
+(( $+functions[_atuin__server_commands] )) ||
+_atuin__server_commands() {
+    local commands; commands=(
+'start:Start the server' \
+'default-config:Print server example configuration' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin server commands' commands "$@"
+}
+(( $+functions[_atuin__server__default-config_commands] )) ||
+_atuin__server__default-config_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin server default-config commands' commands "$@"
+}
+(( $+functions[_atuin__server__help_commands] )) ||
+_atuin__server__help_commands() {
+    local commands; commands=(
+'start:Start the server' \
+'default-config:Print server example configuration' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin server help commands' commands "$@"
+}
+(( $+functions[_atuin__server__help__default-config_commands] )) ||
+_atuin__server__help__default-config_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin server help default-config commands' commands "$@"
+}
+(( $+functions[_atuin__server__help__help_commands] )) ||
+_atuin__server__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin server help help commands' commands "$@"
+}
+(( $+functions[_atuin__server__help__start_commands] )) ||
+_atuin__server__help__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin server help start commands' commands "$@"
+}
+(( $+functions[_atuin__server__start_commands] )) ||
+_atuin__server__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin server start commands' commands "$@"
+}
+(( $+functions[_atuin__stats_commands] )) ||
+_atuin__stats_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin stats commands' commands "$@"
+}
+(( $+functions[_atuin__status_commands] )) ||
+_atuin__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin status commands' commands "$@"
+}
+(( $+functions[_atuin__store_commands] )) ||
+_atuin__store_commands() {
+    local commands; commands=(
+'status:Print the current status of the record store' \
+'rebuild:Rebuild a store (eg atuin store rebuild history)' \
+'rekey:Re-encrypt the store with a new key (potential for data loss!)' \
+'purge:Delete all records in the store that cannot be decrypted with the current key' \
+'verify:Verify that all records in the store can be decrypted with the current key' \
+'push:Push all records to the remote sync server (one way sync)' \
+'pull:Pull records from the remote sync server (one way sync)' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin store commands' commands "$@"
+}
+(( $+functions[_atuin__store__help_commands] )) ||
+_atuin__store__help_commands() {
+    local commands; commands=(
+'status:Print the current status of the record store' \
+'rebuild:Rebuild a store (eg atuin store rebuild history)' \
+'rekey:Re-encrypt the store with a new key (potential for data loss!)' \
+'purge:Delete all records in the store that cannot be decrypted with the current key' \
+'verify:Verify that all records in the store can be decrypted with the current key' \
+'push:Push all records to the remote sync server (one way sync)' \
+'pull:Pull records from the remote sync server (one way sync)' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'atuin store help commands' commands "$@"
+}
+(( $+functions[_atuin__store__help__help_commands] )) ||
+_atuin__store__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store help help commands' commands "$@"
+}
+(( $+functions[_atuin__store__help__pull_commands] )) ||
+_atuin__store__help__pull_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store help pull commands' commands "$@"
+}
+(( $+functions[_atuin__store__help__purge_commands] )) ||
+_atuin__store__help__purge_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store help purge commands' commands "$@"
+}
+(( $+functions[_atuin__store__help__push_commands] )) ||
+_atuin__store__help__push_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store help push commands' commands "$@"
+}
+(( $+functions[_atuin__store__help__rebuild_commands] )) ||
+_atuin__store__help__rebuild_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store help rebuild commands' commands "$@"
+}
+(( $+functions[_atuin__store__help__rekey_commands] )) ||
+_atuin__store__help__rekey_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store help rekey commands' commands "$@"
+}
+(( $+functions[_atuin__store__help__status_commands] )) ||
+_atuin__store__help__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store help status commands' commands "$@"
+}
+(( $+functions[_atuin__store__help__verify_commands] )) ||
+_atuin__store__help__verify_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store help verify commands' commands "$@"
+}
+(( $+functions[_atuin__store__pull_commands] )) ||
+_atuin__store__pull_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store pull commands' commands "$@"
+}
+(( $+functions[_atuin__store__purge_commands] )) ||
+_atuin__store__purge_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store purge commands' commands "$@"
+}
+(( $+functions[_atuin__store__push_commands] )) ||
+_atuin__store__push_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store push commands' commands "$@"
+}
+(( $+functions[_atuin__store__rebuild_commands] )) ||
+_atuin__store__rebuild_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store rebuild commands' commands "$@"
+}
+(( $+functions[_atuin__store__rekey_commands] )) ||
+_atuin__store__rekey_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store rekey commands' commands "$@"
+}
+(( $+functions[_atuin__store__status_commands] )) ||
+_atuin__store__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store status commands' commands "$@"
+}
+(( $+functions[_atuin__store__verify_commands] )) ||
+_atuin__store__verify_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin store verify commands' commands "$@"
+}
+(( $+functions[_atuin__sync_commands] )) ||
+_atuin__sync_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin sync commands' commands "$@"
+}
+(( $+functions[_atuin__uuid_commands] )) ||
+_atuin__uuid_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin uuid commands' commands "$@"
+}
+(( $+functions[_atuin__wrapped_commands] )) ||
+_atuin__wrapped_commands() {
+    local commands; commands=()
+    _describe -t commands 'atuin wrapped commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_atuin" ]; then
+    _atuin "$@"
+else
+    compdef _atuin atuin
+fi

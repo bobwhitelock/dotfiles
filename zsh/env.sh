@@ -23,10 +23,6 @@ export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
 export STEAM="$HOME/.local/share/Steam"
 export STEAMAPPS="$STEAM/steamapps"
 
-# Effectively store unlimited history.
-export HISTSIZE=999999999
-export SAVEHIST=$HISTSIZE
-
 export SRC="$HOME/src"
 export BOB="$SRC/bobwhitelock"
 export NOTES="$BOB/notes"

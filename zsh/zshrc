@@ -161,3 +161,11 @@ export PATH="$HOME/.poetry/bin:$PATH"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 start_or_reuse_ssh_agent
+
+# Enable Atuin.
+# Completions were added with:
+# atuin gen-completions --shell zsh > /home/bob/src/bobwhitelock/dotfiles/zsh/completions/_atuin
+# TODO But would be better if this was dynamic so these get updated when
+# anything changes - and same applies to Poetry completions.
+. "$HOME/.atuin/bin/env"
+eval "$(atuin init zsh --disable-up-arrow)"
