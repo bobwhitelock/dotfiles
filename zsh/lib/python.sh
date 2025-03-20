@@ -4,6 +4,11 @@ alias shell='./manage.py shell_plus'
 alias pyprofile='sudo env PATH="$PATH" py-spy record --subprocesses -o "profile-$(date --iso-8601=seconds).svg"'
 alias poetry_cache_clear="rm -rf ~/.cache/pypoetry/"
 
+# Run isolated ipython with given dependencies installed.
+uv_shell_with() {
+    uvx --with "$@" ipython
+}
+
 # Install a local repo, with fuzz selection, for development/debugging. This
 # works best even in a Poetry environment, as Poetry will often hang
 # indefinitely (or just take a long time, whereas this is fast) when adding a
