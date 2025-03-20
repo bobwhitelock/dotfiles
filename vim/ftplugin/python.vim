@@ -14,6 +14,8 @@ augroup global_python_autocmds
   autocmd BufNewFile,BufRead *.txt set filetype=django
 augroup END
 
+nnoremap <buffer> <leader>ft :Black<CR>
+
 nnoremap <buffer> <leader>tF :call RunTests('TestFile --failfast')<CR>
 
 " This is not a buffer-specific mapping, so that once any Python has been
