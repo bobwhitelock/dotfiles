@@ -5,7 +5,7 @@ alias pyprofile='sudo env PATH="$PATH" py-spy record --subprocesses -o "profile-
 alias poetry_cache_clear="rm -rf ~/.cache/pypoetry/"
 
 # Run isolated ipython with given dependencies installed.
-uv_shell_with() {
+itry() {
     uvx --with "$@" ipython
 }
 
