@@ -21,9 +21,12 @@ endsnippet
 
 # Dump object as JSON to file with corresponding name.
 snippet json
-import json
-with open('$1.json', 'w') as f:
-    json.dump($1, f, indent=2)
+import sys
+import os
+
+sys.path.append(f"{os.environ['DOTFILES']}/lib")
+import lenient_json
+lenient_json.dump($1, '$1.json')
 endsnippet
 
 snippet raise
