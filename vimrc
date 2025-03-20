@@ -828,7 +828,7 @@ nnoremap <silent> <C-\> :TmuxNavigatePrevious<CR>
 " otherwise (Tmux will then send us C-q). Mapping adapted from vim-sensible.
 nnoremap <silent> <C-q> :nohlsearch<C-r>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-l>
 
-nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>sv :call UltiSnips#RefreshSnippets()<CR>:source $MYVIMRC<CR>
 nnoremap <leader>sf :source %<CR>
 
 " Move by visual line.
