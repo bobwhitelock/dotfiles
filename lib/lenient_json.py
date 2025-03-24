@@ -5,6 +5,12 @@ import json
 # unnoticed?
 # - Convert things to dicts via `__dict__` instead/as well before going to
 # `str`? Too magic/not always useful?
+#  - Maybe make explicit what is happening and include multiple things for
+#  objects - so show a dict including their `str` representation, a dict of all
+#  properties etc
+# - Sort keys for easier diffing
+# - Rename this module and class when do some of the above, since this will be
+# specifically for debugging not just leniently converting to JSON
 
 
 class LenientJSONEncoder(json.JSONEncoder):
