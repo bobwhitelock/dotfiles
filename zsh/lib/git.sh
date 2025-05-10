@@ -178,3 +178,10 @@ alias grei7='grei HEAD~7'
 alias grei8='grei HEAD~8'
 alias grei9='grei HEAD~9'
 alias grein='grei --no-autosquash'
+
+gre_on_latest() {
+    git checkout "$@"
+    git pull --ff-only
+    git checkout -
+    git rebase "$@"
+}
