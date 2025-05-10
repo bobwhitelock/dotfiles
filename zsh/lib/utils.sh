@@ -17,7 +17,7 @@ alias urldecode='ruby -r cgi -e "puts CGI.unescape(ARGV[0])"'
 alias urlencode='ruby -r cgi -e "puts CGI.escape(ARGV[0])"'
 alias tf='terraform'
 alias tf_yolo='tf destroy -auto-approve && tf apply -auto-approve; pingme "$?"'
-alias pw='prettier -w'
+alias pw='npx prettier -w'
 
 # From https://unix.stackexchange.com/a/102021/229081.
 alias trim="sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'"
