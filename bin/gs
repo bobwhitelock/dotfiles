@@ -2,6 +2,9 @@
 
 # From https://www.reddit.com/r/git/comments/avv34g/nicer_gitstatus/.
 
+# TODO try to get display of KB/MB/GB working from
+# https://chatgpt.com/c/6786f7fb-b0b8-8001-a0b4-cc6a65ea6425
+
 awk -vOFS='' '
     NR==FNR {
         all[i++] = $0;
