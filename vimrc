@@ -706,12 +706,13 @@ function! RunTests(test_command)
   " Enable TDD mode.
   CrTdd
 
+  " XXX Disabled for now as secondary session not working
   " Launch terminal for tests to run in, unless this has already been
   " configured.
-  if !exists('g:tslime')
-    TmuxLaunchTerminal
-    sleep 4 " Give terminal time to launch before running tests in it.
-  endif
+  " if !exists('g:tslime')
+  "   TmuxLaunchTerminal
+  "   sleep 4 " Give terminal time to launch before running tests in it.
+  " endif
 
   execute a:test_command
 endfunction
