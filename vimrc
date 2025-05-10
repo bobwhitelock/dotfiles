@@ -261,7 +261,7 @@ Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 let g:rust_clip_command = 'xclip -selection clipboard'
 Plug 'mattn/webapi-vim' " Required by rust.vim for :RustPlay.
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
 Plug 'https://gitlab.com/dbeniamine/todo.txt-vim.git'
 Plug 'chrisbra/csv.vim'
 let g:no_csv_maps = 1
