@@ -16,6 +16,7 @@ alias sz='source ~/.zshrc'
 alias urldecode='ruby -r cgi -e "puts CGI.unescape(ARGV[0])"'
 alias urlencode='ruby -r cgi -e "puts CGI.escape(ARGV[0])"'
 alias tf='terraform'
+alias tfa='terraform init && terraform apply'
 alias tf_yolo='tf destroy -auto-approve && tf apply -auto-approve; pingme "$?"'
 alias pw='npx prettier -w'
 
