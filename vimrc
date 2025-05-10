@@ -236,9 +236,13 @@ Plug 'nvie/vim-flake8'
 " XXX Could replace this, maybe other things (vim-rubocop, Black etc?) with
 " just using ALE/COC?
 " Plug 'tell-k/vim-autopep8'
-" XXX Manually edited `vim/plugged/black/autoload/black.vim` to set `pyver =
-" (3,9,12)`; see
-" https://github.com/psf/black/issues/2876#issuecomment-1102356294.
+" If Black gets out of sync with Rescale Black version, `rm -rf ~/.vim/black`,
+" `:PlugUpdate`, restart Vim outside of Rescale venv and run `:Black` to
+" reinstall this. (Will this always actually work? Is there a better way?)
+" Also see https://github.com/psf/black/issues/2547.
+" XXX Use this instead but does not work, figure out why and then can ensure
+" black versions in sync
+" let g:black_use_virtualenv = 0
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'yaymukund/vim-rabl'
 Plug 'ngmy/vim-rubocop'
