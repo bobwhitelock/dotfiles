@@ -13,7 +13,6 @@
     ~/.ctags.d: ctags.d
     ~/.gitconfig:
     ~/.gitignore:
-    ~/.git_template:
     ~/.npmrc:
     ~/.vimrc:
       force: true
