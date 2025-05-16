@@ -509,10 +509,26 @@ function! s:DisableAutoCommit()
 endfunction
 command! DisableAutoCommit call s:DisableAutoCommit()
 
+augroup prettier_on_save
+  autocmd!
+  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call s:PrettierWrite()
+augroup END
+
+let g:prettier_running = 0
+
+function! s:PrettierWrite()
+  let l:output = system('npx prettier --write ' . shellescape(@%))
+  if v:shell_error
+    echohl ErrorMsg
+    echo "Prettier failed:\n" . l:output
+    echohl None
+  else
+    silent! edit!
+  endif
+endfunction
+
 " When searching for ctags include generated tag files in neighbouring repos.
 command! IncludeNeighbourTags set tags+=../*/.git/tags
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Disable some built in plugins.
 " As dicussed in https://www.reddit.com/r/vim/comments/7anxss.
