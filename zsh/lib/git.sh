@@ -185,3 +185,11 @@ gre_on_latest() {
     git checkout -
     git rebase "$@"
 }
+
+# TODO DRY this up with the above - they are the same apart from `-i` flag.
+grei_on_latest() {
+    git checkout "$@"
+    git pull --ff-only
+    git checkout -
+    git rebase -i "$@"
+}
