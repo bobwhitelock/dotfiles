@@ -129,6 +129,21 @@ fsh() {
         xargs git show
 }
 
+# Fuzz running of my history alias, on files with local changes, with `git
+# diff` as preview.
+fhistory() {
+    git status --porcelain | \
+        grep -v '??' | \
+        xargs -L1 | \
+        cut -d' ' -f2 | \
+        fzf \
+        --query="$*" \
+        --ansi \
+        --preview="echo {} | xargs git diff --color=always" \
+        --preview-window=top:60% | \
+        xargs git history
+}
+
 alias gr='git reset'
 
 alias gci='git clean -d --interactive'
