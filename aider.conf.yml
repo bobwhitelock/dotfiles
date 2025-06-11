@@ -1,0 +1,11 @@
+
+model: 'azure/gpt-4.1'
+weak-model: 'azure/gpt-4.1'
+
+# Indicate aider-authored commits in message, but don't change
+# author/committer.
+attribute-author: false
+attribute-committer: false
+attribute-commit-message-author: true
+
+user-input-color: '#ffa500' # Default conflicts with my Tmux color.

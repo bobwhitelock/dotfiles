@@ -26,6 +26,7 @@
     ~/.pryrc:
     ~/.pylintrc:
     ~/.pdbrc:
+    ~/.aider.conf.yml:
     ~/.zshrc:
       path: zsh/zshrc
       force: true
