@@ -9,6 +9,10 @@ attribute-author: false
 attribute-committer: false
 attribute-commit-message-author: true
 
+# Operate in the context of whatever dir it is run in - will make no difference
+# if run from the repo root.
+subtree-only: true
+
 user-input-color: '#ffa500' # Default conflicts with my Tmux color.
 
 # XXX Try:
