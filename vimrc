@@ -720,6 +720,17 @@ function! RunTests(test_command)
   " Enable TDD mode.
   CrTdd
 
+  if exists('g:tslime')
+    let l:tmux_target = printf('%s:%s.%s', g:tslime['session'], g:tslime['window'], g:tslime['pane'])
+    " Send command to exit copy mode to the target pane - if it's in copy mode
+    " (i.e. scrolled up to see some earlier output) this will exit this before
+    " running the tests, without which the test command will get sent to Tmux
+    " copy mode, and this will capture my input and require hitting <C-c> ~20
+    " times to escape this; if it's not in copy mode then this won't do
+    " anything.
+    call system('tmux copy-mode -t ' . shellescape(l:tmux_target) . ' -q')
+  endif
+
   " XXX Disabled for now as secondary session not working
   " Launch terminal for tests to run in, unless this has already been
   " configured.
@@ -733,7 +744,7 @@ endfunction
 
 " Map <CR> to re-run most recently run tests (the default).
 function! s:CrTdd()
-  nnoremap <silent> <CR> :TestLast<CR>
+  nnoremap <silent> <CR> :call RunTests('TestLast')<CR>
 endfunction
 command! CrTdd call s:CrTdd()
 CrTdd
