@@ -335,7 +335,6 @@ highlight QuickScopePrimary gui=underline cterm=underline
 highlight QuickScopeSecondary ctermbg=236
 
 set number " Show current line number.
-set numberwidth=8 " Spacing always given to these numbers.
 
 set undofile " Maintain undo history between sessions.
 set undodir=~/.vim/undodir " Dir for undo history.
