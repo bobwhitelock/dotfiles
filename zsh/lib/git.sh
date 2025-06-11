@@ -36,7 +36,7 @@ gplr() {
 
 alias gd='git diff --color --patch-with-stat'
 alias gdc='gd --cached'
-alias gds='git diff --color --shortstat'
+alias gds='git diff --color --stat'
 alias gdcs='gds --cached'
 
 # Grep for files making given change (e.g. `gdgrep TODO`), since we branched
@@ -149,7 +149,7 @@ alias gr='git reset'
 alias gci='git clean -d --interactive'
 
 alias gsh='git show --pretty=fuller --patch-with-stat'
-alias gshs='git show --shortstat'
+alias gshs='git show --stat'
 alias gsh~='gsh HEAD~'
 alias gsh2='gsh HEAD~2'
 alias gsh3='gsh HEAD~3'
