@@ -672,7 +672,6 @@ endfunction
 let g:test#custom_strategies = {'tslime_and_cache': function('TslimeAndCacheStrategy')}
 " let test#strategy = 'tslime_and_cache'
 let test#strategy = 'tslime'
-let g:test#preserve_screen = 1
 
 " XXX WIP, hacky, transform for seamlessly running tests within
 " Docker/`docker-compose` environment.
@@ -740,6 +739,8 @@ command! CrTdd call s:CrTdd()
 CrTdd
 
 " Map <CR> to attempt to execute the current file.
+" TODO Have this and other `Cr...` commands also clear the screen before
+" running?
 function! s:CrRunCurrentFile()
   " Expand current file and then save and use this in mapping, rather than
   " just using `TmuxRunCurrentFile`, as want <CR> to always execute the
