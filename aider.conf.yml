@@ -1,5 +1,6 @@
 
 model: 'azure/gpt-4.1'
+# XXX Use a different weak model?
 weak-model: 'azure/gpt-4.1'
 
 # Indicate aider-authored commits in message, but don't change
@@ -9,3 +10,11 @@ attribute-committer: false
 attribute-commit-message-author: true
 
 user-input-color: '#ffa500' # Default conflicts with my Tmux color.
+
+# XXX Try:
+# --notifications
+# --multiline (however then submit with alt-enter - perhaps this could be
+# changed?)
+# --architect (with another model)?
+# --yes-always (but https://github.com/Aider-AI/aider/issues/3903 means this
+# won't run commands)
