@@ -1,7 +1,10 @@
 
-model: 'azure/gpt-4.1'
+# Note: Models from GitHub Copilot need to be prefixed with `openai/` to use,
+# even if not from OpenAI, as this uses an OpenAI-style endpoint.
+# Run `gh_copilot_available_models` to see our currently available models.
+model: 'openai/gpt-4.1'
 # XXX Use a different weak model?
-weak-model: 'azure/gpt-4.1'
+weak-model: 'openai/gpt-4.1'
 
 # Indicate aider-authored commits in message, but don't change
 # author/committer.

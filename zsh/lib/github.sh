@@ -30,3 +30,12 @@ _gh_login() {
     echo "$gh_cli_token" | gh auth login --with-token
     gh auth status
 }
+
+gh_copilot_available_models() {
+    # From
+    # https://aider.chat/docs/llms/github.html#discover-available-models.
+    curl -s "$OPENAI_API_BASE/models" \
+      -H "Authorization: Bearer $OPENAI_API_KEY" \
+      -H "Content-Type: application/json" \
+      -H "Copilot-Integration-Id: vscode-chat" | jq -r '.data[].id'
+}

@@ -71,3 +71,11 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 source "$ZSH_DIR/env.private.sh" 2> /dev/null
 
 export LINODE_CLI_TOKEN="$LINODE_TOKEN"
+
+# For GitHub Copilot.
+export OPENAI_API_BASE='https://api.githubcopilot.com'
+# This token first needs to be generated via a JetBrains IDE, by installing and
+# configuring the Copilot plugin - it is apparently not currently possible to
+# get a token with all needed permissions in the GitHub UI - see
+# https://aider.chat/docs/llms/github.html#where-do-i-get-the-token.
+export OPENAI_API_KEY="$(jq -r 'to_entries[0].value.oauth_token' ~/.config/github-copilot/apps.json)"
