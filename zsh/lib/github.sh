@@ -37,5 +37,5 @@ gh_copilot_available_models() {
     curl -s "$OPENAI_API_BASE/models" \
       -H "Authorization: Bearer $OPENAI_API_KEY" \
       -H "Content-Type: application/json" \
-      -H "Copilot-Integration-Id: vscode-chat" | jq -r '.data[].id'
+      | jq -r '.data[].id'
 }
