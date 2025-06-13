@@ -195,16 +195,29 @@ alias grei9='grei HEAD~9'
 alias grein='grei --no-autosquash'
 
 gre_on_latest() {
-    git checkout "$@"
+    local branch="$1"
+    shift
+    git checkout "$branch"
     git pull --ff-only
     git checkout -
-    git rebase "$@"
+    git rebase "$@" "$branch"
 }
 
-# TODO DRY this up with the above - they are the same apart from `-i` flag.
-grei_on_latest() {
-    git checkout "$@"
-    git pull --ff-only
-    git checkout -
-    git rebase -i "$@"
+# Completion for `gre_on_latest`.
+_gre_on_latest() {
+    if [[ $CURRENT -eq 2 ]]; then
+        # Only suggest rebasing on one of these branches, when they exist, as
+        # this is almost always what I want.
+        local -a branches
+        branches=($(
+            git for-each-ref --format='%(refname:short)' refs/heads/ |
+            grep -E '^(main|master|candidate|release)$'
+        ))
+        compadd -- ${branches[@]}
+    else
+        # Only suggest these 2 `rebase` options or nothing, as these are the
+        # only ones I actually use in this context.
+        compadd '' --no-autosquash --interactive
+    fi
 }
+compdef _gre_on_latest gre_on_latest
