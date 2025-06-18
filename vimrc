@@ -1255,3 +1255,27 @@ function! s:ProfileVim(arg)
   endif
 endfunction
 command! -nargs=? ProfileVim call s:ProfileVim(<q-args>)
+
+" If Aider is running in the current Tmux window, add the current file in Vim
+" to that Aider's context.
+function! AiderAddCurrentFile()
+  let l:panes = systemlist('tmux list-panes -F "#{pane_id} #{pane_pid}"')
+  let l:aider_pane = ''
+  for l:line in l:panes
+    let [l:pane_id, l:pid] = split(l:line)
+    " Aider is running in a pane if a process with this pane's PID as a parent
+    " is running a command containing the word 'aider'.
+    let l:cmdline = system('ps --ppid ' . l:pid . ' -o args=')
+    if l:cmdline =~? 'aider'
+      let l:aider_pane = l:pane_id
+      break
+    endif
+  endfor
+  if empty(l:aider_pane)
+    echo "Aider is not running!"
+    return
+  endif
+  let l:cmd = '/add ' . expand('%:p') . "\r"
+  call system('tmux send-keys -t ' . shellescape(l:aider_pane) . ' ' . shellescape(l:cmd))
+endfunction
+nnoremap <silent> <leader>aa :call AiderAddCurrentFile()<CR>
