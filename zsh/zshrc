@@ -75,14 +75,6 @@ bashcompinit
 
 # source /etc/bash_completion.d/compleat_setup
 
-# For advanced shell history - disabled for now as messes up environment.
-# export ASH_LOG_BIN=/usr/local/bin/_ash_log.py
-# source /usr/lib/advanced_shell_history/zsh
-# unset ASH_CFG_MOTD # Don't show message at shell start.
-
-# Enable thefuck.
-command -v thefuck >/dev/null 2>&1 && eval "$(thefuck --alias)"
-
 # Load NVM.
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
