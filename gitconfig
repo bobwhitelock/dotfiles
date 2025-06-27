@@ -66,6 +66,7 @@
 	# This has the flaw that it shows everything in submodules -
 	# fortunately I usually don't use these.
 	tree-with-untracked = "!fd --type f --hidden --exclude .git | treeall --fromfile"
+	rerere-clear = "!rm -rf .git/rr-cache"
 
 [color]
 	ui = true
