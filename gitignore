@@ -9,3 +9,4 @@ tags
 .mypy_cache
 __pycache__
 .aider*
+.dmypy.json
