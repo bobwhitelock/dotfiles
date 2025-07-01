@@ -1,10 +1,39 @@
 
 # Note: Models from GitHub Copilot need to be prefixed with `openai/` to use,
 # even if not from OpenAI, as this uses an OpenAI-style endpoint.
+#
 # Run `gh_copilot_available_models` to see our currently available models.
+#
+# Current selected default model is GPT-4.1 from Azure. Other notable options
+# for reference:
+# - Listed Gemini model is much slower to respond but performs better on
+# https://aider.chat/docs/leaderboards/.
+# - GPT-4.1 is:
+#   - Slightly faster from Azure vs Copilot;
+#   - cheaper/already built-in to price from Copilot;
+#   - has much lower context window limit from Copilot (64,000; Azure GPT-4.1
+#   limit is the full 1 million).
+#
+# Timing stats:
+#   Model                    Total Time (seconds)
+#   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#   azure/gpt-4.1 (run 1)                         4.222
+#   azure/gpt-4.1 (run 2)                         4.298
+#   openai/gpt-4.1 (run 1)                        5.179
+#   openai/gpt-4.1 (run 2)                        5.457
+#   openai/gemini-2.5-pro-preview-05-06 (run 1)   37.884
+
 model: 'openai/gpt-4.1'
-# XXX Use a different weak model?
+# Need to explicitly specify `weak-model` to the same, at least in this case,
+# otherwise it tries to use a model I don't have deployed.
 weak-model: 'openai/gpt-4.1'
+# model: 'openai/gemini-2.5-pro-preview-05-06'
+# weak-model: 'openai/gemini-2.5-pro-preview-05-06'
+
+# Aider doesn't know about all GitHub Copilot models because of the `openai/`
+# prefix so may warn - but suppressing this warning is probably fine - see
+# https://aider.chat/docs/llms/warnings.html#unknown-context-window-size-and-token-costs.
+show-model-warnings: false
 
 # Indicate aider-authored commits in message, but don't change
 # author/committer.
