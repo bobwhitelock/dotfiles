@@ -17,6 +17,9 @@ attribute-commit-message-author: true
 subtree-only: true
 
 user-input-color: '#ffa500' # Default conflicts with my Tmux color.
+# Default conflicts with my cursor color and it gets lost against the
+# background.
+code-theme: monokai
 
 # XXX Preprocess this file to have this use the "$DOTFILES" env var.
 read: ~/src/bobwhitelock/dotfiles/AI_CONVENTIONS.md
