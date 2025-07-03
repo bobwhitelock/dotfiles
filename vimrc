@@ -1275,6 +1275,11 @@ function! AiderAddCurrentFile()
     echo "Aider is not running!"
     return
   endif
+
+  " Send Ctrl-C first, so any existing Aider input does not get executed.
+  " XXX actually bad as will kill Aider if add 2 files in quick succession
+  " call system('tmux send-keys -t ' . shellescape(l:aider_pane) . ' C-c')
+
   let l:cmd = '/add ' . expand('%:p') . "\r"
   call system('tmux send-keys -t ' . shellescape(l:aider_pane) . ' ' . shellescape(l:cmd))
 endfunction

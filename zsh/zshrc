@@ -11,6 +11,7 @@ plugins=(\
   aws \
   bundler \
   django \
+  git \
   history-substring-search \
   httpie \
   rust \

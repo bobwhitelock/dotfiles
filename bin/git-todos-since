@@ -1,42 +1,23 @@
 #!/bin/bash
-set -euo pipefail
-IFS=$'\n\t'
 
-# XXX Make this more robust - seems to continue and open Vim without any files
-# if invalid commit passed, or if no todos found since commit.
-# XXX Will still open files without recently added todos in certain situations,
-# e.g. if a file had a todo deleted since the given commit but still contains
-# an earlier todo it will be opened, but ideally wouldn't be.
-# XXX Add completion of commits/branches/SHAs for this command.
+# Function to find TODO or XXX added since a given commit or branch
+find_todos_since_commit() {
+  # Check if a commit or branch is provided
+  if [ -z "$1" ]; then
+    echo "Usage: $0 <commit-or-branch>"
+    exit 1
+  fi
 
-TODOS_REGEX='(XXX|TODO|FIXME)'
+  # Get the commit or branch
+  COMMIT_OR_BRANCH=$1
 
-main() {
-    local commit="$1"
-
-    existing_files_with_todos_since "$commit" | \
-        # Files might be included without todos if a todo was deleted rather
-        # than added, so filter these out (seemingly no easy way to find just
-        # added matches in previous step).
-        filter_out_files_without_todos | \
-        edit_files_and_find_todos
+  # Get the list of added lines containing TODO or XXX since the given commit/branch
+  git diff "$COMMIT_OR_BRANCH" --unified=0 | \
+  rg '^\+' | \
+  rg 'TODO|XXX|FIXME' | \
+  sed 's/^+//g' | \
+  awk -F: '{print $1 ":" NR ":" $2}'
 }
 
-existing_files_with_todos_since() {
-    local commit="$1"
-
-    # `--diff-filter=d` filters out deleted files.
-    git diff "$commit" -G "$TODOS_REGEX" --name-only --diff-filter=d
-}
-
-filter_out_files_without_todos() {
-    xargs grep -El "$TODOS_REGEX"
-}
-
-edit_files_and_find_todos() {
-    # Can then navigate files with `]a`/`[a`, and todos within files with
-    # `n`/`p`.
-    xargs vim --not-a-term "+/\\v$TODOS_REGEX"
-}
-
-main "$@"
+# Call the function with the provided argument
+find_todos_since_commit "$1"

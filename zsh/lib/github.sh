@@ -1,4 +1,5 @@
 
+alias co="gh copilot"
 alias grip="grip --browser --user \"\$GITHUB_USER\" --pass \"\$GITHUB_PASSWORD\""
 
 # Pass `-R REPO_NAME` to just backup a single repo (much quicker).

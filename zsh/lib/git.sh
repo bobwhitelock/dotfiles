@@ -43,6 +43,7 @@ alias gdcs='gds --cached'
 # from `master`.
 # XXX Will show both additions and deletions, want to only show additions
 # (maybe?)
+# XXX Similar to `git-todos-since`? Can just keep one?
 gdgrep() {
     gd --name-only -G "$@" master
 }
@@ -194,6 +195,8 @@ alias grei8='grei HEAD~8'
 alias grei9='grei HEAD~9'
 alias grein='grei --no-autosquash'
 
+# XXX Split this out to a separate script so that it doesn't blindly continue
+# if one of the commands fails.
 gre_on_latest() {
     local branch="$1"
     shift

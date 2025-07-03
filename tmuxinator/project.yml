@@ -16,9 +16,17 @@ project_specific_setup = \
   elsif File.exist?("#{project_path}/Makefile")
     ["make"]
   else
-    nil
+    # XXX This does mean `aider` running and above setup running are mutually
+    # exclusive, so this should perhaps be reworked.
+    # XXX `aider` will run at top of repo, limiting benefits of working on a
+    # sub-directory of repo - perhaps should be able to specify directory to
+    # work in? Or can just manually exit and re-run in these cases, too hard to
+    # know what should always happen automatically?
+    "aider"
   end.to_json
 %>
+# XXX maybe use window layout like this for normal things? Aider at the top left, small term bottom left, vim right?
+# `2: shaker* (3 panes) [239x58] [layout 915a,239x58,0,0{118x58,0,0[118x43,0,0,4,118x14,0,44,7],120x58,119,0,8}] @3 (active)`
 
 name: <%= [project_owner, project_name].join('/') %>
 startup_window: <%= project_name %>
