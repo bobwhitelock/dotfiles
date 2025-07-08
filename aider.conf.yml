@@ -40,6 +40,7 @@ show-model-warnings: false
 attribute-author: false
 attribute-committer: false
 attribute-commit-message-author: true
+attribute-co-authored-by: false
 
 # Operate in the context of whatever dir it is run in - will make no difference
 # if run from the repo root.
