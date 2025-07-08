@@ -64,3 +64,6 @@
       glob: true
     ~/.aws/config:
       path: ../dotfiles-private/aws/config
+    ~/.config/io.datasette.llm/:
+      path: ../dotfiles-private/config/io.datasette.llm/*
+      glob: true
