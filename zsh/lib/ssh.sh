@@ -1,6 +1,6 @@
 
 alias sshaddbob='ssh-add ~/.ssh/id_rsa.bob'
-alias sshaddaws='ssh-add ~/.ssh/aws_ireland.pem'
+alias sshaddrescale='ssh-add ~/.ssh/rescale'
 
 ssh_remove_last_key() {
     ssh-keygen \
