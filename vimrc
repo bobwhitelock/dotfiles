@@ -219,7 +219,20 @@ Plug 'sk1418/QFGrep'
 Plug 'Olical/vim-expand'
 
 " GitHub Copilot.
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
+" Copilot needs a recent Node but Rescale version needs to be older, so load
+" and use `nvm` to find a recent Node
+let g:copilot_node_command = system('export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm which 22')->trim()
+
+function! s:EnableCopilot()
+  execute 'Copilot enable'
+endfunction
+command! EnableCopilot call s:EnableCopilot()
+
+function! s:DisableCopilot()
+  execute 'Copilot disable'
+endfunction
+command! DisableCopilot call s:DisableCopilot()
 
 " Language-specific.
 Plug 'markcornick/vim-bats'
