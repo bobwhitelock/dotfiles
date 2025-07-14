@@ -67,3 +67,6 @@
     ~/.config/io.datasette.llm/:
       path: ../dotfiles-private/config/io.datasette.llm/*
       glob: true
+    ~/.vim/spell:
+      path: ../dotfiles-private/vim/spell
+      glob: true
