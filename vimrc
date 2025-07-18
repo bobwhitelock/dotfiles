@@ -1292,3 +1292,14 @@ function! AiderAddCurrentFile()
   call system('tmux send-keys -t ' . shellescape(l:aider_pane) . ' ' . shellescape(l:cmd))
 endfunction
 nnoremap <silent> <leader>aa :call AiderAddCurrentFile()<CR>
+
+" Populate quickfix list with all added TODO/XXX/FIXME comments since a given
+" branch.
+function! TodosSince(branch)
+  " This magic AWK command is fully GPT-4.1/Aider's work.
+  let l:awk_cmd = "'/^diff --git/ {filename = $4} /^@@/ {split($0, a, \" \"); split(a[3], b, \",\"); start = substr(b[1], 2); lineno = start - 1} /^\\+/ && !/^\\+\\+\\+/ {if ($0 ~ /(TODO|XXX|FIXME)/) {sub(/^[ab]\\//, \"\", filename); print filename \":\" lineno+1 \":\" substr($0, 2)} lineno++}'"
+  let l:cmd = "git diff --unified=0 " . a:branch . "...HEAD | awk " . l:awk_cmd
+  execute "cexpr systemlist(" . string(l:cmd) . ")"
+  copen
+endfunction
+command! -nargs=1 TodosSince call TodosSince(<f-args>)

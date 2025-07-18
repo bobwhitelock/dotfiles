@@ -39,14 +39,6 @@ alias gdc='gd --cached'
 alias gds='git diff --color --stat'
 alias gdcs='gds --cached'
 
-# Grep for files making given change (e.g. `gdgrep TODO`), since we branched
-# from `master`.
-# XXX Will show both additions and deletions, want to only show additions
-# (maybe?)
-gdgrep() {
-    gd --name-only -G "$@" master
-}
-
 alias gst='git stash'
 alias gstk='gst save --keep-index'
 alias gsti='gst save --include-untracked'
