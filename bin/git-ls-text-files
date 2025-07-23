@@ -1,0 +1,13 @@
+#!/bin/bash
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+
+main() {
+  git ls-files -z | \
+    xargs -0 file --mime-type | \
+    awk -F: '$2 ~ /text\// {print $1}'
+}
+
+
+main "$@"
