@@ -1288,6 +1288,14 @@ function! AiderAddCurrentFile()
     echo "Aider is not running!"
     return
   endif
+
+  " # TODO BW 2025-07-25: If there's already unfinished input in Aider, this
+  " will submit it - the ideal situation would be if this saved that input,
+  " added the file, and then restored the input, so you can add new files when
+  " you realize they're needed halfway through a prompt, without losing the
+  " prompt.
+  " # TODO BW 2025-07-25: If this fails/if the file is not in the current
+  " repo, add it using `/read-only` instead.
   let l:cmd = '/add ' . expand('%:p') . "\r"
   call system('tmux send-keys -t ' . shellescape(l:aider_pane) . ' ' . shellescape(l:cmd))
 endfunction
