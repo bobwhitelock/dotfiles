@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+
+main() {
+  check_uncommitted_changes
+  git reset --hard HEAD~
+}
+
+
+check_uncommitted_changes() {
+  if ! git diff-index --quiet HEAD --; then
+    echo "Error: Repository has uncommitted changes. Please commit or stash them first." >&2
+    exit 1
+  fi
+}
+
+
+main "$@"

@@ -39,7 +39,7 @@
 	; Adapted from https://stackoverflow.com/a/21857717.
 	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|main\\|develop\\|dev\\|candidate\\|release' | xargs -rn 1 git branch -d"
 	pop = reset HEAD~
-	drop = reset --hard HEAD~
+	drop = drop
 	just-index = stash save --keep-index
 	wip = wip
 	about = git-about
