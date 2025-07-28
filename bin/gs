@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # From https://www.reddit.com/r/git/comments/avv34g/nicer_gitstatus/.
 
