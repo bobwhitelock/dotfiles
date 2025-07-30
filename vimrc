@@ -1004,6 +1004,8 @@ nnoremap <silent> <leader>gC :GitGutterQuickFix<CR>:call ResizeQuickFix()<CR>:cc
 
 " Grep for current filename, less extension if present.
 nnoremap <leader>gf :Ggrep! <C-R>=expand('%:t:r')<CR><CR><CR>
+" Grep for directory name of current file.
+nnoremap <leader>gd :Ggrep! <C-R>=fnamemodify(expand('%:p:h'), ':t')<CR><CR><CR>
 
 nnoremap <leader>G :Ggrep!<space>
 nnoremap <leader>I :Ggrep! -i<space>
