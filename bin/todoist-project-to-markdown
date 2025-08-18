@@ -1,0 +1,238 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import json
+import argparse
+from urllib.request import Request, urlopen
+from urllib.parse import urlencode
+from urllib.error import URLError, HTTPError
+import hashlib
+
+
+def get_todoist_api_token():
+    """Get the Todoist API token from environment variable."""
+    token = os.environ.get('TODOIST_API_TOKEN')
+    if not token:
+        print("Error: TODOIST_API_TOKEN environment variable not set", file=sys.stderr)
+        sys.exit(1)
+    return token
+
+
+def make_sync_request(resource_types, token):
+    """Make a sync request to the Todoist API v1."""
+    url = "https://api.todoist.com/api/v1/sync"
+    data = urlencode({
+        'sync_token': '*',
+        'resource_types': json.dumps(resource_types)
+    })
+
+    req = Request(url, data.encode('utf-8'))
+    req.add_header('Authorization', f'Bearer {token}')
+    req.add_header('Content-Type', 'application/x-www-form-urlencoded')
+
+    try:
+        with urlopen(req) as response:
+            return json.loads(response.read().decode('utf-8'))
+    except HTTPError as e:
+        print(f"HTTP Error {e.code}: {e.reason}", file=sys.stderr)
+        sys.exit(1)
+    except URLError as e:
+        print(f"URL Error: {e.reason}", file=sys.stderr)
+        sys.exit(1)
+    except json.JSONDecodeError as e:
+        print(f"JSON decode error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+def get_project_by_name(project_name, token):
+    """Find a project by name."""
+    sync_data = make_sync_request(['projects'], token)
+    projects = sync_data.get('projects', [])
+
+    for project in projects:
+        if project['name'].lower() == project_name.lower():
+            return project
+
+    print(f"Error: Project '{project_name}' not found", file=sys.stderr)
+    available_projects = [p['name'] for p in projects]
+    print(f"Available projects: {', '.join(available_projects)}", file=sys.stderr)
+    sys.exit(1)
+
+
+def get_project_tasks_and_comments(project_id, token):
+    """Get all tasks and comments for a specific project."""
+    sync_data = make_sync_request(['items', 'notes'], token)
+    all_tasks = sync_data.get('items', [])
+    all_comments = sync_data.get('notes', [])
+
+    # Filter tasks for the specific project
+    project_tasks = [task for task in all_tasks if task['project_id'] == project_id]
+
+    # Filter comments for tasks in this project
+    task_ids = {task['id'] for task in project_tasks}
+    project_comments = [comment for comment in all_comments if comment.get('item_id') in task_ids]
+
+    return project_tasks, project_comments
+
+
+def build_task_hierarchy(tasks, comments):
+    """Build a hierarchical structure of tasks with comments."""
+    task_dict = {task['id']: task for task in tasks}
+    root_tasks = []
+
+    # Add children and comments lists to each task
+    for task in tasks:
+        task['children'] = []
+        task['comments'] = []
+
+    # Associate comments with tasks
+    for comment in comments:
+        item_id = comment.get('item_id')
+        if item_id and item_id in task_dict:
+            task_dict[item_id]['comments'].append(comment)
+
+    # Build the hierarchy
+    for task in tasks:
+        if task.get('parent_id'):
+            parent = task_dict.get(task['parent_id'])
+            if parent:
+                parent['children'].append(task)
+        else:
+            root_tasks.append(task)
+
+    return root_tasks
+
+
+def format_task_content(content):
+    """Format task content, preserving raw content as in Todoist editor."""
+    return content
+
+
+def is_image_file(file_name):
+    """Check if a file is an image based on its extension."""
+    if not file_name:
+        return False
+
+    image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg', '.webp'}
+    extension = '.' + file_name.split('.')[-1].lower() if '.' in file_name else ''
+    return extension in image_extensions
+
+
+def download_image(url, file_name, token):
+    """Download an image file to the attachments directory."""
+    # Create attachments directory if it doesn't exist
+    attachments_dir = "attachments"
+    os.makedirs(attachments_dir, exist_ok=True)
+
+    # Create a unique filename to avoid conflicts
+    name_hash = hashlib.md5(url.encode()).hexdigest()[:8]
+    base_name, extension = os.path.splitext(file_name)
+    if not extension:
+        extension = '.png'  # Default extension if none provided
+
+    local_filename = f"{base_name}_{name_hash}{extension}"
+    local_path = os.path.join(attachments_dir, local_filename)
+
+    # Skip download if file already exists
+    if os.path.exists(local_path):
+        return local_path
+
+    try:
+        # Create request with authorization
+        req = Request(url)
+        req.add_header('Authorization', f'Bearer {token}')
+
+        with urlopen(req) as response:
+            with open(local_path, 'wb') as f:
+                f.write(response.read())
+
+        print(f"Downloaded image: {local_path}", file=sys.stderr)
+        return local_path
+
+    except Exception as e:
+        print(f"Failed to download image {url}: {e}", file=sys.stderr)
+        # Return original URL if download fails
+        return url
+
+
+def format_attachment_url(attachment, token):
+    """Format attachment as a Todoist link or image markdown."""
+    file_name = attachment.get('file_name', 'attachment')
+    file_url = attachment.get('file_url', '')
+
+    # If we have a direct file URL, use that; otherwise construct a Todoist link
+    if file_url and file_url.startswith('http'):
+        attachment_url = file_url
+    else:
+        attachment_url = f"https://todoist.com/app/attachment/{attachment.get('resource_type', 'file')}/{file_url or file_name}"
+
+    # If it's an image, download it and format as markdown image
+    if is_image_file(file_name):
+        local_path = download_image(attachment_url, file_name, token)
+        return f"![{file_name}]({local_path})"
+    else:
+        return attachment_url
+
+
+def print_tasks_markdown(tasks, token, indent_level=0):
+    """Print tasks in markdown format with proper hierarchy."""
+    indent = "  " * indent_level
+
+    for task in tasks:
+        # Print the main task as a bullet point
+        print(f"{indent}- {format_task_content(task['content'])}")
+
+        # If task has a description, print it as its own bullet point
+        # In v1 API, descriptions might be in a different field or format
+        description = task.get('description', '') or task.get('note', '')
+        if description:
+            print(f"{indent}  - description: {description}")
+
+        # Print comments for this task
+        if task.get('comments'):
+            for comment in task['comments']:
+                comment_content = comment.get('content', '')
+                if comment_content:
+                    print(f"{indent}  - comment: {comment_content}")
+
+                    # Handle attachments in comments as their own bullet point
+                    attachment = comment.get('file_attachment')
+                    if attachment:
+                        attachment_url = format_attachment_url(attachment, token)
+                        print(f"{indent}    - attachment: {attachment_url}")
+
+        # Recursively print children
+        if task['children']:
+            print_tasks_markdown(task['children'], token, indent_level + 1)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Export Todoist project tasks to markdown format"
+    )
+    parser.add_argument(
+        "project_name",
+        help="Name of the Todoist project to export"
+    )
+
+    args = parser.parse_args()
+
+    # Get API token
+    token = get_todoist_api_token()
+
+    # Find the project
+    project = get_project_by_name(args.project_name, token)
+
+    # Get all tasks and comments for the project
+    tasks, comments = get_project_tasks_and_comments(project['id'], token)
+
+    # Build task hierarchy with comments
+    root_tasks = build_task_hierarchy(tasks, comments)
+
+    # Print tasks in markdown format
+    print_tasks_markdown(root_tasks, token)
+
+
+if __name__ == "__main__":
+    main()
