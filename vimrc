@@ -446,6 +446,12 @@ augroup autocmds
   " Graphviz files use `dot` language.
   autocmd BufNewFile,BufRead *.gv set filetype=dot
 
+  " Cog (https://github.com/nedbat/cog) snippets are Python. Using custom
+  " markers here to make these much less likely to independently occur (and
+  " cause conflicts) in arbitrary text files; the hashes also make the Cog
+  " boundaries themselves get highlighted as valid Python comments.
+  autocmd BufNewFile,BufRead * call SyntaxRange#Include("#{---cog", "#---}", "python")
+
   " Always want spellcheck for text files.
   autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst,*.todo setlocal spell
   autocmd FileType gitcommit setlocal spell
