@@ -301,7 +301,8 @@ Plug 'tpope/vim-repeat' " Make '.' work with mappings.
 Plug 'kreskij/Repeatable.vim', { 'on': 'Repeatable' }
 Plug 'ntpeters/vim-better-whitespace' " Highlight trailing whitespace.
 Plug 'henrik/vim-indexed-search' " Show number of search results.
-Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
+" TODO BW 2025-08-21: was giving errors - look into fixing
+" Plug 'valloric/MatchTagAlways' " Highlight enclosing HTML/XML tags.
 Plug 'jiangmiao/auto-pairs' " Inserting and deleting brackets.
 Plug 'jkerian/HiCursorWords' " Highlight occurrences of word under cursor.
 let g:HiCursorWords_linkStyle='ColorColumn'
