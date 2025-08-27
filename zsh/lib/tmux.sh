@@ -72,5 +72,6 @@ _tmux_create() {
         additional_commands=''
     fi
 
+    # TODO BW 2025-08-27: This blows up if the directory has spaces in its name.
     eval "tmux $tmux_command -c $window_path -n $window_name $additional_commands"
 }
