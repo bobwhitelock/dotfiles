@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+
+# Usage:
+# - Generate once: `d2_render diagram.d2`
+# - Watch and regenerate on changes: `echo diagram.d2 | entr d2_render diagram.d2`
+# (`d2_render diagram.d2 --watch` does not apply the `sed` correctly)
+# - Watch and regenerate every D2 diagram in directory when any changes:
+# `find . | entr -s "find **/*.d2 | xargs -n1 d2_render"`
+
+main() {
+  local d2_path base_path svg_path temp_svg_path
+  d2_path="$1"
+  shift
+
+  base_path="${d2_path%.*}"
+  svg_path="$base_path.svg"
+  temp_svg_path="$svg_path.$$"
+
+  d2 "$d2_path" "$@"
+  sed 's/UNLICENSED COPY//g' "$svg_path" > "$temp_svg_path"
+  mv "$temp_svg_path" "$svg_path"
+}
+
+
+main "$@"
