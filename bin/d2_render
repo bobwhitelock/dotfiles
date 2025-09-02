@@ -11,17 +11,23 @@ IFS=$'\n\t'
 # `find . | entr -s "find **/*.d2 | xargs -n1 d2_render"`
 
 main() {
-  local d2_path base_path svg_path temp_svg_path
+  local d2_path base_path svg_path temp_svg_path png_path
   d2_path="$1"
   shift
 
   base_path="${d2_path%.*}"
   svg_path="$base_path.svg"
   temp_svg_path="$svg_path.$$"
+  png_path="$base_path.png"
 
   d2 "$d2_path" "$@"
   sed 's/UNLICENSED COPY//g' "$svg_path" > "$temp_svg_path"
   mv "$temp_svg_path" "$svg_path"
+
+  # Settled on this tool to convert SVG to PNG as it includes icons correctly,
+  # others do not. Also need to do this as a separate step not via D2, as need
+  # `sed` to apply first.
+  npx svgexport "$svg_path" "$png_path"
 }
 
 
