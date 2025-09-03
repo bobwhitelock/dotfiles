@@ -454,7 +454,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead * call SyntaxRange#Include("#{---cog", "#---}", "python")
 
   " Always want spellcheck for text files.
-  autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst,*.todo setlocal spell
+  autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst,*.todo,*.tex setlocal spell
   autocmd FileType gitcommit setlocal spell
 
   " Open quickfix window after any grep.
