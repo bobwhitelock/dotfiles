@@ -2,6 +2,11 @@
 set -Eeuo pipefail
 IFS=$'\n\t'
 
+# TODO BW 2025-09-03: Make this take args like `--watch` (watch like below) and
+# `--repo` (render any diagram in repo like below) and which of the 2 formats
+# to render (which should be default?). Any other arguments should be passed
+# through to D2. Best way to do this might be to convert to Python with Click
+# (with this dependency specified by `uv`).
 
 # Usage:
 # - Generate once: `d2_render diagram.d2`
