@@ -1,0 +1,6 @@
+{
+  "awsAuthRefresh": "aws sso login --profile ai-dev",
+  "env": {
+    "AWS_PROFILE": "ai-dev"
+  }
+}

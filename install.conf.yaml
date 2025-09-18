@@ -52,6 +52,9 @@
     ~/.tmux/plugins:
       path: tmux/plugins
     ~/.compleat:
+    ~/.claude/:
+      path: claude/*
+      glob: true
 
 # Link in any files from `dotfiles-private`; in separate `link` section for
 # clarity and to avoid clashes in destination dir names with above.
