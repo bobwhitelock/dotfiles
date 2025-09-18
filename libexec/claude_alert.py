@@ -27,7 +27,10 @@ def main():
         pingme(input_data["message"])
 
     elif event == "stop":
-        pingme("task complete")
+        # XXX BW 2025-09-18: notification will actually already send when no
+        # input for 60 seconds - so don't need this?
+        # pingme("task complete")
+        pass
 
     else:
         pingme("unhandled input")
