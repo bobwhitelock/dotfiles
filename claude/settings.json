@@ -2,5 +2,28 @@
   "awsAuthRefresh": "aws sso login --profile ai-dev",
   "env": {
     "AWS_PROFILE": "ai-dev"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/src/bobwhitelock/dotfiles/libexec/claude_alert.py"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/src/bobwhitelock/dotfiles/libexec/claude_alert.py"
+          }
+        ]
+      }
+    ]
   }
 }

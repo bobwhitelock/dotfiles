@@ -20,7 +20,7 @@ main() {
   message="${*:-$DEFAULT_MESSAGE}"
   echo "pingme: message=\"$message\"" >&2
 
-  http --body --form "$PUSHOVER_ENDPOINT" \
+  http --ignore-stdin --body --form "$PUSHOVER_ENDPOINT" \
     token="$PUSHOVER_TOKEN" \
     user="$PUSHOVER_USER" \
     title="pingme" \
