@@ -1,4 +1,10 @@
 #!/bin/sh
+
+# Run local hook if it exists
+if [ -x ".git/hooks/post-checkout" ]; then
+    .git/hooks/post-checkout "$@"
+fi
+
 .git/hooks/ctags >/dev/null 2>&1 &
 
 # Remove all `pyc` files to prevent any leftover ones for Python files which

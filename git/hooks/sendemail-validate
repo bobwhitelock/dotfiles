@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Run local hook if it exists
+if [ -x ".git/hooks/sendemail-validate" ]; then
+    .git/hooks/sendemail-validate "$@"
+fi

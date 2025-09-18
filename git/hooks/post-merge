@@ -1,2 +1,8 @@
 #!/bin/sh
+
+# Run local hook if it exists
+if [ -x ".git/hooks/post-merge" ]; then
+    .git/hooks/post-merge "$@"
+fi
+
 .git/hooks/ctags >/dev/null 2>&1 &

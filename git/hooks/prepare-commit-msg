@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import os
 import subprocess
 import os
 from pathlib import Path
@@ -24,6 +25,11 @@ def is_in_rescale_repo():
 def main():
     if len(sys.argv) < 2:
         sys.exit(1)
+
+    # Run local hook if it exists
+    local_hook = Path(".git/hooks/prepare-commit-msg")
+    if local_hook.exists() and os.access(local_hook, os.X_OK):
+        subprocess.run([str(local_hook)] + sys.argv[1:])
 
     commit_msg_file = Path(sys.argv[1])
 

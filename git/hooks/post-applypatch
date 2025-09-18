@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Run local hook if it exists
+if [ -x ".git/hooks/post-applypatch" ]; then
+    .git/hooks/post-applypatch "$@"
+fi

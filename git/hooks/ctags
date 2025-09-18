@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# TODO BW 2025-09-18: This is not actually a git hook => should move to
+# `libexec/`?
+
 set -e
 PATH="/usr/local/bin:$PATH"
 dir="$(git rev-parse --git-dir)"

@@ -1,4 +1,10 @@
 #!/bin/sh
+
+# Run local hook if it exists
+if [ -x ".git/hooks/post-rewrite" ]; then
+    .git/hooks/post-rewrite "$@"
+fi
+
 case "$1" in
   rebase) exec .git/hooks/post-merge ;;
 esac
