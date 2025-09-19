@@ -1,0 +1,385 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import json
+import argparse
+from urllib.request import Request, urlopen
+from urllib.parse import urlencode
+from urllib.error import URLError, HTTPError
+import hashlib
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+# TODO BW 2025-08-30: Update to allow passing a single task as well.
+# TODO BW 2025-09-19: Also include dates, deadlines, sections, tags etc for
+# each task
+# TODO BW 2025-09-19: When run with `--all`, it would be good to be able to
+# replace the existing hierarchy - rather than intermingle stuff with it -
+# maybe just have this remove and then create a whole fresh directory?
+
+def get_todoist_api_token():
+    """Get the Todoist API token from environment variable."""
+    token = os.environ.get('TODOIST_API_TOKEN')
+    if not token:
+        print("Error: TODOIST_API_TOKEN environment variable not set", file=sys.stderr)
+        sys.exit(1)
+    return token
+
+
+def make_sync_request(resource_types, token):
+    """Make a sync request to the Todoist API v1."""
+    url = "https://api.todoist.com/api/v1/sync"
+    data = urlencode({
+        'sync_token': '*',
+        'resource_types': json.dumps(resource_types)
+    })
+
+    req = Request(url, data.encode('utf-8'))
+    req.add_header('Authorization', f'Bearer {token}')
+    req.add_header('Content-Type', 'application/x-www-form-urlencoded')
+    req.add_header('User-Agent', 'bob.whitelock1@gmail.com')
+
+    try:
+        with urlopen(req) as response:
+            return json.loads(response.read().decode('utf-8'))
+    except HTTPError as e:
+        if e.code == 429:
+            retry_after = e.headers.get('Retry-After')
+            if retry_after:
+                print(f"Rate limit exceeded (429). Retry after {retry_after} seconds.", file=sys.stderr)
+            else:
+                print("Rate limit exceeded (429). No retry-after header provided.", file=sys.stderr)
+        else:
+            print(f"HTTP Error {e.code}: {e.reason}", file=sys.stderr)
+        sys.exit(1)
+    except URLError as e:
+        print(f"URL Error: {e.reason}", file=sys.stderr)
+        sys.exit(1)
+    except json.JSONDecodeError as e:
+        print(f"JSON decode error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+def get_project_by_name(project_name, token):
+    """Find a project by name."""
+    sync_data = make_sync_request(['projects'], token)
+    projects = sync_data.get('projects', [])
+
+    for project in projects:
+        if project['name'].lower() == project_name.lower():
+            return project
+
+    print(f"Error: Project '{project_name}' not found", file=sys.stderr)
+    available_projects = [p['name'] for p in projects]
+    print(f"Available projects: {', '.join(available_projects)}", file=sys.stderr)
+    sys.exit(1)
+
+
+def get_all_tasks_and_comments(token):
+    """Get all tasks and comments from Todoist."""
+    print("Getting all tasks and comments...", file=sys.stderr)
+    sync_data = make_sync_request(['items', 'notes'], token)
+    all_tasks = sync_data.get('items', [])
+    all_comments = sync_data.get('notes', [])
+    return all_tasks, all_comments
+
+
+def filter_project_tasks_and_comments(project_id, all_tasks, all_comments):
+    """Filter tasks and comments for a specific project from pre-fetched data."""
+    # Filter tasks for the specific project
+    project_tasks = [task for task in all_tasks if task['project_id'] == project_id]
+
+    # Filter comments for tasks in this project
+    task_ids = {task['id'] for task in project_tasks}
+    project_comments = [comment for comment in all_comments if comment.get('item_id') in task_ids]
+
+    return project_tasks, project_comments
+
+
+def build_task_hierarchy(tasks, comments):
+    """Build a hierarchical structure of tasks with comments."""
+    task_dict = {task['id']: task for task in tasks}
+    root_tasks = []
+
+    # Add children and comments lists to each task
+    for task in tasks:
+        task['children'] = []
+        task['comments'] = []
+
+    # Associate comments with tasks
+    for comment in comments:
+        item_id = comment.get('item_id')
+        if item_id and item_id in task_dict:
+            task_dict[item_id]['comments'].append(comment)
+
+    # Build the hierarchy
+    for task in tasks:
+        if task.get('parent_id'):
+            parent = task_dict.get(task['parent_id'])
+            if parent:
+                parent['children'].append(task)
+        else:
+            root_tasks.append(task)
+
+    return root_tasks
+
+
+def format_task_content(content):
+    """Format task content, preserving raw content as in Todoist editor."""
+    return content
+
+
+def is_image_file(file_name):
+    """Check if a file is an image based on its extension."""
+    if not file_name:
+        return False
+
+    image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.svg', '.webp'}
+    extension = '.' + file_name.split('.')[-1].lower() if '.' in file_name else ''
+    return extension in image_extensions
+
+
+def download_image(url, file_name, token):
+    """Download an image file to the attachments directory."""
+    # Create attachments directory if it doesn't exist
+    attachments_dir = "attachments"
+    os.makedirs(attachments_dir, exist_ok=True)
+
+    # Create a unique filename to avoid conflicts
+    name_hash = hashlib.md5(url.encode()).hexdigest()[:8]
+    base_name, extension = os.path.splitext(file_name)
+    if not extension:
+        extension = '.png'  # Default extension if none provided
+
+    local_filename = f"{base_name}_{name_hash}{extension}"
+    local_path = os.path.join(attachments_dir, local_filename)
+
+    # Skip download if file already exists
+    if os.path.exists(local_path):
+        return local_path
+
+    try:
+        print(f"Downloading image: {url}", file=sys.stderr)
+        # Create request with authorization
+        req = Request(url)
+        req.add_header('Authorization', f'Bearer {token}')
+        req.add_header('User-Agent', 'bob.whitelock1@gmail.com')
+
+        with urlopen(req) as response:
+            with open(local_path, 'wb') as f:
+                f.write(response.read())
+
+        print(f"Downloaded image: {local_path}", file=sys.stderr)
+        return local_path
+
+    except HTTPError as e:
+        if e.code == 429:
+            retry_after = e.headers.get('Retry-After')
+            if retry_after:
+                print(f"Failed to download image {url}: Rate limit exceeded (429). Retry after {retry_after} seconds.", file=sys.stderr)
+            else:
+                print(f"Failed to download image {url}: Rate limit exceeded (429). No retry-after header provided.", file=sys.stderr)
+        else:
+            print(f"Failed to download image {url}: HTTP Error {e.code}: {e.reason}", file=sys.stderr)
+        # Return original URL if download fails
+        return url
+    except Exception as e:
+        print(f"Failed to download image {url}: {e}", file=sys.stderr)
+        # Return original URL if download fails
+        return url
+
+
+def format_attachment_url(attachment, token):
+    """Format attachment as a Todoist link or image markdown."""
+    file_name = attachment.get('file_name', 'attachment')
+    file_url = attachment.get('file_url', '')
+
+    # If we have a direct file URL, use that; otherwise construct a Todoist link
+    if file_url and file_url.startswith('http'):
+        attachment_url = file_url
+    else:
+        attachment_url = f"https://todoist.com/app/attachment/{attachment.get('resource_type', 'file')}/{file_url or file_name}"
+
+    # If it's an image, download it and format as markdown image
+    if is_image_file(file_name):
+        local_path = download_image(attachment_url, file_name, token)
+        return f"![{file_name}]({local_path})"
+    else:
+        return attachment_url
+
+
+def print_tasks_markdown(tasks, token, indent_level=0, file=None):
+    """Print tasks in markdown format with proper hierarchy."""
+    if file is None:
+        file = sys.stdout
+
+    indent = "  " * indent_level
+
+    for task in tasks:
+        # Print the main task as a bullet point
+        print(f"{indent}- {format_task_content(task['content'])}", file=file)
+
+        # If task has a description, print it as its own bullet point
+        # In v1 API, descriptions might be in a different field or format
+        description = task.get('description', '') or task.get('note', '')
+        if description:
+            print(f"{indent}  - description: {description}", file=file)
+
+        # Print comments for this task
+        if task.get('comments'):
+            for comment in task['comments']:
+                comment_content = comment.get('content', '')
+                if comment_content:
+                    print(f"{indent}  - comment: {comment_content}", file=file)
+
+                    # Handle attachments in comments as their own bullet point
+                    attachment = comment.get('file_attachment')
+                    if attachment:
+                        attachment_url = format_attachment_url(attachment, token)
+                        print(f"{indent}    - attachment: {attachment_url}", file=file)
+
+        # Recursively print children
+        if task['children']:
+            print_tasks_markdown(task['children'], token, indent_level + 1, file=file)
+
+
+def get_all_projects(token):
+    """Get all projects and build hierarchy."""
+    sync_data = make_sync_request(['projects'], token)
+    projects = sync_data.get('projects', [])
+
+    # Build project hierarchy
+    project_dict = {p['id']: p for p in projects}
+    root_projects = []
+
+    # Add children lists to each project
+    for project in projects:
+        project['children'] = []
+
+    # Build the hierarchy
+    for project in projects:
+        if project.get('parent_id'):
+            parent = project_dict.get(project['parent_id'])
+            if parent:
+                parent['children'].append(project)
+        else:
+            root_projects.append(project)
+
+    return root_projects
+
+
+def sanitize_filename(name):
+    """Sanitize a project name for use as a filename."""
+    # Replace problematic characters with safe alternatives
+    return "".join(c if c.isalnum() or c in (' ', '-', '_') else '_' for c in name).strip()
+
+
+def export_project_to_file(project, token, all_tasks, all_comments, base_path=""):
+    """Export a single project to a markdown file."""
+    # Filter tasks and comments for this project
+    tasks, comments = filter_project_tasks_and_comments(project['id'], all_tasks, all_comments)
+    root_tasks = build_task_hierarchy(tasks, comments)
+
+    # Create the file path
+    filename = f"{sanitize_filename(project['name'])}.md"
+    filepath = os.path.join(base_path, filename) if base_path else filename
+
+    # Ensure directory exists
+    if base_path:
+        os.makedirs(base_path, exist_ok=True)
+
+    # Write to file
+    with open(filepath, 'w', encoding='utf-8') as f:
+        print_tasks_markdown(root_tasks, token, file=f)
+
+    return filepath
+
+
+def flatten_projects_with_paths(projects, base_path=""):
+    """Flatten project hierarchy into list of (project, path) tuples."""
+    result = []
+    for project in projects:
+        # Add this project
+        result.append((project, base_path))
+
+        # If project has children, add them recursively in subdirectory
+        if project['children']:
+            subdir_name = sanitize_filename(project['name'])
+            subdir_path = os.path.join(base_path, subdir_name) if base_path else subdir_name
+            result.extend(flatten_projects_with_paths(project['children'], subdir_path))
+
+    return result
+
+
+def export_all_projects(root_projects, token, max_workers=4):
+    """Export all projects in parallel to directory hierarchy."""
+    # Get all tasks and comments once upfront
+    all_tasks, all_comments = get_all_tasks_and_comments(token)
+
+    # Flatten the hierarchy to get all projects with their paths
+    projects_with_paths = flatten_projects_with_paths(root_projects)
+    total_projects = len(projects_with_paths)
+
+    # Export projects in parallel (for image downloads and file writing)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all export tasks with project info for tracking
+        future_to_project = {}
+        for project, path in projects_with_paths:
+            future = executor.submit(export_project_to_file, project, token, all_tasks, all_comments, path)
+            future_to_project[future] = project
+
+        # Wait for all exports to complete and track progress
+        completed = 0
+        for future in as_completed(future_to_project):
+            completed += 1
+            project = future_to_project[future]
+
+            try:
+                filepath = future.result()  # This will raise any exceptions that occurred
+                filename = os.path.basename(filepath)
+                print(f"Exported {completed}/{total_projects}: {filename}", file=sys.stderr)
+            except Exception as e:
+                print(f"Error exporting project {project['name']}: {e}", file=sys.stderr)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Export Todoist project tasks to markdown format"
+    )
+    parser.add_argument(
+        "project_name",
+        nargs='?',
+        help="Name of the Todoist project to export"
+    )
+    parser.add_argument(
+        "--all", "-a",
+        action="store_true",
+        help="Export all projects to a directory hierarchy"
+    )
+
+    args = parser.parse_args()
+
+    # Validate arguments
+    if not args.project_name and not args.all:
+        parser.error("Either project_name or --all/-a must be specified")
+    if args.project_name and args.all:
+        parser.error("Cannot specify both project_name and --all/-a")
+
+    # Get API token
+    token = get_todoist_api_token()
+
+    if args.all:
+        # Export all projects to directory hierarchy
+        root_projects = get_all_projects(token)
+        export_all_projects(root_projects, token)
+    else:
+        # Export single project to stdout
+        project = get_project_by_name(args.project_name, token)
+        all_tasks, all_comments = get_all_tasks_and_comments(token)
+        tasks, comments = filter_project_tasks_and_comments(project['id'], all_tasks, all_comments)
+        root_tasks = build_task_hierarchy(tasks, comments)
+        print_tasks_markdown(root_tasks, token)
+
+
+if __name__ == "__main__":
+    main()
