@@ -33,7 +33,7 @@
 	cloc = cloc
 	cloc-children = cloc-children
 	own-files = own-files
-	ctags = !.git/hooks/ctags
+	ctags = !~/src/bobwhitelock/dotfiles/git/hooks/ctags
 	review = log -p
 	delete-branch = delete-branch
 	; Adapted from https://stackoverflow.com/a/21857717.
