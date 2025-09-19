@@ -9,6 +9,7 @@ from urllib.parse import urlencode
 from urllib.error import URLError, HTTPError
 import hashlib
 
+# TODO BW 2025-08-30: Update to allow passing a single task as well.
 
 def get_todoist_api_token():
     """Get the Todoist API token from environment variable."""
