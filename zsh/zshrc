@@ -154,6 +154,9 @@ export PATH="$HOME/.poetry/bin:$PATH"
 
 start_or_reuse_ssh_agent
 
+# Enable Task completions.
+eval "$(task --completion zsh)"
+
 # Enable Atuin.
 # Completions were added with:
 # atuin gen-completions --shell zsh > /home/bob/src/bobwhitelock/dotfiles/zsh/completions/_atuin
