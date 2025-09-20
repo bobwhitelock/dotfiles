@@ -3,19 +3,17 @@
 import os
 import sys
 import json
-import argparse
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 from urllib.error import URLError, HTTPError
 import hashlib
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# TODO BW 2025-08-30: Update to allow passing a single task as well.
 # TODO BW 2025-09-19: Also include dates, deadlines, sections, tags etc for
 # each task
-# TODO BW 2025-09-19: When run with `--all`, it would be good to be able to
-# replace the existing hierarchy - rather than intermingle stuff with it -
-# maybe just have this remove and then create a whole fresh directory?
+# TODO BW 2025-09-19: It would be good to be able to replace the existing
+# hierarchy - rather than intermingle stuff with it - maybe just have this
+# remove and then create a whole fresh directory?
 
 def get_todoist_api_token():
     """Get the Todoist API token from environment variable."""
@@ -59,20 +57,6 @@ def make_sync_request(resource_types, token):
         print(f"JSON decode error: {e}", file=sys.stderr)
         sys.exit(1)
 
-
-def get_project_by_name(project_name, token):
-    """Find a project by name."""
-    sync_data = make_sync_request(['projects'], token)
-    projects = sync_data.get('projects', [])
-
-    for project in projects:
-        if project['name'].lower() == project_name.lower():
-            return project
-
-    print(f"Error: Project '{project_name}' not found", file=sys.stderr)
-    available_projects = [p['name'] for p in projects]
-    print(f"Available projects: {', '.join(available_projects)}", file=sys.stderr)
-    sys.exit(1)
 
 
 def get_all_tasks_and_comments(token):
@@ -343,42 +327,12 @@ def export_all_projects(root_projects, token, max_workers=4):
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Export Todoist project tasks to markdown format"
-    )
-    parser.add_argument(
-        "project_name",
-        nargs='?',
-        help="Name of the Todoist project to export"
-    )
-    parser.add_argument(
-        "--all", "-a",
-        action="store_true",
-        help="Export all projects to a directory hierarchy"
-    )
-
-    args = parser.parse_args()
-
-    # Validate arguments
-    if not args.project_name and not args.all:
-        parser.error("Either project_name or --all/-a must be specified")
-    if args.project_name and args.all:
-        parser.error("Cannot specify both project_name and --all/-a")
-
     # Get API token
     token = get_todoist_api_token()
 
-    if args.all:
-        # Export all projects to directory hierarchy
-        root_projects = get_all_projects(token)
-        export_all_projects(root_projects, token)
-    else:
-        # Export single project to stdout
-        project = get_project_by_name(args.project_name, token)
-        all_tasks, all_comments = get_all_tasks_and_comments(token)
-        tasks, comments = filter_project_tasks_and_comments(project['id'], all_tasks, all_comments)
-        root_tasks = build_task_hierarchy(tasks, comments)
-        print_tasks_markdown(root_tasks, token)
+    # Export all projects to directory hierarchy
+    root_projects = get_all_projects(token)
+    export_all_projects(root_projects, token)
 
 
 if __name__ == "__main__":
