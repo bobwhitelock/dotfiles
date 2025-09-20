@@ -9,11 +9,12 @@ from urllib.error import URLError, HTTPError
 import hashlib
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# TODO BW 2025-09-19: Also include dates, deadlines, sections, tags etc for
-# each task
 # TODO BW 2025-09-19: It would be good to be able to replace the existing
 # hierarchy - rather than intermingle stuff with it - maybe just have this
 # remove and then create a whole fresh directory?
+# TODO BW 2025-09-20: Comments (and maybe descriptions?) are handled badly,
+# multiline content will start on one line but then appear as if it is a new
+# task/section on subsequent lines
 
 def get_todoist_api_token():
     """Get the Todoist API token from environment variable."""
@@ -60,16 +61,18 @@ def make_sync_request(resource_types, token):
 
 
 def get_all_tasks_and_comments(token):
-    """Get all tasks and comments from Todoist."""
-    print("Getting all tasks and comments...", file=sys.stderr)
-    sync_data = make_sync_request(['items', 'notes'], token)
+    """Get all tasks, comments, labels, and sections from Todoist."""
+    print("Getting all tasks, comments, labels, and sections...", file=sys.stderr)
+    sync_data = make_sync_request(['items', 'notes', 'labels', 'sections'], token)
     all_tasks = sync_data.get('items', [])
     all_comments = sync_data.get('notes', [])
-    return all_tasks, all_comments
+    all_labels = sync_data.get('labels', [])
+    all_sections = sync_data.get('sections', [])
+    return all_tasks, all_comments, all_labels, all_sections
 
 
-def filter_project_tasks_and_comments(project_id, all_tasks, all_comments):
-    """Filter tasks and comments for a specific project from pre-fetched data."""
+def filter_project_tasks_and_comments(project_id, all_tasks, all_comments, all_labels, all_sections):
+    """Filter tasks, comments, labels, and sections for a specific project from pre-fetched data."""
     # Filter tasks for the specific project
     project_tasks = [task for task in all_tasks if task['project_id'] == project_id]
 
@@ -77,13 +80,16 @@ def filter_project_tasks_and_comments(project_id, all_tasks, all_comments):
     task_ids = {task['id'] for task in project_tasks}
     project_comments = [comment for comment in all_comments if comment.get('item_id') in task_ids]
 
-    return project_tasks, project_comments
+    # Filter sections for this project
+    project_sections = [section for section in all_sections if section['project_id'] == project_id]
+
+    return project_tasks, project_comments, all_labels, project_sections
 
 
-def build_task_hierarchy(tasks, comments):
-    """Build a hierarchical structure of tasks with comments."""
+def build_task_hierarchy(tasks, comments, sections):
+    """Build a hierarchical structure of tasks with comments, organized by sections."""
     task_dict = {task['id']: task for task in tasks}
-    root_tasks = []
+    section_dict = {section['id']: section for section in sections}
 
     # Add children and comments lists to each task
     for task in tasks:
@@ -97,6 +103,7 @@ def build_task_hierarchy(tasks, comments):
             task_dict[item_id]['comments'].append(comment)
 
     # Build the hierarchy
+    root_tasks = []
     for task in tasks:
         if task.get('parent_id'):
             parent = task_dict.get(task['parent_id'])
@@ -105,7 +112,91 @@ def build_task_hierarchy(tasks, comments):
         else:
             root_tasks.append(task)
 
-    return root_tasks
+    # Group root tasks by section
+    sections_with_tasks = {}
+    tasks_without_section = []
+
+    for task in root_tasks:
+        section_id = task.get('section_id')
+        if section_id and section_id in section_dict:
+            section_name = section_dict[section_id]['name']
+            if section_name not in sections_with_tasks:
+                sections_with_tasks[section_name] = []
+            sections_with_tasks[section_name].append(task)
+        else:
+            tasks_without_section.append(task)
+
+    return sections_with_tasks, tasks_without_section
+
+
+def format_priority(priority):
+    """Format task priority as !!1 through !!4."""
+    if priority and priority > 1:
+        return f"!!{priority}"
+    return ""
+
+
+def format_labels(label_names):
+    """Format task labels as @label1 @label2."""
+    if not label_names:
+        return ""
+    # Labels are already strings, just add @ prefix
+    labels = [f"@{label}" for label in label_names]
+    return " ".join(labels)
+
+
+def format_date(date_str):
+    """Format date from ISO format to yyyy-mm-dd."""
+    if not date_str:
+        return ""
+    # Handle both date and datetime formats
+    if 'T' in date_str:
+        return date_str.split('T')[0]
+    return date_str
+
+
+def format_task_metadata(task, labels_dict):
+    """Format all task metadata in the specified order."""
+    parts = []
+
+    # Priority first
+    priority = format_priority(task.get('priority'))
+    if priority:
+        parts.append(priority)
+
+    # Task content
+    parts.append(task['content'])
+
+    # Labels
+    labels = format_labels(task.get('labels', []))
+    if labels:
+        parts.append(labels)
+
+    # Created date
+    created = task.get('added_at')
+    if created:
+        parts.append(f"created:{format_date(created)}")
+
+    # Due date
+    due_date = task.get('due')
+    if due_date and due_date.get('date'):
+        parts.append(f"due:{format_date(due_date['date'])}")
+
+    # Deadline
+    deadline = task.get('deadline')
+    if deadline and deadline.get('date'):
+        parts.append(f"deadline:{format_date(deadline['date'])}")
+
+    # Recurrence
+    if due_date and due_date.get('string') and 'every' in due_date.get('string', '').lower():
+        parts.append(f"recurs:'{due_date['string']}'")
+
+    # Todoist URL
+    task_id = task.get('id')
+    if task_id:
+        parts.append(f"| [Todoist](https://app.todoist.com/app/task/{task_id})")
+
+    return " ".join(parts)
 
 
 def format_task_content(content):
@@ -200,8 +291,9 @@ def print_tasks_markdown(tasks, token, indent_level=0, file=None):
     indent = "  " * indent_level
 
     for task in tasks:
-        # Print the main task as a bullet point
-        print(f"{indent}- {format_task_content(task['content'])}", file=file)
+        # Print the main task with all metadata
+        task_line = format_task_metadata(task, {})  # Pass empty dict since we don't use it anymore
+        print(f"{indent}- {task_line}", file=file)
 
         # If task has a description, print it as its own bullet point
         # In v1 API, descriptions might be in a different field or format
@@ -258,11 +350,17 @@ def sanitize_filename(name):
     return "".join(c if c.isalnum() or c in (' ', '-', '_') else '_' for c in name).strip()
 
 
-def export_project_to_file(project, token, all_tasks, all_comments, base_path=""):
+def export_project_to_file(project, token, all_tasks, all_comments, all_labels, all_sections, base_path=""):
     """Export a single project to a markdown file."""
-    # Filter tasks and comments for this project
-    tasks, comments = filter_project_tasks_and_comments(project['id'], all_tasks, all_comments)
-    root_tasks = build_task_hierarchy(tasks, comments)
+    # Filter tasks, comments, labels, and sections for this project
+    tasks, comments, labels, sections = filter_project_tasks_and_comments(
+        project['id'], all_tasks, all_comments, all_labels, all_sections)
+
+    # Build label lookup dictionary
+    labels_dict = {label['id']: label for label in labels}
+
+    # Build task hierarchy organized by sections
+    sections_with_tasks, tasks_without_section = build_task_hierarchy(tasks, comments, sections)
 
     # Create the file path
     filename = f"{sanitize_filename(project['name'])}.md"
@@ -274,7 +372,15 @@ def export_project_to_file(project, token, all_tasks, all_comments, base_path=""
 
     # Write to file
     with open(filepath, 'w', encoding='utf-8') as f:
-        print_tasks_markdown(root_tasks, token, file=f)
+        # Print tasks without sections first
+        if tasks_without_section:
+            print_tasks_markdown(tasks_without_section, token, file=f)
+
+        # Print sections with their tasks
+        for section_name, section_tasks in sections_with_tasks.items():
+            if section_tasks:  # Only print section if it has tasks
+                print(f"\n# {section_name}\n", file=f)
+                print_tasks_markdown(section_tasks, token, file=f)
 
     return filepath
 
@@ -297,8 +403,8 @@ def flatten_projects_with_paths(projects, base_path=""):
 
 def export_all_projects(root_projects, token, max_workers=4):
     """Export all projects in parallel to directory hierarchy."""
-    # Get all tasks and comments once upfront
-    all_tasks, all_comments = get_all_tasks_and_comments(token)
+    # Get all tasks, comments, labels, and sections once upfront
+    all_tasks, all_comments, all_labels, all_sections = get_all_tasks_and_comments(token)
 
     # Flatten the hierarchy to get all projects with their paths
     projects_with_paths = flatten_projects_with_paths(root_projects)
@@ -309,7 +415,7 @@ def export_all_projects(root_projects, token, max_workers=4):
         # Submit all export tasks with project info for tracking
         future_to_project = {}
         for project, path in projects_with_paths:
-            future = executor.submit(export_project_to_file, project, token, all_tasks, all_comments, path)
+            future = executor.submit(export_project_to_file, project, token, all_tasks, all_comments, all_labels, all_sections, path)
             future_to_project[future] = project
 
         # Wait for all exports to complete and track progress
