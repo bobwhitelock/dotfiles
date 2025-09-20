@@ -355,6 +355,10 @@ def export_project_to_file(project, token, all_tasks, all_comments, all_labels, 
     tasks, comments, labels, sections = filter_project_tasks_and_comments(
         project['id'], all_tasks, all_comments, all_labels, all_sections)
 
+    # Skip creating markdown file if project has no tasks but has child projects
+    if not tasks and project.get('children'):
+        return None
+
     # Build label lookup dictionary
     labels_dict = {label['id']: label for label in labels}
 
@@ -425,8 +429,11 @@ def export_all_projects(root_projects, token, max_workers=4):
 
             try:
                 filepath = future.result()  # This will raise any exceptions that occurred
-                filename = os.path.basename(filepath)
-                print(f"Exported {completed}/{total_projects}: {filename}", file=sys.stderr)
+                if filepath:  # Only report if a file was actually created
+                    filename = os.path.basename(filepath)
+                    print(f"Exported {completed}/{total_projects}: {filename}", file=sys.stderr)
+                else:
+                    print(f"Skipped {completed}/{total_projects}: {project['name']} (no tasks, has child projects)", file=sys.stderr)
             except Exception as e:
                 print(f"Error exporting project {project['name']}: {e}", file=sys.stderr)
 
