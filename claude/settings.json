@@ -94,16 +94,6 @@
           }
         ]
       }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/src/bobwhitelock/dotfiles/libexec/claude_alert.py"
-          }
-        ]
-      }
     ]
   }
 }
