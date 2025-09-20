@@ -9,12 +9,11 @@ from urllib.error import URLError, HTTPError
 import hashlib
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# TODO BW 2025-09-19: It would be good to be able to replace the existing
-# hierarchy - rather than intermingle stuff with it - maybe just have this
-# remove and then create a whole fresh directory?
 # TODO BW 2025-09-20: Comments (and maybe descriptions?) are handled badly,
 # multiline content will start on one line but then appear as if it is a new
 # task/section on subsequent lines
+# TODO BW 2025-09-20: If an attachment fails to attach, this script ends up
+# downloading the Todoist login page for that attachment instead.
 
 def get_todoist_api_token():
     """Get the Todoist API token from environment variable."""
