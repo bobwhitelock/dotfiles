@@ -16,12 +16,18 @@ def main():
     alert_prefix = f"Claude in {cwd}"
 
     def pingme(message: str):
+        # Send push notification
         subprocess.run(
             [
                 "pingme",
                 f"{alert_prefix}: {message}\n\n(debug: {input_data})",
             ]
         )
+
+        # Sound terminal bell (which will also make Tmux highlight the window)
+        with open("/dev/tty", "w") as tty:
+            tty.write("\a")
+            tty.flush()
 
     if event == "notification":
         pingme(input_data["message"])
