@@ -43,7 +43,7 @@
 	just-index = stash save --keep-index
 	wip = wip
 	wipall = "!git add .; git wip"
-	about = git-about
+	about = about
 	discard-unresolved = discard-unresolved
 	diff-since=diff-since
 	changes-since=changes-since

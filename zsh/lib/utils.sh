@@ -91,3 +91,108 @@ tar_dir() {
 pshow() {
     pgrep "$@" | xargs --no-run-if-empty ps -l
 }
+
+# XXX BW 2025-09-22: Maybe make output more consistent in each case
+# XXX BW 2025-09-22: Refactor/test this to make it more understandable
+# XXX BW 2025-09-22: Why do full paths need to be used in here otherwise
+# commands are not found?
+# XXX BW 2025-09-22: Could use `batcat --file-name` to show the alias details
+# instead of `STDIN`?
+# XXX BW 2025-09-22: Could this go to a separate script? However it needs
+# access to shell environment for various finding commands to find the right
+# things.
+def() {
+    local name="$1"
+
+    # Handle `def git alias-name` case
+    if [[ "$name" == "git" && $# -gt 1 ]]; then
+        local git_alias="$2"
+        if alias_def=$(git config --get "alias.$git_alias" 2>/dev/null); then
+            # If alias is just a single command name, recursively show the git-command script
+            # Example: $ def git cloc
+            #   git-cloc is /home/bob/bin/git-cloc
+            #   /home/bob/bin/git-cloc: symbolic link to /home/bob/src/bobwhitelock/dotfiles/bin/git-cloc
+            #   #!/usr/bin/env bash
+            #   [... script content with syntax highlighting ...]
+            if [[ "$alias_def" =~ ^[a-zA-Z0-9_-]+$ ]]; then
+                def "git-$alias_def"
+            # Complex git alias with multiple commands or arguments
+            # Example: $ def git amend
+            #   commit --verbose --amend -C HEAD
+            else
+                echo "$alias_def"
+            fi
+            return
+        # Built-in git command
+        # Example: $ def git branch
+        #   branch is a git command
+        elif git help -a | grep -q "^   $git_alias "; then
+            echo "$git_alias is a git command"
+        # Not found as either alias or command
+        else
+            echo "No git alias or command found: $git_alias"
+        fi
+    else
+        local type_output=$(type "$name" 2>/dev/null)
+        echo "$type_output"
+
+        # Shell function
+        # Example: $ def echoerr
+        #   echoerr is a shell function from zsh/lib/utils.sh
+        #   echoerr () {
+        #   	echo "$@" >&2
+        #   }
+        if [[ "$type_output" =~ "is a shell function" ]]; then
+            which "$name" 2>/dev/null | /usr/bin/batcat --language bash || true
+        # Shell alias case is handled by type output alone
+        # Example: $ def cbcopy
+        #   cbcopy is an alias for xclip -selection clipboard
+        # Skip additional processing for aliases since type already shows the definition
+        elif [[ ! "$type_output" =~ "is an alias" ]]; then
+            local path=$(which "$name" 2>/dev/null)
+            if [[ -n "$path" && -f "$path" ]]; then
+                local file_type=$(/usr/bin/file "$path" 2>/dev/null)
+                # Script or text file - show content with syntax highlighting
+                if [[ "$file_type" =~ "script" || "$file_type" =~ "text" ]]; then
+                    /usr/bin/batcat --color always "$path" | /usr/bin/less -R
+                # Symbolic link - show link info then target content
+                # Example: $ def gs
+                #   gs is /home/bob/bin/gs
+                #   /home/bob/bin/gs: symbolic link to /home/bob/src/bobwhitelock/dotfiles/bin/gs
+                #   #!/usr/bin/env bash
+                #   [... script content with syntax highlighting ...]
+                elif [[ "$file_type" =~ "symbolic link" ]]; then
+                    echo "$file_type"
+                    local target=$(/usr/bin/readlink -f "$path")
+                    if [[ -f "$target" ]]; then
+                        local target_type=$(/usr/bin/file "$target" 2>/dev/null)
+                        # Target is a script - show its content
+                        # Example: $ def gs
+                        #   gs is /home/bob/bin/gs
+                        #   /home/bob/bin/gs: symbolic link to /home/bob/src/bobwhitelock/dotfiles/bin/gs
+                        #   #!/usr/bin/env bash
+                        #   [... script content with syntax highlighting ...]
+                        # XXX BW 2025-09-22: This is the same as above - refactor
+                        if [[ "$target_type" =~ "script" || "$target_type" =~ "text" ]]; then
+                            /usr/bin/batcat --color always "$target" | /usr/bin/less -R
+                        # Target is a binary - show file type info
+                        # Example: $ def python3
+                        #   python3 is /usr/bin/python3
+                        #   /usr/bin/python3: symbolic link to python3.12
+                        #   /usr/bin/python3.12: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked
+                        # XXX BW 2025-09-22: This is the same as below - refactor
+                        else
+                            echo "$target_type"
+                        fi
+                    fi
+                else
+                    # binary executable - show file type and architecture info
+                    # Example: $ def bash
+                    #   bash is /usr/bin/bash
+                    #   /usr/bin/bash: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2f77b36371c214e11670c7d9d92727e9a49f626b, for GNU/Linux 3.2.0, stripped
+                    echo "$file_type"
+                fi
+            fi
+        fi
+    fi
+}
