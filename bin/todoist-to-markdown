@@ -14,7 +14,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # task/section on subsequent lines
 # TODO BW 2025-09-20: If an attachment fails to attach, this script ends up
 # downloading the Todoist login page for that attachment instead.
-# TODO BW 2025-09-27: Have actual emojis included in project names.
 
 def get_todoist_api_token():
     """Get the Todoist API token from environment variable."""
@@ -354,8 +353,9 @@ def get_all_projects(token):
 
 def sanitize_filename(name):
     """Sanitize a project name for use as a filename."""
-    # Replace problematic characters with safe alternatives
-    return "".join(c if c.isalnum() or c in (' ', '-', '_') else '_' for c in name).strip()
+    # Replace problematic filesystem characters with safe alternatives, but preserve emojis and Unicode
+    problematic_chars = '<>:"/\\|?*'
+    return "".join('_' if c in problematic_chars else c for c in name).strip()
 
 
 def export_project_to_file(project, token, all_tasks, all_comments, all_labels, all_sections, base_path="", output_root=""):
