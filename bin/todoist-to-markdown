@@ -14,6 +14,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # task/section on subsequent lines
 # TODO BW 2025-09-20: If an attachment fails to attach, this script ends up
 # downloading the Todoist login page for that attachment instead.
+# TODO BW 2025-09-27: Have actual emojis included in project names.
 
 def get_todoist_api_token():
     """Get the Todoist API token from environment variable."""
@@ -213,10 +214,10 @@ def is_image_file(file_name):
     return extension in image_extensions
 
 
-def download_image(url, file_name, token):
-    """Download an image file to the attachments directory."""
-    # Create attachments directory if it doesn't exist
-    attachments_dir = "attachments"
+def download_image(url, file_name, token, output_root="", current_dir=""):
+    """Download an image file to the attachments directory and return relative path."""
+    # Create attachments directory in the output root
+    attachments_dir = os.path.join(output_root, "attachments") if output_root else "attachments"
     os.makedirs(attachments_dir, exist_ok=True)
 
     # Create a unique filename to avoid conflicts
@@ -230,6 +231,10 @@ def download_image(url, file_name, token):
 
     # Skip download if file already exists
     if os.path.exists(local_path):
+        # Return relative path from current directory to the existing image
+        if current_dir and output_root:
+            relative_path = os.path.relpath(local_path, current_dir)
+            return relative_path
         return local_path
 
     try:
@@ -244,6 +249,10 @@ def download_image(url, file_name, token):
                 f.write(response.read())
 
         print(f"Downloaded image: {local_path}", file=sys.stderr)
+        # Return relative path from current directory to the downloaded image
+        if current_dir and output_root:
+            relative_path = os.path.relpath(local_path, current_dir)
+            return relative_path
         return local_path
 
     except HTTPError as e:
@@ -263,7 +272,7 @@ def download_image(url, file_name, token):
         return url
 
 
-def format_attachment_url(attachment, token):
+def format_attachment_url(attachment, token, output_root="", current_dir=""):
     """Format attachment as a Todoist link or image markdown."""
     file_name = attachment.get('file_name', 'attachment')
     file_url = attachment.get('file_url', '')
@@ -276,13 +285,13 @@ def format_attachment_url(attachment, token):
 
     # If it's an image, download it and format as markdown image
     if is_image_file(file_name):
-        local_path = download_image(attachment_url, file_name, token)
+        local_path = download_image(attachment_url, file_name, token, output_root, current_dir)
         return f"![{file_name}]({local_path})"
     else:
         return attachment_url
 
 
-def print_tasks_markdown(tasks, token, indent_level=0, file=None):
+def print_tasks_markdown(tasks, token, indent_level=0, file=None, output_root="", current_dir=""):
     """Print tasks in markdown format with proper hierarchy."""
     if file is None:
         file = sys.stdout
@@ -310,12 +319,12 @@ def print_tasks_markdown(tasks, token, indent_level=0, file=None):
                     # Handle attachments in comments as their own bullet point
                     attachment = comment.get('file_attachment')
                     if attachment:
-                        attachment_url = format_attachment_url(attachment, token)
+                        attachment_url = format_attachment_url(attachment, token, output_root, current_dir)
                         print(f"{indent}    - attachment: {attachment_url}", file=file)
 
         # Recursively print children
         if task['children']:
-            print_tasks_markdown(task['children'], token, indent_level + 1, file=file)
+            print_tasks_markdown(task['children'], token, indent_level + 1, file=file, output_root=output_root, current_dir=current_dir)
 
 
 def get_all_projects(token):
@@ -349,7 +358,7 @@ def sanitize_filename(name):
     return "".join(c if c.isalnum() or c in (' ', '-', '_') else '_' for c in name).strip()
 
 
-def export_project_to_file(project, token, all_tasks, all_comments, all_labels, all_sections, base_path=""):
+def export_project_to_file(project, token, all_tasks, all_comments, all_labels, all_sections, base_path="", output_root=""):
     """Export a single project to a markdown file."""
     # Filter tasks, comments, labels, and sections for this project
     tasks, comments, labels, sections = filter_project_tasks_and_comments(
@@ -377,13 +386,13 @@ def export_project_to_file(project, token, all_tasks, all_comments, all_labels, 
     with open(filepath, 'w', encoding='utf-8') as f:
         # Print tasks without sections first
         if tasks_without_section:
-            print_tasks_markdown(tasks_without_section, token, file=f)
+            print_tasks_markdown(tasks_without_section, token, file=f, output_root=output_root, current_dir=base_path)
 
         # Print sections with their tasks
         for section_name, section_tasks in sections_with_tasks.items():
             if section_tasks:  # Only print section if it has tasks
                 print(f"\n# {section_name}\n", file=f)
-                print_tasks_markdown(section_tasks, token, file=f)
+                print_tasks_markdown(section_tasks, token, file=f, output_root=output_root, current_dir=base_path)
 
     return filepath
 
@@ -404,13 +413,13 @@ def flatten_projects_with_paths(projects, base_path=""):
     return result
 
 
-def export_all_projects(root_projects, token, max_workers=4):
+def export_all_projects(root_projects, token, base_dir="", max_workers=4):
     """Export all projects in parallel to directory hierarchy."""
     # Get all tasks, comments, labels, and sections once upfront
     all_tasks, all_comments, all_labels, all_sections = get_all_tasks_and_comments(token)
 
     # Flatten the hierarchy to get all projects with their paths
-    projects_with_paths = flatten_projects_with_paths(root_projects)
+    projects_with_paths = flatten_projects_with_paths(root_projects, base_dir)
     total_projects = len(projects_with_paths)
 
     # Export projects in parallel (for image downloads and file writing)
@@ -418,7 +427,7 @@ def export_all_projects(root_projects, token, max_workers=4):
         # Submit all export tasks with project info for tracking
         future_to_project = {}
         for project, path in projects_with_paths:
-            future = executor.submit(export_project_to_file, project, token, all_tasks, all_comments, all_labels, all_sections, path)
+            future = executor.submit(export_project_to_file, project, token, all_tasks, all_comments, all_labels, all_sections, path, base_dir)
             future_to_project[future] = project
 
         # Wait for all exports to complete and track progress
@@ -439,12 +448,20 @@ def export_all_projects(root_projects, token, max_workers=4):
 
 
 def main():
+    # Check for directory argument
+    if len(sys.argv) != 2:
+        print("Usage: todoist-to-markdown <directory>", file=sys.stderr)
+        print("Exports all Todoist projects to markdown files under the specified directory", file=sys.stderr)
+        sys.exit(1)
+
+    output_dir = sys.argv[1]
+
     # Get API token
     token = get_todoist_api_token()
 
-    # Export all projects to directory hierarchy
+    # Export all projects to directory hierarchy under the specified directory
     root_projects = get_all_projects(token)
-    export_all_projects(root_projects, token)
+    export_all_projects(root_projects, token, output_dir)
 
 
 if __name__ == "__main__":
