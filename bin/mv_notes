@@ -1,0 +1,91 @@
+#!/bin/bash
+set -Eeuo pipefail
+IFS=$'\n\t'
+
+usage() {
+    echo "Usage: $0 <source> <destination>"
+    echo "Move a file or directory and update wikilink references"
+    exit 1
+}
+
+# Determine the final path after mv operation
+get_final_path() {
+    local source="$1"
+    local dest="$2"
+
+    # Remove trailing slash from destination
+    dest="${dest%/}"
+
+    if [ -d "$dest" ]; then
+        # If destination is a directory, source will be moved into it
+        echo "$dest/$(basename "$source")"
+    else
+        # Otherwise, source will be renamed to destination
+        echo "$dest"
+    fi
+}
+
+# Update wikilinks in all markdown files
+update_wikilinks() {
+    local old_path="$1"
+    local new_path="$2"
+
+    # Remove leading ./ if present
+    old_path="${old_path#./}"
+    new_path="${new_path#./}"
+
+    echo "Updating wikilinks from '$old_path' to '$new_path'"
+
+    # Find all .md files and update wikilinks
+    find . -name "*.md" -type f | while read -r file; do
+        # Skip if file doesn't contain any wikilinks to avoid unnecessary processing
+        if ! grep -q "\[\[.*$old_path" "$file"; then
+            continue
+        fi
+
+        # Create a temporary file for the updates
+        local temp_file=$(mktemp)
+
+        # Update wikilinks that reference the old path
+        # This handles cases like:
+        # [[old_path]] -> [[new_path]]
+        # [[old_path/subfile]] -> [[new_path/subfile]]
+        sed "s|\[\[\($old_path\)\(/[^]]*\)\?\]\]|[[$new_path\2]]|g" "$file" > "$temp_file"
+
+        # Only replace the file if changes were made
+        if ! cmp -s "$file" "$temp_file"; then
+            mv "$temp_file" "$file"
+            echo "Updated wikilinks in $file"
+        else
+            rm "$temp_file"
+        fi
+    done
+}
+
+main() {
+    if [ $# -ne 2 ]; then
+        usage
+    fi
+
+    local source="$1"
+    local dest="$2"
+
+    if [ ! -e "$source" ]; then
+        echo "Error: Source '$source' does not exist"
+        exit 1
+    fi
+
+    # Determine what the final path will be
+    local final_path
+    final_path=$(get_final_path "$source" "$dest")
+
+    # Update wikilinks before moving
+    update_wikilinks "$source" "$final_path"
+
+    # Perform the actual move
+    mv "$source" "$dest"
+
+    echo "Moved '$source' to '$dest'"
+}
+
+main "$@"
