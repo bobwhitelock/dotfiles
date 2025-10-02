@@ -80,9 +80,6 @@ export OPENAI_API_BASE='https://api.githubcopilot.com'
 # https://aider.chat/docs/llms/github.html#where-do-i-get-the-token.
 export OPENAI_API_KEY="$(jq -r 'to_entries[0].value.oauth_token' ~/.config/github-copilot/apps.json)"
 
-export CLAUDE_CODE_MAX_OUTPUT_TOKENS=8192
+# export CLAUDE_CODE_MAX_OUTPUT_TOKENS=8192
 export CLAUDE_CODE_MAX_OUTPUT_TOKENS=50000
-# XXX BW 2025-09-18: correct? why are these inconsistently
-# named? above maybe does nothing as nothing output by
-# claude
 export MAX_THINKING_TOKENS=1024
