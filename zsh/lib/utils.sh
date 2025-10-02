@@ -6,6 +6,7 @@ alias df='df --human-readable'
 alias diff='diff --color=always'
 alias m='make'
 alias k='kubectl'
+alias t='task'
 alias open='xdg-open'
 alias pyserver="python -m http.server"
 alias rerun="rerun --pattern '**/*' --no-notify"
