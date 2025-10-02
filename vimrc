@@ -233,15 +233,20 @@ Plug 'github/copilot.vim'
 " and use `nvm` to find a recent Node
 let g:copilot_node_command = system('export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm which 22')->trim()
 
-function! s:EnableCopilot()
-  execute 'Copilot enable'
-endfunction
-command! EnableCopilot call s:EnableCopilot()
+autocmd VimEnter * Copilot enable
 
-function! s:DisableCopilot()
-  execute 'Copilot disable'
+function! s:ToggleCopilot()
+  if get(g:, 'copilot_enabled', 1)
+    execute 'Copilot disable'
+    let g:copilot_enabled = 0
+    echo "Copilot disabled"
+  else
+    execute 'Copilot enable'
+    let g:copilot_enabled = 1
+    echo "Copilot enabled"
+  endif
 endfunction
-command! DisableCopilot call s:DisableCopilot()
+nnoremap coC :call <SID>ToggleCopilot()<CR>
 
 " Language-specific.
 Plug 'markcornick/vim-bats'
