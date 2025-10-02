@@ -1112,6 +1112,7 @@ nnoremap <leader>ca :let @+ = expand("%:p")<CR>:echo "copied absolute filepath!"
 nnoremap <leader>cp :let @+ = expand("%")<CR>:echo "copied relative filepath!"<CR>
 nnoremap <leader>cf :let @+ = expand("%:t")<CR>:echo "copied filename!"<CR>
 nnoremap <leader>cn :let @+ = expand("%:t:r")<CR>:echo "copied file basename!"<CR>
+nnoremap <leader>cl :let @+ = '[[' . substitute(expand("%:p"), '^/home/bob/src/bobwhitelock/notes/space/', '', '') . ']]'<CR>:echo "copied wikilink!"<CR>
 
 " Copy SHA or path to current object using Fugitive.
 nmap <leader>ch "+y<C-g>:echo "copied SHA/current object path!"<CR>
