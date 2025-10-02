@@ -4,6 +4,15 @@
 #
 # Run `gh_copilot_available_models` to see our currently available models.
 #
+# Can also run
+# ```
+# yaml_to_json /home/bob/src/Aider-AI/aider/aider/website/_data/polyglot_leaderboard.yml | jq '[.[] | select(.seconds_per_case < 30 and (.command | contains("openrouter") | not))] | sort_by(.pass_rate_2)'
+# ```
+# to see models I might be able to use, that are not too slow, by speed at
+# Aider benchmark (but also take with a pinch of salt - a lot of people think
+# Sonnet 4 is better than 3.7, but it's not better on the leaderboard)
+#
+# XXX BW 2025-10-02: All this comment is outdated - update
 # Current selected default model is GPT-4.1 from Azure. Other notable options
 # for reference:
 # - Listed Gemini model is much slower to respond but performs better on
@@ -23,11 +32,18 @@
 #   openai/gpt-4.1 (run 2)                        5.457
 #   openai/gemini-2.5-pro-preview-05-06 (run 1)   37.884
 
-model: 'openai/gpt-4.1'
+# XXX BW 2025-10-02: Below is only relevant for models from Azure?
 # Need to explicitly specify `weak-model` to the same, at least in this case,
 # otherwise it tries to use a model I don't have deployed.
-weak-model: 'openai/gpt-4.1'
+
+# model: 'openai/claude-sonnet-4'
+# model: 'openai/claude-3.7-sonnet'
+# model: 'openai/gpt-4.1'
+# model: 'azure/gpt-5'
+model: 'azure/o3'
 # model: 'openai/gemini-2.5-pro-preview-05-06'
+
+# weak-model: 'openai/gpt-4.1'
 # weak-model: 'openai/gemini-2.5-pro-preview-05-06'
 
 # Aider doesn't know about all GitHub Copilot models because of the `openai/`
