@@ -14,6 +14,11 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # task/section on subsequent lines
 # TODO BW 2025-09-20: If an attachment fails to attach, this script ends up
 # downloading the Todoist login page for that attachment instead.
+# TODO BW 2025-10-02: Include a pipe between task content and all metadata, so
+# can easily copy just the content by yanking until the pipe?
+# TODO BW 2025-10-02: The only actually forbidden character in filenames on
+# Linux is `/`, so just allow everything else to preserve project names? And
+# maybe switch that to `\`?
 
 def get_todoist_api_token():
     """Get the Todoist API token from environment variable."""

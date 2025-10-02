@@ -2,7 +2,10 @@
 alias mux='tmuxinator'
 alias project="\$DOTFILES/libexec/fuzz-repo-and-run 'tmuxinator start project'"
 
+# TODO BW 2025-09-23: Have this work similar to `project`, with fuzzy selection
+# of available sessions.
 alias attach='tmux switch-client -t'
+
 alias kill_window='tmux kill-window'
 alias kill_session='tmux kill-session'
 
