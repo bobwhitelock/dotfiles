@@ -43,8 +43,6 @@
       glob: true
     ~/.config/terminator:
       path: config/terminator
-    ~/.config/htop:
-      path: config/htop
     ~/.config/coc/extensions/package.json:
       path: config/coc/extensions/package.json
     ~/.config/pgcli/config:
