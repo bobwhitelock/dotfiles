@@ -19,9 +19,19 @@ project_specific_setup = \
     # project.
     ["make"]
   else
-    nil
+    # Start an agentic coding tool here.
+    # TODO BW 2025-10-02: This does mean this is mutually exclusive with above rather than additional to it.
+
+    "claude_rescale"
+    # Alternatively, one of these:
+    # "claude"
+    # "aider"
+    # TODO BW 2025-10-02: Make which of these is used automatic/configurable?
   end.to_json
 %>
+# TODO BW 2025-10-02:  maybe use window layout like this for normal things?
+# agent at the top left, small term bottom left, vim right?
+# `2: shaker* (3 panes) [239x58] [layout 915a,239x58,0,0{118x58,0,0[118x43,0,0,4,118x14,0,44,7],120x58,119,0,8}] @3 (active)`
 
 name: <%= [project_owner, project_name].join('/') %>
 startup_window: <%= project_name %>
