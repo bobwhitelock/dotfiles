@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Adapted from
+# https://github.com/Twizzes/copy-claude-response/blob/main/copy-claude-response.
+
 # Constants
 PREVIEW_LENGTH=60
 MAX_RESPONSES=99999
@@ -28,7 +31,7 @@ format_time_ago() {
         local now_epoch=$(date +%s)
         local msg_epoch=$(date -d "$timestamp" +%s 2>/dev/null || echo "$now_epoch")
         local diff_sec=$((now_epoch - msg_epoch))
-        
+
         if [[ $diff_sec -lt 60 ]]; then
             time_display=$(printf "[%4.1f sec ago]" "$diff_sec")
         elif [[ $diff_sec -lt 3600 ]]; then
@@ -73,8 +76,8 @@ if [[ "$INPUT" =~ \"prompt\":[[:space:]]*\"([^\"]+)\" ]]; then
     PROMPT="${BASH_REMATCH[1]}"
 fi
 
-# Check if this is a copy-response command (with optional number, list, find, or debug)
-if [[ ! "$PROMPT" =~ ^/copy-response([[:space:]]+(list([[:space:]]+[0-9]+)?|find[[:space:]]+\"[^\"]+\"|debug([[:space:]]+[0-9]+)?|[0-9]+))?$ ]]; then
+# Check if this is a copy command (with optional number, list, find, or debug)
+if [[ ! "$PROMPT" =~ ^/copy([[:space:]]+(list([[:space:]]+[0-9]+)?|find[[:space:]]+\"[^\"]+\"|debug([[:space:]]+[0-9]+)?|[0-9]+))?$ ]]; then
     exit 0  # Let other prompts proceed normally
 fi
 
@@ -96,22 +99,22 @@ SEARCH_TERM=""
 RESPONSE_NUM=1
 LIST_COUNT=$DEFAULT_LIST_COUNT
 
-if [[ "$PROMPT" =~ ^/copy-response[[:space:]]+list([[:space:]]+([0-9]+))?$ ]]; then
+if [[ "$PROMPT" =~ ^/copy[[:space:]]+list([[:space:]]+([0-9]+))?$ ]]; then
     LIST_MODE=true
     if [ -n "${BASH_REMATCH[2]}" ]; then
         LIST_COUNT=${BASH_REMATCH[2]}
     fi
-elif [[ "$PROMPT" =~ ^/copy-response[[:space:]]+find[[:space:]]+\"([^\"]+)\"$ ]]; then
+elif [[ "$PROMPT" =~ ^/copy[[:space:]]+find[[:space:]]+\"([^\"]+)\"$ ]]; then
     FIND_MODE=true
     SEARCH_TERM="${BASH_REMATCH[1]}"
-elif [[ "$PROMPT" =~ ^/copy-response[[:space:]]+debug([[:space:]]+([0-9]+))?$ ]]; then
+elif [[ "$PROMPT" =~ ^/copy[[:space:]]+debug([[:space:]]+([0-9]+))?$ ]]; then
     DEBUG_MODE=true
     echo "DEBUG: Matched debug command" >&2
     if [ -n "${BASH_REMATCH[2]}" ]; then
         RESPONSE_NUM=${BASH_REMATCH[2]}
         echo "DEBUG: Set response num to ${BASH_REMATCH[2]}" >&2
     fi
-elif [[ "$PROMPT" =~ ^/copy-response[[:space:]]+([0-9]+)$ ]]; then
+elif [[ "$PROMPT" =~ ^/copy[[:space:]]+([0-9]+)$ ]]; then
     RESPONSE_NUM=${BASH_REMATCH[1]}
 fi
 
@@ -133,13 +136,13 @@ while read -r line; do
     if echo "$line" | jq -e '.message.role == "assistant"' >/dev/null 2>&1; then
         request_id=$(echo "$line" | jq -r '.requestId')
         content=$(echo "$line" | jq -r '.message.content[0].text // ""')
-        
+
         # If we haven't seen this requestId before, initialize it
         if [[ -z "${seen_requests[$request_id]}" ]]; then
             seen_requests["$request_id"]=1
             response_groups["$request_id"]=""
         fi
-        
+
         # Append content (processing in forward order)
         if [[ -n "$content" ]]; then
             if [[ -n "${response_groups[$request_id]}" ]]; then
@@ -160,7 +163,7 @@ while read -r line; do
     if echo "$line" | jq -e '.message.role == "assistant"' >/dev/null 2>&1; then
         request_id=$(echo "$line" | jq -r '.requestId')
         timestamp=$(echo "$line" | jq -r '.timestamp // .message.timestamp // ""')
-        
+
         # Add to order if not already added and response has content
         if [[ ! " ${request_order[@]} " =~ " ${request_id} " ]]; then
             # Only add if the response group has actual content (not just whitespace/newlines)
