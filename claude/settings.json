@@ -49,13 +49,16 @@
       "Bash(grep :*)",
       "Bash(head :*)",
       "Bash(isort :*)",
+      "Bash(kubectl describe :*)",
+      "Bash(kubectl get :*)",
+      "Bash(kubectl logs :*)",
       "Bash(ls :*)",
       "Bash(mkdir :*)",
       "Bash(mypy :*)",
       "Bash(npm test :*)",
       "Bash(pwd)",
       "Bash(pytest :*)",
-      "Bash(python manage.py test :*)",
+      "Bash(python manage.py :*)",
       "Bash(rg :*)",
       "Bash(tail :*)",
       "Bash(task :*)",
@@ -87,6 +90,7 @@
       "Write(./**)"
     ]
   },
+  "model": "sonnet",
   "hooks": {
     "Notification": [
       {
@@ -99,5 +103,7 @@
         ]
       }
     ]
-  }
+  },
+  "alwaysThinkingEnabled": false,
+  "includeCoAuthoredBy": false
 }
