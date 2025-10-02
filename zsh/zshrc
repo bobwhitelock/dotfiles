@@ -35,11 +35,13 @@ disable r
 # Check existence of setxkbmap so doesn't break without X.
 # TODO Doesn't actually work, get message about cannot open display default
 # display; is $DISPLAY set, on machine with X but not available
-command -v setxkbmap >/dev/null 2>&1
-if [ $? ]; then
-  # Ensure correct keyboard layout.
-  setxkbmap gb
-fi
+# command -v setxkbmap >/dev/null 2>&1
+# XXX BW 2025-09-27: This will blow away current layout if already deliberately
+# set to something else earlier.
+# if [ $? ]; then
+#   # Ensure correct keyboard layout.
+#   setxkbmap gb
+# fi
 
 unsetopt share_history
 
@@ -118,9 +120,11 @@ source "$ZSH_DIR/packages.sh"
 source "$ZSH_DIR/env.sh"
 
 # Enable Pyenv.
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# XXX BW 2025-10-02: For now, need to comment/uncomment this depending on if
+# Python is being managed in a repo by uv or pyenv.
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
 # Enable Rbenv.
 # XXX or could use omz plugin, for this and pyenv
