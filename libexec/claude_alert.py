@@ -44,5 +44,8 @@ def path_relative_to_src_or_absolute(path: str):
     return abs_path
 
 
+# TODO BW 2025-10-02: Add a way to make this optional so I can suppress alerts
+# when I want to (but still have somewhere so can come back to later? Maybe
+# should just mute in Pushover?)
 if __name__ == "__main__":
     main()
