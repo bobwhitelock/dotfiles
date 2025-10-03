@@ -248,6 +248,38 @@ function! s:ToggleCopilot()
 endfunction
 nnoremap coC :call <SID>ToggleCopilot()<CR>
 
+Plug 'https://git.sr.ht/~jcc/vim-code-review'
+command! -nargs=? Review call s:Review(<q-args>)
+function! s:Review(...)
+  " Ensure we're in a consistent state to start with - only a single window
+  " and tab.
+  tabonly
+  only
+
+  " Start review, optionally against a given SHA/branch (e.g. `Review HEAD~`
+  " to just review latest commit).
+  if a:0
+    execute 'ReviewStart' a:1
+  else
+    ReviewStart
+  endif
+
+  " Quickfix window will be focused by default - move back to main window.
+  wincmd k
+
+  " Window will be opened to review file by default - move this to a new tab,
+  " then move back and open first item in quickfix list.
+  tabnew %
+  normal! gT
+  cc 1
+
+  " Make quickfix window exactly the size it needs to be to show all items.
+  call ResizeQuickFix()
+
+  " Show diff of changes in each file.
+  ReviewDiffSplit
+endfunction
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'ElmCast/elm-vim'
@@ -428,6 +460,9 @@ set tags^=./.git/tags;
 " Other settings recommended by coc (https://github.com/neoclide/coc.nvim).
 set nowritebackup
 set cmdheight=2
+
+" Use vertical diffs by default.
+set diffopt+=vertical
 
 " Highlight shell scripts as bash by default unless specified otherwise.
 let g:is_bash=1
