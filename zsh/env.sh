@@ -13,6 +13,7 @@ $JAVA_HOME/bin:\
 $HOME/.local/bin:\
 $HOME/.rbenv/bin:\
 /usr/local/go/bin:\
+$HOME/go/bin:\
 $HOME/.rvm/bin:\
 ./node_modules/.bin:\
 $HOME/.cargo/bin:\
