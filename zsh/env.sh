@@ -3,7 +3,20 @@ export ZSH_DIR="$DOTFILES/zsh"
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
-export PATH="$HOME/bin:/usr/local/bin:/usr/sbin:/sbin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$JAVA_HOME/bin:$HOME/.local/bin:$HOME/.rbenv/bin:/usr/local/go/bin:$HOME/.rvm/bin:./node_modules/.bin:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/bin:\
+/usr/local/bin:\
+/usr/sbin:\
+/sbin:\
+$HOME/.yarn/bin:\
+$HOME/.config/yarn/global/node_modules/.bin:\
+$JAVA_HOME/bin:\
+$HOME/.local/bin:\
+$HOME/.rbenv/bin:\
+/usr/local/go/bin:\
+$HOME/.rvm/bin:\
+./node_modules/.bin:\
+$HOME/.cargo/bin:\
+$PATH"
 
 export TZ='Europe/London'
 
