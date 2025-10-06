@@ -527,6 +527,13 @@ augroup autocmds
   " https://stackoverflow.com/questions/27235102/vim-randomly-breaks-syntax-highlighting).
   autocmd BufEnter * syntax sync fromstart
 
+  " When in quickfix window, add map to delete current row from quickfix list,
+  " then resize the window to fit the new content.
+  " TODO BW 2025-10-03: If go back through quickfix lists via `]q`/`[q`, might
+  " be good to also resize them to content again, otherwise some lines will be
+  " hidden.
+  autocmd FileType qf nnoremap <buffer> <leader>cd :call setqflist(filter(getqflist(), {idx, val -> idx != line('.') - 1}))<CR>:call ResizeQuickFix()<CR>
+
   " Enable Goyo hook functions (not used currently but left commented in case
   " need them later).
   " autocmd User GoyoEnter nested call <SID>goyo_enter()
