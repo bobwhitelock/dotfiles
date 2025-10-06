@@ -233,6 +233,7 @@ Plug 'github/copilot.vim'
 " and use `nvm` to find a recent Node
 let g:copilot_node_command = system('export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm which 22')->trim()
 
+" XXX BW 2025-10-03: Move with other autocmds?
 autocmd VimEnter * Copilot enable
 
 function! s:ToggleCopilot()
@@ -590,6 +591,7 @@ function! s:DisableAutoCommit()
 endfunction
 command! DisableAutoCommit call s:DisableAutoCommit()
 
+" XXX BW 2025-10-03: Move with other autocmds?
 augroup prettier_on_save
   autocmd!
   autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call s:PrettierWrite()

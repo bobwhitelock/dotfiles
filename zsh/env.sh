@@ -69,9 +69,11 @@ export DOTFILES_PRIVATE="$BOB/dotfiles-private"
 export ZSH_PRIVATE_LIB="$DOTFILES_PRIVATE/zsh/lib"
 
 # See http://vim.wikia.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix.
-export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
-    vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
-    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+# XXX BW 2025-10-03: Disabled for now as formatting messed up now for some
+# reason.
+# export MANPAGER="/bin/sh -c \"unset MANPAGER;col -b -x | \
+#     vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
+#     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 export M2_HOME='/opt/maven/'
 
