@@ -281,6 +281,36 @@ function! s:Review(...)
   ReviewDiffSplit
 endfunction
 
+" Reset review-specific things once done with the review (as started by the
+" above).
+command! ReviewReset call s:ReviewReset()
+function! s:ReviewReset()
+  diffoff
+  cclose
+
+  " Reset Git Gutter signs to be relative to most recent
+  " commit again.
+  let g:gitgutter_diff_base = ''
+
+  " Close any review windows in all tabs.
+  " XXX BW 2025-10-08: Does not actually fully work, does not close in other
+  " tabs.
+  for tabnr in range(1, tabpagenr('$'))
+    for winnr in range(1, tabpagewinnr(tabnr, '$'))
+      let bufname = bufname(winbufnr(winnr))
+      if bufname =~# '^review://' || bufname =~# 'review\..*\.md$'
+        execute 'tabnext' tabnr
+        execute winnr . 'wincmd w'
+        quit
+        " Adjust tabnr if we closed the last window in a tab (which closes the tab).
+        if tabnr > tabpagenr('$')
+          let tabnr -= 1
+        endif
+      endif
+    endfor
+  endfor
+endfunction
+
 " Language-specific.
 Plug 'markcornick/vim-bats'
 Plug 'ElmCast/elm-vim'
