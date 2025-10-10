@@ -1228,6 +1228,8 @@ Repeatable nnoremap <leader>g, mzA,<esc>`z
 nnoremap g<Backspace> mzA<Backspace><Esc>`z
 
 " Split line in different places.
+" TODO BW 2025-10-10: Make this a full action that can be used with any
+" character.
 Repeatable nnoremap gs( f(a<CR><Esc>
 Repeatable nnoremap gs) f)i<CR><Esc>
 Repeatable nnoremap gs{ f{a<CR><Esc>
