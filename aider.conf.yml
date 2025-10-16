@@ -32,15 +32,16 @@
 #   openai/gpt-4.1 (run 2)                        5.457
 #   openai/gemini-2.5-pro-preview-05-06 (run 1)   37.884
 
-# XXX BW 2025-10-02: Below is only relevant for models from Azure?
-# Need to explicitly specify `weak-model` to the same, at least in this case,
-# otherwise it tries to use a model I don't have deployed.
+# When using Azure models you need to explicitly specify `weak-model` to the
+# same model (or at least to another model you have deployed?) - otherwise it
+# will assume a model to use that you don't have deployed.
 
 # model: 'openai/claude-sonnet-4'
 # model: 'openai/claude-3.7-sonnet'
 # model: 'openai/gpt-4.1'
 # model: 'azure/gpt-5'
 model: 'azure/o3'
+weak-model: 'azure/o3'
 # model: 'openai/gemini-2.5-pro-preview-05-06'
 
 # weak-model: 'openai/gpt-4.1'
