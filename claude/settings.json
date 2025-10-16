@@ -3,33 +3,8 @@
   "env": {
     "AWS_PROFILE": "ai-dev"
   },
+  "includeCoAuthoredBy": false,
   "permissions": {
-    "deny": [
-      "Read(**/*.env)",
-      "Read(**/*.key)",
-      "Read(**/*.p12)",
-      "Read(**/*.pem)",
-      "Read(**/*.pfx)",
-      "Read(**/*.secrets)",
-      "Read(**/*env.sh)",
-      "Read(**/.*env)",
-      "Read(**/.aws/credentials*)",
-      "Read(**/.env)",
-      "Read(**/.env.*)",
-      "Read(**/.envrc)",
-      "Read(**/.netrc)",
-      "Read(**/.npmrc)",
-      "Read(**/.pgpass)",
-      "Read(**/.pypirc)",
-      "Read(**/config.env)",
-      "Read(**/docker-compose.override.yml)",
-      "Read(**/environment.properties)",
-      "Read(**/id_dsa*)",
-      "Read(**/id_ecdsa*)",
-      "Read(**/id_ed25519*)",
-      "Read(**/id_rsa*)",
-      "Read(**/secrets.*)"
-    ],
     "allow": [
       "Bash(alembic:*)",
       "Bash(black:*)",
@@ -88,6 +63,32 @@
       "WebFetch(domain:learn.microsoft.com)",
       "WebSearch",
       "Write(./**)"
+    ],
+    "deny": [
+      "Read(**/*.env)",
+      "Read(**/*.key)",
+      "Read(**/*.p12)",
+      "Read(**/*.pem)",
+      "Read(**/*.pfx)",
+      "Read(**/*.secrets)",
+      "Read(**/*env.sh)",
+      "Read(**/.*env)",
+      "Read(**/.aws/credentials*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/.envrc)",
+      "Read(**/.netrc)",
+      "Read(**/.npmrc)",
+      "Read(**/.pgpass)",
+      "Read(**/.pypirc)",
+      "Read(**/config.env)",
+      "Read(**/docker-compose.override.yml)",
+      "Read(**/environment.properties)",
+      "Read(**/id_dsa*)",
+      "Read(**/id_ecdsa*)",
+      "Read(**/id_ed25519*)",
+      "Read(**/id_rsa*)",
+      "Read(**/secrets.*)"
     ]
   },
   "model": "sonnet",
@@ -104,6 +105,5 @@
       }
     ]
   },
-  "alwaysThinkingEnabled": false,
-  "includeCoAuthoredBy": false
+  "alwaysThinkingEnabled": false
 }
