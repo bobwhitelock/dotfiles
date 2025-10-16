@@ -285,7 +285,7 @@ endfunction
 " above).
 command! ReviewReset call s:ReviewReset()
 function! s:ReviewReset()
-  diffoff
+  diffoff!
   cclose
 
   " Reset Git Gutter signs to be relative to most recent
@@ -1209,7 +1209,7 @@ nmap gK <Plug>(devdocs-under-cursor)
 " Open current file/current visual selection of current file in Github.
 noremap <leader>gh :GBrowse<CR><CR>
 
-nnoremap <leader>do :diffoff<CR>
+nnoremap <leader>do :diffoff!<CR>
 " XXX Conditionally enable these only when in diff mode? Can conflict with
 " other `<leader>d` maps.
 nnoremap <leader>dt :diffthis<CR>
