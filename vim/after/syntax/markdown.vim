@@ -22,11 +22,11 @@ highlight link markdownH4 markdownLevel4
 highlight link markdownH5 markdownLevel5
 
 " Rainbow bullets by indentation.
-syntax match markdownBullet1 "^[-*]"
-syntax match markdownBullet2 "^  [-*]"
-syntax match markdownBullet3 "^    [-*]"
-syntax match markdownBullet4 "^      [-*]"
-syntax match markdownBullet5 "^        \+[-*]"
+syntax match markdownBullet1 "^[-*] "
+syntax match markdownBullet2 "^  [-*] "
+syntax match markdownBullet3 "^    [-*] "
+syntax match markdownBullet4 "^      [-*] "
+syntax match markdownBullet5 "^        \+[-*] "
 
 highlight link markdownBullet1 markdownLevel1
 highlight link markdownBullet2 markdownLevel2
