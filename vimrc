@@ -353,6 +353,10 @@ let g:rust_clip_command = 'xclip -selection clipboard'
 Plug 'mattn/webapi-vim' " Required by rust.vim for :RustPlay.
 " Plug 'fatih/vim-go'
 Plug 'https://gitlab.com/dbeniamine/todo.txt-vim.git'
+" Key commands:
+" - `ArrangeColumn` to arrange into a spreadheet-like format with aligned
+"   columns; `UnArrangeColumn` to undo.
+" - `CSVTabularize` to output file as a table with borders.
 Plug 'chrisbra/csv.vim'
 let g:no_csv_maps = 1
 Plug 'neovimhaskell/haskell-vim'
@@ -571,6 +575,14 @@ augroup autocmds
   " autocmd User GoyoLeave nested call <SID>goyo_leave()
 augroup END
 
+
+" XXX BW 2025-10-23: Decide if should keep this or adapt
+aug CSV_Editing
+    au!
+    au BufRead,BufWritePost *.csv :%ArrangeColumn
+    au BufWritePre *.csv :%UnArrangeColumn
+aug end
+
 " Create CamelCaseMotion maps name-spaced behind leader.
 call camelcasemotion#CreateMotionMappings('<leader>')
 
@@ -701,6 +713,7 @@ let g:markdown_fenced_languages = [
     \ 'bash=sh',
     \ 'crontab',
     \ 'css',
+    \ 'csv',
     \ 'dot',
     \ 'elm',
     \ 'hcl=terraform',
