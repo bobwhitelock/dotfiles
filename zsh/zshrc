@@ -172,3 +172,6 @@ eval "$(k9s completion zsh)"
 # anything changes - and same applies to Poetry completions.
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh --disable-up-arrow)"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
