@@ -3,6 +3,9 @@
 " noremap <silent> <buffer> <C-s> <Esc>mzgqip:write<CR>`z
 " noremap! <silent> <buffer> <C-s> <Esc>mzgqip:write<CR>`z
 
+setlocal shiftwidth=2
+setlocal softtabstop=2
+
 " So can write `@tag` in markdown files and search for this with `*`.
 setlocal iskeyword+=@-@
 
