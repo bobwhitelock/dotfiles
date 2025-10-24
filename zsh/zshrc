@@ -160,8 +160,10 @@ export PATH="$HOME/.poetry/bin:$PATH"
 
 start_or_reuse_ssh_agent
 
-# Enable Task completions.
+# Enable completions for various tools that provide these.
 eval "$(task --completion zsh)"
+eval "$(kubectl completion zsh)"
+eval "$(k9s completion zsh)"
 
 # Enable Atuin.
 # Completions were added with:
