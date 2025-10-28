@@ -155,7 +155,6 @@ source_libs() {
 }
 source_libs
 
-export PATH="$HOME/.poetry/bin:$PATH"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 start_or_reuse_ssh_agent

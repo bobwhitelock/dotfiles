@@ -17,6 +17,7 @@ $HOME/go/bin:\
 $HOME/.rvm/bin:\
 ./node_modules/.bin:\
 $HOME/.cargo/bin:\
+$HOME/.poetry/bin:\
 $PATH"
 
 export TZ='Europe/London'
