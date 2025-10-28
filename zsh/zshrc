@@ -163,6 +163,7 @@ bashcompinit
 eval "$(task --completion zsh)"
 eval "$(kubectl completion zsh)"
 eval "$(k9s completion zsh)"
+eval "$(atuin gen-completions --shell zsh)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 # source /etc/bash_completion.d/compleat_setup
 
