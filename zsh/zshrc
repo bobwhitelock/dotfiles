@@ -71,14 +71,6 @@ bindkey '^F' forward-word
 stty stop '' -ixoff
 ttyctl -f
 
-# Load completions.
-fpath=("$ZSH_DIR/completions" $fpath)
-autoload -Uz compinit bashcompinit
-compinit
-bashcompinit
-
-# source /etc/bash_completion.d/compleat_setup
-
 # Load NVM.
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -155,22 +147,24 @@ source_libs() {
 }
 source_libs
 
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 start_or_reuse_ssh_agent
+
+# Enable Atuin.
+. "$HOME/.atuin/bin/env"
+eval "$(atuin init zsh --disable-up-arrow)"
+
+# Load completions.
+fpath=("$ZSH_DIR/completions" $fpath)
+autoload -Uz compinit bashcompinit
+compinit
+bashcompinit
 
 # Enable completions for various tools that provide these.
 eval "$(task --completion zsh)"
 eval "$(kubectl completion zsh)"
 eval "$(k9s completion zsh)"
-
-# Enable Atuin.
-# Completions were added with:
-# atuin gen-completions --shell zsh > /home/bob/src/bobwhitelock/dotfiles/zsh/completions/_atuin
-# TODO But would be better if this was dynamic so these get updated when
-# anything changes - and same applies to Poetry completions.
-. "$HOME/.atuin/bin/env"
-eval "$(atuin init zsh --disable-up-arrow)"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# source /etc/bash_completion.d/compleat_setup
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
