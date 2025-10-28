@@ -713,7 +713,6 @@ let g:markdown_fenced_languages = [
     \ 'bash=sh',
     \ 'crontab',
     \ 'css',
-    \ 'csv',
     \ 'dot',
     \ 'elm',
     \ 'hcl=terraform',
