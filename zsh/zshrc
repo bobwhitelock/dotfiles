@@ -163,8 +163,10 @@ bashcompinit
 eval "$(task --completion zsh)"
 eval "$(kubectl completion zsh)"
 eval "$(k9s completion zsh)"
+eval "$(gh completion --shell zsh)"
 eval "$(atuin gen-completions --shell zsh)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+[ -s /etc/bash_completion.d/azure-cli ] && \. /etc/bash_completion.d/azure-cli
 # source /etc/bash_completion.d/compleat_setup
 
 # Generated for envman. Do not edit.
