@@ -159,13 +159,7 @@ Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'down': '40%' }
 
 " Distraction-free writing mode.
-" Re-source vimrc after this as Goyo seems to mess up some settings and
-" colors, and this fixes this (at the expense of it being slightly less
-" distraction-free).
-" TODO BW 2025-10-01: Fix colorscheme changes, Goyo highlighting of `f`
-" matches etc, to not mess up colors in a better way.
 Plug 'junegunn/goyo.vim'
-nnoremap <leader>go :Goyo<CR>:source $MYVIMRC<CR>:Copilot disable<CR>
 
 " Search for current visual selection with */#.
 Plug 'bronson/vim-visual-star-search'
@@ -568,11 +562,6 @@ augroup autocmds
   " be good to also resize them to content again, otherwise some lines will be
   " hidden.
   autocmd FileType qf nnoremap <buffer> <leader>cd :call setqflist(filter(getqflist(), {idx, val -> idx != line('.') - 1}))<CR>:call ResizeQuickFix()<CR>
-
-  " Enable Goyo hook functions (not used currently but left commented in case
-  " need them later).
-  " autocmd User GoyoEnter nested call <SID>goyo_enter()
-  " autocmd User GoyoLeave nested call <SID>goyo_leave()
 augroup END
 
 
@@ -739,21 +728,6 @@ let g:windowswap_map_keys = 0 " Prevent default bindings.
 nnoremap <silent> gw :call WindowSwap#EasyWindowSwap()<CR>
 
 let g:HiCursorWords_delay = 100
-
-" Note: you need to change the width of the Vim Tmux pane before entering
-" Goyo, otherwise this will still be 50% of the original pane size.
-let g:goyo_width = '50%'
-
-" function! s:goyo_enter()
-"   " HiCursorWords in Goyo highlights the word the same colour as the
-"   " background for some reason; this setting effectively disables it in this
-"   " mode.
-"   let g:HiCursorWords_hiGroupRegexp = 'SomethingWhichWillNeverOccur'
-" endfunction
-
-" function! s:goyo_leave()
-"   let g:HiCursorWords_hiGroupRegexp = ''
-" endfunction
 
 let g:rustfmt_autosave = 1 " Run rustfmt on save of rust files.
 
