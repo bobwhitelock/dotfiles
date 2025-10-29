@@ -79,6 +79,15 @@ echoerr() {
     echo "$@" >&2
 }
 
+
+# Usage: `inplace some update file`, to apply `some update` to `file` and write
+# the output back to the same file.
+inplace() {
+    local file="${@: -1}"
+    local tmp=$(mktemp)
+    "$@" > "$tmp" && mv "$tmp" "$file"
+}
+
 # Compress and tar a directory.
 # XXX Make this better:
 # - check dir exists and use dir first
