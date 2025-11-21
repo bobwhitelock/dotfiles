@@ -228,6 +228,8 @@ Plug 'github/copilot.vim'
 let g:copilot_node_command = system('export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm which 22')->trim()
 
 " XXX BW 2025-10-03: Move with other autocmds?
+" XXX BW 2025-11-21: Or move all this embedded plugin config to
+" plugin-specific files
 autocmd VimEnter * Copilot enable
 
 function! s:ToggleCopilot()
@@ -304,6 +306,60 @@ function! s:ReviewReset()
     endfor
   endfor
 endfunction
+
+Plug 'prabirshrestha/vim-lsp'
+let g:lsp_diagnostics_enabled = 0
+" `uv add python-lsp-server` to enable this for a project.
+if system('uv run pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pylsp',
+        \ 'cmd': {server_info->['uv', 'run', 'pylsp']},
+        \ 'allowlist': ['python'],
+        \ })
+elseif system('pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pylsp',
+        \ 'cmd': {server_info->['pylsp']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> <C-]> <plug>(lsp-definition)
+    " nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    " nmap <buffer> <C-f> <plug>(lsp-workspace-symbol-search)
+    " nmap <buffer> gr <plug>(lsp-references)
+    " nmap <buffer> gi <plug>(lsp-implementation)
+    " nmap <buffer> <C-f> <plug>(lsp-type-definition)
+    " nmap <buffer> <leader>rn <plug>(lsp-rename)
+    " nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    " nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    " nmap <buffer> K <plug>(lsp-hover)
+    " nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    " nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+    let g:lsp_format_sync_timeout = 1000
+    " autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+    " Also  see https://github.com/prabirshrestha/vim-lsp
+endfunction
+
+Plug 'prabirshrestha/asyncomplete.vim'
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+Plug 'jiz4oh/vim-lspfuzzy'
 
 " Language-specific.
 Plug 'markcornick/vim-bats'
@@ -483,8 +539,9 @@ set signcolumn=yes
 " `foo.md#5` to jump to line 5 of `foo.md`.
 set isfname-=#
 
+" XXX BW 2025-11-21: Drop other ctags stuff now using LSPs?
 " Include tags from `.git/tags`.
-set tags^=./.git/tags;
+" set tags^=./.git/tags;
 
 " Other settings recommended by coc (https://github.com/neoclide/coc.nvim).
 set nowritebackup
