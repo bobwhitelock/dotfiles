@@ -28,3 +28,10 @@ windows:
       panes:
         - gpl
         - vim
+
+  - claude-plans:
+      root: <%= ENV.fetch('SRC') %>/claude-plans
+      layout: even-horizontal
+      panes:
+        - gpl
+        - vim

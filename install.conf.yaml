@@ -53,6 +53,8 @@
     ~/.claude/:
       path: claude/*
       glob: true
+    ~/.claude/plans:
+      path: ~/src/bobwhitelock/claude-plans
 
 # Link in any files from `dotfiles-private`; in separate `link` section for
 # clarity and to avoid clashes in destination dir names with above.
