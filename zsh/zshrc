@@ -176,6 +176,7 @@ eval "$(k9s completion zsh)"
 eval "$(gh completion --shell zsh)"
 eval "$(atuin gen-completions --shell zsh)"
 eval "$(xan completions zsh)"
+eval "$(leetcode completions)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 [ -s /etc/bash_completion.d/azure-cli ] && \. /etc/bash_completion.d/azure-cli
 # source /etc/bash_completion.d/compleat_setup
