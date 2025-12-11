@@ -5,6 +5,7 @@
 - **No preamble/postamble**: Don't add explanatory text before/after responses unless specifically asked
 - **Concise responses**: Keep responses to 4 lines or fewer unless detail is requested
 - **No unnecessary "here's what I'm doing" explanations**: Just do the work
+- **IMPORTANT: NEVER put imports inline if this can be avoided - always put them up top of the file, organized with the rest of the imports**
 
 ### Development Approach
 - **Use TodoWrite tool proactively**: Always track complex tasks with the TodoWrite tool for visibility
