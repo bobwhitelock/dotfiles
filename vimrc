@@ -279,8 +279,8 @@ endfunction
 
 " Reset review-specific things once done with the review (as started by the
 " above).
-command! ReviewReset call s:ReviewReset()
-function! s:ReviewReset()
+command! ResetReview call s:ResetReview()
+function! s:ResetReview()
   diffoff!
   cclose
 
