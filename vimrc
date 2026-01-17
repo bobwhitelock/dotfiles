@@ -222,15 +222,19 @@ Plug 'sk1418/QFGrep'
 Plug 'Olical/vim-expand'
 
 " GitHub Copilot.
-Plug 'github/copilot.vim'
+" XXX BW 2026-01-17: Disabled this and usage below for now as don't have a
+" company copilot (see all changes in commit that added this comment) - make
+" this configurable to sometimes use own copilot? Or just remove this if no
+" longer use?
+" Plug 'github/copilot.vim'
 " Copilot needs a recent Node but Rescale version needs to be older, so load
 " and use `nvm` to find a recent Node
-let g:copilot_node_command = system('export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm which 22')->trim()
+" let g:copilot_node_command = system('export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm which 22')->trim()
 
 " XXX BW 2025-10-03: Move with other autocmds?
 " XXX BW 2025-11-21: Or move all this embedded plugin config to
 " plugin-specific files
-autocmd VimEnter * Copilot enable
+" autocmd VimEnter * Copilot enable
 
 function! s:ToggleCopilot()
   if get(g:, 'copilot_enabled', 1)
@@ -243,7 +247,7 @@ function! s:ToggleCopilot()
     echo "Copilot enabled"
   endif
 endfunction
-nnoremap coC :call <SID>ToggleCopilot()<CR>
+" nnoremap coC :call <SID>ToggleCopilot()<CR>
 
 Plug 'https://git.sr.ht/~jcc/vim-code-review'
 command! -nargs=? Review call s:Review(<q-args>)
@@ -390,7 +394,12 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : copilot#Accept("\<Tab>")
+" XXX BW 2025-12-11: Need a map to insert an actual tab when there is a
+" Copilot suggestion but I don't want to use it? Or use a different key for
+" Copilot always?
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : copilot#Accept("\<Tab>")
+" Replacement for above map while not using copilot
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
