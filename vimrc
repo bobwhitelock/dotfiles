@@ -918,7 +918,11 @@ let test#elm#elmtest#options = {
   \ 'suite': '--watch',
 \}
 
-let test#python#djangotest#options = '--keepdb'
+" `-v2` means you can see which test is currently running, and migrations when
+" these are being run (rather than test runner just appearing to hang for a
+" long time when there are many migrations to run).
+" TODO BW 2025-12-10: Still need to verify the migration part actually happens
+let test#python#djangotest#options = '--keepdb -v2'
 " Useful in some situations, but these can also cause weird test failures
 " sometimes.
 " let test#python#djangotest#options = '--keepdb --debug-mode'
