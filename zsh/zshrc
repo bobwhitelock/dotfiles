@@ -8,16 +8,6 @@ ZSH_THEME="bob"
 CASE_SENSITIVE="true" # Use case-sensitive completion.
 DISABLE_AUTO_UPDATE="true" # Don't nag about updates.
 plugins=(\
-  # This plugin was manually installed via:
-  # git clone https://github.com/MichaelAquilina/zsh-auto-notify.git $ZSH_CUSTOM/plugins/auto-notify
-  #
-  # I would add it as a submodule, but that fails as oh-my-zsh is already a
-  # submodule:
-  # $ git submodule add -- https://github.com/MichaelAquilina/zsh-auto-notify.git $ZSH_CUSTOM/plugins/auto-notify
-  # fatal: Pathspec '/home/bob/src/bobwhitelock/dotfiles/oh-my-zsh/custom/plugins/auto-notify' is in submodule 'oh-my-zsh'
-  #
-  # TODO BW 2025-11-05: Automate this installation.
-  auto-notify \
   aws \
   bundler \
   django \
