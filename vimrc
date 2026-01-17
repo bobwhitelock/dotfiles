@@ -309,13 +309,23 @@ endfunction
 
 Plug 'prabirshrestha/vim-lsp'
 let g:lsp_diagnostics_enabled = 0
+" XXX BW 2026-01-17: Can't remember why I added next 2 lines, or if still
+" sometimes useful.
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
 " `uv add python-lsp-server` to enable this for a project.
+" XXX BW 2026-01-17: Possibly sometimes (always?) better to run `uv pip
+" install python-lsp-server` for this so doesn't change standard dependencies
+" for project? Maybe would be good to do this automatically for projects/warn
+" me that this is not the case.
 if system('uv run pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pylsp',
         \ 'cmd': {server_info->['uv', 'run', 'pylsp']},
         \ 'allowlist': ['python'],
         \ })
+" This is to handle the venv case
+" XXX BW 2025-11-24: Should this use executable?
 elseif system('pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pylsp',
@@ -323,6 +333,33 @@ elseif system('pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
         \ 'allowlist': ['python'],
         \ })
 endif
+
+" npm install -g @vtsls/language-server
+if executable('vtsls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'vtsls',
+        \ 'cmd': {server_info->['vtsls', '--stdio']},
+        \ 'allowlist': ['typescript', 'typescriptreact'],
+        \ })
+endif
+
+" XXX BW 2025-11-21: Use this and get symbol search working. Or try something
+" else. Or just use ctags for this?
+" if system('uv run jedi-language-server -h 2>&1') !~ 'command not found' && v:shell_error == 0
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'jedi-language-server',
+"         \ 'cmd': {server_info->['uv', 'run', 'jedi-language-server']},
+"         \ 'allowlist': ['python'],
+"         \ 'initialization_options': {'workspace': {'symbols': {'maxSymbols': 0}}},
+"         \ })
+" elseif system('jedi-language-server -h 2>&1') !~ 'command not found' && v:shell_error == 0
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'jedi-language-server',
+"         \ 'cmd': {server_info->['jedi-language-server']},
+"         \ 'allowlist': ['python'],
+"         \ 'initialization_options': {'workspace': {'symbols': {'maxSymbols': 0}}},
+"         \ })
+" endif
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
