@@ -1,0 +1,26 @@
+[code]
+editor = 'vim'
+lang = 'python'
+edit_code_marker = false
+start_marker = ""
+end_marker = ""
+# if include problem description
+comment_problem_desc = true
+# comment syntax
+comment_leading = "#"
+test = true
+
+[cookies]
+# `LEETCODE_SESSION` and `LEETCODE_CSRF` need to be set in
+# `$DOTFILES/zsh/env.private.sh`, as described in
+# https://github.com/clearloop/leetcode-cli.
+session = ''
+csrf = ''
+site = "leetcode.com"
+
+[storage]
+# XXX BW 2025-11-22: Doesn't seem to actually do anything?
+cache = 'cache'
+code = 'solutions'
+root = '~/src/bobwhitelock/dsa/src/leetcode'
+scripts = 'scripts'
