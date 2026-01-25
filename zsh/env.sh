@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 export ZSH_DIR="$DOTFILES/zsh"
 

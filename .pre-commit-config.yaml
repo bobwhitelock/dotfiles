@@ -5,4 +5,4 @@ repos:
       - id: shellcheck
         args: ["-x"]  # follow source statements
         files: \.(sh|bash)$|^bin/|^libexec/
-        exclude: \.(py|pl)$|colours-to-rgb|extract_urls|git-ls-revisions|stripcolours|todoist-to-markdown
+        exclude: \.(py|pl)$|colours-to-rgb|extract_urls|git-ls-revisions|stripcolours|todoist-to-markdown|env\.private\.example\.sh
