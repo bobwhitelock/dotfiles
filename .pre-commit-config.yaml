@@ -3,6 +3,6 @@ repos:
     rev: v0.10.0
     hooks:
       - id: shellcheck
-        args: ["-x"]  # follow source statements
+        args: ["-x", "-e", "SC1091"]  # follow source statements, ignore missing sourced files
         files: \.(sh|bash)$|^bin/|^libexec/
         exclude: \.(py|pl)$|colours-to-rgb|extract_urls|git-ls-revisions|stripcolours|todoist-to-markdown|env\.private\.example\.sh
