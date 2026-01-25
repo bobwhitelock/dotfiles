@@ -44,7 +44,8 @@ update_wikilinks() {
         fi
 
         # Create a temporary file for the updates
-        local temp_file=$(mktemp)
+        local temp_file
+        temp_file=$(mktemp)
 
         # Update wikilinks that reference the old path
         # This handles cases like:

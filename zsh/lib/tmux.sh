@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 alias mux='tmuxinator'
 alias project="\$DOTFILES/libexec/fuzz-repo-and-run 'tmuxinator start project'"

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 alias b='bundle'
 alias be='bundle exec'

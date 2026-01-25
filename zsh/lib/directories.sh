@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 # Some ls aliases.
 alias ls='ls --color=always --classify'

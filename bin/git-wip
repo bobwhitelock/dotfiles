@@ -5,6 +5,7 @@ IFS=$'\n\t'
 
 main() {
     local message
+    # shellcheck disable=SC2124 # auto-suppressed when enabling Shellcheck
     message="WIP $@"
     git commit --no-verify -m "$message"
 }

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 # Output commands from history in order from least to most used. Tweaked from
 # https://dev.to/abhinav/which-is-the-most-used-command-in-your-shell-history-5ca1.

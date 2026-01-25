@@ -4,6 +4,7 @@ IFS=$'\n\t'
 
 
 main() {
+   # shellcheck disable=SC2198 # auto-suppressed when enabling Shellcheck
    if [ ! -e "$@" ]; then
       echo "Error: Path does not exist: $*"
       exit 1

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 alias sys='sudo systemctl'
 alias sS='sys status'

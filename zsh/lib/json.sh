@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 # "jq pretty", i.e. pretty print/page JSON file.
 jqp() {

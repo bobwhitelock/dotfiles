@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 alias activate='source venv/bin/activate'
 alias shell='./manage.py shell_plus'

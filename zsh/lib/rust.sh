@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 # Explain the current rustc error.
 rustc_explain() {

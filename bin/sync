@@ -21,6 +21,7 @@ main() {
 run() {
   echo
   echo '>' "$@"
+  # shellcheck disable=SC2294 # auto-suppressed when enabling Shellcheck
   eval "$@" 2>&1 | indent
 }
 

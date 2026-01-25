@@ -30,11 +30,13 @@ main() {
 abort_if_dirty_repo() {
     set +e
     git diff-index --quiet --cached HEAD
+    # shellcheck disable=SC2181 # auto-suppressed when enabling Shellcheck
     if [[ $? -ne 0 ]]; then
         echo "You have staged but not committed changes that would be lost! Aborting."
         exit 1
     fi
     git diff-files --quiet
+    # shellcheck disable=SC2181 # auto-suppressed when enabling Shellcheck
     if [[ $? -ne 0 ]]; then
         echo "You have unstaged changes that would be lost! Aborting."
         exit 1
@@ -55,30 +57,31 @@ enforce_usage() {
 }
 
 usage() {
-    echo "usage: `basename $0` start_ref end_ref test_command"
+    echo "usage: $(basename "$0") start_ref end_ref test_command"
 }
 
 run_tests() {
-    revs=`log_command git rev-list --reverse ${start_ref}..${end_ref}`
+    revs=$(log_command git rev-list --reverse "${start_ref}".."${end_ref}")
 
     for rev in $revs; do
-        debug "Checking out: $(git log --oneline -1 $rev)"
-        log_command git checkout --quiet $rev
-        log_command $test_command
+        debug "Checking out: $(git log --oneline -1 "$rev")"
+        log_command git checkout --quiet "$rev"
+        log_command "$test_command"
         log_command git reset --hard --quiet
     done
-    log_command git checkout --quiet $end_ref
+    log_command git checkout --quiet "$end_ref"
     debug "OK for all revisions!"
 }
 
 log_command() {
     debug "=> $*"
+    # shellcheck disable=SC2294 # auto-suppressed when enabling Shellcheck
     eval "$@"
 }
 
 debug() {
-    if [ $verbose ]; then
-        echo $* >&2
+    if [ "$verbose" ]; then
+        echo "$*" >&2
     fi
 }
 

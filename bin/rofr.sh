@@ -79,7 +79,7 @@ for arg in "$@"; do
                 -padding 50 -line-padding 4)"
             ;;
         -l|--logout)
-            if grep -q 'exec startx' $HOME/.*profile; then
+            if grep -q 'exec startx' "$HOME"/.*profile; then
                 ANS="$(rofi -sep "|" -dmenu -i -p 'System' -width 20 \
                     -hide-scrollbar -line-padding 4 -padding 20 \
                     -lines 3 <<< " Lock| Reboot| Shutdown")"
