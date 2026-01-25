@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-# Remove terminal escape sequenes from stdin/file and and send to stdout; in
+# Remove terminal escape sequences from stdin/file and and send to stdout; in
 # particular useful for stripping colour escape sequences.
 # From https://unix.stackexchange.com/a/14707/229081.
 

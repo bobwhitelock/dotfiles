@@ -748,7 +748,7 @@ endfunction
 command! IncludeNeighbourTags set tags+=../*/.git/tags
 
 " Disable some built in plugins.
-" As dicussed in https://www.reddit.com/r/vim/comments/7anxss.
+" As discussed in https://www.reddit.com/r/vim/comments/7anxss.
 let g:loaded_getscript         = 1 "$VIMRUNTIME/autoload/getscript.vim
 let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
 let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
@@ -1100,7 +1100,7 @@ endfunction
 
 " Easier macro executing (with added benefit of preventing accidentally
 " entering 'Ex' mode). Rerun macro in `p` rather than `q` register to avoid
-" accidentally overriting this if hit `qq`.
+" accidentally overwriting this if hit `qq`.
 nnoremap Q @p
 
 " Quick find and replace in file of current word with a new string, with and

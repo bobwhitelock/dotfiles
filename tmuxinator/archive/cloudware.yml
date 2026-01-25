@@ -23,9 +23,9 @@ windows:
         -
         - vim
 
-  - underware:
+  - underwear:
       layout: '6827,274x73,0,0{136x73,0,0[136x36,0,0,41,136x36,0,37,50],137x73,137,0,47}'
-      root: <%= ENV.fetch('ALCES') %>/underware
+      root: <%= ENV.fetch('ALCES') %>/underwear
       panes:
         - vm:
           - vagrant up

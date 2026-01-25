@@ -1,12 +1,12 @@
 
 # Note: need to run `sync` for this session to be available.
 
-name: underware-secondary
+name: underwear-secondary
 
 windows:
-  - underware:
+  - underwear:
       layout: even-horizontal
-      root: <%= ENV.fetch('ALCES') %>/underware
+      root: <%= ENV.fetch('ALCES') %>/underwear
       panes:
         - rspec
 

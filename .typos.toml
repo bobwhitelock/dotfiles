@@ -1,0 +1,3 @@
+[default.extend-words]
+# Vim mapping <leader>ue for UltiSnipsEdit
+ue = "ue"

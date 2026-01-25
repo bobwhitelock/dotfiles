@@ -23,7 +23,7 @@ usage()
 
      -b,--browser       Browser search by keyword (requires surfraw)
 
-     -q,--qalculate     Persistant calculator dialog (requires libqalculate)
+     -q,--qalculate     Persistent calculator dialog (requires libqalculate)
 
      -c,--clipboard     Select previous clipboard entries (requires greenclip)
 

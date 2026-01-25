@@ -1,8 +1,8 @@
 
 # Note: need to run `sync` for this session to be available.
 
-name: underware
-startup_window: underware
+name: underwear
+startup_window: underwear
 
 windows:
   - notes:
@@ -12,9 +12,9 @@ windows:
         -
         - vim
 
-  - underware:
+  - underwear:
       layout: 'df8f,274x67,0,0{137x67,0,0[137x23,0,0,1,137x22,0,24,4,137x20,0,47,5],136x67,138,0,6}'
-      root: <%= ENV.fetch('ALCES') %>/underware
+      root: <%= ENV.fetch('ALCES') %>/underwear
       panes:
         - vm:
           - ssh root@10.101.0.59
