@@ -1,0 +1,25 @@
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+exclude = ["ipython_config.py"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+]
+ignore = ["E501"]  # line too long - let formatter handle it
+
+[tool.ruff.lint.isort]
+known-first-party = []
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+exclude = ["ipython_config.py"]

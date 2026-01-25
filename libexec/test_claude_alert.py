@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 import json
+import os
 import subprocess
 import sys
-import tempfile
-import os
 
 # TODO BW 2025-09-18: make this better, use pytest, test all branches of script
 

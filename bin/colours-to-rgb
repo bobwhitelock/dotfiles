@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+
 import webcolors
 
 # Convert hex or named CSS3 colours on stdin to rgb values on stdout.
@@ -14,6 +15,7 @@ def main():
             rgb = webcolors.name_to_rgb(colour)
 
         print(colour, *rgb)
+
 
 if __name__ == "__main__":
     main()

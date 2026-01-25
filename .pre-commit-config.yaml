@@ -6,3 +6,22 @@ repos:
         args: ["-x", "-e", "SC1091"]  # follow source statements, ignore missing sourced files
         files: \.(sh|bash)$|^bin/|^libexec/
         exclude: \.(py|pl)$|colours-to-rgb|extract_urls|git-ls-revisions|stripcolours|todoist-to-markdown|env\.private\.example\.sh
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.6
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.14.1
+    hooks:
+      - id: mypy
+        additional_dependencies: []
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: [-c, .yamllint.yml]

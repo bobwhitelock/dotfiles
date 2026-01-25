@@ -35,11 +35,11 @@ def main():
         pingme("unhandled input")
 
 
-def path_relative_to_src_or_absolute(path: str):
+def path_relative_to_src_or_absolute(path: str) -> str:
     abs_path = os.path.abspath(path)
     abs_base = os.environ.get("SRC")
 
-    if abs_path.startswith(abs_base + os.sep):
+    if abs_base and abs_path.startswith(abs_base + os.sep):
         return os.path.relpath(abs_path, abs_base)
     return abs_path
 
