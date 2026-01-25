@@ -1,0 +1,8 @@
+repos:
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.10.0
+    hooks:
+      - id: shellcheck
+        args: ["-x"]  # follow source statements
+        files: \.(sh|bash)$|^bin/|^libexec/
+        exclude: \.(py|pl)$|colours-to-rgb|extract_urls|git-ls-revisions|stripcolours|todoist-to-markdown

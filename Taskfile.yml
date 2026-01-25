@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  lint:
+    desc: Run all linters
+    cmds:
+      - pre-commit run --all-files
+
+  ci:
+    desc: Full CI pipeline
+    cmds:
+      - task: lint
