@@ -13,40 +13,33 @@ jobs:
           python-version: '3.11'
       - uses: pre-commit/action@v3.0.1
 
-  install-script:
+  integration:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify install script syntax
-        run: bash -n install
-
-  zsh-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Install zsh
         run: sudo apt-get update && sudo apt-get install -y zsh
-      - name: Check zsh file syntax
+      - name: Run install script
+        run: ./install
+      - name: Verify zsh loads without errors
         run: |
-          # Check syntax of all .sh files in zsh/
-          for f in zsh/*.sh zsh/lib/*.sh; do
-            echo "Checking $f..."
-            zsh -n "$f"
-          done
-      - name: Test env.sh loads without error
-        run: |
-          # Set up minimal environment
-          export HOME="$PWD"
-          export DOTFILES="$PWD"
-          mkdir -p src/bobwhitelock
-          ln -s "$PWD" src/bobwhitelock/dotfiles
+          # Run zsh with our config and check for any output (errors/warnings)
+          # Using a non-interactive shell that sources the lib files
+          output=$(zsh -c '
+            export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
+            export ZSH_DIR="$DOTFILES/zsh"
+            export ZSH_LIB="$ZSH_DIR/lib"
+            source "$ZSH_DIR/env.sh"
+            for f in "$ZSH_LIB"/*; do
+              source "$f"
+            done
+          ' 2>&1) || true
 
-          # Source env.sh and check for errors
-          zsh -c 'source zsh/env.sh' 2>&1 | tee /tmp/env-output.txt
-
-          # Fail if there's any output (warnings/errors)
-          if [ -s /tmp/env-output.txt ]; then
-            echo "ERROR: env.sh produced unexpected output:"
-            cat /tmp/env-output.txt
+          if [ -n "$output" ]; then
+            echo "ERROR: zsh produced unexpected output:"
+            echo "$output"
             exit 1
           fi
+          echo "zsh loaded successfully with no output"

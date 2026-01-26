@@ -14,13 +14,29 @@ tasks:
     cmds:
       - pre-commit run --all-files
 
-  check:zsh:
-    desc: Check zsh files for syntax errors
+  integration:
+    desc: Run install script and verify zsh loads cleanly
     cmds:
-      - for f in zsh/*.sh zsh/lib/*.sh; do echo "Checking $f..."; zsh -n "$f"; done
+      - ./install
+      - |
+        output=$(zsh -c '
+          export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
+          export ZSH_DIR="$DOTFILES/zsh"
+          export ZSH_LIB="$ZSH_DIR/lib"
+          source "$ZSH_DIR/env.sh"
+          for f in "$ZSH_LIB"/*; do
+            source "$f"
+          done
+        ' 2>&1) || true
+        if [ -n "$output" ]; then
+          echo "ERROR: zsh produced unexpected output:"
+          echo "$output"
+          exit 1
+        fi
+        echo "zsh loaded successfully with no output"
 
   ci:
     desc: Full CI pipeline
     cmds:
       - task: lint
-      - task: check:zsh
+      - task: integration
