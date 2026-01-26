@@ -25,8 +25,8 @@ jobs:
         run: |
           mkdir -p ~/src/bobwhitelock
           ln -s ${{ github.workspace }} ~/src/bobwhitelock/dotfiles
-          # Create private env file (needed by env.sh)
-          cp zsh/env.private.example.sh zsh/env.private.sh
+      - name: Run install script
+        run: ./install
       - name: Verify zsh loads without errors
         run: |
           # Run zsh with our config and check for any output (errors/warnings)
