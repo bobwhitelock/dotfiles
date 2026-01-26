@@ -4,11 +4,6 @@ IFS=$'\n\t'
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Check if running in CI environment
-is_ci() {
-  [ "${CI:-}" = "true" ]
-}
-
 # XXX want to automatically handle setting up Gem and Ruby ctags:
 # - see https://thoughtbot.com/upcase/videos/intelligent-navigation-with-ctags
 #
@@ -30,11 +25,14 @@ main() {
   # some arbitrary time for later uses of `sudo`.
   # sudo true
 
-  # In CI, create directories that dotbot expects but don't exist
-  # These paths are relative to $DOTFILES (~/src/bobwhitelock/dotfiles)
-  if is_ci; then
-    header 'Setting up CI environment'
+  # Create directories that dotbot expects if they don't exist
+  # (e.g. dotfiles-private repo may not be cloned yet)
+  if [ ! -d ~/src/bobwhitelock/dotfiles-private ]; then
+    header 'Creating placeholder dotfiles-private directories'
     run mkdir -p ~/src/bobwhitelock/dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
+  fi
+  if [ ! -d ~/src/bobwhitelock/claude-plans ]; then
+    header 'Creating placeholder claude-plans directory'
     run mkdir -p ~/src/bobwhitelock/claude-plans
   fi
 
@@ -66,10 +64,8 @@ main() {
   setup_vim
 
   header 'Setting up Tmux'
-  # Skip tmux plugin install in CI (not needed for validation)
-  if is_ci; then
-    echo "       Skipping tmux plugin install in CI"
-  else
+  # Only run if tpm is installed
+  if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ]; then
     run ~/.tmux/plugins/tpm/bin/install_plugins
   fi
 
@@ -156,12 +152,8 @@ configure_fonts() {
 
 setup_vim() {
   run mkdir -p vim/{session,undodir,view}
-  # Skip vim plugin install in CI (no display, can hang)
-  if is_ci; then
-    echo "       Skipping vim plugin install in CI"
-    return
-  fi
-  if command -v vim >/dev/null 2>&1; then
+  # Only run vim plugin install if vim is available and we're in a terminal
+  if command -v vim >/dev/null 2>&1 && [ -t 0 ]; then
     run "vim +':PlugClean | :PlugInstall | :PlugUpdate | :qa!'"
   fi
   if [ -d ~/.config/coc/extensions ] && command -v yarn >/dev/null 2>&1; then
