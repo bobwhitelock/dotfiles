@@ -325,6 +325,7 @@ let g:lsp_diagnostics_enabled = 0
 " me that this is not the case.
 augroup lsp_servers
     autocmd!
+    " vint: -ProhibitEqualTildeOperator (auto-suppressed when enabling vint)
     if system('uv run pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
         autocmd User lsp_setup call lsp#register_server({
             \ 'name': 'pylsp',
@@ -333,6 +334,7 @@ augroup lsp_servers
             \ })
     " This is to handle the venv case
     " XXX BW 2025-11-24: Should this use executable?
+    " vint: -ProhibitEqualTildeOperator (auto-suppressed when enabling vint)
     elseif system('pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
         autocmd User lsp_setup call lsp#register_server({
             \ 'name': 'pylsp',
@@ -1428,10 +1430,12 @@ function! FollowSymlink(...)
   if exists('w:no_resolve_symlink') && w:no_resolve_symlink
     return
   endif
+  " vint: -ProhibitEqualTildeOperator (auto-suppressed when enabling vint)
   if &ft == 'help'
     return
   endif
   let fname = a:0 ? a:1 : expand('%')
+  " vint: -ProhibitEqualTildeOperator (auto-suppressed when enabling vint)
   if fname =~ '^\w\+:/'
     " Do not mess with 'fugitive://' etc.
     return
