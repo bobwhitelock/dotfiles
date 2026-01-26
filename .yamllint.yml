@@ -1,8 +1,8 @@
 extends: default
 
+# tmuxinator files use ERB templating which makes them invalid YAML
 ignore:
   - tmuxinator/
-  - aider.conf.yml
 
 rules:
   line-length:

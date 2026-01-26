@@ -6,7 +6,9 @@
 #
 # Can also run
 # ```
-# yaml_to_json /home/bob/src/Aider-AI/aider/aider/website/_data/polyglot_leaderboard.yml | jq '[.[] | select(.seconds_per_case < 30 and (.command | contains("openrouter") | not))] | sort_by(.pass_rate_2)'
+# yaml_to_json .../polyglot_leaderboard.yml | \
+#   jq '[.[] | select(.seconds_per_case < 30 and
+#       (.command | contains("openrouter") | not))] | sort_by(.pass_rate_2)'
 # ```
 # to see models I might be able to use, that are not too slow, by speed at
 # Aider benchmark (but also take with a pinch of salt - a lot of people think
