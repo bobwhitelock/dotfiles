@@ -175,7 +175,7 @@ alias gbib='gbi bad'
 alias gbig='gbi good'
 
 alias grec='git rebase --continue'
-alias great='git rebase --abort'
+alias grea='git rebase --abort'
 alias gres='git rebase --skip'
 alias gre='git rebase'
 alias grei='gre --interactive'

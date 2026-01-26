@@ -1,3 +1,4 @@
+scriptencoding utf-8
 
 " Highlight `RUBY` heredocs as Ruby.
 " XXX Commented for now to avoid infinite recursion in syntax file loading ಠ_ಠ

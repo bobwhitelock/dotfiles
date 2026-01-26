@@ -39,3 +39,12 @@ repos:
     hooks:
       - id: yamllint
         args: [-c, .yamllint.yml]
+
+  - repo: local
+    hooks:
+      - id: vint
+        name: vint
+        entry: vint
+        language: python
+        additional_dependencies: [vim-vint]
+        types: [vim]

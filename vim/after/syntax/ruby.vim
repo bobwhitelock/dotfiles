@@ -1,3 +1,4 @@
+scriptencoding utf-8
 
 " Highlight heredoc with particular delimiter's as the language within them.
 call SyntaxRange#Include('^.*<<[-~]HTML.*$', 'HTML', 'html', 'NonText')

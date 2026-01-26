@@ -3,3 +3,5 @@
 ue = "ue"
 # Project name, not underwear
 underware = "underware"
+# Alias for git rebase --abort
+grea = "grea"
