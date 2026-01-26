@@ -21,6 +21,14 @@ jobs:
           submodules: recursive
       - name: Install zsh
         run: sudo apt-get update && sudo apt-get install -y zsh
+      - name: Create required directory structure
+        run: |
+          mkdir -p ~/src/bobwhitelock
+          ln -s ${{ github.workspace }} ~/src/bobwhitelock/dotfiles
+          # Create empty dotfiles-private structure for dotbot links
+          mkdir -p ~/src/bobwhitelock/dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
+          # Create empty claude-plans for dotbot link
+          mkdir -p ~/src/bobwhitelock/claude-plans
       - name: Run install script
         run: ./install
       - name: Verify zsh loads without errors
