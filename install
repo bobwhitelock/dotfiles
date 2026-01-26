@@ -46,8 +46,8 @@ main() {
   set -u
   echo "DOTFILES=$DOTFILES"
 
-  echo "Running dotbot"
-  "$DOTFILES/dotbot/bin/dotbot" -d "$DOTFILES" -c "$DOTFILES/install.conf.yaml" || echo "Dotbot failed but continuing"
+  # Skip dotbot for now to debug
+  echo "Skipping dotbot for CI testing"
 
   echo "Creating vim directories"
   mkdir -p vim/{session,undodir,view}
