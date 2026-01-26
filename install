@@ -45,7 +45,8 @@ main() {
 
   set +u
   # shellcheck disable=SC1091
-  run source 'zsh/env.sh'
+  # Don't use `run` here - sourcing in a pipeline loses exports
+  source 'zsh/env.sh'
   set -u
 
   header 'Linking other needed files'
