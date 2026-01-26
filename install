@@ -31,10 +31,11 @@ main() {
   # sudo true
 
   # In CI, create directories that dotbot expects but don't exist
+  # These paths are relative to $DOTFILES (~/src/bobwhitelock/dotfiles)
   if is_ci; then
     header 'Setting up CI environment'
-    run mkdir -p ../dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
-    run mkdir -p ../claude-plans
+    run mkdir -p ~/src/bobwhitelock/dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
+    run mkdir -p ~/src/bobwhitelock/claude-plans
   fi
 
   # Copy example private environment variables file (if needed), so these can
