@@ -65,9 +65,11 @@ jobs:
           ' 2>&1) || true
 
           if [ -n "$output" ]; then
-            echo "ERROR: zsh produced unexpected output:"
-            echo "$output"
-            echo "TEMPORARILY NOT FAILING - fix output and re-enable"
-          else
-            echo "zsh loaded successfully with no output"
+            echo "::warning::zsh produced unexpected output"
+            echo "### ZSH Output" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "$output" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            exit 1
           fi
+          echo "zsh loaded successfully with no output"
