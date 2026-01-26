@@ -19,3 +19,34 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify install script syntax
         run: bash -n install
+
+  zsh-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install zsh
+        run: sudo apt-get update && sudo apt-get install -y zsh
+      - name: Check zsh file syntax
+        run: |
+          # Check syntax of all .sh files in zsh/
+          for f in zsh/*.sh zsh/lib/*.sh; do
+            echo "Checking $f..."
+            zsh -n "$f"
+          done
+      - name: Test env.sh loads without error
+        run: |
+          # Set up minimal environment
+          export HOME="$PWD"
+          export DOTFILES="$PWD"
+          mkdir -p src/bobwhitelock
+          ln -s "$PWD" src/bobwhitelock/dotfiles
+
+          # Source env.sh and check for errors
+          zsh -c 'source zsh/env.sh' 2>&1 | tee /tmp/env-output.txt
+
+          # Fail if there's any output (warnings/errors)
+          if [ -s /tmp/env-output.txt ]; then
+            echo "ERROR: env.sh produced unexpected output:"
+            cat /tmp/env-output.txt
+            exit 1
+          fi

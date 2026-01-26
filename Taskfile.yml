@@ -14,7 +14,13 @@ tasks:
     cmds:
       - pre-commit run --all-files
 
+  check:zsh:
+    desc: Check zsh files for syntax errors
+    cmds:
+      - for f in zsh/*.sh zsh/lib/*.sh; do echo "Checking $f..."; zsh -n "$f"; done
+
   ci:
     desc: Full CI pipeline
     cmds:
       - task: lint
+      - task: check:zsh
