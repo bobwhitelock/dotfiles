@@ -19,40 +19,62 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 main() {
   cd "${BASEDIR}"
-  echo "Starting install from $BASEDIR"
+
+  # Commented for now as we can't rely on sudo access.
+  # Request `sudo` access pre-emptively, so password isn't re-prompted for at
+  # some arbitrary time for later uses of `sudo`.
+  # sudo true
 
   # Create directories that dotbot expects if they don't exist
   # (e.g. dotfiles-private repo may not be cloned yet)
   if [ ! -d ~/src/bobwhitelock/dotfiles-private ]; then
-    echo "Creating placeholder dotfiles-private directories"
-    mkdir -p ~/src/bobwhitelock/dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
+    header 'Creating placeholder dotfiles-private directories'
+    run mkdir -p ~/src/bobwhitelock/dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
   fi
   if [ ! -d ~/src/bobwhitelock/claude-plans ]; then
-    echo "Creating placeholder claude-plans directory"
-    mkdir -p ~/src/bobwhitelock/claude-plans
+    header 'Creating placeholder claude-plans directory'
+    run mkdir -p ~/src/bobwhitelock/claude-plans
   fi
 
   # Copy example private environment variables file (if needed), so these can
   # be set but not committed.
   if [ ! -f zsh/env.private.sh ]; then
-    echo "Copying private environment variables file"
-    cp zsh/env.private.example.sh zsh/env.private.sh
+    header 'Copying private environment variables file'
+    run cp zsh/env.private.{example.,}sh
   fi
 
-  echo "Sourcing env.sh"
   set +u
   # shellcheck disable=SC1091
+  # Don't use `run` here - sourcing in a pipeline loses exports
   source 'zsh/env.sh'
   set -u
-  echo "DOTFILES=$DOTFILES"
 
-  # Skip dotbot for now to debug
-  echo "Skipping dotbot for CI testing"
+  header 'Linking other needed files'
+  link_files
 
-  echo "Creating vim directories"
-  mkdir -p vim/{session,undodir,view}
+  header 'Installing dependencies'
+  install_dependencies
 
-  echo "Install complete"
+  header 'Installing dotfiles'
+  run bin/sync_dotbot
+
+  # header 'Configuring fonts'
+  # configure_fonts
+
+  header 'Setting up Vim'
+  setup_vim
+
+  header 'Setting up Tmux'
+  # Only run if tpm is installed
+  if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ]; then
+    run ~/.tmux/plugins/tpm/bin/install_plugins
+  fi
+
+  header 'Tweaking system files'
+  tweak_system_files
+
+  # header 'Enabling services'
+  # enable_services
 }
 
 install_dependencies() {
