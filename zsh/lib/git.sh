@@ -219,4 +219,7 @@ _gre_on_latest() {
         compadd '' --no-autosquash --interactive
     fi
 }
-compdef _gre_on_latest gre_on_latest
+# Only register completion if compdef is available (it may not be in non-interactive shells)
+if type compdef &>/dev/null; then
+    compdef _gre_on_latest gre_on_latest
+fi

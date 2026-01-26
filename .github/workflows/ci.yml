@@ -29,31 +29,7 @@ jobs:
         run: ./install
       - name: Verify zsh loads without errors
         run: |
-          # Test each lib file individually to find output sources
-          export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
-          export ZSH_DIR="$DOTFILES/zsh"
-          export ZSH_LIB="$ZSH_DIR/lib"
-
-          # First test env.sh
-          env_output=$(zsh -c "source '$ZSH_DIR/env.sh'" 2>&1) || true
-          if [ -n "$env_output" ]; then
-            echo "env.sh produces output: $env_output"
-          fi
-
-          # Test each lib file
-          for f in $ZSH_LIB/*; do
-            fname=$(basename "$f")
-            out=$(zsh -c "
-              export DOTFILES='$DOTFILES'
-              source '$ZSH_DIR/env.sh'
-              source '$f'
-            " 2>&1) || true
-            if [ -n "$out" ]; then
-              echo "$fname produces: $out"
-            fi
-          done
-
-          # Now run the full test
+          # Run zsh with our config and check for any output (errors/warnings)
           output=$(zsh -c '
             export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
             export ZSH_DIR="$DOTFILES/zsh"
@@ -65,11 +41,8 @@ jobs:
           ' 2>&1) || true
 
           if [ -n "$output" ]; then
-            echo "::warning::zsh produced unexpected output"
-            echo "### ZSH Output" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-            echo "$output" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "ERROR: zsh produced unexpected output:"
+            echo "$output"
             exit 1
           fi
           echo "zsh loaded successfully with no output"
