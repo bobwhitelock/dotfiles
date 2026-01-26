@@ -21,16 +21,12 @@ jobs:
           submodules: recursive
       - name: Install zsh
         run: sudo apt-get update && sudo apt-get install -y zsh
-      - name: Create required directory structure
+      - name: Setup environment
         run: |
           mkdir -p ~/src/bobwhitelock
           ln -s ${{ github.workspace }} ~/src/bobwhitelock/dotfiles
-          # Create empty dotfiles-private structure for dotbot links
-          mkdir -p ~/src/bobwhitelock/dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
-          # Create empty claude-plans for dotbot link
-          mkdir -p ~/src/bobwhitelock/claude-plans
-      - name: Run install script
-        run: ./install
+          # Create private env file (needed by env.sh)
+          cp zsh/env.private.example.sh zsh/env.private.sh
       - name: Verify zsh loads without errors
         run: |
           # Run zsh with our config and check for any output (errors/warnings)

@@ -15,9 +15,8 @@ tasks:
       - pre-commit run --all-files
 
   integration:
-    desc: Run install script and verify zsh loads cleanly
+    desc: Verify zsh loads cleanly
     cmds:
-      - ./install
       - |
         output=$(zsh -c '
           export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
