@@ -1,7 +1,5 @@
 # shellcheck shell=bash
 
-export ZSH_DIR="$DOTFILES/zsh"
-
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
 export PATH="$HOME/bin:\
@@ -48,6 +46,7 @@ export ALCES="$SRC/alces-software"
 # Duplicated from `zshrc` in case source this file directly.
 export DOTFILES="$BOB/dotfiles"
 
+export ZSH_DIR="$DOTFILES/zsh"
 export LIBEXEC="$DOTFILES/libexec"
 
 export GITHUB_USER='bobwhitelock'
