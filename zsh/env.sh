@@ -85,7 +85,7 @@ export SHELLCHECK_OPTS='--shell=bash'
 export PYTHONBREAKPOINT=ipdb.set_trace
 
 # Load private environment variables if present.
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 source "$ZSH_DIR/env.private.sh" 2> /dev/null
 
 export LINODE_CLI_TOKEN="$LINODE_TOKEN"
