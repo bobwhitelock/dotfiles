@@ -25,27 +25,25 @@ jobs:
         run: |
           mkdir -p ~/src/bobwhitelock
           ln -s ${{ github.workspace }} ~/src/bobwhitelock/dotfiles
-      - name: Setup for zsh test
-        run: |
-          cd ~/src/bobwhitelock/dotfiles
-          # Copy env file
-          cp zsh/env.private.example.sh zsh/env.private.sh
+      - name: Run install script
+        run: ./install
       - name: Verify zsh loads without errors
         run: |
           # Run zsh with our config and check for any output (errors/warnings)
           # Using a non-interactive shell that sources the lib files
-          echo "Testing zsh lib loading..."
-          zsh -c '
+          output=$(zsh -c '
             export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
             export ZSH_DIR="$DOTFILES/zsh"
             export ZSH_LIB="$ZSH_DIR/lib"
-            echo "Sourcing env.sh..."
             source "$ZSH_DIR/env.sh"
-            echo "Sourcing lib files..."
             for f in "$ZSH_LIB"/*; do
-              echo "  Sourcing $f"
-              source "$f" || echo "  FAILED: $f"
+              source "$f"
             done
-            echo "Done loading zsh config"
-          ' 2>&1 || echo "zsh command failed with exit code $?"
-          echo "Test completed"
+          ' 2>&1) || true
+
+          if [ -n "$output" ]; then
+            echo "ERROR: zsh produced unexpected output:"
+            echo "$output"
+            exit 1
+          fi
+          echo "zsh loaded successfully with no output"
