@@ -1,6 +1,14 @@
 version: '3'
 
 tasks:
+  dev:
+    desc: Install development dependencies
+    cmds:
+      - pipx install pre-commit vint
+
+  # TODO BW 2026-01-26: Add install and other scripts in here instead? Though
+  # then need `task` installed first.
+
   lint:
     desc: Run all linters
     cmds:
