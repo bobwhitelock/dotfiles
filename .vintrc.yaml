@@ -1,0 +1,5 @@
+# Disable operator case-sensitivity warnings.
+# Auto-suppressed when enabling vint - not always safe to change these operators.
+policies:
+  ProhibitEqualTildeOperator:
+    enabled: false

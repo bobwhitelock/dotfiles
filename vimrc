@@ -1,3 +1,4 @@
+scriptencoding utf-8
 
 " Force Vim to use Python 3 rather than have plugins (like UltiSnips)
 " sporadically blow up and complain depending on which plugins are already
@@ -240,11 +241,11 @@ function! s:ToggleCopilot()
   if get(g:, 'copilot_enabled', 1)
     execute 'Copilot disable'
     let g:copilot_enabled = 0
-    echo "Copilot disabled"
+    echo 'Copilot disabled'
   else
     execute 'Copilot enable'
     let g:copilot_enabled = 1
-    echo "Copilot enabled"
+    echo 'Copilot enabled'
   endif
 endfunction
 " nnoremap coC :call <SID>ToggleCopilot()<CR>
@@ -322,30 +323,33 @@ let g:lsp_diagnostics_enabled = 0
 " install python-lsp-server` for this so doesn't change standard dependencies
 " for project? Maybe would be good to do this automatically for projects/warn
 " me that this is not the case.
-if system('uv run pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pylsp',
-        \ 'cmd': {server_info->['uv', 'run', 'pylsp']},
-        \ 'allowlist': ['python'],
-        \ })
-" This is to handle the venv case
-" XXX BW 2025-11-24: Should this use executable?
-elseif system('pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pylsp',
-        \ 'cmd': {server_info->['pylsp']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
+augroup lsp_servers
+    autocmd!
+    if system('uv run pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
+        autocmd User lsp_setup call lsp#register_server({
+            \ 'name': 'pylsp',
+            \ 'cmd': {server_info->['uv', 'run', 'pylsp']},
+            \ 'allowlist': ['python'],
+            \ })
+    " This is to handle the venv case
+    " XXX BW 2025-11-24: Should this use executable?
+    elseif system('pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
+        autocmd User lsp_setup call lsp#register_server({
+            \ 'name': 'pylsp',
+            \ 'cmd': {server_info->['pylsp']},
+            \ 'allowlist': ['python'],
+            \ })
+    endif
 
-" npm install -g @vtsls/language-server
-if executable('vtsls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'vtsls',
-        \ 'cmd': {server_info->['vtsls', '--stdio']},
-        \ 'allowlist': ['typescript', 'typescriptreact'],
-        \ })
-endif
+    " npm install -g @vtsls/language-server
+    if executable('vtsls')
+        autocmd User lsp_setup call lsp#register_server({
+            \ 'name': 'vtsls',
+            \ 'cmd': {server_info->['vtsls', '--stdio']},
+            \ 'allowlist': ['typescript', 'typescriptreact'],
+            \ })
+    endif
+augroup END
 
 " XXX BW 2025-11-21: Use this and get symbol search working. Or try something
 " else. Or just use ctags for this?
@@ -1502,7 +1506,7 @@ function! AiderAddCurrentFile()
     endif
   endfor
   if empty(l:aider_pane)
-    echo "Aider is not running!"
+    echo 'Aider is not running!'
     return
   endif
 
@@ -1523,8 +1527,8 @@ nnoremap <silent> <leader>aa :call AiderAddCurrentFile()<CR>
 function! TodosSince(branch)
   " This magic AWK command is fully GPT-4.1/Aider's work.
   let l:awk_cmd = "'/^diff --git/ {filename = $4} /^@@/ {split($0, a, \" \"); split(a[3], b, \",\"); start = substr(b[1], 2); lineno = start - 1} /^\\+/ && !/^\\+\\+\\+/ {if ($0 ~ /(TODO|XXX|FIXME)/) {sub(/^[ab]\\//, \"\", filename); print filename \":\" lineno+1 \":\" substr($0, 2)} lineno++}'"
-  let l:cmd = "git diff --unified=0 " . a:branch . "...HEAD | awk " . l:awk_cmd
-  execute "cexpr systemlist(" . string(l:cmd) . ")"
+  let l:cmd = 'git diff --unified=0 ' . a:branch . '...HEAD | awk ' . l:awk_cmd
+  execute 'cexpr systemlist(' . string(l:cmd) . ')'
   copen
 endfunction
 command! -nargs=1 TodosSince call TodosSince(<f-args>)
