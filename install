@@ -4,11 +4,6 @@ IFS=$'\n\t'
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Check if sudo is available and working
-can_sudo() {
-  command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null
-}
-
 # XXX want to automatically handle setting up Gem and Ruby ctags:
 # - see https://thoughtbot.com/upcase/videos/intelligent-navigation-with-ctags
 #
@@ -23,14 +18,6 @@ can_sudo() {
 # gem ctags
 
 main() {
-  # Request `sudo` access pre-emptively, so password isn't re-prompted for at
-  # some arbitrary time for later uses of `sudo`.
-  if can_sudo; then
-    sudo true
-  else
-    echo "Note: sudo not available, skipping privileged operations"
-  fi
-
   cd "${BASEDIR}"
 
   # Copy example private environment variables file (if needed), so these can
@@ -87,10 +74,10 @@ install_dependencies() {
   # Required for `interactive.singleKey` Git option.
   # XXX On last install, cpan required configuration but could do this
   # automatically by typing `yes` - automate this?
-  # XXX Requires sudo, skipping in non-privileged mode
+  # Commented for now as we can't rely on sudo access.
   # run sudo cpan Term::ReadKey
 
-  # XXX Requires sudo, skipping in non-privileged mode
+  # Commented for now as we can't rely on sudo access.
   # run sudo pip install autopep8 ipdb grip pgcli
 
   # Need `rbenv shell system` so Tmuxinator is installed for system Ruby, and
@@ -172,7 +159,7 @@ link_files() {
   # run sudo ln -sf "$DOTFILES"/etc/pacman.conf /etc/pacman.conf
 
   # Primarily so `etckeeper` (which runs as `root`) uses my Git config.
-  # XXX Requires sudo, skipping in non-privileged mode
+  # Commented for now as we can't rely on sudo access.
   # run sudo ln -sf ~bob/.gitconfig ~root
   :
 }
@@ -181,7 +168,7 @@ tweak_system_files() {
   # It's possible a global, system Zshrc will exist (possibly due to updating
   # system and an updated version of this also being updated); move this out
   # the way if so, so it doesn't interfere with my own config.
-  # XXX Requires sudo, skipping in non-privileged mode
+  # Commented for now as we can't rely on sudo access.
   # if [ -f /etc/zsh/zshrc ]; then
   #   run sudo mv -f /etc/zsh/zshrc{,.bak}
   # fi
