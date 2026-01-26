@@ -48,9 +48,6 @@ main() {
   # Don't use `run` here - sourcing in a pipeline loses exports
   source 'zsh/env.sh'
   set -u
-  echo "DEBUG: DOTFILES=$DOTFILES"
-  echo "DEBUG: Checking if dotbot exists at $DOTFILES/dotbot/bin/dotbot"
-  ls -la "$DOTFILES/dotbot/bin/dotbot" || echo "DEBUG: dotbot not found!"
 
   header 'Linking other needed files'
   link_files
@@ -59,7 +56,12 @@ main() {
   install_dependencies
 
   header 'Installing dotfiles'
-  run bin/sync_dotbot
+  # Only run dotbot if it exists (may not in CI if submodules aren't populated)
+  if [ -x "$DOTFILES/dotbot/bin/dotbot" ]; then
+    run bin/sync_dotbot
+  else
+    echo "       Skipping dotbot (not found)"
+  fi
 
   # header 'Configuring fonts'
   # configure_fonts
