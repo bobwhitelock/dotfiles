@@ -30,13 +30,13 @@ main() {
 abort_if_dirty_repo() {
     set +e
     git diff-index --quiet --cached HEAD
-    # shellcheck disable=SC2181 # auto-suppressed when enabling Shellcheck
+    # shellcheck disable=SC2181 # Auto-suppressed when enabling Shellcheck.
     if [[ $? -ne 0 ]]; then
         echo "You have staged but not committed changes that would be lost! Aborting."
         exit 1
     fi
     git diff-files --quiet
-    # shellcheck disable=SC2181 # auto-suppressed when enabling Shellcheck
+    # shellcheck disable=SC2181 # Auto-suppressed when enabling Shellcheck.
     if [[ $? -ne 0 ]]; then
         echo "You have unstaged changes that would be lost! Aborting."
         exit 1
@@ -75,7 +75,7 @@ run_tests() {
 
 log_command() {
     debug "=> $*"
-    # shellcheck disable=SC2294 # auto-suppressed when enabling Shellcheck
+    # shellcheck disable=SC2294 # Auto-suppressed when enabling Shellcheck.
     eval "$@"
 }
 

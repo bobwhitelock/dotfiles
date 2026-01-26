@@ -206,12 +206,12 @@ _gre_on_latest() {
         # Only suggest rebasing on one of these branches, when they exist, as
         # this is almost always what I want.
         local -a branches
-        # shellcheck disable=SC2207 # auto-suppressed when enabling Shellcheck
+        # shellcheck disable=SC2207 # Auto-suppressed when enabling Shellcheck.
         branches=($(
             git for-each-ref --format='%(refname:short)' refs/heads/ |
             grep -E '^(main|master|candidate|release)$'
         ))
-        # shellcheck disable=SC2068 # auto-suppressed when enabling Shellcheck
+        # shellcheck disable=SC2068 # Auto-suppressed when enabling Shellcheck.
         compadd -- ${branches[@]}
     else
         # Only suggest these 2 `rebase` options or nothing, as these are the

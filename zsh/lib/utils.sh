@@ -84,7 +84,7 @@ echoerr() {
 # Usage: `inplace some update file`, to apply `some update` to `file` and write
 # the output back to the same file.
 inplace() {
-    # shellcheck disable=SC2124 # auto-suppressed when enabling Shellcheck
+    # shellcheck disable=SC2124 # Auto-suppressed when enabling Shellcheck.
     local file="${@: -1}"
     local tmp
     tmp=$(mktemp)
