@@ -49,6 +49,12 @@ main() {
   source 'zsh/env.sh'
   set -u
 
+  header 'Linking other needed files'
+  link_files
+
+  header 'Installing dependencies'
+  install_dependencies
+
   header 'Setting up Vim'
   setup_vim
 
