@@ -20,6 +20,11 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 main() {
   cd "${BASEDIR}"
 
+  # Commented for now as we can't rely on sudo access.
+  # Request `sudo` access pre-emptively, so password isn't re-prompted for at
+  # some arbitrary time for later uses of `sudo`.
+  # sudo true
+
   # Copy example private environment variables file (if needed), so these can
   # be set but not committed.
   if [ ! -f zsh/env.private.sh ]; then
