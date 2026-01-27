@@ -100,9 +100,10 @@ install_dependencies() {
   # run 'xargs yay -S --noconfirm --noredownload --norebuild < dependencies/aur'
 
   # XXX Should all these be installed - could break things?
-  if command -v yarn >/dev/null 2>&1; then
-    run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test prettier
-  fi
+  # Commented for now as these are optional and may fail in CI
+  # if command -v yarn >/dev/null 2>&1; then
+  #   run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test prettier
+  # fi
 
   # Required for `interactive.singleKey` Git option.
   # XXX On last install, cpan required configuration but could do this
