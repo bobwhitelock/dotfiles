@@ -56,27 +56,13 @@ main() {
   install_dependencies
 
   header 'Installing dotfiles'
-  # Only run dotbot if it exists (may not in CI if submodules aren't populated)
-  if [ -x "$DOTFILES/dotbot/bin/dotbot" ]; then
-    set +e
-    run bin/sync_dotbot
-    dotbot_status=$?
-    set -e
-    if [ $dotbot_status -ne 0 ]; then
-      echo "       Dotbot exited with status $dotbot_status, continuing anyway"
-    fi
-  else
-    echo "       Skipping dotbot (not found at $DOTFILES/dotbot/bin/dotbot)"
-  fi
+  run bin/sync_dotbot
 
   header 'Setting up Vim'
   setup_vim
 
   header 'Setting up Tmux'
-  # Only run if tpm is installed
-  if [ -x ~/.tmux/plugins/tpm/bin/install_plugins ]; then
-    run ~/.tmux/plugins/tpm/bin/install_plugins
-  fi
+  run ~/.tmux/plugins/tpm/bin/install_plugins
 
   header 'Tweaking system files'
   tweak_system_files
