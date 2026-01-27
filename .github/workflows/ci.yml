@@ -27,42 +27,8 @@ jobs:
           ln -s ${{ github.workspace }} ~/src/bobwhitelock/dotfiles
       - name: Run install script
         run: |
-          set -x
-          # Test each part of install manually
           cd ~/src/bobwhitelock/dotfiles
-          failed=""
-
-          echo "=== Creating placeholder dirs ==="
-          mkdir -p ~/src/bobwhitelock/dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell} || failed="$failed placeholder_dirs"
-          mkdir -p ~/src/bobwhitelock/claude-plans || failed="$failed claude_plans"
-
-          echo "=== Copying env.private ==="
-          cp zsh/env.private.example.sh zsh/env.private.sh || failed="$failed env_private"
-
-          echo "=== Sourcing env.sh ==="
-          source zsh/env.sh || failed="$failed env_sh"
-          echo "DOTFILES=$DOTFILES"
-
-          echo "=== Git submodule update ==="
-          git submodule update --init --recursive || failed="$failed submodule"
-
-          echo "=== Checking dotbot ==="
-          ls -la "$DOTFILES/dotbot/bin/dotbot" || failed="$failed dotbot_check"
-
-          echo "=== Running dotbot ==="
-          bin/sync_dotbot || failed="$failed dotbot"
-
-          echo "=== Vim setup ==="
-          mkdir -p vim/{session,undodir,view} || failed="$failed vim_dirs"
-
-          echo "=== Tmux plugin install ==="
-          ~/.tmux/plugins/tpm/bin/install_plugins || failed="$failed tpm"
-
-          echo "=== Done ==="
-          if [ -n "$failed" ]; then
-            echo "FAILED STEPS:$failed"
-            exit 1
-          fi
+          ./install
       - name: Verify zsh loads without errors
         run: |
           # Run zsh with our config and check for any output (errors/warnings)
