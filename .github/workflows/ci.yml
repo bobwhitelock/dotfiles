@@ -26,7 +26,9 @@ jobs:
           mkdir -p ~/src/bobwhitelock
           ln -s ${{ github.workspace }} ~/src/bobwhitelock/dotfiles
       - name: Run install script
-        run: ./install
+        run: |
+          set -x
+          ./install
       - name: Verify zsh loads without errors
         run: |
           # Run zsh with our config and check for any output (errors/warnings)
