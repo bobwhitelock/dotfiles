@@ -59,18 +59,24 @@
 
 # Link in any files from `dotfiles-private`; in separate `link` section for
 # clarity and to avoid clashes in destination dir names with above.
+# Use ignore-missing so dotbot doesn't fail when dotfiles-private isn't available.
 - link:
     ~/.tmuxinator:
       path: ../dotfiles-private/tmuxinator/*
       glob: true
+      ignore-missing: true
     ~/bin/:
       path: ../dotfiles-private/bin/*
       glob: true
+      ignore-missing: true
     ~/.aws/config:
       path: ../dotfiles-private/aws/config
+      ignore-missing: true
     ~/.config/io.datasette.llm/:
       path: ../dotfiles-private/config/io.datasette.llm/*
       glob: true
+      ignore-missing: true
     ~/.vim/spell:
       path: ../dotfiles-private/vim/spell
       glob: true
+      ignore-missing: true
