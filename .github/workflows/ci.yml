@@ -34,10 +34,34 @@ jobs:
       - name: Verify zsh loads without errors
         run: |
           set -x
-          echo "DOTFILES location:"
-          ls -la ~/src/bobwhitelock/dotfiles/zsh/
-          echo "---"
-          # Run zsh with our config and check for any output (errors/warnings)
+          echo "=== Testing zsh lib files individually ==="
+          export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
+          export ZSH_DIR="$DOTFILES/zsh"
+          export ZSH_LIB="$ZSH_DIR/lib"
+
+          # First test env.sh alone
+          echo "Testing env.sh..."
+          output=$(zsh -c "source '$ZSH_DIR/env.sh'" 2>&1) || true
+          if [ -n "$output" ]; then
+            echo "env.sh produced output: $output"
+          fi
+
+          # Test each lib file
+          for f in "$ZSH_LIB"/*; do
+            fname=$(basename "$f")
+            output=$(zsh -c "
+              source '$ZSH_DIR/env.sh'
+              source '$f'
+            " 2>&1) || true
+            if [ -n "$output" ]; then
+              echo "ERROR: $fname produced output:"
+              echo "$output"
+            else
+              echo "OK: $fname"
+            fi
+          done
+
+          echo "=== Full zsh load test ==="
           output=$(zsh -c '
             export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
             export ZSH_DIR="$DOTFILES/zsh"
