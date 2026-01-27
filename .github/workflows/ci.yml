@@ -27,10 +27,16 @@ jobs:
           ln -s ${{ github.workspace }} ~/src/bobwhitelock/dotfiles
       - name: Run install script
         run: |
+          set -x
           cd ~/src/bobwhitelock/dotfiles
           ./install
+          echo "Install script completed successfully"
       - name: Verify zsh loads without errors
         run: |
+          set -x
+          echo "DOTFILES location:"
+          ls -la ~/src/bobwhitelock/dotfiles/zsh/
+          echo "---"
           # Run zsh with our config and check for any output (errors/warnings)
           output=$(zsh -c '
             export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
