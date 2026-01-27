@@ -18,11 +18,27 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # gem ctags
 
 main() {
+  cd "${BASEDIR}"
+
+  # Commented for now as we can't rely on sudo access.
   # Request `sudo` access pre-emptively, so password isn't re-prompted for at
   # some arbitrary time for later uses of `sudo`.
-  sudo true
+  # sudo true
 
-  cd "${BASEDIR}"
+  # Create directories that dotbot expects if they don't exist
+  # (e.g. dotfiles-private repo may not be cloned yet)
+  # Use BASEDIR to ensure paths work regardless of where dotfiles is checked out
+  local dotfiles_private="$BASEDIR/../dotfiles-private"
+  if [ ! -d "$dotfiles_private" ]; then
+    header 'Creating placeholder dotfiles-private directories'
+    run mkdir -p "$dotfiles_private"/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
+    # Create placeholder files that dotbot expects (not just directories)
+    run touch "$dotfiles_private/aws/config"
+  fi
+  if [ ! -d ~/src/bobwhitelock/claude-plans ]; then
+    header 'Creating placeholder claude-plans directory'
+    run mkdir -p ~/src/bobwhitelock/claude-plans
+  fi
 
   # Copy example private environment variables file (if needed), so these can
   # be set but not committed.
@@ -33,7 +49,8 @@ main() {
 
   set +u
   # shellcheck disable=SC1091
-  run source 'zsh/env.sh'
+  # Don't use `run` here - sourcing in a pipeline loses exports
+  source 'zsh/env.sh'
   set -u
 
   header 'Linking other needed files'
@@ -43,16 +60,32 @@ main() {
   install_dependencies
 
   header 'Installing dotfiles'
+  set +e
   run bin/sync_dotbot
-
-  # header 'Configuring fonts'
-  # configure_fonts
+  dotbot_status=$?
+  set -e
+  if [ $dotbot_status -ne 0 ]; then
+    echo "       ERROR: dotbot failed with status $dotbot_status"
+    exit 1
+  fi
 
   header 'Setting up Vim'
   setup_vim
 
   header 'Setting up Tmux'
-  run ~/.tmux/plugins/tpm/bin/install_plugins
+  # tpm needs tmux to install plugins
+  if command -v tmux >/dev/null 2>&1; then
+    set +e
+    run ~/.tmux/plugins/tpm/bin/install_plugins
+    tpm_status=$?
+    set -e
+    if [ $tpm_status -ne 0 ]; then
+      echo "       ERROR: tpm install failed with status $tpm_status"
+      exit 1
+    fi
+  else
+    echo "       Skipping tmux plugin install (tmux not installed)"
+  fi
 
   header 'Tweaking system files'
   tweak_system_files
@@ -71,14 +104,19 @@ install_dependencies() {
   # run 'xargs yay -S --noconfirm --noredownload --norebuild < dependencies/aur'
 
   # XXX Should all these be installed - could break things?
-  run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test prettier
+  # Commented for now as these are optional and may fail in CI
+  # if command -v yarn >/dev/null 2>&1; then
+  #   run yarn global add elm elm-format@exp create-elm-app elm-oracle elm-test prettier
+  # fi
 
   # Required for `interactive.singleKey` Git option.
   # XXX On last install, cpan required configuration but could do this
   # automatically by typing `yes` - automate this?
-  run sudo cpan Term::ReadKey
+  # Commented for now as we can't rely on sudo access.
+  # run sudo cpan Term::ReadKey
 
-  run sudo pip install autopep8 ipdb grip pgcli
+  # Commented for now as we can't rely on sudo access.
+  # run sudo pip install autopep8 ipdb grip pgcli
 
   # Need `rbenv shell system` so Tmuxinator is installed for system Ruby, and
   # need to do this via `zsh -ic` so this is done in an interactive shell and
@@ -133,8 +171,13 @@ configure_fonts() {
 
 setup_vim() {
   run mkdir -p vim/{session,undodir,view}
-  run "vim +':PlugClean | :PlugInstall | :PlugUpdate | :qa!'"
-  run 'cd ~/.config/coc/extensions && yarn install'
+  # Only run vim plugin install if vim is available and we're in a terminal
+  if command -v vim >/dev/null 2>&1 && [ -t 0 ]; then
+    run "vim +':PlugClean | :PlugInstall | :PlugUpdate | :qa!'"
+  fi
+  if [ -d ~/.config/coc/extensions ] && command -v yarn >/dev/null 2>&1; then
+    run 'cd ~/.config/coc/extensions && yarn install'
+  fi
 }
 
 link_files() {
@@ -155,20 +198,24 @@ link_files() {
   # run sudo ln -sf "$DOTFILES"/etc/pacman.conf /etc/pacman.conf
 
   # Primarily so `etckeeper` (which runs as `root`) uses my Git config.
-  run sudo ln -sf ~bob/.gitconfig ~root
+  # Commented for now as we can't rely on sudo access.
+  # run sudo ln -sf ~bob/.gitconfig ~root
+  :
 }
 
 tweak_system_files() {
   # It's possible a global, system Zshrc will exist (possibly due to updating
   # system and an updated version of this also being updated); move this out
   # the way if so, so it doesn't interfere with my own config.
-  if [ -f /etc/zsh/zshrc ]; then
-    run sudo mv -f /etc/zsh/zshrc{,.bak}
-  fi
+  # Commented for now as we can't rely on sudo access.
+  # if [ -f /etc/zsh/zshrc ]; then
+  #   run sudo mv -f /etc/zsh/zshrc{,.bak}
+  # fi
 
   # Make this from `git-extras` non-executable, so own alias takes precedence.
   # XXX `git-extras` is not currently installed.
   # run sudo chmod -x /usr/bin/git-touch
+  :
 }
 
 # XXX Obsolete, was for Arch (using "Gnome tweaks" for same effect on Ubuntu

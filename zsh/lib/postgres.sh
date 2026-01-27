@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 alias psql='psql -U postgres'
 alias pgcli='pgcli -U postgres'

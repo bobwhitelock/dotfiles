@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+# shellcheck disable=SC2034,SC2154,SC1090,SC1091 # Auto-suppressed when enabling Shellcheck.
 
 PACKAGES_DIR="$DOTFILES/zsh/packages"
 

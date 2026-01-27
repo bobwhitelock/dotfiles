@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 # rsync="rsync -r --copy-links --delete --perms --human-readable --progress --exclude .git"
 rsync="rsync -r --copy-links --delete --perms --human-readable --progress"

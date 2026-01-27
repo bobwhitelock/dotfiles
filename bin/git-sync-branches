@@ -25,4 +25,3 @@ _sync_branch() {
 
 
 main "$@"
-

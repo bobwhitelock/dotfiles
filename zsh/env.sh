@@ -1,5 +1,4 @@
-
-export ZSH_DIR="$DOTFILES/zsh"
+# shellcheck shell=bash
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
@@ -47,6 +46,7 @@ export ALCES="$SRC/alces-software"
 # Duplicated from `zshrc` in case source this file directly.
 export DOTFILES="$BOB/dotfiles"
 
+export ZSH_DIR="$DOTFILES/zsh"
 export LIBEXEC="$DOTFILES/libexec"
 
 export GITHUB_USER='bobwhitelock'
@@ -84,7 +84,7 @@ export SHELLCHECK_OPTS='--shell=bash'
 export PYTHONBREAKPOINT=ipdb.set_trace
 
 # Load private environment variables if present.
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 source "$ZSH_DIR/env.private.sh" 2> /dev/null
 
 export LINODE_CLI_TOKEN="$LINODE_TOKEN"

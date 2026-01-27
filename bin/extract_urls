@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import sys
 import re
+import sys
 
 # Extract URLs from a file given as the first argument, or stdin, and output
 # one URL per line.
@@ -11,7 +11,7 @@ URL_PATTERN = r'https?://[^\s<>"{}|\\^`\[\]()]+'
 
 def main():
     if len(sys.argv) > 1:
-        with open(sys.argv[1], "r") as f:
+        with open(sys.argv[1]) as f:
             extract_urls_from_lines(f)
     else:
         extract_urls_from_lines(sys.stdin)

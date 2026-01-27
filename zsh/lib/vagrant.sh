@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 alias v='vagrant'
 alias vs='vagrant status'

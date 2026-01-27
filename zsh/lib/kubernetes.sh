@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 alias k='kubectl'
 alias kcontexts='k config get-contexts'
@@ -7,6 +8,9 @@ alias kcontexts='k config get-contexts'
 # so this is actually helpful.
 # TODO BW 2025-10-23: Alternatively could switch to just have a FZF alias to
 # allow selecting a Kubernetes context?
-while IFS= read -r context; do
-  alias "$context=k config use-context $context"
-done < <(k config get-contexts -o name)
+if command -v kubectl >/dev/null 2>&1; then
+  while IFS= read -r context; do
+    # shellcheck disable=SC2139 # Auto-suppressed when enabling Shellcheck.
+    alias "$context=k config use-context $context"
+  done < <(k config get-contexts -o name 2>/dev/null)
+fi

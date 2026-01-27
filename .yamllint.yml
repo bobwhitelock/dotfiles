@@ -1,0 +1,20 @@
+extends: default
+
+# tmuxinator files use ERB templating which makes them invalid YAML
+ignore:
+  - tmuxinator/
+
+rules:
+  line-length:
+    max: 150
+  truthy:
+    check-keys: false
+  document-start: disable
+  comments:
+    min-spaces-from-content: 1
+  empty-lines:
+    max-start: 1
+  indentation:
+    indent-sequences: whatever
+  comments-indentation: disable
+  key-duplicates: disable

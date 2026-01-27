@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 which_edit() {
     # shellcheck disable=SC2230

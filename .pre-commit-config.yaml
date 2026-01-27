@@ -1,0 +1,50 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-executables-have-shebangs
+
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.28.4
+    hooks:
+      - id: typos
+
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.10.0
+    hooks:
+      - id: shellcheck
+        args: ["-x"]  # follow source statements
+        files: \.(sh|bash)$|^bin/|^libexec/
+        exclude: \.(py|pl)$|colours-to-rgb|extract_urls|git-ls-revisions|stripcolours|todoist-to-markdown|env\.private\.example\.sh
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.6
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.14.1
+    hooks:
+      - id: mypy
+        additional_dependencies: []
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: [-c, .yamllint.yml]
+
+  - repo: local
+    hooks:
+      - id: vint
+        name: vint
+        entry: vint
+        language: python
+        additional_dependencies: [vim-vint]
+        files: \.vim$|vimrc$|gvimrc$

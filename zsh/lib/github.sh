@@ -1,8 +1,10 @@
+# shellcheck shell=bash
 
 alias co="gh copilot"
 alias grip="grip --browser --user \"\$GITHUB_USER\" --pass \"\$GITHUB_PASSWORD\""
 
 # Pass `-R REPO_NAME` to just backup a single repo (much quicker).
+# shellcheck disable=SC2027,SC2139,SC2086 # Auto-suppressed when enabling Shellcheck.
 alias gh_backup="github-backup bobwhitelock -u bobwhitelock -o ~/github-backups --all --private --skip-archived --token "$GITHUB_CLI_TOKEN_PERSONAL""
 
 gh_login_personal() {

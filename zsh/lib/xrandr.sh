@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 xrandr_off() {
     for arg in "$@"; do

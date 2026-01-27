@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 docker_debug() {
     local container_hash debug_name

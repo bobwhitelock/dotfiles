@@ -1,0 +1,42 @@
+version: '3'
+
+tasks:
+  dev:
+    desc: Install development dependencies
+    cmds:
+      - pipx install pre-commit vint
+
+  # TODO BW 2026-01-26: Add install and other scripts in here instead? Though
+  # then need `task` installed first.
+
+  lint:
+    desc: Run all linters
+    cmds:
+      - pre-commit run --all-files
+
+  integration:
+    desc: Run install script and verify zsh loads cleanly
+    cmds:
+      - ./install
+      - |
+        output=$(zsh -c '
+          export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
+          export ZSH_DIR="$DOTFILES/zsh"
+          export ZSH_LIB="$ZSH_DIR/lib"
+          source "$ZSH_DIR/env.sh"
+          for f in "$ZSH_LIB"/*; do
+            source "$f"
+          done
+        ' 2>&1) || true
+        if [ -n "$output" ]; then
+          echo "ERROR: zsh produced unexpected output:"
+          echo "$output"
+          exit 1
+        fi
+        echo "zsh loaded successfully with no output"
+
+  ci:
+    desc: Full CI pipeline
+    cmds:
+      - task: lint
+      - task: integration

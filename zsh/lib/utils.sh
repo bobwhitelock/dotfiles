@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 # Misc aliases.
 alias cat='bat'
@@ -83,8 +84,10 @@ echoerr() {
 # Usage: `inplace some update file`, to apply `some update` to `file` and write
 # the output back to the same file.
 inplace() {
+    # shellcheck disable=SC2124 # Auto-suppressed when enabling Shellcheck.
     local file="${@: -1}"
-    local tmp=$(mktemp)
+    local tmp
+    tmp=$(mktemp)
     "$@" > "$tmp" && mv "$tmp" "$file"
 }
 
@@ -142,7 +145,8 @@ def() {
             echo "No git alias or command found: $git_alias"
         fi
     else
-        local type_output=$(type "$name" 2>/dev/null)
+        local type_output
+        type_output=$(type "$name" 2>/dev/null)
         echo "$type_output"
 
         # Shell function
@@ -158,9 +162,11 @@ def() {
         #   cbcopy is an alias for xclip -selection clipboard
         # Skip additional processing for aliases since type already shows the definition
         elif [[ ! "$type_output" =~ "is an alias" ]]; then
-            local path=$(which "$name" 2>/dev/null)
+            local path
+            path=$(which "$name" 2>/dev/null)
             if [[ -n "$path" && -f "$path" ]]; then
-                local file_type=$(/usr/bin/file "$path" 2>/dev/null)
+                local file_type
+                file_type=$(/usr/bin/file "$path" 2>/dev/null)
                 # Script or text file - show content with syntax highlighting
                 if [[ "$file_type" =~ "script" || "$file_type" =~ "text" ]]; then
                     /usr/bin/batcat --color always "$path" | /usr/bin/less -R
@@ -172,9 +178,11 @@ def() {
                 #   [... script content with syntax highlighting ...]
                 elif [[ "$file_type" =~ "symbolic link" ]]; then
                     echo "$file_type"
-                    local target=$(/usr/bin/readlink -f "$path")
+                    local target
+                    target=$(/usr/bin/readlink -f "$path")
                     if [[ -f "$target" ]]; then
-                        local target_type=$(/usr/bin/file "$target" 2>/dev/null)
+                        local target_type
+                        target_type=$(/usr/bin/file "$target" 2>/dev/null)
                         # Target is a script - show its content
                         # Example: $ def gs
                         #   gs is /home/bob/bin/gs

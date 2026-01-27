@@ -9,7 +9,7 @@ IFS=$'\n\t'
 main() {
     local current_window new_window
 
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     source "$ZSH_LIB/tmux.sh"
 
     # shellcheck disable=SC2063

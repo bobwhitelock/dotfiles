@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 
 alias sshaddbob='ssh-add ~/.ssh/id_rsa.bob'
 alias sshaddrescale='ssh-add ~/.ssh/rescale'
@@ -17,7 +18,8 @@ start_or_reuse_ssh_agent() {
     # Start ssh-agent and share this between shells. From
     # https://unix.stackexchange.com/a/217223/229081.
     if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-      eval `ssh-agent`
+      # shellcheck disable=SC2046 # Auto-suppressed when enabling Shellcheck.
+      eval $(ssh-agent)
       ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
     fi
     export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock

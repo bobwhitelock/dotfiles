@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: pre-commit/action@v3.0.1
+
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y zsh vim tmux
+      - name: Setup environment
+        run: |
+          mkdir -p ~/src/bobwhitelock
+          ln -s ${{ github.workspace }} ~/src/bobwhitelock/dotfiles
+      - name: Run install script
+        run: |
+          set -x
+          cd ~/src/bobwhitelock/dotfiles
+          ./install
+          echo "Install script completed successfully"
+      - name: Verify zsh loads without errors
+        run: |
+          set -x
+          echo "=== Testing zsh lib files individually ==="
+          export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
+          export ZSH_DIR="$DOTFILES/zsh"
+          export ZSH_LIB="$ZSH_DIR/lib"
+
+          # First test env.sh alone
+          echo "Testing env.sh..."
+          output=$(zsh -c "source '$ZSH_DIR/env.sh'" 2>&1) || true
+          if [ -n "$output" ]; then
+            echo "env.sh produced output: $output"
+          fi
+
+          # Test each lib file
+          for f in "$ZSH_LIB"/*; do
+            fname=$(basename "$f")
+            output=$(zsh -c "
+              source '$ZSH_DIR/env.sh'
+              source '$f'
+            " 2>&1) || true
+            if [ -n "$output" ]; then
+              echo "ERROR: $fname produced output:"
+              echo "$output"
+            else
+              echo "OK: $fname"
+            fi
+          done
+
+          echo "=== Full zsh load test ==="
+          output=$(zsh -c '
+            export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
+            export ZSH_DIR="$DOTFILES/zsh"
+            export ZSH_LIB="$ZSH_DIR/lib"
+            source "$ZSH_DIR/env.sh"
+            for f in "$ZSH_LIB"/*; do
+              source "$f"
+            done
+          ' 2>&1) || true
+
+          if [ -n "$output" ]; then
+            echo "ERROR: zsh produced unexpected output:"
+            echo "$output"
+            exit 1
+          fi
+          echo "zsh loaded successfully with no output"

@@ -1,5 +1,6 @@
+scriptencoding utf-8
 
-" Highlight heredoc with particular delimeter's as the language within them.
+" Highlight heredoc with particular delimiter's as the language within them.
 call SyntaxRange#Include('^.*<<[-~]HTML.*$', 'HTML', 'html', 'NonText')
 " XXX Commented for now to avoid infinite recursion in syntax file loading ಠ_ಠ
 " call SyntaxRange#Include('^.*<<[-~]RUBY.*$', 'RUBY', 'ruby', 'NonText')

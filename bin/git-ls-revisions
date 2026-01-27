@@ -3,7 +3,6 @@
 import operator
 import subprocess
 
-
 # Lists all tracked files in repo along with the number of commits which have
 # changed them, in order from most to least.
 
@@ -13,34 +12,26 @@ import subprocess
 
 
 def main():
-    tracked_files = output_lines(
-        ['git', 'ls-tree', '--full-tree', '--name-only', '-r', 'HEAD']
-    )
+    tracked_files = output_lines(["git", "ls-tree", "--full-tree", "--name-only", "-r", "HEAD"])
 
     file_to_revisions = {}
     for file in tracked_files:
         try:
-            revisions = output_lines(
-                ['git', 'log', '--oneline', '--follow', file]
-            )
+            revisions = output_lines(["git", "log", "--oneline", "--follow", file])
             file_to_revisions[file] = len(revisions)
         except subprocess.CalledProcessError as ex:
             print(ex)
 
-    sorted_files = sorted(
-        file_to_revisions.items(),
-        key=operator.itemgetter(1),
-        reverse=True
-    )
+    sorted_files = sorted(file_to_revisions.items(), key=operator.itemgetter(1), reverse=True)
 
     for file, revision_count in sorted_files:
-        print('{} - {}'.format(file, revision_count))
+        print(f"{file} - {revision_count}")
 
 
 def output_lines(command):
     output = subprocess.check_output(command, universal_newlines=True)
-    return [line for line in output.split('\n') if len(line) > 0]
+    return [line for line in output.split("\n") if len(line) > 0]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
