@@ -27,9 +27,13 @@ main() {
 
   # Create directories that dotbot expects if they don't exist
   # (e.g. dotfiles-private repo may not be cloned yet)
-  if [ ! -d ~/src/bobwhitelock/dotfiles-private ]; then
+  # Use BASEDIR to ensure paths work regardless of where dotfiles is checked out
+  local dotfiles_private="$BASEDIR/../dotfiles-private"
+  if [ ! -d "$dotfiles_private" ]; then
     header 'Creating placeholder dotfiles-private directories'
-    run mkdir -p ~/src/bobwhitelock/dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
+    run mkdir -p "$dotfiles_private"/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
+    # Create placeholder files that dotbot expects (not just directories)
+    run touch "$dotfiles_private/aws/config"
   fi
   if [ ! -d ~/src/bobwhitelock/claude-plans ]; then
     header 'Creating placeholder claude-plans directory'
