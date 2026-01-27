@@ -62,7 +62,12 @@ main() {
   setup_vim
 
   header 'Setting up Tmux'
-  run ~/.tmux/plugins/tpm/bin/install_plugins
+  # tpm needs tmux to install plugins
+  if command -v tmux >/dev/null 2>&1; then
+    run ~/.tmux/plugins/tpm/bin/install_plugins
+  else
+    echo "       Skipping tmux plugin install (tmux not installed)"
+  fi
 
   header 'Tweaking system files'
   tweak_system_files
