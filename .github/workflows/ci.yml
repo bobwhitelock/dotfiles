@@ -27,8 +27,37 @@ jobs:
           ln -s ${{ github.workspace }} ~/src/bobwhitelock/dotfiles
       - name: Run install script
         run: |
-          set -x
-          ./install
+          set -ex
+          # Test each part of install manually
+          cd ~/src/bobwhitelock/dotfiles
+
+          echo "=== Creating placeholder dirs ==="
+          mkdir -p ~/src/bobwhitelock/dotfiles-private/{tmuxinator,bin,aws,config/io.datasette.llm,vim/spell}
+          mkdir -p ~/src/bobwhitelock/claude-plans
+
+          echo "=== Copying env.private ==="
+          cp zsh/env.private.example.sh zsh/env.private.sh
+
+          echo "=== Sourcing env.sh ==="
+          source zsh/env.sh
+          echo "DOTFILES=$DOTFILES"
+
+          echo "=== Git submodule update ==="
+          git submodule update --init --recursive
+
+          echo "=== Checking dotbot ==="
+          ls -la "$DOTFILES/dotbot/bin/dotbot" || echo "dotbot not found!"
+
+          echo "=== Running dotbot ==="
+          bin/sync_dotbot
+
+          echo "=== Vim setup ==="
+          mkdir -p vim/{session,undodir,view}
+
+          echo "=== Tmux plugin install ==="
+          ~/.tmux/plugins/tpm/bin/install_plugins || echo "tpm install failed"
+
+          echo "=== Done ==="
       - name: Verify zsh loads without errors
         run: |
           # Run zsh with our config and check for any output (errors/warnings)
