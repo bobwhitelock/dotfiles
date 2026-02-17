@@ -27,5 +27,5 @@ urls() {
     temp_file="$(mktemp)"
 
     faketty ./manage.py show_urls > "$temp_file"
-    batcat "$temp_file"
+    bat "$temp_file"
 }

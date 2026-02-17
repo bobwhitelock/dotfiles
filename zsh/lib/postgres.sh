@@ -15,5 +15,5 @@ pglog() {
     latest_log_path="$pg_logs/$latest_log"
 
     echo "$latest_log_path"
-    sudo tail -f "$latest_log_path" | batcat --paging=never -l sql
+    sudo tail -f "$latest_log_path" | bat --paging=never -l sql
 }

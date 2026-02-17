@@ -1,7 +1,6 @@
 
 # Misc aliases.
 alias cat='bat'
-alias bat='batcat' # Called this on Ubuntu, for some reason.
 alias df='df --human-readable'
 alias diff='diff --color=always'
 alias m='make'
@@ -52,7 +51,7 @@ du() {
 
 # "ripgrep pretty", i.e. with output always coloured and piped to `bat`.
 rgp() {
-    rg --pretty "$@" | batcat
+    rg --pretty "$@" | bat
 }
 
 # Swap 2 filenames around, if they exist (from
@@ -105,7 +104,7 @@ pshow() {
 # XXX BW 2025-09-22: Refactor/test this to make it more understandable
 # XXX BW 2025-09-22: Why do full paths need to be used in here otherwise
 # commands are not found?
-# XXX BW 2025-09-22: Could use `batcat --file-name` to show the alias details
+# XXX BW 2025-09-22: Could use `bat --file-name` to show the alias details
 # instead of `STDIN`?
 # XXX BW 2025-09-22: Could this go to a separate script? However it needs
 # access to shell environment for various finding commands to find the right
@@ -152,7 +151,7 @@ def() {
         #   	echo "$@" >&2
         #   }
         if [[ "$type_output" =~ "is a shell function" ]]; then
-            which "$name" 2>/dev/null | /usr/bin/batcat --language bash || true
+            which "$name" 2>/dev/null | /usr/bin/bat --language bash || true
         # Shell alias case is handled by type output alone
         # Example: $ def cbcopy
         #   cbcopy is an alias for xclip -selection clipboard
@@ -163,7 +162,7 @@ def() {
                 local file_type=$(/usr/bin/file "$path" 2>/dev/null)
                 # Script or text file - show content with syntax highlighting
                 if [[ "$file_type" =~ "script" || "$file_type" =~ "text" ]]; then
-                    /usr/bin/batcat --color always "$path" | /usr/bin/less -R
+                    /usr/bin/bat --color always "$path" | /usr/bin/less -R
                 # Symbolic link - show link info then target content
                 # Example: $ def gs
                 #   gs is /home/bob/bin/gs
@@ -183,7 +182,7 @@ def() {
                         #   [... script content with syntax highlighting ...]
                         # XXX BW 2025-09-22: This is the same as above - refactor
                         if [[ "$target_type" =~ "script" || "$target_type" =~ "text" ]]; then
-                            /usr/bin/batcat --color always "$target" | /usr/bin/less -R
+                            /usr/bin/bat --color always "$target" | /usr/bin/less -R
                         # Target is a binary - show file type info
                         # Example: $ def python3
                         #   python3 is /usr/bin/python3
