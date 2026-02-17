@@ -136,7 +136,6 @@ configure_fonts() {
 setup_vim() {
   run mkdir -p vim/{session,undodir,view}
   run "vim +':PlugClean | :PlugInstall | :PlugUpdate | :qa!'"
-  run 'cd ~/.config/coc/extensions && yarn install'
 }
 
 link_files() {

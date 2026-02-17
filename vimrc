@@ -68,10 +68,6 @@ let g:ale_python_pylint_options = '--rcfile ~/.pylintrc'
 " Single command (gw) for grabbing then swapping windows.
 Plug 'wesQ3/vim-windowswap'
 
-" Autocompletion.
-" XXX Was slowing things down? And also erroring sometimes
-Plug 'neoclide/coc.nvim', {'do': 'source /usr/share/nvm/init-nvm.sh && nvm use system && yarn install --frozen-lockfile'}
-
 " Reopen last-closed window (C-w u)
 Plug 'AndrewRadev/undoquit.vim'
 
@@ -589,8 +585,6 @@ set isfname-=#
 " Include tags from `.git/tags`.
 " set tags^=./.git/tags;
 
-" Other settings recommended by coc (https://github.com/neoclide/coc.nvim).
-set nowritebackup
 set cmdheight=2
 
 " Use vertical diffs by default.
