@@ -32,13 +32,6 @@ choose things rather than install everything if you're not me).
   source zshrc
 
   # Copy over private files, SSH keys, AWS credentials etc.
-
-  ssh-add ~/.ssh/id_rsa.bob
-  clone bobwhitelock/dotfiles-private
-
-  # Need to re-install to link in private files.
-  ./install
-
   ```
 
 3. Fix the things which will probably break/be incomplete in the above, and

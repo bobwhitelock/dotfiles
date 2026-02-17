@@ -139,8 +139,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/bob/perl5"; export PERL_MM_OPT;
 # attempting to do something in this environment such as sourcing a
 # virtualenv).
 source_libs() {
-    # XXX conditionally load private files?
-    for file in "$ZSH_PRIVATE_LIB"/* "$ZSH_LIB/"*; do
+    for file in "$ZSH_LIB/"*; do
         # shellcheck disable=SC1090
         source "$file"
     done

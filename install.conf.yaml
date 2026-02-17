@@ -54,21 +54,3 @@
     ~/.claude/plans:
       path: ~/src/bobwhitelock/claude-plans
     ~/.leetcode/leetcode.toml:
-
-# Link in any files from `dotfiles-private`; in separate `link` section for
-# clarity and to avoid clashes in destination dir names with above.
-- link:
-    ~/.tmuxinator:
-      path: ../dotfiles-private/tmuxinator/*
-      glob: true
-    ~/bin/:
-      path: ../dotfiles-private/bin/*
-      glob: true
-    ~/.aws/config:
-      path: ../dotfiles-private/aws/config
-    ~/.config/io.datasette.llm/:
-      path: ../dotfiles-private/config/io.datasette.llm/*
-      glob: true
-    ~/.vim/spell:
-      path: ../dotfiles-private/vim/spell
-      glob: true
