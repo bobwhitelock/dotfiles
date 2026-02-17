@@ -59,6 +59,8 @@ main() {
 
   # header 'Enabling services'
   # enable_services
+
+  echo "Install complete!"
 }
 
 install_dependencies() {
