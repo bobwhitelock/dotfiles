@@ -53,4 +53,5 @@
       glob: true
     ~/.claude/plans:
       path: ~/src/bobwhitelock/claude-plans
+      if: '[ -d ~/src/bobwhitelock/claude-plans ]'
     ~/.leetcode/leetcode.toml:
