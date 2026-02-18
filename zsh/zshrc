@@ -75,10 +75,13 @@ ttyctl -f
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# Have NVM automatically use `.nvmrc` if present - from
+# Have NVM automatically use `.nvmrc` if present - adapted from
 # https://github.com/nvm-sh/nvm#deeper-shell-integration.
 autoload -U add-zsh-hook
 load-nvmrc() {
+  # Early exit if `nvm` is not installed.
+  (( $+commands[nvm] )) || return
+
   local node_version="$(nvm version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
 
