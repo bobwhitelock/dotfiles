@@ -158,14 +158,15 @@ autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
 
-# Enable completions for various tools that provide these.
-eval "$(task --completion zsh)"
-eval "$(kubectl completion zsh)"
-eval "$(k9s completion zsh)"
-eval "$(gh completion --shell zsh)"
-eval "$(atuin gen-completions --shell zsh)"
-eval "$(xan completions zsh)"
-eval "$(leetcode completions)"
+# Enable completions for various tools that provide these, only if the tool is
+# installed.
+(( $+commands[task] )) && eval "$(task --completion zsh)"
+(( $+commands[kubectl] )) && eval "$(kubectl completion zsh)"
+(( $+commands[k9s] )) && eval "$(k9s completion zsh)"
+(( $+commands[gh] )) && eval "$(gh completion --shell zsh)"
+(( $+commands[atuin] )) && eval "$(atuin gen-completions --shell zsh)"
+(( $+commands[xan] )) && eval "$(xan completions zsh)"
+(( $+commands[leetcode] )) && eval "$(leetcode completions)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 [ -s /etc/bash_completion.d/azure-cli ] && \. /etc/bash_completion.d/azure-cli
 # source /etc/bash_completion.d/compleat_setup
