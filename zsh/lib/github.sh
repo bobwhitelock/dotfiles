@@ -9,10 +9,6 @@ gh_login_personal() {
     _gh_login id_rsa.bob "$GITHUB_CLI_TOKEN_PERSONAL"
 }
 
-gh_login_rescale() {
-    _gh_login id_bob-rescale "$GITHUB_CLI_TOKEN_RESCALE"
-}
-
 _gh_login() {
     local gh_key_name gh_cli_token
     gh_key_name="$1"

@@ -415,16 +415,6 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'tpope/vim-liquid'
 Plug 'othree/nginx-contrib-vim'
 Plug 'nvie/vim-flake8'
-" XXX Could replace this, maybe other things (vim-rubocop, Black etc?) with
-" just using ALE/COC?
-" Plug 'tell-k/vim-autopep8'
-" If Black gets out of sync with Rescale Black version, `rm -rf ~/.vim/black`,
-" `:PlugUpdate`, restart Vim outside of Rescale venv and run `:Black` to
-" reinstall this. (Will this always actually work? Is there a better way?)
-" Also see https://github.com/psf/black/issues/2547.
-" XXX Use this instead but does not work, figure out why and then can ensure
-" black versions in sync
-" let g:black_use_virtualenv = 0
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'yaymukund/vim-rabl'
 Plug 'ngmy/vim-rubocop'
@@ -610,9 +600,6 @@ augroup autocmds
   autocmd BufNewFile,BufRead *.todo set filetype=todo
   autocmd BufNewFile,BufRead .sqlfluff set filetype=confini
   autocmd BufNewFile,BufRead .terraformignore set filetype=gitignore
-
-  " Set Rescale Jenkins configs to be Jenkins-specific filetype.
-  autocmd BufNewFile,BufRead **/jenkins-jobs/**/*.groovy set filetype=Jenkinsfile
 
   " oh-my-zsh themes are shell.
   autocmd BufNewFile,BufRead *.zsh-theme set filetype=sh
@@ -1449,22 +1436,6 @@ function! FollowSymlink(...)
   endif
 endfunction
 command! ToggleFollowSymlink let w:no_resolve_symlink = !get(w:, 'no_resolve_symlink', 0) | echo "w:no_resolve_symlink =>" w:no_resolve_symlink
-
-" Edit a file for a new 1-to-1 meeting, with today's date. Assumes Vim has
-" been opened in my notes directory.
-" XXX Allow creating this file for days other than today. Alternatively have
-" this be created for one week after last 1-to-1, if that's in the future (and
-" otherwise create for today).
-function! s:OneToOne(with)
-  " XXX Have this be copied into new 1-to-1 file (and then cleared up), iff
-  " that doesn't already exist (in which case this is for next week)
-  let next_path = join(['reference/rescale/1-to-1s', a:with, 'next.md'])
-
-  let todays_file_name = strftime('%Y-%m-%d').'.md'
-  let path = join(['reference/rescale/1-to-1s', a:with, l:todays_file_name], '/')
-  execute 'edit '.l:path
-endfunction
-command! -nargs=1 OneToOne call s:OneToOne(<q-args>)
 
 function! s:ProfileVim(arg)
   let l:profile_file = 'profile.log'

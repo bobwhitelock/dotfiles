@@ -1,8 +1,4 @@
 
-" XXX Could conditionally do this based on the current file name, and only do
-" this in Rescale non-test web code/`unlet!` in other code?
-" let b:lumberjack_print_string = 'import logging; logger = logging.getLogger(__name__); logger.info(f"IDENTIFIER: {VALUE}")'
-
 augroup global_python_autocmds
   autocmd!
 

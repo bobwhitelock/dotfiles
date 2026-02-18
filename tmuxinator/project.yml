@@ -14,17 +14,12 @@ project_specific_setup = \
   if File.exist?("#{project_path}/package-lock.json")
     {npm: ["npm install", "npm start"]}
   elsif File.exist?("#{project_path}/Makefile")
-    # TODO BW 2025-09-03: This doesn't work for `rescale-platform-web` as that
-    # now has a Makefile, but the default command isn't the main task for the
-    # project.
     ["make"]
   else
     # Start an agentic coding tool here.
     # TODO BW 2025-10-02: This does mean this is mutually exclusive with above rather than additional to it.
-
-    "claude_rescale"
-    # Alternatively, one of these:
-    # "claude"
+    "claude"
+    # Alternatively use:
     # "aider"
     # TODO BW 2025-10-02: Make which of these is used automatic/configurable?
   end.to_json
