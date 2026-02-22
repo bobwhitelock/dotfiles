@@ -141,11 +141,11 @@ def format_date(date_str):
     return date_str
 
 
-def format_task_metadata_bullets(task):
+def format_task_metadata_bullets(task, include_url=True):
     bullets = []
 
     task_id = task.get('id')
-    if task_id:
+    if task_id and include_url:
         bullets.append(f"- URL: https://app.todoist.com/app/task/{task_id}")
 
     priority = task.get('priority')
@@ -270,36 +270,36 @@ def print_tasks_markdown(tasks, token, indent_level=0, file=None, output_root=""
     i3 = "  " * (indent_level + 3)
 
     for task in tasks:
-        content = task['content'].replace('\n', ' ')
+        content = task['content'].replace('\n', ' ').rstrip()
         print(f"{i0}- {content}", file=file)
 
-        for bullet in format_task_metadata_bullets(task):
+        for bullet in format_task_metadata_bullets(task, include_url=(indent_level == 0)):
             print(f"{i1}{bullet}", file=file)
 
         description = (task.get('description', '') or task.get('note', '')).strip()
         if description:
-            print(f"{i1}- Description", file=file)
+            print(f"{i1}- Description:", file=file)
             for line in description.split('\n'):
-                print(f"{i2}> {line}", file=file)
+                print(f"{i2}> {line}".rstrip(), file=file)
 
         if task.get('comments'):
             has_content = any(c.get('content', '') for c in task['comments'])
             if has_content:
-                print(f"{i1}- Comments", file=file)
+                print(f"{i1}- Comments:", file=file)
                 for comment in task['comments']:
                     comment_content = comment.get('content', '')
                     if comment_content:
                         lines = comment_content.split('\n')
-                        print(f"{i2}- > {lines[0]}", file=file)
+                        print(f"{i2}- > {lines[0]}".rstrip(), file=file)
                         for line in lines[1:]:
-                            print(f"{i2}  > {line}", file=file)
+                            print(f"{i2}  > {line}".rstrip(), file=file)
                         attachment = comment.get('file_attachment')
                         if attachment:
                             attachment_url = format_attachment_url(attachment, token, output_root, current_dir)
                             print(f"{i2}  {attachment_url}", file=file)
 
         if task['children']:
-            print(f"{i1}- Sub-tasks", file=file)
+            print(f"{i1}- Sub-tasks:", file=file)
             print_tasks_markdown(task['children'], token, indent_level + 2, file=file, output_root=output_root, current_dir=current_dir)
 
 
