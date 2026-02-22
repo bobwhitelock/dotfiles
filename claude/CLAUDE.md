@@ -9,7 +9,7 @@
 
 ### Development Approach
 - **Use TodoWrite tool proactively**: Always track complex tasks with the TodoWrite tool for visibility
-- **Commit frequently**: Make commits after each significant change, not batched
+- **Never commit unless explicitly asked**: Do not create git commits; the user commits their own changes
 - **Fix actual errors**: When something breaks, fix the root cause, don't fake it
 
 ### Technical Preferences
