@@ -152,10 +152,6 @@ def format_task_metadata_bullets(task):
     if priority and priority > 1:
         bullets.append(f"- Priority: !!{priority}")
 
-    created = task.get('added_at')
-    if created:
-        bullets.append(f"- Created: {format_date(created)}")
-
     due_date = task.get('due')
     if due_date and due_date.get('date'):
         bullets.append(f"- Due: {format_date(due_date['date'])}")
@@ -247,14 +243,16 @@ def format_attachment_url(attachment, token, output_root="", current_dir=""):
     """Format attachment as a Todoist link or image markdown."""
     file_name = attachment.get('file_name', 'attachment')
     file_url = attachment.get('file_url', '')
+    resource_type = attachment.get('resource_type', 'file')
 
-    # If we have a direct file URL, use that; otherwise construct a Todoist link
+    if resource_type == 'website':
+        return file_name or file_url or ''
+
     if file_url and file_url.startswith('http'):
         attachment_url = file_url
     else:
-        attachment_url = f"https://todoist.com/app/attachment/{attachment.get('resource_type', 'file')}/{file_url or file_name}"
+        attachment_url = f"https://todoist.com/app/attachment/{resource_type}/{file_url or file_name}"
 
-    # If it's an image, download it and format as markdown image
     if is_image_file(file_name):
         local_path = download_image(attachment_url, file_name, token, output_root, current_dir)
         return f"![{file_name}]({local_path})"
@@ -272,7 +270,8 @@ def print_tasks_markdown(tasks, token, indent_level=0, file=None, output_root=""
     i3 = "  " * (indent_level + 3)
 
     for task in tasks:
-        print(f"{i0}- {task['content']}", file=file)
+        content = task['content'].replace('\n', ' ')
+        print(f"{i0}- {content}", file=file)
 
         for bullet in format_task_metadata_bullets(task):
             print(f"{i1}{bullet}", file=file)
@@ -280,10 +279,8 @@ def print_tasks_markdown(tasks, token, indent_level=0, file=None, output_root=""
         description = (task.get('description', '') or task.get('note', '')).strip()
         if description:
             print(f"{i1}- Description", file=file)
-            print(f"{i2}```", file=file)
             for line in description.split('\n'):
-                print(f"{i2}{line}", file=file)
-            print(f"{i2}```", file=file)
+                print(f"{i2}> {line}", file=file)
 
         if task.get('comments'):
             has_content = any(c.get('content', '') for c in task['comments'])
@@ -292,14 +289,14 @@ def print_tasks_markdown(tasks, token, indent_level=0, file=None, output_root=""
                 for comment in task['comments']:
                     comment_content = comment.get('content', '')
                     if comment_content:
-                        print(f"{i2}- ```", file=file)
-                        for line in comment_content.split('\n'):
-                            print(f"{i3}{line}", file=file)
-                        print(f"{i3}```", file=file)
+                        lines = comment_content.split('\n')
+                        print(f"{i2}- > {lines[0]}", file=file)
+                        for line in lines[1:]:
+                            print(f"{i2}  > {line}", file=file)
                         attachment = comment.get('file_attachment')
                         if attachment:
                             attachment_url = format_attachment_url(attachment, token, output_root, current_dir)
-                            print(f"{i3}{attachment_url}", file=file)
+                            print(f"{i2}  {attachment_url}", file=file)
 
         if task['children']:
             print(f"{i1}- Sub-tasks", file=file)
