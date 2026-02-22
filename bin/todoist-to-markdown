@@ -133,79 +133,46 @@ def build_task_hierarchy(tasks, comments, sections):
     return sections_with_tasks, tasks_without_section
 
 
-def format_priority(priority):
-    """Format task priority as !!1 through !!4."""
-    if priority and priority > 1:
-        return f"!!{priority}"
-    return ""
-
-
-def format_labels(label_names):
-    """Format task labels as @label1 @label2."""
-    if not label_names:
-        return ""
-    # Labels are already strings, just add @ prefix
-    labels = [f"@{label}" for label in label_names]
-    return " ".join(labels)
-
-
 def format_date(date_str):
-    """Format date from ISO format to yyyy-mm-dd."""
     if not date_str:
         return ""
-    # Handle both date and datetime formats
     if 'T' in date_str:
         return date_str.split('T')[0]
     return date_str
 
 
-def format_task_metadata(task, labels_dict):
-    """Format all task metadata in the specified order."""
-    parts = []
+def format_task_metadata_bullets(task):
+    bullets = []
 
-    # Priority first
-    priority = format_priority(task.get('priority'))
-    if priority:
-        parts.append(priority)
-
-    # Task content
-    parts.append(task['content'])
-
-    # Labels
-    labels = format_labels(task.get('labels', []))
-    if labels:
-        parts.append(labels)
-
-    # Created date
-    created = task.get('added_at')
-    if created:
-        parts.append(f"created:{format_date(created)}")
-
-    # Due date
-    due_date = task.get('due')
-    if due_date and due_date.get('date'):
-        parts.append(f"due:{format_date(due_date['date'])}")
-
-    # Deadline
-    deadline = task.get('deadline')
-    if deadline and deadline.get('date'):
-        parts.append(f"deadline:{format_date(deadline['date'])}")
-
-    # Recurrence
-    if due_date and due_date.get('string') and 'every' in due_date.get('string', '').lower():
-        parts.append(f"recurs:'{due_date['string']}'")
-
-    # Todoist URL
     task_id = task.get('id')
     if task_id:
-        parts.append(f"| [Todoist](https://app.todoist.com/app/task/{task_id})")
+        bullets.append(f"- URL: https://app.todoist.com/app/task/{task_id}")
 
-    return " ".join(parts)
+    priority = task.get('priority')
+    if priority and priority > 1:
+        bullets.append(f"- Priority: !!{priority}")
 
+    created = task.get('added_at')
+    if created:
+        bullets.append(f"- Created: {format_date(created)}")
 
-def format_task_content(content):
-    """Format task content, preserving raw content as in Todoist editor."""
-    return content
+    due_date = task.get('due')
+    if due_date and due_date.get('date'):
+        bullets.append(f"- Due: {format_date(due_date['date'])}")
+
+    deadline = task.get('deadline')
+    if deadline and deadline.get('date'):
+        bullets.append(f"- Deadline: {format_date(deadline['date'])}")
+
+    if due_date and due_date.get('string') and 'every' in due_date.get('string', '').lower():
+        bullets.append(f"- Recurring: '{due_date['string']}'")
+
+    label_names = task.get('labels', [])
+    if label_names:
+        labels = " ".join(f"@{label}" for label in label_names)
+        bullets.append(f"- Labels: {labels}")
+
+    return bullets
 
 
 def is_image_file(file_name):
@@ -296,39 +263,47 @@ def format_attachment_url(attachment, token, output_root="", current_dir=""):
 
 
 def print_tasks_markdown(tasks, token, indent_level=0, file=None, output_root="", current_dir=""):
-    """Print tasks in markdown format with proper hierarchy."""
     if file is None:
         file = sys.stdout
 
-    indent = "  " * indent_level
+    i0 = "  " * indent_level
+    i1 = "  " * (indent_level + 1)
+    i2 = "  " * (indent_level + 2)
+    i3 = "  " * (indent_level + 3)
 
     for task in tasks:
-        # Print the main task with all metadata
-        task_line = format_task_metadata(task, {})  # Pass empty dict since we don't use it anymore
-        print(f"{indent}- {task_line}", file=file)
+        print(f"{i0}- {task['content']}", file=file)
 
-        # If task has a description, print it as its own bullet point
-        # In v1 API, descriptions might be in a different field or format
-        description = task.get('description', '') or task.get('note', '')
+        for bullet in format_task_metadata_bullets(task):
+            print(f"{i1}{bullet}", file=file)
+
+        description = (task.get('description', '') or task.get('note', '')).strip()
         if description:
-            print(f"{indent}  - description: {description}", file=file)
+            print(f"{i1}- Description", file=file)
+            print(f"{i2}```", file=file)
+            for line in description.split('\n'):
+                print(f"{i2}{line}", file=file)
+            print(f"{i2}```", file=file)
 
-        # Print comments for this task
         if task.get('comments'):
-            for comment in task['comments']:
-                comment_content = comment.get('content', '')
-                if comment_content:
-                    print(f"{indent}  - comment: {comment_content}", file=file)
+            has_content = any(c.get('content', '') for c in task['comments'])
+            if has_content:
+                print(f"{i1}- Comments", file=file)
+                for comment in task['comments']:
+                    comment_content = comment.get('content', '')
+                    if comment_content:
+                        print(f"{i2}- ```", file=file)
+                        for line in comment_content.split('\n'):
+                            print(f"{i3}{line}", file=file)
+                        print(f"{i3}```", file=file)
+                        attachment = comment.get('file_attachment')
+                        if attachment:
+                            attachment_url = format_attachment_url(attachment, token, output_root, current_dir)
+                            print(f"{i3}{attachment_url}", file=file)
 
-                    # Handle attachments in comments as their own bullet point
-                    attachment = comment.get('file_attachment')
-                    if attachment:
-                        attachment_url = format_attachment_url(attachment, token, output_root, current_dir)
-                        print(f"{indent}    - attachment: {attachment_url}", file=file)
-
-        # Recursively print children
         if task['children']:
-            print_tasks_markdown(task['children'], token, indent_level + 1, file=file, output_root=output_root, current_dir=current_dir)
+            print(f"{i1}- Sub-tasks", file=file)
+            print_tasks_markdown(task['children'], token, indent_level + 2, file=file, output_root=output_root, current_dir=current_dir)
 
 
 def get_all_projects(token):
@@ -372,9 +347,6 @@ def export_project_to_file(project, token, all_tasks, all_comments, all_labels, 
     # Skip creating markdown file if project has no tasks but has child projects
     if not tasks and project.get('children'):
         return None
-
-    # Build label lookup dictionary
-    labels_dict = {label['id']: label for label in labels}
 
     # Build task hierarchy organized by sections
     sections_with_tasks, tasks_without_section = build_task_hierarchy(tasks, comments, sections)
