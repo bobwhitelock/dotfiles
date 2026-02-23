@@ -19,6 +19,14 @@ def env(tmp_path):
     )
     gh.chmod(gh.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
 
+    git = fake_bin / "git"
+    git.write_text(
+        "#!/usr/bin/env bash\n"
+        f'touch "{tmp_path}/git_called"\n'
+        'mkdir -p "$(basename "${2%.git}")"\n'
+    )
+    git.chmod(git.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
+
     add_window = fake_bin / "add_window"
     add_window.write_text("#!/usr/bin/env bash\nexit 0\n")
     add_window.chmod(
@@ -51,12 +59,14 @@ def run_clone(repo_identifier, env):
 @pytest.mark.parametrize(
     "repo_identifier,expected_subdir",
     [
-        ("https://github.com/junegunn/fzf", "junegunn/fzf"),
-        ("https://github.com/junegunn/fzf.vim", "junegunn/fzf.vim"),
-        ("git@github.com:junegunn/fzf.git", "junegunn/fzf"),
-        ("git@github.com:junegunn/fzf.vim.git", "junegunn/fzf.vim"),
-        ("junegunn/fzf", "junegunn/fzf"),
-        ("junegunn/fzf.vim", "junegunn/fzf.vim"),
+        ("https://github.com/junegunn/fzf", "github.com/junegunn/fzf"),
+        ("https://github.com/junegunn/fzf.vim", "github.com/junegunn/fzf.vim"),
+        ("git@github.com:junegunn/fzf.git", "github.com/junegunn/fzf"),
+        ("git@github.com:junegunn/fzf.vim.git", "github.com/junegunn/fzf.vim"),
+        ("junegunn/fzf", "github.com/junegunn/fzf"),
+        ("junegunn/fzf.vim", "github.com/junegunn/fzf.vim"),
+        ("https://gitlab.example.com/junegunn/fzf/fzf.vim.git", "gitlab.example.com/junegunn/fzf/fzf.vim"),
+        ("git@gitlab.example.com:junegunn/fzf/fzf.vim.git", "gitlab.example.com/junegunn/fzf/fzf.vim"),
     ],
 )
 def test_clone_creates_directory(repo_identifier, expected_subdir, env):
@@ -67,10 +77,20 @@ def test_clone_creates_directory(repo_identifier, expected_subdir, env):
 
 
 def test_already_cloned_skips_gh(env):
-    repo_dir = env["_src"] / "junegunn" / "fzf"
+    repo_dir = env["_src"] / "github.com" / "junegunn" / "fzf"
     repo_dir.mkdir(parents=True)
 
     run_clone("junegunn/fzf", env)
 
     sentinel = env["_tmp_path"] / "gh_called"
     assert not sentinel.exists(), "gh should not have been called when repo already exists"
+
+
+def test_already_cloned_skips_git(env):
+    repo_dir = env["_src"] / "gitlab.example.com" / "junegunn" / "fzf" / "fzf.vim"
+    repo_dir.mkdir(parents=True)
+
+    run_clone("https://gitlab.example.com/junegunn/fzf/fzf.vim.git", env)
+
+    sentinel = env["_tmp_path"] / "git_called"
+    assert not sentinel.exists(), "git should not have been called when repo already exists"

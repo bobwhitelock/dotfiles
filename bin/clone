@@ -1,28 +1,47 @@
 #!/usr/bin/env python3
 
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
+
+
+def parse_repo_identifier(repo_identifier):
+    if "://" in repo_identifier:
+        parsed = urlparse(repo_identifier)
+        hostname = parsed.hostname
+        parts = [p for p in parsed.path.split("/") if p]
+        parts[-1] = parts[-1].removesuffix(".git")
+        return hostname == "github.com", hostname, parts
+
+    ssh_match = re.match(r"git@([^:]+):(.+)", repo_identifier)
+    if ssh_match:
+        hostname = ssh_match.group(1)
+        parts = [p for p in ssh_match.group(2).split("/") if p]
+        parts[-1] = parts[-1].removesuffix(".git")
+        return hostname == "github.com", hostname, parts
+
+    # Short form owner/name — defaults to GitHub
+    return True, "github.com", repo_identifier.split("/")
 
 
 def main():
     repo_identifier = sys.argv[1]
+    is_github, hostname, path_parts = parse_repo_identifier(repo_identifier)
+    name = path_parts[-1]
 
-    owner_raw = os.path.basename(os.path.dirname(repo_identifier))
-    owner = owner_raw.split(":")[-1]
-    base_name = os.path.basename(repo_identifier)
-    name = base_name.removesuffix(".git")
+    parent_path = Path(os.environ["SRC"]).joinpath(hostname, *path_parts[:-1])
+    parent_path.mkdir(parents=True, exist_ok=True)
 
-    repo = f"{owner}/{name}"
+    if not (parent_path / name).is_dir():
+        if is_github:
+            subprocess.run(["gh", "repo", "clone", f"{path_parts[-2]}/{name}"], cwd=parent_path, check=True)
+        else:
+            subprocess.run(["git", "clone", repo_identifier], cwd=parent_path, check=True)
 
-    owner_path = Path(os.environ["SRC"]) / owner
-    owner_path.mkdir(parents=True, exist_ok=True)
-
-    if not (owner_path / name).is_dir():
-        subprocess.run(["gh", "repo", "clone", repo], cwd=owner_path, check=True)
-
-    subprocess.run(["add_window", "--vim-pane", name], check=True)
+    subprocess.run(["add_window", "--vim-pane", str(parent_path / name)], check=True)
 
 
 if __name__ == "__main__":
