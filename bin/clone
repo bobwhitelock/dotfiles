@@ -1,46 +1,29 @@
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
+#!/usr/bin/env python3
 
-# Clone a GitHub repo into standard directory structure, then create Tmux
-# window for new repo. Just open existing repo if already previously cloned.
+import os
+import subprocess
+import sys
+from pathlib import Path
 
-# Test cases:
-# `clone https://github.com/junegunn/fzf`     -> `$SRC/junegunn/fzf`
-# `clone https://github.com/junegunn/fzf.vim` -> `$SRC/junegunn/fzf.vim`
-# `clone git@github.com:junegunn/fzf.git`     -> `$SRC/junegunn/fzf`
-# `clone git@github.com:junegunn/fzf.vim.git` -> `$SRC/junegunn/fzf.vim`
-# `clone junegunn/fzf`                        -> `$SRC/junegunn/fzf`
-# `clone junegunn/fzf.vim`                    -> `$SRC/junegunn/fzf.vim`
 
-main() {
-    local repo_identifier owner base_name name repo owner_path
+def main():
+    repo_identifier = sys.argv[1]
 
-    # Can be URL or just `owner/name`.
-    repo_identifier="$1"
+    owner_raw = os.path.basename(os.path.dirname(repo_identifier))
+    owner = owner_raw.split(":")[-1]
+    base_name = os.path.basename(repo_identifier)
+    name = base_name.removesuffix(".git")
 
-    # Extract `owner` and `name` from URLs/repo identifiers in any of the
-    # following forms (including when name itself includes a `.`):
-    # - https://github.com/owner/name
-    # - git@github.com:owner/name.git
-    # - owner/name
-    owner="$(basename "$(dirname "$repo_identifier")" | awk -F: '{ print $NF }')"
-    base_name="$(basename "$repo_identifier")"
-    name="${base_name%.git}"
+    repo = f"{owner}/{name}"
 
-    # Standardize repo name so `hub` can figure out method should use to clone;
-    # avoids being unnecessarily prompted for password.
-    repo="$owner/$name"
+    owner_path = Path(os.environ["SRC"]) / owner
+    owner_path.mkdir(parents=True, exist_ok=True)
 
-    owner_path="$SRC/$owner"
-    mkdir -p "$owner_path"
-    cd "$owner_path"
+    if not (owner_path / name).is_dir():
+        subprocess.run(["gh", "repo", "clone", repo], cwd=owner_path, check=True)
 
-    if [ ! -d "$name" ]; then
-        gh repo clone "$repo"
-    fi
+    subprocess.run(["add_window", "--vim-pane", name], check=True)
 
-    add_window --vim-pane "$name"
-}
 
-main "$@"
+if __name__ == "__main__":
+    main()
