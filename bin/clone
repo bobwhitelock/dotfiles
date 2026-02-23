@@ -1,48 +1,48 @@
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
+#!/usr/bin/env python3
 
-# Clone a GitHub repo into standard directory structure, then create Tmux
-# window for new repo. Just open existing repo if already previously cloned.
+import os
+import re
+import subprocess
+import sys
+from pathlib import Path
+from urllib.parse import urlparse
 
-# Test cases:
-# `clone https://github.com/junegunn/fzf`     -> `$SRC/junegunn/fzf`
-# `clone https://github.com/junegunn/fzf.vim` -> `$SRC/junegunn/fzf.vim`
-# `clone git@github.com:junegunn/fzf.git`     -> `$SRC/junegunn/fzf`
-# `clone git@github.com:junegunn/fzf.vim.git` -> `$SRC/junegunn/fzf.vim`
-# `clone junegunn/fzf`                        -> `$SRC/junegunn/fzf`
-# `clone junegunn/fzf.vim`                    -> `$SRC/junegunn/fzf.vim`
 
-main() {
-    local repo_identifier owner base_name name repo owner_path
+def parse_repo_identifier(repo_identifier):
+    if "://" in repo_identifier:
+        parsed = urlparse(repo_identifier)
+        hostname = parsed.hostname
+        parts = [p for p in parsed.path.split("/") if p]
+        parts[-1] = parts[-1].removesuffix(".git")
+        return hostname == "github.com", hostname, parts
 
-    # Can be URL or just `owner/name`.
-    repo_identifier="$1"
+    ssh_match = re.match(r"git@([^:]+):(.+)", repo_identifier)
+    if ssh_match:
+        hostname = ssh_match.group(1)
+        parts = [p for p in ssh_match.group(2).split("/") if p]
+        parts[-1] = parts[-1].removesuffix(".git")
+        return hostname == "github.com", hostname, parts
 
-    # Extract `owner` and `name` from URLs/repo identifiers in any of the
-    # following forms (including when name itself includes a `.`):
-    # - https://github.com/owner/name
-    # - git@github.com:owner/name.git
-    # - owner/name
-    owner="$(basename "$(dirname "$repo_identifier")" | awk -F: '{ print $NF }')"
-    base_name="$(basename "$repo_identifier")"
-    name="${base_name%.git}"
+    # Short form owner/name — defaults to GitHub
+    return True, "github.com", repo_identifier.split("/")
 
-    # Standardize repo name so `hub` can figure out method should use to clone;
-    # avoids being unnecessarily prompted for password.
-    repo="$owner/$name"
 
-    owner_path="$SRC/$owner"
-    mkdir -p "$owner_path"
-    cd "$owner_path"
+def main():
+    repo_identifier = sys.argv[1]
+    is_github, hostname, path_parts = parse_repo_identifier(repo_identifier)
+    name = path_parts[-1]
 
-    if [ ! -d "$name" ]; then
-        gh repo clone "$repo"
-    fi
+    parent_path = Path(os.environ["SRC"]).joinpath(hostname, *path_parts[:-1])
+    parent_path.mkdir(parents=True, exist_ok=True)
 
-    # shellcheck disable=SC1090
-    source "$ZSH_LIB/tmux.sh"
-    add_window --vim-pane "$name"
-}
+    if not (parent_path / name).is_dir():
+        if is_github:
+            subprocess.run(["gh", "repo", "clone", f"{path_parts[-2]}/{name}"], cwd=parent_path, check=True)
+        else:
+            subprocess.run(["git", "clone", repo_identifier], cwd=parent_path, check=True)
 
-main "$@"
+    subprocess.run(["add_window", "--vim-pane", str(parent_path / name)], check=True)
+
+
+if __name__ == "__main__":
+    main()
