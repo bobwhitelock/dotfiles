@@ -47,18 +47,20 @@ def run_script(args, env):
 
 
 def test_runs_command_on_selected_repo(env):
-    repo_dir = env["_src"] / "owner" / "repo"
+    repo_dir = env["_src"] / "github.com" / "owner" / "repo"
     repo_dir.mkdir(parents=True)
+    (repo_dir / ".git").mkdir()
 
     result = run_script(["echo"], env)
 
     assert result.returncode == 0, result.stderr
-    assert str(env["_src"] / "owner" / "repo") in result.stdout
+    assert str(env["_src"] / "github.com" / "owner" / "repo") in result.stdout
 
 
 def test_exits_1_when_no_repo_selected(env):
-    repo_dir = env["_src"] / "owner" / "repo"
+    repo_dir = env["_src"] / "github.com" / "owner" / "repo"
     repo_dir.mkdir(parents=True)
+    (repo_dir / ".git").mkdir()
 
     fzf = env["_tmp_path"] / "bin" / "fzf"
     fzf.write_text("#!/usr/bin/env bash\nexit 1\n")
@@ -69,8 +71,9 @@ def test_exits_1_when_no_repo_selected(env):
 
 
 def test_passes_query_to_fzf(env):
-    repo_dir = env["_src"] / "owner" / "repo"
+    repo_dir = env["_src"] / "github.com" / "owner" / "repo"
     repo_dir.mkdir(parents=True)
+    (repo_dir / ".git").mkdir()
 
     run_script(["echo", "my", "query"], env)
 
@@ -81,13 +84,36 @@ def test_passes_query_to_fzf(env):
 
 
 def test_lists_all_repos(env):
-    (env["_src"] / "alice" / "foo").mkdir(parents=True)
-    (env["_src"] / "alice" / "bar").mkdir(parents=True)
-    (env["_src"] / "bob" / "baz").mkdir(parents=True)
+    repos = [
+        ("owner", "repo"),
+        ("github.com", "alice", "foo"),
+        ("github.com", "bob", "bar"),
+        ("gitlab.example.com", "one", "two", "three"),
+    ]
+    for parts in repos:
+        d = env["_src"].joinpath(*parts)
+        d.mkdir(parents=True)
+        (d / ".git").mkdir()
 
     run_script(["echo"], env)
 
     fzf_stdin = env["_fzf_stdin_file"].read_text()
-    assert "alice/foo" in fzf_stdin
-    assert "alice/bar" in fzf_stdin
-    assert "bob/baz" in fzf_stdin
+    assert "owner/repo" in fzf_stdin
+    assert "github.com/alice/foo" in fzf_stdin
+    assert "github.com/bob/bar" in fzf_stdin
+    assert "gitlab.example.com/one/two/three" in fzf_stdin
+
+
+def test_does_not_list_repos_within_repos(env):
+    repo_dir = env["_src"] / "github.com" / "owner" / "repo"
+    repo_dir.mkdir(parents=True)
+    (repo_dir / ".git").mkdir()
+    nested = repo_dir / "submodules" / "nested"
+    nested.mkdir(parents=True)
+    (nested / ".git").mkdir()
+
+    run_script(["echo"], env)
+
+    fzf_stdin = env["_fzf_stdin_file"].read_text()
+    assert "github.com/owner/repo" in fzf_stdin
+    assert "github.com/owner/repo/submodules/nested" not in fzf_stdin
