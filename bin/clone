@@ -40,8 +40,6 @@ main() {
         gh repo clone "$repo"
     fi
 
-    # shellcheck disable=SC1090
-    source "$ZSH_LIB/tmux.sh"
     add_window --vim-pane "$name"
 }
 
