@@ -123,7 +123,7 @@ def() {
             # If alias is just a single command name, recursively show the git-command script
             # Example: $ def git cloc
             #   git-cloc is /home/bob/bin/git-cloc
-            #   /home/bob/bin/git-cloc: symbolic link to /home/bob/src/bobwhitelock/dotfiles/bin/git-cloc
+            #   /home/bob/bin/git-cloc: symbolic link to /home/bob/src/github.com/bobwhitelock/dotfiles/bin/git-cloc
             #   #!/usr/bin/env bash
             #   [... script content with syntax highlighting ...]
             if [[ "$alias_def" =~ ^[a-zA-Z0-9_-]+$ ]]; then
@@ -170,7 +170,7 @@ def() {
                 # Symbolic link - show link info then target content
                 # Example: $ def gs
                 #   gs is /home/bob/bin/gs
-                #   /home/bob/bin/gs: symbolic link to /home/bob/src/bobwhitelock/dotfiles/bin/gs
+                #   /home/bob/bin/gs: symbolic link to /home/bob/src/github.com/bobwhitelock/dotfiles/bin/gs
                 #   #!/usr/bin/env bash
                 #   [... script content with syntax highlighting ...]
                 elif [[ "$file_type" =~ "symbolic link" ]]; then
@@ -181,7 +181,7 @@ def() {
                         # Target is a script - show its content
                         # Example: $ def gs
                         #   gs is /home/bob/bin/gs
-                        #   /home/bob/bin/gs: symbolic link to /home/bob/src/bobwhitelock/dotfiles/bin/gs
+                        #   /home/bob/bin/gs: symbolic link to /home/bob/src/github.com/bobwhitelock/dotfiles/bin/gs
                         #   #!/usr/bin/env bash
                         #   [... script content with syntax highlighting ...]
                         # XXX BW 2025-09-22: This is the same as above - refactor

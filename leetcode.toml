@@ -22,5 +22,5 @@ site = "leetcode.com"
 # XXX BW 2025-11-22: Doesn't seem to actually do anything?
 cache = 'cache'
 code = 'solutions'
-root = '~/src/bobwhitelock/dsa/src/leetcode'
+root = '~/src/github.com/bobwhitelock/dsa/src/leetcode'
 scripts = 'scripts'

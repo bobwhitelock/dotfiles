@@ -15,7 +15,7 @@ def test_claude_alert():
     test_data = {
         "session_id": "61495b1f-3b0e-4d82-b06d-9aacca4a7b7b",
         "transcript_path": "/home/bob/.claude/projects/-home-bob-src-bobwhitelock-dotfiles/61495b1f-3b0e-4d82-b06d-9aacca4a7b7b.jsonl",
-        "cwd": "/home/bob/src/bobwhitelock/dotfiles",
+        "cwd": "/home/bob/src/github.com/bobwhitelock/dotfiles",
         "hook_event_name": "Notification",
         "message": "Claude needs your permission to use Write",
     }

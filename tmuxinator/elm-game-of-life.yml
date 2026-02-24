@@ -30,7 +30,7 @@ windows:
         - vim
 
   - claude-plans:
-      root: <%= ENV.fetch('SRC') %>/claude-plans
+      root: <%= ENV.fetch('BOB') %>/claude-plans
       layout: even-horizontal
       panes:
         - gpl

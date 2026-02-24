@@ -1,5 +1,5 @@
 
-export DOTFILES="$HOME/src/bobwhitelock/dotfiles"
+export DOTFILES="$HOME/src/github.com/bobwhitelock/dotfiles"
 export ZSH_DIR="$DOTFILES/zsh"
 source "$ZSH_DIR/env.sh"
 

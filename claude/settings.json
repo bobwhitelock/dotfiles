@@ -51,9 +51,9 @@
       "MultiEdit(./**)",
       "Read(./**)",
       "Read(/home/bob/.claude/**)",
-      "Read(/home/bob/src/bobwhitelock/dotfiles/**)",
+      "Read(/home/bob/src/github.com/bobwhitelock/dotfiles/**)",
       "Read(~/.claude/**)",
-      "Read(~/src/bobwhitelock/dotfiles/**)",
+      "Read(~/src/github.com/bobwhitelock/dotfiles/**)",
       "Update(./**)",
       "WebFetch(domain:docs.anthropic.com)",
       "WebFetch(domain:docs.claude.com)",
@@ -97,7 +97,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "~/src/bobwhitelock/dotfiles/libexec/claude_alert.py"
+            "command": "~/src/github.com/bobwhitelock/dotfiles/libexec/claude_alert.py"
           }
         ]
       }

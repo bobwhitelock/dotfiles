@@ -22,7 +22,7 @@ choose things rather than install everything if you're not me).
 
 2. Do the following:
   ```bash
-  mkdir -p ~/src/bobwhitelock
+  mkdir -p ~/src/github.com/bobwhitelock
   cd !$
   git clone git@github.com:bobwhitelock/dotfiles.git
 

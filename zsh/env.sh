@@ -39,7 +39,7 @@ export STEAM="$HOME/.local/share/Steam"
 export STEAMAPPS="$STEAM/steamapps"
 
 export SRC="$HOME/src"
-export BOB="$SRC/bobwhitelock"
+export BOB="$SRC/github.com/bobwhitelock"
 export NOTES="$BOB/notes"
 export GAMES="$BOB/games"
 

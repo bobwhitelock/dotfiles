@@ -69,7 +69,7 @@ user-input-color: '#ffa500' # Default conflicts with my Tmux color.
 code-theme: monokai
 
 # XXX Preprocess this file to have this use the "$DOTFILES" env var.
-read: ~/src/bobwhitelock/dotfiles/AI_CONVENTIONS.md
+read: ~/src/github.com/bobwhitelock/dotfiles/AI_CONVENTIONS.md
 
 # XXX Try:
 # --notifications

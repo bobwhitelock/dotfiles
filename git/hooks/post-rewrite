@@ -6,5 +6,5 @@ if [ -x ".git/hooks/post-rewrite" ]; then
 fi
 
 case "$1" in
-  rebase) exec ~/src/bobwhitelock/dotfiles/git/hooks/post-merge ;;
+  rebase) exec ~/src/github.com/bobwhitelock/dotfiles/git/hooks/post-merge ;;
 esac

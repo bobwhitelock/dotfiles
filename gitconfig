@@ -5,7 +5,7 @@
 [core]
 	pager = less -FRSX
 	excludesfile = ~/.gitignore
-	hooksPath = ~/src/bobwhitelock/dotfiles/git/hooks
+	hooksPath = ~/src/github.com/bobwhitelock/dotfiles/git/hooks
 
 [push]
 	default = current
@@ -33,7 +33,7 @@
 	cloc = cloc
 	cloc-children = cloc-children
 	own-files = own-files
-	ctags = !~/src/bobwhitelock/dotfiles/git/hooks/ctags
+	ctags = !~/src/github.com/bobwhitelock/dotfiles/git/hooks/ctags
 	review = log -p
 	delete-branch = delete-branch
 	; Adapted from https://stackoverflow.com/a/21857717.
