@@ -71,7 +71,7 @@ alias gsta8='gsta stash@\{8\}'
 alias gsta9='gsta stash@\{9\}'
 
 alias gc='git commit --verbose'
-alias gcm='gc -m'
+gcm() { gc -m "$*"; }
 alias gca='gc --all'
 alias gcnv='gc --no-verify' # Skips any `pre-commit` and `commit-msg` hooks.
 
