@@ -1,6 +1,11 @@
 - defaults:
     link:
       create: true
+      # If a file ever already exists at link location (whether an existing
+      # file or a stale link that has moved), can uncomment this and sync
+      # again. Don't want to do this always as could blow away important things
+      # unexpectedly.
+      # force: true
 
 - clean:
     ~/:
