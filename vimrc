@@ -188,9 +188,8 @@ Plug 'rhysd/devdocs.vim'
 " nmap <C-a> <Plug>(trip-increment)
 " nmap <C-x> <Plug>(trip-decrement)
 
-" Plug 'bobwhitelock/vim-lumberjack'
 " Operator to log motion as output.
-Plug '~/src/bobwhitelock/vim-lumberjack'
+Plug 'bobwhitelock/vim-lumberjack'
 map gl <Plug>(operator-print-below)
 map gL <Plug>(operator-print-above)
 
