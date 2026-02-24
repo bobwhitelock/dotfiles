@@ -42,7 +42,6 @@ export SRC="$HOME/src"
 export BOB="$SRC/bobwhitelock"
 export NOTES="$BOB/notes"
 export GAMES="$BOB/games"
-export ALCES="$SRC/alces-software"
 
 # Duplicated from `zshrc` in case source this file directly.
 export DOTFILES="$BOB/dotfiles"
