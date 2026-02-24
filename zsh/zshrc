@@ -1,6 +1,9 @@
 
 export DOTFILES="$HOME/src/github.com/bobwhitelock/dotfiles"
 export ZSH_DIR="$DOTFILES/zsh"
+# Local customizations - see "Local Customizations" in README.md.
+[[ -f "$DOTFILES/.local-customizations/zsh/env.sh" ]] && \
+    source "$DOTFILES/.local-customizations/zsh/env.sh"
 source "$ZSH_DIR/env.sh"
 
 # Oh My Zsh stuff.
@@ -148,6 +151,11 @@ source_libs() {
     done
 }
 source_libs
+
+# Local customizations - see "Local Customizations" in README.md.
+for file in "$DOTFILES/.local-customizations/zsh/lib/"*.sh(N); do
+    source "$file"
+done
 
 start_or_reuse_ssh_agent
 

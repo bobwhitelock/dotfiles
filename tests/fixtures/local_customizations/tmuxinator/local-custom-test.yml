@@ -1,0 +1,4 @@
+name: local-custom-test
+root: ~/
+windows:
+  - main: echo hello

@@ -1494,4 +1494,12 @@ function! TodosSince(branch)
   execute "cexpr systemlist(" . string(l:cmd) . ")"
   copen
 endfunction
+
+" Local customizations - see "Local Customizations" in README.md.
+let s:custom_vim = $DOTFILES . '/.local-customizations/vim'
+if isdirectory(s:custom_vim)
+  for s:f in glob(s:custom_vim . '/*.vim', 0, 1)
+    execute 'source ' . s:f
+  endfor
+endif
 command! -nargs=1 TodosSince call TodosSince(<f-args>)

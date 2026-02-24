@@ -1,0 +1,2 @@
+export DOTFILES_SUDO=false
+export LOCAL_CUSTOM_ENV_TEST=loaded
