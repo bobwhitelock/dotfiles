@@ -31,7 +31,7 @@ alias tmux_session_name="tmux display-message -p '#S'"
 # Fuzzy select a window and switch to it.
 alias sw="tmux list-windows | tac | fzf | cut -d: -f1 | xargs tmux select-window -t"
 
-tmux_kill_unattached_sessions() {
+kill_unattached_sessions() {
     local session
     for session in $(tmux list-sessions | grep -v '(attached)' | cut -d: -f 1); do
         echo "Killing '$session'" >&2
