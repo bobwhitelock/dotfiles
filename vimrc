@@ -451,6 +451,7 @@ Plug 'google/vim-jsonnet'
 Plug 'MTDL9/vim-log-highlighting'
 Plug 'kyoh86/vim-jsonl'
 Plug 'terrastruct/d2-vim'
+Plug 'HiPhish/jinja.vim'
 " TODO: Remove some of above in favour of this?
 " Breaks markdown formatting, snippets, maybe other things - due to duplicate
 " plugin installs?
