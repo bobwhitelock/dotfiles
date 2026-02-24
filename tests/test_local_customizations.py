@@ -8,6 +8,27 @@ import pytest
 
 DOTFILES = os.path.join(os.path.dirname(__file__), "..")
 FIXTURES = os.path.join(DOTFILES, "tests", "fixtures", "local_customizations")
+
+
+@pytest.fixture
+def zsh_cmd(tmp_path):
+    """Bash-based shim standing in for zsh, since zsh isn't available in CI.
+    Handles the zsh syntax used in this codebase: strips the (N) null-glob
+    qualifier and enables bash's nullglob to replicate the same behaviour."""
+    shim = tmp_path / "zsh"
+    shim.write_text(
+        "#!/usr/bin/env bash\n"
+        'if [[ "$1" == "-c" ]]; then\n'
+        '    tmpfile=$(mktemp /tmp/fake_zsh_XXXXXX.sh)\n'
+        '    trap "rm -f $tmpfile" EXIT\n'
+        '    echo "shopt -s nullglob" > "$tmpfile"\n'
+        '    echo "${2//(N)/}" >> "$tmpfile"\n'
+        '    exec bash "$tmpfile"\n'
+        "fi\n"
+        'exec bash "$@"\n'
+    )
+    shim.chmod(shim.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
+    return str(shim)
 INSTALL_SCRIPT = os.path.join(DOTFILES, "install")
 
 
@@ -57,7 +78,7 @@ def test_gitconfig_works_without_local_customizations(tmp_path):
 # --- zsh tests ---
 
 
-def test_zsh_sources_custom_lib_files():
+def test_zsh_sources_custom_lib_files(zsh_cmd):
     lib_dir = os.path.join(FIXTURES, "zsh", "lib")
     script = textwrap.dedent(f"""\
         for file in "{lib_dir}/"*.sh(N); do
@@ -66,7 +87,7 @@ def test_zsh_sources_custom_lib_files():
         local_custom_lib_test
     """)
     result = subprocess.run(
-        ["zsh", "-c", script],
+        [zsh_cmd, "-c", script],
         capture_output=True,
         text=True,
     )
@@ -74,7 +95,7 @@ def test_zsh_sources_custom_lib_files():
     assert "custom_lib_loaded" in result.stdout
 
 
-def test_zsh_lib_sourcing_works_without_local_customizations(tmp_path):
+def test_zsh_lib_sourcing_works_without_local_customizations(tmp_path, zsh_cmd):
     missing_dir = tmp_path / "nonexistent" / "lib"
     script = textwrap.dedent(f"""\
         for file in "{missing_dir}/"*.sh(N); do
@@ -83,7 +104,7 @@ def test_zsh_lib_sourcing_works_without_local_customizations(tmp_path):
         echo ok
     """)
     result = subprocess.run(
-        ["zsh", "-c", script],
+        [zsh_cmd, "-c", script],
         capture_output=True,
         text=True,
     )
@@ -91,14 +112,14 @@ def test_zsh_lib_sourcing_works_without_local_customizations(tmp_path):
     assert "ok" in result.stdout
 
 
-def test_zsh_sources_custom_env():
+def test_zsh_sources_custom_env(zsh_cmd):
     env_file = os.path.join(FIXTURES, "zsh", "env.sh")
     script = textwrap.dedent(f"""\
         source "{env_file}"
         echo "$LOCAL_CUSTOM_ENV_TEST"
     """)
     result = subprocess.run(
-        ["zsh", "-c", script],
+        [zsh_cmd, "-c", script],
         capture_output=True,
         text=True,
     )
