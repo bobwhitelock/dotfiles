@@ -108,3 +108,7 @@
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = !/usr/bin/gh auth git-credential
+
+; Local customizations - see "Local Customizations" in README.md.
+[include]
+	path = ~/src/github.com/bobwhitelock/dotfiles/.local-customizations/gitconfig

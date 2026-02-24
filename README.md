@@ -36,3 +36,28 @@ choose things rather than install everything if you're not me).
 
 3. Fix the things which will probably break/be incomplete in the above, and
    update steps for next time.
+
+## Local Customizations
+
+A `.local-customizations/` directory (git-ignored) can be placed in this repo
+to override or extend config without modifying the repo itself. A separate
+repo can symlink files/dirs into it to activate overrides.
+
+The directory mirrors the relevant parts of this repo:
+
+```
+.local-customizations/
+├── zsh/
+│   ├── env.sh        # Sourced before zsh/env.sh (can pre-set variables)
+│   └── lib/
+│       └── *.sh      # Auto-sourced after main zsh/lib/ files
+├── gitconfig         # Included by main gitconfig (overrides user.email etc.)
+├── vim/
+│   └── *.vim         # Auto-sourced at end of vimrc
+├── bin/
+│   └── *             # Scripts linked to ~/bin/ via dotbot
+└── tmuxinator/
+    └── *.yml         # Configs linked to ~/.tmuxinator/ via dotbot
+```
+
+See `tests/fixtures/local_customizations/` for a documented example.

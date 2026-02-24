@@ -17,12 +17,25 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # gem install gem-ctags
 # gem ctags
 
+maybe_sudo() {
+  if [[ "${DOTFILES_SUDO:-true}" == "true" ]]; then
+    sudo "$@"
+  else
+    echo "Skipping (sudo disabled by DOTFILES_SUDO=false): sudo $*"
+  fi
+}
+
 main() {
+  cd "${BASEDIR}"
+
+  # Local customizations - see "Local Customizations" in README.md.
+  if [ -f ".local-customizations/zsh/env.sh" ]; then
+    source ".local-customizations/zsh/env.sh"
+  fi
+
   # Request `sudo` access pre-emptively, so password isn't re-prompted for at
   # some arbitrary time for later uses of `sudo`.
-  sudo true
-
-  cd "${BASEDIR}"
+  maybe_sudo true
 
   # Copy example private environment variables file (if needed), so these can
   # be set but not committed.
@@ -75,7 +88,7 @@ install_dependencies() {
   # Required for `interactive.singleKey` Git option.
   # XXX On last install, cpan required configuration but could do this
   # automatically by typing `yes` - automate this?
-  run sudo cpan Term::ReadKey
+  run maybe_sudo cpan Term::ReadKey
 
   # Need `rbenv shell system` so Tmuxinator is installed for system Ruby, and
   # need to do this via `zsh -ic` so this is done in an interactive shell and
@@ -151,7 +164,7 @@ link_files() {
   # run sudo ln -sf "$DOTFILES"/etc/pacman.conf /etc/pacman.conf
 
   # Primarily so `etckeeper` (which runs as `root`) uses my Git config.
-  run sudo ln -sf ~bob/.gitconfig ~root
+  run maybe_sudo ln -sf ~bob/.gitconfig ~root
 }
 
 tweak_system_files() {
@@ -159,7 +172,7 @@ tweak_system_files() {
   # system and an updated version of this also being updated); move this out
   # the way if so, so it doesn't interfere with my own config.
   if [ -f /etc/zsh/zshrc ]; then
-    run sudo mv -f /etc/zsh/zshrc{,.bak}
+    run maybe_sudo mv -f /etc/zsh/zshrc{,.bak}
   fi
 
   # Make this from `git-extras` non-executable, so own alias takes precedence.

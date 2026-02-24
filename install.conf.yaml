@@ -60,3 +60,15 @@
       path: ~/src/github.com/bobwhitelock/claude-plans
       if: '[ -d ~/src/github.com/bobwhitelock/claude-plans ]'
     ~/.leetcode/leetcode.toml:
+
+# Local customizations - see "Local Customizations" in README.md. In separate
+# `link` section to avoid clashes in destination dir names with above.
+- link:
+    ~/.tmuxinator/:
+      path: .local-customizations/tmuxinator/*
+      glob: true
+      if: '[ -d .local-customizations/tmuxinator ]'
+    ~/bin/:
+      path: .local-customizations/bin/*
+      glob: true
+      if: '[ -d .local-customizations/bin ]'
