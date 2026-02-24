@@ -1,5 +1,5 @@
 
-alias activate='source venv/bin/activate'
+alias activate='source venv/bin/activate 2>/dev/null || source .venv/bin/activate'
 alias shell='./manage.py shell_plus'
 alias pyprofile='sudo env PATH="$PATH" py-spy record --subprocesses -o "profile-$(date --iso-8601=seconds).svg"'
 alias poetry_cache_clear="rm -rf ~/.cache/pypoetry/"
