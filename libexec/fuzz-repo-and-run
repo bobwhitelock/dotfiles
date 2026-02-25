@@ -12,6 +12,7 @@ main() {
 
     find "$SRC" -mindepth 1 -type d -exec test -e "{}/.git" \; -print -prune | \
         sed "s%$SRC/%%" | \
+        sort | \
         fzf --ansi --query="$*" | \
         _run_command_on_repo "$command_to_run"
 }
