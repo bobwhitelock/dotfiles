@@ -9,5 +9,5 @@ vim/undodir
 vim/view
 tmux/plugins
 zsh/env.private.sh
-.local-customizations/
+.local-customizations
 __pycache__/
