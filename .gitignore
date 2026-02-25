@@ -10,3 +10,4 @@ vim/view
 tmux/plugins
 zsh/env.private.sh
 .local-customizations/
+__pycache__/
