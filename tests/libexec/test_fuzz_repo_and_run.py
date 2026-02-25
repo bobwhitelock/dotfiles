@@ -104,6 +104,25 @@ def test_lists_all_repos(env):
     assert "gitlab.example.com/one/two/three" in fzf_stdin
 
 
+def test_lists_repos_alphabetically(env):
+    repos = [
+        ("owner", "repo"),
+        ("github.com", "alice", "foo"),
+        ("github.com", "bob", "bar"),
+        ("gitlab.example.com", "one", "two", "three"),
+    ]
+    for parts in repos:
+        d = env["_src"].joinpath(*parts)
+        d.mkdir(parents=True)
+        (d / ".git").mkdir()
+
+    run_script(["echo"], env)
+
+    fzf_stdin = env["_fzf_stdin_file"].read_text()
+    lines = [line for line in fzf_stdin.splitlines() if line]
+    assert lines == sorted(lines)
+
+
 def test_does_not_list_repos_within_repos(env):
     repo_dir = env["_src"] / "github.com" / "owner" / "repo"
     repo_dir.mkdir(parents=True)
