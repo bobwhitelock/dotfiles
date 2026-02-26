@@ -106,8 +106,6 @@ pshow() {
 
 # XXX BW 2025-09-22: Maybe make output more consistent in each case
 # XXX BW 2025-09-22: Refactor/test this to make it more understandable
-# XXX BW 2025-09-22: Why do full paths need to be used in here otherwise
-# commands are not found?
 # XXX BW 2025-09-22: Could use `bat --file-name` to show the alias details
 # instead of `STDIN`?
 # XXX BW 2025-09-22: Could this go to a separate script? However it needs
@@ -155,18 +153,18 @@ def() {
         #   	echo "$@" >&2
         #   }
         if [[ "$type_output" =~ "is a shell function" ]]; then
-            which "$name" 2>/dev/null | /usr/bin/bat --language bash || true
+            which "$name" 2>/dev/null | bat --language bash || true
         # Shell alias case is handled by type output alone
         # Example: $ def cbcopy
         #   cbcopy is an alias for xclip -selection clipboard
         # Skip additional processing for aliases since type already shows the definition
         elif [[ ! "$type_output" =~ "is an alias" ]]; then
-            local path=$(which "$name" 2>/dev/null)
-            if [[ -n "$path" && -f "$path" ]]; then
-                local file_type=$(/usr/bin/file "$path" 2>/dev/null)
+            local file_path=$(which "$name" 2>/dev/null)
+            if [[ -n "$file_path" && -f "$file_path" ]]; then
+                local file_type=$(file "$file_path" 2>/dev/null)
                 # Script or text file - show content with syntax highlighting
                 if [[ "$file_type" =~ "script" || "$file_type" =~ "text" ]]; then
-                    /usr/bin/bat --color always "$path" | /usr/bin/less -R
+                    bat --color always "$file_path" | less -R
                 # Symbolic link - show link info then target content
                 # Example: $ def gs
                 #   gs is /home/bob/bin/gs
@@ -175,9 +173,9 @@ def() {
                 #   [... script content with syntax highlighting ...]
                 elif [[ "$file_type" =~ "symbolic link" ]]; then
                     echo "$file_type"
-                    local target=$(/usr/bin/readlink -f "$path")
+                    local target=$(readlink -f "$file_path")
                     if [[ -f "$target" ]]; then
-                        local target_type=$(/usr/bin/file "$target" 2>/dev/null)
+                        local target_type=$(file "$target" 2>/dev/null)
                         # Target is a script - show its content
                         # Example: $ def gs
                         #   gs is /home/bob/bin/gs
@@ -186,7 +184,7 @@ def() {
                         #   [... script content with syntax highlighting ...]
                         # XXX BW 2025-09-22: This is the same as above - refactor
                         if [[ "$target_type" =~ "script" || "$target_type" =~ "text" ]]; then
-                            /usr/bin/bat --color always "$target" | /usr/bin/less -R
+                            bat --color always "$target" | less -R
                         # Target is a binary - show file type info
                         # Example: $ def python3
                         #   python3 is /usr/bin/python3
