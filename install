@@ -143,6 +143,10 @@ configure_fonts() {
 
 setup_vim() {
   run mkdir -p vim/{session,undodir,view}
+  # TODO BW 2026-02-27: This seems to capture input from whole Tmux window and
+  # not allow any interaction with current pane or switching to another pane,
+  # but can still switch to a different window. Possibly also sometimes
+  # requires user input to proceed?
   run "vim +':PlugClean | :PlugInstall | :PlugUpdate | :qa!'"
 }
 
