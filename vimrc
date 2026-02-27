@@ -875,6 +875,8 @@ endfunction
 
 let g:test#custom_strategies = {'tslime_and_cache': function('TslimeAndCacheStrategy')}
 " let test#strategy = 'tslime_and_cache'
+" Note: Do not create and try to use a Tmux session name with spaces in with
+" tslime strategy, it will break things.
 let test#strategy = 'tslime'
 
 " XXX WIP, hacky, transform for seamlessly running tests within
