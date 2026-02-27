@@ -46,6 +46,8 @@
     ~/bin/:
       path: bin/*
       glob: true
+    ~/.config/autostart:
+      path: config/autostart
     ~/.config/terminator:
       path: config/terminator
     ~/.config/pgcli/config:

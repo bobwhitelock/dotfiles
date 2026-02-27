@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=CopyQ
+Exec=copyq --start-server
+Type=Application
+Terminal=false
+X-GNOME-Autostart-Delay=3

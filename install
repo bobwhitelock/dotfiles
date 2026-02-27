@@ -70,10 +70,57 @@ main() {
   header 'Tweaking system files'
   tweak_system_files
 
+  header 'Configuring GNOME'
+  configure_gnome
+
   # header 'Enabling services'
   # enable_services
 
   echo "Install complete!"
+}
+
+configure_gnome() {
+  command -v gsettings &>/dev/null || { echo 'GNOME not in use, skipping configuration'; return 0; }
+
+  # Color scheme.
+  run gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+  run gsettings set org.gnome.desktop.interface accent-color 'green'
+
+  # Keyboard layout.
+  run "gsettings set org.gnome.desktop.input-sources sources \"[('xkb', 'gb')]\""
+
+  # Configure workspaces.
+  run gsettings set org.gnome.mutter dynamic-workspaces false
+  run gsettings set org.gnome.mutter workspaces-only-on-primary false
+
+  # App switcher shows only current workspace.
+  run gsettings set org.gnome.shell.app-switcher current-workspace-only true
+
+  # Open new windows when launching apps rather than focusing existing window.
+  run "gsettings set org.gnome.shell enabled-extensions \"['launch-new-instance@gnome-shell-extensions.gcampax.github.com']\""
+
+  # Configure apps in dock.
+  run "gsettings set org.gnome.shell favorite-apps \"['org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'google-chrome.desktop', 'md.obsidian.Obsidian.desktop', 'terminator.desktop']\""
+
+  # Key bindings.
+  run "gsettings set org.gnome.desktop.wm.keybindings switch-windows \"['<Alt>Tab']\""
+  run "gsettings set org.gnome.desktop.wm.keybindings switch-applications \"['<Super>Tab']\""
+  run "gsettings set org.gnome.shell.keybindings toggle-message-tray \"['<Super>m']\""
+  local kb_schema="org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
+  local kb_base='/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings'
+  local kb_browser="$kb_base/browser/"
+  local kb_terminal="$kb_base/terminal/"
+  local kb_clipboard="$kb_base/clipboard/"
+  run "gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings \"['$kb_browser', '$kb_terminal', '$kb_clipboard']\""
+  run "gsettings set \"$kb_schema:$kb_browser\" name 'Open Browser'"
+  run "gsettings set \"$kb_schema:$kb_browser\" command 'google-chrome'"
+  run "gsettings set \"$kb_schema:$kb_browser\" binding '<Super>w'"
+  run "gsettings set \"$kb_schema:$kb_terminal\" name 'Open Terminal'"
+  run "gsettings set \"$kb_schema:$kb_terminal\" command 'terminator'"
+  run "gsettings set \"$kb_schema:$kb_terminal\" binding '<Super>t'"
+  run "gsettings set \"$kb_schema:$kb_clipboard\" name 'Open Clipboard Manager'"
+  run "gsettings set \"$kb_schema:$kb_clipboard\" command 'copyq toggle'"
+  run "gsettings set \"$kb_schema:$kb_clipboard\" binding '<Super>v'"
 }
 
 install_dependencies() {
