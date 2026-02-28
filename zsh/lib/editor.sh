@@ -5,10 +5,15 @@ which_edit() {
 }
 
 vim() {
+    local vim_cmd
+    # On Fedora, `vimx` from `vim-X11` is the fully featured Vim with
+    # `+clipboard` support; alias `vim` to this if it's installed.
+    (( $+commands[vimx] )) && vim_cmd=vimx || vim_cmd=vim
+
     if [ -f 'Session.vim' ] && [ "$*" = "" ]; then
-        command vim -S
+        command "$vim_cmd" -S
     else
-        command vim "$@"
+        command "$vim_cmd" "$@"
     fi
 }
 

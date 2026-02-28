@@ -20,10 +20,6 @@ alias tf_yolo='tf destroy -auto-approve && tf apply -auto-approve; pingme "$?"'
 alias pw='npx prettier -w'
 alias clear="clear -x"
 
-# On Fedora, `vimx` from `vim-X11` is the fully featured Vim with `+clipboard`
-# support; alias `vim` to this if it's installed.
-(( $+commands[vimx] )) && alias vim='vimx'
-
 # From https://unix.stackexchange.com/a/102021/229081.
 alias trim="sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'"
 
