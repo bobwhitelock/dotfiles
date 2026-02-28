@@ -1,8 +1,4 @@
 {
-  "awsAuthRefresh": "aws sso login --profile ai-dev",
-  "env": {
-    "AWS_PROFILE": "ai-dev"
-  },
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -102,8 +98,5 @@
         ]
       }
     ]
-  },
-  "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": true
   }
 }
