@@ -145,17 +145,13 @@ PERL_MM_OPT="INSTALL_BASE=/home/bob/perl5"; export PERL_MM_OPT;
 # attempting to do something in this environment such as sourcing a
 # virtualenv).
 source_libs() {
-    for file in "$ZSH_LIB/"*; do
+    # For local customizations part see "Local Customizations" in README.md.
+    for file in "$ZSH_LIB/"* "$DOTFILES/.local-customizations/zsh/lib/"*.sh(N); do
         # shellcheck disable=SC1090
         source "$file"
     done
 }
 source_libs
-
-# Local customizations - see "Local Customizations" in README.md.
-for file in "$DOTFILES/.local-customizations/zsh/lib/"*.sh(N); do
-    source "$file"
-done
 
 start_or_reuse_ssh_agent
 
