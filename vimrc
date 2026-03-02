@@ -433,7 +433,6 @@ Plug 'rust-lang/rust.vim'
 let g:rust_clip_command = 'xclip -selection clipboard'
 Plug 'mattn/webapi-vim' " Required by rust.vim for :RustPlay.
 " Plug 'fatih/vim-go'
-Plug 'https://gitlab.com/dbeniamine/todo.txt-vim.git'
 " Key commands:
 " - `ArrangeColumn` to arrange into a spreadheet-like format with aligned
 "   columns; `UnArrangeColumn` to undo.
@@ -597,7 +596,6 @@ augroup autocmds
   autocmd BufNewFile,BufRead .prettierrc set filetype=json
   autocmd BufNewFile,BufRead *.mm set filetype=xml
   autocmd BufNewFile,BufRead *.xaml set filetype=xml
-  autocmd BufNewFile,BufRead *.todo set filetype=todo
   autocmd BufNewFile,BufRead .sqlfluff set filetype=confini
   autocmd BufNewFile,BufRead .terraformignore set filetype=gitignore
 
@@ -617,7 +615,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead * call SyntaxRange#Include("#{---cog", "#---}", "python")
 
   " Always want spellcheck for text files.
-  autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst,*.todo,*.tex setlocal spell
+  autocmd BufNewFile,BufRead *.txt,*.md,*.markdown,*.rst,*.tex setlocal spell
   autocmd FileType gitcommit setlocal spell
 
   " Open quickfix window after any grep.
