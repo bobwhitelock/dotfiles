@@ -317,6 +317,9 @@ let g:lsp_diagnostics_enabled = 0
 " install python-lsp-server` for this so doesn't change standard dependencies
 " for project? Maybe would be good to do this automatically for projects/warn
 " me that this is not the case.
+" XXX BW 2026-03-02: Think use of `uv run` here may be causing `uv.lock` files
+" to be left around in projects, when they are not otherwise using `uv` at the
+" top level.
 if system('uv run pylsp -h 2>&1') !~ 'command not found' && v:shell_error == 0
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pylsp',
