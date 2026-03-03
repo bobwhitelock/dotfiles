@@ -349,7 +349,7 @@ def export_project_to_file(project, token, all_tasks, all_comments, all_labels, 
     sections_with_tasks, tasks_without_section = build_task_hierarchy(tasks, comments, sections)
 
     # Create the file path
-    filename = f"{sanitize_filename(project['name'])}.md"
+    filename = f"todoist - {sanitize_filename(project['name'])}.md"
     filepath = os.path.join(base_path, filename) if base_path else filename
 
     # Ensure directory exists
@@ -376,7 +376,7 @@ def flatten_projects_with_paths(projects, base_path=""):
     result = []
     for project in projects:
         if project['children']:
-            subdir_name = sanitize_filename(project['name'])
+            subdir_name = f"todoist - {sanitize_filename(project['name'])}"
             subdir_path = os.path.join(base_path, subdir_name) if base_path else subdir_name
             result.append((project, subdir_path))
             result.extend(flatten_projects_with_paths(project['children'], subdir_path))
