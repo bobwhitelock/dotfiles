@@ -1,0 +1,11 @@
+{
+  "promptDelete": false,
+  "showLineNumber": false,
+  "readableLineLength": true,
+  "showUnsupportedFiles": true,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "0 - inbox",
+  "attachmentFolderPath": "attachments/",
+  "vimMode": true
+}

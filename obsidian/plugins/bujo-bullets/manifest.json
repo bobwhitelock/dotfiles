@@ -1,0 +1,11 @@
+{
+	"id": "bujo-bullets",
+	"name": "BuJo Bullets",
+	"version": "1.2.1",
+	"minAppVersion": "1.0.0",
+	"description": "Alternate checkbox types to support Bullet Journal bullets",
+	"author": "Will Olson",
+	"authorUrl": "https://willolson.io",
+	"fundingUrl": "https://github.com/sponsors/frankolson",
+	"isDesktopOnly": false
+}

@@ -1,0 +1,10 @@
+{
+  "layoutEngine": "tala",
+  "debounce": 500,
+  "theme": 0,
+  "apiToken": "",
+  "d2Path": "",
+  "pad": 100,
+  "sketch": false,
+  "containerHeight": 800
+}

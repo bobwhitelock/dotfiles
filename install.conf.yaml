@@ -61,6 +61,13 @@
     ~/.claude/plans:
       path: ~/src/github.com/bobwhitelock/claude-plans
       if: '[ -d ~/src/github.com/bobwhitelock/claude-plans ]'
+    ~/src/github.com/bobwhitelock/notes/notes/.obsidian/:
+      path: obsidian/*
+      glob: true
+      if: '[ -d ~/src/github.com/bobwhitelock/notes/notes ]'
+    ~/src/github.com/bobwhitelock/notes/notes/.obsidian.vimrc:
+      path: obsidian.vimrc
+      if: '[ -d ~/src/github.com/bobwhitelock/notes/notes ]'
     ~/.leetcode/leetcode.toml:
 
 # Local customizations - see "Local Customizations" in README.md. In separate
