@@ -8,6 +8,12 @@
     display: none;
 }
 
+/* make.md plugin integration */
+.hide-folder-note .mk-tree-node > .mk-tree-wrapper > .dropzone > .mk-tree-item.is-folder-note {
+    opacity: 40%;
+    display: flex;
+}
+
 .pointer-cursor,
 .has-folder-note .nav-folder-title-content:hover,
 .has-folder-note.view-header-breadcrumb:hover,
@@ -17,6 +23,9 @@
     cursor: pointer !important;
 }
 
+.hide-folder-note :not(.show-folder-note-in-explorer).only-has-folder-note .nav-folder-children {
+    display: none !important;
+}
 
 /* ==========================================================================
    Tree Items
@@ -120,6 +129,7 @@ body:not(.disable-folder-highlight) .tree-item-self.fn-is-active {
 }
 
 .cm-line:has(.fv-link-list-item),
+li:has(.fv-link-list-item),
 .el-ul:has(.fv-link-list-item),
 .cm-line:has(.fv-link-list-start),
 .cm-line:has(.fv-link-list-end),
@@ -222,8 +232,10 @@ body:not(.disable-folder-highlight) .tree-item-self.fn-is-active {
 
 .fn-has-no-files .collapse-icon,
 .fn-hide-collapse-icon .has-folder-note.only-has-folder-note .tree-item-icon,
-.fn-hide-empty-collapse-icon .fn-empty-folder .tree-item-icon,
-.only-has-folder-note:not(.is-collapsed):not(.show-folder-note-in-explorer)>.nav-folder-children {
+body.fn-ignore-attachment-folder.fn-hide-collapse-icon .only-has-folder-note .fn-empty-folder.fn-has-attachment-folder .tree-item-icon,
+body.fn-hide-collapse-icon .only-has-folder-note .fn-empty-folder:not(.fn-has-attachment-folder) .tree-item-icon,
+body.fn-hide-empty-collapse-icon :not(.only-has-folder-note) > .fn-empty-folder:not(.fn-has-attachment-folder) .tree-item-icon,
+body.fn-hide-collapse-icon.only-has-folder-note:not(.is-collapsed):not(.show-folder-note-in-explorer)>.nav-folder-children {
     display: none;
 }
 
