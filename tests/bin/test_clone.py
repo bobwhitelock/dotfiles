@@ -1,9 +1,15 @@
 import os
 import subprocess
 import stat
+import sys
 import pytest
 
 CLONE_SCRIPT = os.path.join(os.path.dirname(__file__), "..", "..", "bin", "clone")
+PYTHON = sys.executable
+
+
+def _make_executable(path):
+    path.chmod(path.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
 
 
 @pytest.fixture
@@ -13,25 +19,29 @@ def env(tmp_path):
 
     gh = fake_bin / "gh"
     gh.write_text(
-        "#!/usr/bin/env bash\n"
-        f'touch "{tmp_path}/gh_called"\n'
-        'mkdir -p "$(basename "$3")"\n'
+        f"#!{PYTHON}\n"
+        "import sys, os\n"
+        f'open("{tmp_path}/gh_called", "w").close()\n'
+        "name = os.path.basename(sys.argv[3])\n"
+        "os.makedirs(name, exist_ok=True)\n"
     )
-    gh.chmod(gh.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
+    _make_executable(gh)
 
     git = fake_bin / "git"
     git.write_text(
-        "#!/usr/bin/env bash\n"
-        f'touch "{tmp_path}/git_called"\n'
-        'mkdir -p "$(basename "${2%.git}")"\n'
+        f"#!{PYTHON}\n"
+        "import sys, os\n"
+        f'open("{tmp_path}/git_called", "w").close()\n'
+        "url = sys.argv[2]\n"
+        f'open("{tmp_path}/git_clone_url", "w").write(url)\n'
+        'name = os.path.basename(url.removesuffix(".git"))\n'
+        "os.makedirs(name, exist_ok=True)\n"
     )
-    git.chmod(git.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
+    _make_executable(git)
 
     add_window = fake_bin / "add_window"
-    add_window.write_text("#!/usr/bin/env bash\nexit 0\n")
-    add_window.chmod(
-        add_window.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH
-    )
+    add_window.write_text(f"#!{PYTHON}\n")
+    _make_executable(add_window)
 
     src = tmp_path / "src"
     src.mkdir()
@@ -43,6 +53,15 @@ def env(tmp_path):
         "_tmp_path": tmp_path,
         "_src": src,
     }
+
+
+@pytest.fixture
+def env_no_gh(env):
+    fake_bin = env["_tmp_path"] / "bin"
+    (fake_bin / "gh").unlink()
+    (fake_bin / "python3").symlink_to(PYTHON)
+    env["PATH"] = str(fake_bin)
+    return env
 
 
 def run_clone(repo_identifier, env):
@@ -104,3 +123,19 @@ def test_already_cloned_skips_git(env):
     assert (
         not sentinel.exists()
     ), "git should not have been called when repo already exists"
+
+
+@pytest.mark.parametrize(
+    "repo_identifier,expected_url",
+    [
+        ("junegunn/fzf", "https://github.com/junegunn/fzf"),
+        ("https://github.com/junegunn/fzf", "https://github.com/junegunn/fzf"),
+        ("git@github.com:junegunn/fzf.git", "git@github.com:junegunn/fzf.git"),
+    ],
+)
+def test_github_falls_back_to_git_when_no_gh(repo_identifier, expected_url, env_no_gh):
+    result = run_clone(repo_identifier, env_no_gh)
+    assert result.returncode == 0, result.stderr
+    assert (env_no_gh["_tmp_path"] / "git_called").exists()
+    url_file = env_no_gh["_tmp_path"] / "git_clone_url"
+    assert url_file.read_text().strip() == expected_url

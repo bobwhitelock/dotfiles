@@ -2,6 +2,7 @@
 
 import os
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -36,10 +37,14 @@ def main():
     parent_path.mkdir(parents=True, exist_ok=True)
 
     if not (parent_path / name).is_dir():
-        if is_github:
+        if is_github and shutil.which("gh"):
             subprocess.run(["gh", "repo", "clone", f"{path_parts[-2]}/{name}"], cwd=parent_path, check=True)
         else:
-            subprocess.run(["git", "clone", repo_identifier], cwd=parent_path, check=True)
+            if "://" in repo_identifier or repo_identifier.startswith("git@"):
+                clone_url = repo_identifier
+            else:
+                clone_url = f"https://{hostname}/{'/'.join(path_parts)}"
+            subprocess.run(["git", "clone", clone_url], cwd=parent_path, check=True)
 
     subprocess.run(["add_window", "--vim-pane", str(parent_path / name)], check=True)
 
