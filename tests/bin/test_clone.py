@@ -65,8 +65,14 @@ def run_clone(repo_identifier, env):
         ("git@github.com:junegunn/fzf.vim.git", "github.com/junegunn/fzf.vim"),
         ("junegunn/fzf", "github.com/junegunn/fzf"),
         ("junegunn/fzf.vim", "github.com/junegunn/fzf.vim"),
-        ("https://gitlab.example.com/junegunn/fzf/fzf.vim.git", "gitlab.example.com/junegunn/fzf/fzf.vim"),
-        ("git@gitlab.example.com:junegunn/fzf/fzf.vim.git", "gitlab.example.com/junegunn/fzf/fzf.vim"),
+        (
+            "https://gitlab.example.com/junegunn/fzf/fzf.vim.git",
+            "gitlab.example.com/junegunn/fzf/fzf.vim",
+        ),
+        (
+            "git@gitlab.example.com:junegunn/fzf/fzf.vim.git",
+            "gitlab.example.com/junegunn/fzf/fzf.vim",
+        ),
     ],
 )
 def test_clone_creates_directory(repo_identifier, expected_subdir, env):
@@ -83,7 +89,9 @@ def test_already_cloned_skips_gh(env):
     run_clone("junegunn/fzf", env)
 
     sentinel = env["_tmp_path"] / "gh_called"
-    assert not sentinel.exists(), "gh should not have been called when repo already exists"
+    assert (
+        not sentinel.exists()
+    ), "gh should not have been called when repo already exists"
 
 
 def test_already_cloned_skips_git(env):
@@ -93,4 +101,6 @@ def test_already_cloned_skips_git(env):
     run_clone("https://gitlab.example.com/junegunn/fzf/fzf.vim.git", env)
 
     sentinel = env["_tmp_path"] / "git_called"
-    assert not sentinel.exists(), "git should not have been called when repo already exists"
+    assert (
+        not sentinel.exists()
+    ), "git should not have been called when repo already exists"
