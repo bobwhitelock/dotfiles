@@ -1,0 +1,20 @@
+# https://taskfile.dev
+
+version: '3'
+
+# Prefix output with the name of the task that is running - most useful when
+# tasks have `deps`, as these run in parallel and so their output can get
+# interleaved. For interactive tasks make sure to add `interactive: true` so
+# their output does not get messed up by this.
+output: prefixed
+
+tasks:
+  default:
+    desc: "List available tasks (tasks without description are internal and not shown)"
+    # Strictly speaking this isn't really interactive, but this makes the output nicer.
+    interactive: true
+    cmd: task --list
+
+  test:
+    desc: "Run tests"
+    cmd: pytest tests/ -v
