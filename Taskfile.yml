@@ -23,7 +23,7 @@ tasks:
         exit 1
       fi
       mkdir -p "$NOTES/notes/.obsidian"
-      rsync -av --delete --exclude=graph.json --exclude=workspace.json obsidian/ "$NOTES/notes/.obsidian/"
+      rsync -av --delete --exclude-from=obsidian-sync-exclude obsidian/ "$NOTES/notes/.obsidian/"
       rsync -av obsidian.vimrc "$NOTES/notes/.obsidian.vimrc"
 
   pull-obsidian:
@@ -33,7 +33,7 @@ tasks:
         echo "Error: NOTES env var is not set" >&2
         exit 1
       fi
-      rsync -av --delete --exclude=graph.json --exclude=workspace.json "$NOTES/notes/.obsidian/" obsidian/
+      rsync -av --delete --exclude-from=obsidian-sync-exclude "$NOTES/notes/.obsidian/" obsidian/
       rsync -av "$NOTES/notes/.obsidian.vimrc" obsidian.vimrc
 
   test:
