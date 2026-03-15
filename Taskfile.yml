@@ -22,9 +22,9 @@ tasks:
         echo "Error: NOTES env var is not set" >&2
         exit 1
       fi
-      mkdir -p "$NOTES/.obsidian"
-      rsync -av --delete obsidian/ "$NOTES/.obsidian/"
-      rsync -av obsidian.vimrc "$NOTES/.obsidian.vimrc"
+      mkdir -p "$NOTES/notes/.obsidian"
+      rsync -av --delete obsidian/ "$NOTES/notes/.obsidian/"
+      rsync -av obsidian.vimrc "$NOTES/notes/.obsidian.vimrc"
 
   pull-obsidian:
     desc: "Pull obsidian configs from the notes vault back into dotfiles (set NOTES to override source)"
@@ -33,8 +33,8 @@ tasks:
         echo "Error: NOTES env var is not set" >&2
         exit 1
       fi
-      rsync -av --delete "$NOTES/.obsidian/" obsidian/
-      rsync -av "$NOTES/.obsidian.vimrc" obsidian.vimrc
+      rsync -av --delete "$NOTES/notes/.obsidian/" obsidian/
+      rsync -av "$NOTES/notes/.obsidian.vimrc" obsidian.vimrc
 
   test:
     desc: "Run tests"
