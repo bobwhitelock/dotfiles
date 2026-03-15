@@ -1,4 +1,7 @@
 
+# shellcheck disable=SC1091
+source "$DOTFILES/.local-customizations/zsh/env.sh" 2>/dev/null
+
 export ZSH_DIR="$DOTFILES/zsh"
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
@@ -40,11 +43,11 @@ export STEAMAPPS="$STEAM/steamapps"
 
 export SRC="$HOME/src"
 export BOB="$SRC/github.com/bobwhitelock"
-export NOTES="${NOTES:-$BOB/notes}"
+export NOTES="$BOB/notes"
 export GAMES="$BOB/games"
 
 # Duplicated from `zshrc` in case source this file directly.
-export DOTFILES="$BOB/dotfiles"
+export DOTFILES="${DOTFILES:-$BOB/dotfiles}"
 
 export LIBEXEC="$DOTFILES/libexec"
 
@@ -96,3 +99,6 @@ export OPENAI_API_BASE='https://api.githubcopilot.com'
 # export CLAUDE_CODE_MAX_OUTPUT_TOKENS=8192
 export CLAUDE_CODE_MAX_OUTPUT_TOKENS=50000
 export MAX_THINKING_TOKENS=1024
+
+# shellcheck disable=SC1091
+source "$DOTFILES/.local-customizations/zsh/env.sh" 2>/dev/null

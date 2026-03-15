@@ -48,7 +48,7 @@ The directory mirrors the relevant parts of this repo:
 ```
 .local-customizations/
 ├── zsh/
-│   ├── env.sh        # Sourced before zsh/env.sh (can pre-set variables)
+│   ├── env.sh        # Sourced at start and end of zsh/env.sh (overrides take precedence)
 │   └── lib/
 │       └── *.sh      # Auto-sourced after main zsh/lib/ files
 ├── gitconfig         # Included by main gitconfig (overrides user.email etc.)
