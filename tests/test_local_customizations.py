@@ -127,6 +127,26 @@ def test_zsh_sources_custom_env(zsh_cmd):
     assert result.stdout.strip() == "loaded"
 
 
+def test_notes_can_be_overridden_before_env_sh(zsh_cmd):
+    """NOTES set by local customizations (sourced before env.sh) should not be
+    overwritten when env.sh is subsequently sourced."""
+    main_env = os.path.join(DOTFILES, "zsh", "env.sh")
+    script = textwrap.dedent(f"""\
+        export NOTES=/custom/notes/path
+        export DOTFILES="{DOTFILES}"
+        export BOB="/home/bob/src/github.com/bobwhitelock"
+        source "{main_env}"
+        echo "$NOTES"
+    """)
+    result = subprocess.run(
+        [zsh_cmd, "-c", script],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0
+    assert result.stdout.strip() == "/custom/notes/path"
+
+
 # --- install tests ---
 
 

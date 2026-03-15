@@ -40,7 +40,7 @@ export STEAMAPPS="$STEAM/steamapps"
 
 export SRC="$HOME/src"
 export BOB="$SRC/github.com/bobwhitelock"
-export NOTES="$BOB/notes"
+export NOTES="${NOTES:-$BOB/notes}"
 export GAMES="$BOB/games"
 
 # Duplicated from `zshrc` in case source this file directly.
