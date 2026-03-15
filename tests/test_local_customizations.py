@@ -127,19 +127,19 @@ def test_zsh_sources_custom_env(zsh_cmd):
     assert result.stdout.strip() == "loaded"
 
 
-def test_notes_can_be_overridden_via_local_customizations(zsh_cmd, tmp_path):
-    """NOTES set in .local-customizations/zsh/env.sh should take precedence
-    over the default set in zsh/env.sh, because env.sh re-sources it at the end."""
+def test_local_customizations_env_overrides_env_sh(zsh_cmd, tmp_path):
+    """Variables set in .local-customizations/zsh/env.sh should take precedence
+    over values set in zsh/env.sh, because env.sh re-sources it at the end."""
     local_env_dir = tmp_path / ".local-customizations" / "zsh"
     local_env_dir.mkdir(parents=True)
-    (local_env_dir / "env.sh").write_text("export NOTES=/custom/notes/path\n")
+    (local_env_dir / "env.sh").write_text("export EDITOR=nano\n")
 
     main_env = os.path.join(DOTFILES, "zsh", "env.sh")
     script = textwrap.dedent(f"""\
         export DOTFILES="{tmp_path}"
         export BOB="/home/bob/src/github.com/bobwhitelock"
         source "{main_env}"
-        echo "$NOTES"
+        echo "$EDITOR"
     """)
     result = subprocess.run(
         [zsh_cmd, "-c", script],
@@ -147,7 +147,7 @@ def test_notes_can_be_overridden_via_local_customizations(zsh_cmd, tmp_path):
         text=True,
     )
     assert result.returncode == 0
-    assert result.stdout.strip() == "/custom/notes/path"
+    assert result.stdout.strip() == "nano"
 
 
 # --- install tests ---
