@@ -86,6 +86,18 @@ def test_push_obsidian_deletes_files_removed_from_dotfiles(task_env):
     assert not (task_env["vault"] / ".obsidian" / "stale.json").exists()
 
 
+def test_push_obsidian_preserves_vault_specific_files(task_env):
+    (task_env["vault"] / ".obsidian").mkdir()
+    (task_env["vault"] / ".obsidian" / "graph.json").write_text('{"vault": "graph"}')
+    (task_env["vault"] / ".obsidian" / "workspace.json").write_text('{"vault": "workspace"}')
+
+    result = run_task("push-obsidian", task_env["cwd"], task_env["notes_repo"])
+
+    assert result.returncode == 0, result.stderr
+    assert (task_env["vault"] / ".obsidian" / "graph.json").read_text() == '{"vault": "graph"}'
+    assert (task_env["vault"] / ".obsidian" / "workspace.json").read_text() == '{"vault": "workspace"}'
+
+
 def test_push_obsidian_fails_without_notes_env(task_env):
     result = run_task("push-obsidian", task_env["cwd"], notes_repo=None)
 
@@ -126,6 +138,19 @@ def test_pull_obsidian_copies_vimrc(task_env):
 
     assert result.returncode == 0, result.stderr
     assert (task_env["cwd"] / "obsidian.vimrc").read_text() == "set number\n"
+
+
+def test_pull_obsidian_does_not_pull_vault_specific_files(task_env):
+    (task_env["vault"] / ".obsidian").mkdir()
+    (task_env["vault"] / ".obsidian" / "graph.json").write_text('{"vault": "graph"}')
+    (task_env["vault"] / ".obsidian" / "workspace.json").write_text('{"vault": "workspace"}')
+    (task_env["vault"] / ".obsidian.vimrc").write_text("set number\n")
+
+    result = run_task("pull-obsidian", task_env["cwd"], task_env["notes_repo"])
+
+    assert result.returncode == 0, result.stderr
+    assert not (task_env["cwd"] / "obsidian" / "graph.json").exists()
+    assert not (task_env["cwd"] / "obsidian" / "workspace.json").exists()
 
 
 def test_pull_obsidian_deletes_files_removed_from_vault(task_env):
