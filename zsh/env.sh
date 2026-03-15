@@ -1,7 +1,4 @@
 
-# shellcheck disable=SC1091
-source "$DOTFILES/.local-customizations/zsh/env.sh" 2>/dev/null
-
 export ZSH_DIR="$DOTFILES/zsh"
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
@@ -47,7 +44,7 @@ export NOTES="$BOB/notes"
 export GAMES="$BOB/games"
 
 # Duplicated from `zshrc` in case source this file directly.
-export DOTFILES="${DOTFILES:-$BOB/dotfiles}"
+export DOTFILES="$BOB/dotfiles"
 
 export LIBEXEC="$DOTFILES/libexec"
 
@@ -100,5 +97,7 @@ export OPENAI_API_BASE='https://api.githubcopilot.com'
 export CLAUDE_CODE_MAX_OUTPUT_TOKENS=50000
 export MAX_THINKING_TOKENS=1024
 
+# Source local customizations here so they can override anything set in this
+# file.
 # shellcheck disable=SC1091
 source "$DOTFILES/.local-customizations/zsh/env.sh" 2>/dev/null
