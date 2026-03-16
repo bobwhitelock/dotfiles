@@ -15,6 +15,27 @@ tasks:
     interactive: true
     cmd: task --list
 
+  push-obsidian:
+    desc: "Push obsidian configs from dotfiles to the notes vault (set NOTES to override destination)"
+    cmd: |
+      if [ -z "${NOTES:-}" ]; then
+        echo "Error: NOTES env var is not set" >&2
+        exit 1
+      fi
+      mkdir -p "$NOTES/notes/.obsidian"
+      rsync -av --delete --exclude-from=obsidian-sync-exclude obsidian/ "$NOTES/notes/.obsidian/"
+      rsync -av obsidian.vimrc "$NOTES/notes/.obsidian.vimrc"
+
+  pull-obsidian:
+    desc: "Pull obsidian configs from the notes vault back into dotfiles (set NOTES to override source)"
+    cmd: |
+      if [ -z "${NOTES:-}" ]; then
+        echo "Error: NOTES env var is not set" >&2
+        exit 1
+      fi
+      rsync -av --delete --exclude-from=obsidian-sync-exclude "$NOTES/notes/.obsidian/" obsidian/
+      rsync -av "$NOTES/notes/.obsidian.vimrc" obsidian.vimrc
+
   test:
     desc: "Run tests"
     cmd: pytest tests/ -v
