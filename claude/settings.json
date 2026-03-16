@@ -65,7 +65,6 @@
             "Read(**/*.pem)",
             "Read(**/*.pfx)",
             "Read(**/*.secrets)",
-            "Read(**/*env.sh)",
             "Read(**/.*env)",
             "Read(**/.aws/credentials*)",
             "Read(**/.env)",
