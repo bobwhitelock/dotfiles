@@ -4,7 +4,7 @@
   "displayVimMode": true,
   "fixedNormalModeLayout": false,
   "capturedKeyboardMap": {},
-  "supportJsCommands": false,
+  "supportJsCommands": true,
   "vimStatusPromptMap": {
     "normal": "⚪NORMAL⚪",
     "insert": "🔵INSERT🔵",
