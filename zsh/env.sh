@@ -99,5 +99,6 @@ export MAX_THINKING_TOKENS=1024
 
 # Source local customizations here so they can override anything set in this
 # file.
-# shellcheck disable=SC1091
-source "$DOTFILES/.local-customizations/zsh/env.sh" 2>/dev/null
+if [ -f "$DOTFILES/.local-customizations/zsh/env.sh" ]; then
+    source "$DOTFILES/.local-customizations/zsh/env.sh"
+fi
