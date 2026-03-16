@@ -127,6 +127,30 @@ def test_zsh_sources_custom_env(zsh_cmd):
     assert result.stdout.strip() == "loaded"
 
 
+def test_local_customizations_env_overrides_env_sh(zsh_cmd, tmp_path):
+    """Variables set in .local-customizations/zsh/env.sh should take precedence
+    over values set in zsh/env.sh, because env.sh sources it at the end."""
+    dotfiles = tmp_path / "src" / "github.com" / "bobwhitelock" / "dotfiles"
+    dotfiles.mkdir(parents=True)
+    local_env_dir = dotfiles / ".local-customizations" / "zsh"
+    local_env_dir.mkdir(parents=True)
+    (local_env_dir / "env.sh").write_text("export EDITOR=nano\n")
+
+    main_env = os.path.join(DOTFILES, "zsh", "env.sh")
+    script = textwrap.dedent(f"""\
+        export HOME="{tmp_path}"
+        source "{main_env}"
+        echo "$EDITOR"
+    """)
+    result = subprocess.run(
+        [zsh_cmd, "-c", script],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0
+    assert result.stdout.strip() == "nano"
+
+
 # --- install tests ---
 
 

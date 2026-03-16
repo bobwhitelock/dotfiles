@@ -96,3 +96,8 @@ export OPENAI_API_BASE='https://api.githubcopilot.com'
 # export CLAUDE_CODE_MAX_OUTPUT_TOKENS=8192
 export CLAUDE_CODE_MAX_OUTPUT_TOKENS=50000
 export MAX_THINKING_TOKENS=1024
+
+# Source local customizations here so they can override anything set in this
+# file.
+# shellcheck disable=SC1091
+source "$DOTFILES/.local-customizations/zsh/env.sh" 2>/dev/null
