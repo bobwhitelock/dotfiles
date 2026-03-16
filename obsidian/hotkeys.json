@@ -40,6 +40,12 @@
         "Mod"
       ],
       "key": "P"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "K"
     }
   ],
   "editor:cycle-list-checklist": [
