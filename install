@@ -105,8 +105,10 @@ configure_gnome() {
   # Key bindings.
   run "gsettings set org.gnome.desktop.wm.keybindings switch-windows \"['<Alt>Tab']\""
   run "gsettings set org.gnome.desktop.wm.keybindings switch-applications \"['<Super>Tab']\""
-  run "gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left \"['<Control><Super>Left']\""
-  run "gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right \"['<Control><Super>Right']\""
+  run "gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left \"[]\""
+  run "gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right \"[]\""
+  run "gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left \"['<Shift><Super>Left']\""
+  run "gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right \"['<Shift><Super>Right']\""
   run "gsettings set org.gnome.shell.keybindings toggle-message-tray \"['<Super>m']\""
   local kb_schema="org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
   local kb_base='/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings'
