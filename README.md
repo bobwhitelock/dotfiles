@@ -16,15 +16,14 @@ this is probably just adding an
 (This is mostly for my own reference - you probably want to just pick and
 choose things rather than install everything if you're not me).
 
-1. Install Linux (currently I'm on various distros on different machines - some
-   things currently in this repo are specific to Arch, and won't work on other
-   distros).
+1. Install Linux (I'm on various distros on different machines - some things in
+   this repo are likely distro-specific or outdated).
 
 2. Do the following:
   ```bash
   mkdir -p ~/src/github.com/bobwhitelock
   cd !$
-  git clone git@github.com:bobwhitelock/dotfiles.git
+  git clone https://github.com/bobwhitelock/dotfiles
 
   cd dotfiles
   ./install
