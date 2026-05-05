@@ -31,7 +31,7 @@ project_specific_setup = \
 name: <%= [project_owner, project_name].join('/') %>
 startup_window: <%= project_name %>
 # XXX Don't reprompt for this when it's already added.
-on_project_start: ssh-add ~/.ssh/id_rsa.bob
+on_project_start: ssh-add ~/.ssh/id_rsa
 
 windows:
   - notes:

@@ -1,6 +1,4 @@
 
-alias sshaddbob='ssh-add ~/.ssh/id_rsa.bob'
-
 ssh_remove_last_key() {
     ssh-keygen \
         -f ~/.ssh/known_hosts \

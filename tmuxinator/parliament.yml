@@ -5,7 +5,7 @@ name: parliament
 on_project_start: sudo systemctl start postgresql
 startup_window: app
 # XXX Don't reprompt for this when it's already added.
-on_project_start: ssh-add ~/.ssh/id_rsa.bob
+on_project_start: ssh-add ~/.ssh/id_rsa
 
 windows:
   - notes:

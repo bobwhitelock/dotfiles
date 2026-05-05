@@ -5,8 +5,10 @@ alias grip="grip --browser --user \"\$GITHUB_USER\" --pass \"\$GITHUB_PASSWORD\"
 # Pass `-R REPO_NAME` to just backup a single repo (much quicker).
 alias gh_backup="github-backup bobwhitelock -u bobwhitelock -o ~/github-backups --all --private --skip-archived --token "$GITHUB_CLI_TOKEN_PERSONAL""
 
+# TODO BW 2026-05-05: Still need all this stuff? Only use one GitHub account +
+# the key is the default.
 gh_login_personal() {
-    _gh_login id_rsa.bob "$GITHUB_CLI_TOKEN_PERSONAL"
+    _gh_login id_rsa "$GITHUB_CLI_TOKEN_PERSONAL"
 }
 
 _gh_login() {
