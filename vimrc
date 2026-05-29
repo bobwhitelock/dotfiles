@@ -601,6 +601,7 @@ augroup autocmds
   autocmd BufNewFile,BufRead *.xaml set filetype=xml
   autocmd BufNewFile,BufRead .sqlfluff set filetype=confini
   autocmd BufNewFile,BufRead .terraformignore set filetype=gitignore
+  autocmd BufNewFile,BufRead *.base set filetype=yaml
 
   " oh-my-zsh themes are shell.
   autocmd BufNewFile,BufRead *.zsh-theme set filetype=sh
