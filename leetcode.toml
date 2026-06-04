@@ -1,19 +1,27 @@
+# Config for https://github.com/clearloop/leetcode-cli.
+# To use CLI:
+# - Sign in in Firefox and set env vars - see below; first time on each machine
+# only.
+# - `leetcode list` to choose
+# - `leetcode edit 3` to start
+# - `leetcode test 3` to test
+# - `leetcode exec 3` to submit
+
 [code]
 editor = 'vim'
 lang = 'python'
 edit_code_marker = false
 start_marker = ""
 end_marker = ""
-# if include problem description
 comment_problem_desc = true
-# comment syntax
 comment_leading = "#"
 test = true
 
 [cookies]
 # `LEETCODE_SESSION` and `LEETCODE_CSRF` need to be set in
 # `$DOTFILES/zsh/env.private.sh`, as described in
-# https://github.com/clearloop/leetcode-cli.
+# https://github.com/clearloop/leetcode-cli#cookies. Sign in in Firefox and
+# grab these values from Storage tab.
 session = ''
 csrf = ''
 site = "leetcode.com"
