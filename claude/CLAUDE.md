@@ -1,5 +1,11 @@
 # Claude Code Instructions
 
+### In Claude conversations
+- When I ask you to update a notes/docs file from now on, MAKE SURE you just keep doing this until I tell you otherwise - you don't need to keep only outputting the text until I tell you again to do this.
+- When adding text to a notes/docs file, keep things concise without losing key details, and in particular focus on the things it seems like I didn't understand before the conversation until I asked about them.
+- When there are multiple approaches to something, always note if there is a clear default/standard choice vs niche/specialized/obsolete ones. Mark defaults clearly (e.g. **default: X**) and label niche options (e.g. niche: ...) both in conversation and in any notes/docs.
+- When you give a list of potential improvements to something, ALWAYS output each item with a unique, numerically increasing, number, starting with 1, and continue using this number moving forward. If new such items come up later in the conversation, continue the same numbering starting from the next available number (DO NOT use letters). In each subsequent message when there are such numeric points we have not addressed or dismissed, output just these points and any solutions already offered again. This all allows me to easily and uniquely refer to specific items in the subsequent conversation, and ensure everything gets addressed. IMPORTANT: use the `(N)` format (e.g. `(1)`, `(7)`) — never use `1.` or `- 1.` style as these can render incorrectly, either being re-numbered or as lettered lists (a, b, c...) instead of numbered ones.
+
 ### Code Style and Documentation
 - **Remove verbose comments and docstrings**: Only comment on truly exceptional or non-obvious code. Competent developers can read code without explaining what each line does
 - **No preamble/postamble**: Don't add explanatory text before/after responses unless specifically asked
