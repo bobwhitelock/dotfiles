@@ -307,7 +307,10 @@ function! s:ResetReview()
 endfunction
 
 Plug 'prabirshrestha/vim-lsp'
-let g:lsp_diagnostics_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_diagnostics_highlights_enabled = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_float_cursor = 1
 " XXX BW 2026-01-17: Can't remember why I added next 2 lines, or if still
 " sometimes useful.
 " let g:lsp_log_verbose = 1
@@ -341,9 +344,21 @@ if executable('vtsls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'vtsls',
         \ 'cmd': {server_info->['vtsls', '--stdio']},
-        \ 'allowlist': ['typescript', 'typescriptreact'],
-        \ })
+        \ 'allowlist': ['typescript', 'typescriptreact', 'javascript', 'javascriptreact'],
+        \ 'initialization_options': {
+        \   'typescript': {'implicitProjectConfig': {'lib': ['ES2020', 'DOM'], 'strict': v:true}}
+        \ }})
 endif
+
+" npm install -g vscode-langservers-extracted
+" TODO BW 2026-06-05: Never actually used this, enable if ever need it
+" if executable('vscode-html-language-server')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'vscode-html-language-server',
+"         \ 'cmd': {server_info->['vscode-html-language-server', '--stdio']},
+"         \ 'allowlist': ['html'],
+"         \ })
+" endif
 
 " XXX BW 2025-11-21: Use this and get symbol search working. Or try something
 " else. Or just use ctags for this?
@@ -367,6 +382,7 @@ function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> <C-]> <plug>(lsp-definition)
+    " nmap <buffer> <leader>ga <plug>(lsp-code-action)
     " nmap <buffer> gs <plug>(lsp-document-symbol-search)
     " nmap <buffer> <C-f> <plug>(lsp-workspace-symbol-search)
     " nmap <buffer> gr <plug>(lsp-references)
@@ -775,6 +791,18 @@ nmap co yo
 " Override unimpaired map to just toggle `cursorcolumn`, since I always want
 " `cursorline`.
 nnoremap cox :set cursorcolumn!<CR>
+
+" XXX BW 2026-06-05: Didn't find this useful, but maybe use again.
+" nnoremap <silent> coL :call <SID>ToggleLspAutoComplete()<CR>
+" function! s:ToggleLspAutoComplete()
+"   if get(g:, 'asyncomplete_auto_popup', 1)
+"     let g:asyncomplete_auto_popup = 0
+"     echo "LSP autocomplete off"
+"   else
+"     let g:asyncomplete_auto_popup = 1
+"     echo "LSP autocomplete on"
+"   endif
+" endfunction
 
 " Unimpaired-style maps to jump to next/previous file in quickfix list
 " (Unimpaired defaults for this conflict with my Tmux prefix).
