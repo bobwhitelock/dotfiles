@@ -6,3 +6,4 @@ let b:ale_linters = []
 
 " Have eslint ignore current line.
 nnoremap <buffer> <leader>i mzO// eslint-disable-next-line<esc>`z
+let b:lumberjack_print_string = "console.log('IDENTIFIER:', VALUE);"
