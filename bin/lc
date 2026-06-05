@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import json
 import os
 import pty
 import re
@@ -7,6 +8,8 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
+import urllib.request
 from pathlib import Path
 
 LEETCODE_CONFIG = Path(os.environ["DOTFILES"]) / "leetcode.toml"
@@ -36,32 +39,40 @@ def parse_config():
 
 
 def create_editor_wrapper(editor_name, lang):
-    if lang != "golang":
-        return None
-
     real_editor = shutil.which(editor_name)
     wrapper_dir = tempfile.mkdtemp(prefix="lc_editor_")
     wrapper_path = os.path.join(wrapper_dir, editor_name)
 
-    wrapper_script = f"""#!/usr/bin/env python3
-import os, sys
-
-file_path = sys.argv[1] if len(sys.argv) > 1 else None
-if file_path and file_path.endswith('.go'):
-    try:
-        with open(file_path) as f:
-            content = f.read()
+    go_block = ""
+    if lang == "golang":
+        go_block = """
         if 'package main' not in content:
             lines = content.splitlines()
             insert_pos = 0
             for i, line in enumerate(lines):
-                if line.startswith('//') or line == '':
+                if line.startswith('//'):
                     insert_pos = i + 1
+                elif line == '' and insert_pos > 0:
+                    insert_pos = i + 1
+                    break
                 else:
                     break
             new_lines = lines[:insert_pos] + ['package main', ''] + lines[insert_pos:]
-            with open(file_path, 'w') as f:
-                f.write('\\n'.join(new_lines) + '\\n')
+            content = '\\n'.join(new_lines) + '\\n'
+"""
+
+    wrapper_script = f"""#!/usr/bin/env python3
+import os, re, sys
+
+file_path = sys.argv[1] if len(sys.argv) > 1 else None
+if file_path:
+    try:
+        with open(file_path) as f:
+            content = f.read()
+        content = re.sub('[\\u200b-\\u200f\\u00ad\\ufeff]', '', content)
+{go_block}
+        with open(file_path, 'w') as f:
+            f.write(content)
     except Exception:
         pass
 
@@ -74,10 +85,77 @@ os.execv({repr(real_editor)}, [{repr(real_editor)}] + sys.argv[1:])
     return wrapper_dir
 
 
-def leetcode_list_with_color():
+CATEGORIES = ["algorithms", "database", "shell", "concurrency"]
+TAGS_CACHE_MAX_AGE = 7 * 24 * 3600
+MAX_LABEL_LEN = 45
+
+
+def tags_cache_path():
+    cache_dir = Path.home() / ".cache" / "lc"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    return cache_dir / "tags_cache.json"
+
+
+def fetch_tags_from_api():
+    session = os.environ.get("LEETCODE_SESSION", "")
+    csrf = os.environ.get("LEETCODE_CSRF", "")
+    query = json.dumps({"query": "{ allQuestions { frontendId: questionFrontendId topicTags { slug } } }"})
+    req = urllib.request.Request(
+        "https://leetcode.com/graphql",
+        data=query.encode(),
+        headers={
+            "content-type": "application/json",
+            "cookie": f"LEETCODE_SESSION={session}; csrftoken={csrf}",
+            "x-csrftoken": csrf,
+            "referer": "https://leetcode.com",
+            "user-agent": "Mozilla/5.0",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = json.loads(resp.read())
+    return {
+        q["frontendId"]: [t["slug"] for t in q["topicTags"]]
+        for q in data["data"]["allQuestions"]
+    }
+
+
+def load_tags():
+    cache = tags_cache_path()
+    if cache.exists():
+        data = json.loads(cache.read_text())
+        if time.time() - data.get("updated", 0) < TAGS_CACHE_MAX_AGE:
+            return data["tags"]
+    tags = fetch_tags_from_api()
+    cache.write_text(json.dumps({"updated": time.time(), "tags": tags}))
+    return tags
+
+
+def parse_list_line(line):
+    num_m = re.search(rb"\[\s*\d+\s*\]", line)
+    diff_m = re.search(rb"\x1b\[\d+m\w+\s*\x1b\[0m", line)
+    pct_m = re.search(rb"\(\d+\.\d+ %\)", line)
+
+    num = num_m.group(0) if num_m else b""
+    pct = pct_m.group(0) if pct_m else b""
+    diff = re.sub(rb"\s+(\x1b\[0m)", rb"\1", diff_m.group(0)) if diff_m else b""
+
+    if num_m and diff_m:
+        title = line[num_m.end():diff_m.start()].strip()
+    elif num_m and pct_m:
+        title = line[num_m.end():pct_m.start()].strip()
+    elif num_m:
+        title = line[num_m.end():].strip()
+    else:
+        title = line.strip()
+
+    return num, title, diff, pct
+
+
+def fetch_category(args):
+    category, tags_by_fid = args
     master_fd, slave_fd = pty.openpty()
     proc = subprocess.Popen(
-        ["leetcode", "list", "-q", "DL"],
+        ["leetcode", "list", "-q", "DL", "-c", category],
         stdout=slave_fd,
         stderr=slave_fd,
     )
@@ -94,16 +172,45 @@ def leetcode_list_with_color():
     finally:
         os.close(master_fd)
     proc.wait()
-    return b"".join(chunks).replace(b"\r\n", b"\n")
+    raw = b"".join(chunks).replace(b"\r\n", b"\n")
+
+    lines = []
+    for line in raw.splitlines():
+        if not line.strip():
+            continue
+        m = re.search(rb"\[\s*(\d+)\s*\]", line)
+        fid = m.group(1).decode() if m else None
+        problem_tags = [t for t in (tags_by_fid.get(fid, []) if fid else []) if t != category]
+
+        inner = ",".join([category] + problem_tags)
+        label_str = f"[{inner}]"
+        if len(label_str) > MAX_LABEL_LEN:
+            label_str = label_str[:MAX_LABEL_LEN - 2] + "…]"
+        label = label_str.ljust(MAX_LABEL_LEN).encode()
+
+        num, title, diff, pct = parse_list_line(line.lstrip())
+        parts = [p for p in [num, label, diff, pct, title] if p]
+        visual = b"  ".join(parts)
+        lines.append((fid or "0").encode() + b"\t" + visual)
+    return b"\n".join(lines)
+
+
+def leetcode_list_with_color():
+    import concurrent.futures
+    tags_by_fid = load_tags()
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        results = list(executor.map(fetch_category, [(c, tags_by_fid) for c in CATEGORIES]))
+    return b"\n".join(r for r in results if r)
 
 
 def run_fzf_select():
     output = leetcode_list_with_color()
 
-    preview_cmd = "leetcode pick $(echo {} | grep -o '\\[  *[0-9]*  *\\]' | tr -d '[] ') 2>/dev/null"
-
     fzf_result = subprocess.run(
-        ["fzf", "--ansi", "--preview", preview_cmd, "--preview-window", "right:60%"],
+        ["fzf", "--ansi", "--delimiter", "\t", "--with-nth", "2..",
+         "--preview", "leetcode pick {1} 2>/dev/null",
+         "--preview-window", "right:40%",
+         "--tiebreak=index"],
         input=output,
         stdout=subprocess.PIPE,
     )
@@ -115,8 +222,7 @@ def run_fzf_select():
     if not selected:
         return None
 
-    m = re.search(r'\[\s*(\d+)\s*\]', selected)
-    return int(m.group(1)) if m else None
+    return int(selected.split("\t")[0])
 
 
 def edit_problem(problem_num):
@@ -125,12 +231,10 @@ def edit_problem(problem_num):
 
     try:
         env = os.environ.copy()
-        if wrapper_dir:
-            env["PATH"] = wrapper_dir + ":" + env.get("PATH", "")
+        env["PATH"] = wrapper_dir + ":" + env.get("PATH", "")
         subprocess.run(["leetcode", "edit", str(problem_num)], env=env)
     finally:
-        if wrapper_dir:
-            shutil.rmtree(wrapper_dir)
+        shutil.rmtree(wrapper_dir)
 
 
 def main():
