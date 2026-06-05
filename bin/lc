@@ -1,0 +1,146 @@
+#!/usr/bin/env python3
+
+import os
+import pty
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+LEETCODE_CONFIG = Path(os.environ["DOTFILES"]) / "leetcode.toml"
+
+
+def parse_config():
+    lang = None
+    solutions_dir = None
+    editor_name = "vim"
+
+    if LEETCODE_CONFIG.exists():
+        text = LEETCODE_CONFIG.read_text()
+        m = re.search(r'^lang\s*=\s*[\'"](\w+)[\'"]', text, re.MULTILINE)
+        if m:
+            lang = m.group(1)
+        m = re.search(r'^editor\s*=\s*[\'"]([^\'"]+)[\'"]', text, re.MULTILINE)
+        if m:
+            editor_name = m.group(1)
+        root_m = re.search(r'^root\s*=\s*[\'"]([^\'"]+)[\'"]', text, re.MULTILINE)
+        code_m = re.search(r'^code\s*=\s*[\'"]([^\'"]+)[\'"]', text, re.MULTILINE)
+        if root_m:
+            root = Path(root_m.group(1)).expanduser()
+            code = code_m.group(1) if code_m else "solutions"
+            solutions_dir = root / code
+
+    return lang, editor_name, solutions_dir
+
+
+def create_editor_wrapper(editor_name, lang):
+    if lang != "golang":
+        return None
+
+    real_editor = shutil.which(editor_name)
+    wrapper_dir = tempfile.mkdtemp(prefix="lc_editor_")
+    wrapper_path = os.path.join(wrapper_dir, editor_name)
+
+    wrapper_script = f"""#!/usr/bin/env python3
+import os, sys
+
+file_path = sys.argv[1] if len(sys.argv) > 1 else None
+if file_path and file_path.endswith('.go'):
+    try:
+        with open(file_path) as f:
+            content = f.read()
+        if 'package main' not in content:
+            lines = content.splitlines()
+            insert_pos = 0
+            for i, line in enumerate(lines):
+                if line.startswith('//') or line == '':
+                    insert_pos = i + 1
+                else:
+                    break
+            new_lines = lines[:insert_pos] + ['package main', ''] + lines[insert_pos:]
+            with open(file_path, 'w') as f:
+                f.write('\\n'.join(new_lines) + '\\n')
+    except Exception:
+        pass
+
+os.execv({repr(real_editor)}, [{repr(real_editor)}] + sys.argv[1:])
+"""
+
+    with open(wrapper_path, "w") as f:
+        f.write(wrapper_script)
+    os.chmod(wrapper_path, 0o755)
+    return wrapper_dir
+
+
+def leetcode_list_with_color():
+    master_fd, slave_fd = pty.openpty()
+    proc = subprocess.Popen(
+        ["leetcode", "list", "-q", "DL"],
+        stdout=slave_fd,
+        stderr=slave_fd,
+    )
+    os.close(slave_fd)
+    chunks = []
+    try:
+        while True:
+            chunk = os.read(master_fd, 4096)
+            if not chunk:
+                break
+            chunks.append(chunk)
+    except OSError:
+        pass
+    finally:
+        os.close(master_fd)
+    proc.wait()
+    return b"".join(chunks).replace(b"\r\n", b"\n")
+
+
+def run_fzf_select():
+    output = leetcode_list_with_color()
+
+    preview_cmd = "leetcode pick $(echo {} | grep -o '\\[  *[0-9]*  *\\]' | tr -d '[] ') 2>/dev/null"
+
+    fzf_result = subprocess.run(
+        ["fzf", "--ansi", "--preview", preview_cmd, "--preview-window", "right:60%"],
+        input=output,
+        stdout=subprocess.PIPE,
+    )
+
+    if fzf_result.returncode != 0:
+        return None
+
+    selected = fzf_result.stdout.decode().strip()
+    if not selected:
+        return None
+
+    m = re.search(r'\[\s*(\d+)\s*\]', selected)
+    return int(m.group(1)) if m else None
+
+
+def edit_problem(problem_num):
+    lang, editor_name, _ = parse_config()
+    wrapper_dir = create_editor_wrapper(editor_name, lang)
+
+    try:
+        env = os.environ.copy()
+        if wrapper_dir:
+            env["PATH"] = wrapper_dir + ":" + env.get("PATH", "")
+        subprocess.run(["leetcode", "edit", str(problem_num)], env=env)
+    finally:
+        if wrapper_dir:
+            shutil.rmtree(wrapper_dir)
+
+
+def main():
+    if len(sys.argv) > 1:
+        os.execvp("leetcode", ["leetcode"] + sys.argv[1:])
+
+    problem_num = run_fzf_select()
+    if problem_num is not None:
+        edit_problem(problem_num)
+
+
+if __name__ == "__main__":
+    main()
