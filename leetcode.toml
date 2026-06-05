@@ -8,7 +8,7 @@
 # - `leetcode exec 3` to submit
 
 [code]
-editor = 'vim'
+editor = 'vimx'
 edit_code_marker = false
 start_marker = ""
 end_marker = ""
