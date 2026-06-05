@@ -350,6 +350,17 @@ if executable('vtsls')
         \ }})
 endif
 
+" sudo dnf install gopls
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls']},
+        \ 'allowlist': ['go'],
+        \ 'initialization_options': {
+        \   'analyses': {'staticcheck': v:true},
+        \ }})
+endif
+
 " npm install -g vscode-langservers-extracted
 " TODO BW 2026-06-05: Never actually used this, enable if ever need it
 " if executable('vscode-html-language-server')
@@ -382,6 +393,7 @@ function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> <C-]> <plug>(lsp-definition)
+    nnoremap <buffer> <leader>sd :LspDocumentDiagnostics<CR>
     " nmap <buffer> <leader>ga <plug>(lsp-code-action)
     " nmap <buffer> gs <plug>(lsp-document-symbol-search)
     " nmap <buffer> <C-f> <plug>(lsp-workspace-symbol-search)
