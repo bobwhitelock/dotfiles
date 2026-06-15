@@ -17,6 +17,7 @@
 - **Use TodoWrite tool proactively**: Always track complex tasks with the TodoWrite tool for visibility
 - **Never commit unless explicitly asked**: Do not create git commits; the user commits their own changes
 - **Fix actual errors**: When something breaks, fix the root cause, don't fake it
+- **Never swallow errors silently**: Do not write `except Exception: pass` or equivalent bare catch-and-ignore patterns — these hide bugs and make debugging impossible. Let errors propagate or handle them explicitly with a specific exception type and meaningful action
 
 ### Technical Preferences
 - Files and classes should be structured so functions/methods always appear above functions/methods they depend on, so things will naturally be grouped with a public method followed by private methods it uses, and further private methods these use etc. Other independent public methods may then follow these, in the same pattern. This also means furthest down in a class may appear implementation details that multiple higher public methods depend on. Follow this approach for additions you make, but leave existing ordering as it is unless instructed otherwise or you are making a significant refactoring already.
