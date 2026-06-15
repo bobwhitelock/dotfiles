@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+import os
+import re
+import sys
+
+# Script used by `bin/lc`.
+
+real_editor = os.environ["LC_REAL_EDITOR"]
+lang = os.environ.get("LC_LANG", "")
+
+
+def _detect_cc(content):
+    for line in content.splitlines():
+        s = line.strip()
+        if s.startswith("//"):
+            return "//"
+        if s.startswith("--"):
+            return "--"
+        if s.startswith("#"):
+            return "#"
+    return "#"
+
+
+def _is_empty_comment(line, cc):
+    return line.strip() == cc
+
+
+def _is_section_header(line, cc):
+    s = line.strip()
+    if not s.startswith(cc) or s == cc:
+        return False
+    after = s[len(cc):].strip()
+    return after.endswith(":") and len(after) <= 20
+
+
+def _collapse_comments(content):
+    cc = _detect_cc(content)
+    lines = [l.rstrip() for l in content.splitlines()]
+
+    # Pass 1: collapse consecutive empty comments; remove empty comments after section headers.
+    result = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        result.append(line)
+        if _is_empty_comment(line, cc) or _is_section_header(line, cc):
+            while i + 1 < len(lines) and _is_empty_comment(lines[i + 1], cc):
+                i += 1
+        i += 1
+
+    # Pass 2: remove empty comments immediately before a blank non-comment line or end of file.
+    final = []
+    for j, line in enumerate(result):
+        if _is_empty_comment(line, cc):
+            next_line = result[j + 1] if j + 1 < len(result) else None
+            if next_line is None or next_line == "":
+                continue
+        final.append(line)
+
+    return "\n".join(final) + "\n"
+
+
+file_path = sys.argv[1] if len(sys.argv) > 1 else None
+if file_path:
+    with open(file_path) as f:
+        content = f.read()
+    content = re.sub("[​-‏­﻿]", "", content)
+    if lang == "golang" and "package main" not in content:
+        lines = content.splitlines()
+        insert_pos = 0
+        for i, line in enumerate(lines):
+            if line.startswith("//"):
+                insert_pos = i + 1
+            elif line == "" and insert_pos > 0:
+                insert_pos = i + 1
+                break
+            else:
+                break
+        new_lines = lines[:insert_pos] + ["package main", ""] + lines[insert_pos:]
+        content = "\n".join(new_lines) + "\n"
+    content = _collapse_comments(content)
+    with open(file_path, "w") as f:
+        f.write(content)
+
+os.execv(real_editor, [real_editor] + sys.argv[1:])

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Wrapper script for https://github.com/clearloop/leetcode-cli.
+#
+# Related config in `leetcode.toml`
+
 # TODO BW 2026-06-05: Allow passing language to use at runtime, rather than
 # needing to change this in `leetcode.toml` each time.
 
@@ -45,47 +49,9 @@ def create_editor_wrapper(editor_name, lang):
     real_editor = shutil.which(editor_name)
     wrapper_dir = tempfile.mkdtemp(prefix="lc_editor_")
     wrapper_path = os.path.join(wrapper_dir, editor_name)
-
-    go_block = ""
-    if lang == "golang":
-        go_block = """
-        if 'package main' not in content:
-            lines = content.splitlines()
-            insert_pos = 0
-            for i, line in enumerate(lines):
-                if line.startswith('//'):
-                    insert_pos = i + 1
-                elif line == '' and insert_pos > 0:
-                    insert_pos = i + 1
-                    break
-                else:
-                    break
-            new_lines = lines[:insert_pos] + ['package main', ''] + lines[insert_pos:]
-            content = '\\n'.join(new_lines) + '\\n'
-"""
-
-    wrapper_script = f"""#!/usr/bin/env python3
-import os, re, sys
-
-file_path = sys.argv[1] if len(sys.argv) > 1 else None
-if file_path:
-    try:
-        with open(file_path) as f:
-            content = f.read()
-        content = re.sub('[\\u200b-\\u200f\\u00ad\\ufeff]', '', content)
-{go_block}
-        with open(file_path, 'w') as f:
-            f.write(content)
-    except Exception:
-        pass
-
-os.execv({repr(real_editor)}, [{repr(real_editor)}] + sys.argv[1:])
-"""
-
-    with open(wrapper_path, "w") as f:
-        f.write(wrapper_script)
-    os.chmod(wrapper_path, 0o755)
-    return wrapper_dir
+    script = Path(__file__).resolve().parent.parent / "libexec" / "lc_editor_wrapper"
+    os.symlink(script, wrapper_path)
+    return wrapper_dir, real_editor, lang or ""
 
 
 CATEGORIES = ["algorithms", "database", "shell", "concurrency"]
@@ -230,11 +196,13 @@ def run_fzf_select():
 
 def edit_problem(problem_num):
     lang, editor_name, _ = parse_config()
-    wrapper_dir = create_editor_wrapper(editor_name, lang)
+    wrapper_dir, real_editor, lang = create_editor_wrapper(editor_name, lang)
 
     try:
         env = os.environ.copy()
         env["PATH"] = wrapper_dir + ":" + env.get("PATH", "")
+        env["LC_REAL_EDITOR"] = real_editor
+        env["LC_LANG"] = lang
         subprocess.run(["leetcode", "edit", str(problem_num)], env=env)
     finally:
         shutil.rmtree(wrapper_dir)
