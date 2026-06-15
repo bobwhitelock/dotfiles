@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# TODO BW 2026-06-05: Allow passing language to use at runtime, rather than
+# needing to change this in `leetcode.toml` each time.
+
 import json
 import os
 import pty
