@@ -18,16 +18,16 @@ test = true
 # Uncomment as applicable for language to use:
 
 # For Python.
-# lang = 'python'
-# comment_leading = "#"
+lang = 'python'
+comment_leading = "#"
 
 # For TypeScript.
 # lang = 'typescript'
 # comment_leading = "//"
 
 # For Go.
-lang = 'golang'
-comment_leading = "//"
+# lang = 'golang'
+# comment_leading = "//"
 
 [cookies]
 # `LEETCODE_SESSION` and `LEETCODE_CSRF` need to be set in
