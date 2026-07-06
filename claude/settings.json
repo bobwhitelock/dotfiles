@@ -98,5 +98,9 @@
             }
         ]
     },
-    "skipDangerousModePermissionPrompt": true
+    "enabledPlugins": {
+        "gopls-lsp@claude-plugins-official": true
+    },
+    "skipDangerousModePermissionPrompt": true,
+    "tui": "fullscreen"
 }
