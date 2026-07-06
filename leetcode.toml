@@ -18,7 +18,7 @@ test = true
 # Uncomment as applicable for language to use:
 
 # For Python.
-lang = 'python'
+lang = 'python3'
 comment_leading = "#"
 
 # For TypeScript.
