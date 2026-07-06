@@ -27,8 +27,8 @@ export TZ='Europe/London'
 # XXX Commented as was being very slow
 # export NODE_PATH=$NODE_PATH:"$(npm root -g)"
 
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="vimx"
+export VISUAL="vimx"
 export PAGER="less"
 export LESS="-K"
 
