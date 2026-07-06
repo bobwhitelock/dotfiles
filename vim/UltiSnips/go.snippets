@@ -1,0 +1,8 @@
+
+# From https://www.reddit.com/r/golang/comments/gritgv/comment/fs3gdtu/
+snippet json
+func PrintJSON(obj interface{}) {
+	bytes, _ := json.MarshalIndent(obj, "\t", "\t")
+	fmt.Println(string(bytes))
+}
+endsnippet
