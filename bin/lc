@@ -6,6 +6,15 @@
 
 # TODO BW 2026-06-05: Allow passing language to use at runtime, rather than
 # needing to change this in `leetcode.toml` each time.
+# TODO BW 2026-07-07: Add test coverage to avoid breaking past features as new
+# ones added - could look at past prompts/commits against this file to see what
+# the important features to cover are.
+# TODO BW 2026-07-07: Re-architect to better structure, with clear pre/post
+# hooks for different language types.
+# TODO BW 2026-07-07: Have actual local test runner that doesn't send to
+# Leetcode? But would need to identify function to test, and may not be viable
+# in some cases as Leetcode does extra pre-processing around function under
+# test.
 
 import json
 import os
