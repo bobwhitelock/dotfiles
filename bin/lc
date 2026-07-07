@@ -194,6 +194,41 @@ def run_fzf_select():
     return int(selected.split("\t")[0])
 
 
+def find_python_solution(solutions_dir, problem_num):
+    if not solutions_dir:
+        return None
+    matches = list(solutions_dir.glob(f"{problem_num}.*.py"))
+    return matches[0] if matches else None
+
+
+def find_project_root(start_dir):
+    for directory in [start_dir, *start_dir.parents]:
+        if (directory / "pyproject.toml").exists():
+            return directory
+    return None
+
+
+def check_python_solution(solutions_dir, problem_num):
+    """Run `uv run mypy` on the problem's solution file, if it's a Python one.
+
+    Returns False (and prints mypy's output) if the check fails, so the
+    caller can abort before wasting a `leetcode test`/`exec` round-trip on
+    code that's already known to be broken.
+    """
+    py_file = find_python_solution(solutions_dir, problem_num)
+    if py_file is None:
+        return True
+
+    project_root = find_project_root(py_file.parent)
+    if project_root is None:
+        return True
+
+    result = subprocess.run(
+        ["uv", "run", "mypy", str(py_file)], cwd=project_root
+    )
+    return result.returncode == 0
+
+
 def edit_problem(problem_num):
     lang, editor_name, _ = parse_config()
     wrapper_dir, real_editor, lang = create_editor_wrapper(editor_name, lang)
@@ -210,6 +245,11 @@ def edit_problem(problem_num):
 
 def main():
     if len(sys.argv) > 1:
+        command = sys.argv[1]
+        if command in ("test", "exec") and len(sys.argv) > 2:
+            _, _, solutions_dir = parse_config()
+            if not check_python_solution(solutions_dir, sys.argv[2]):
+                sys.exit(1)
         os.execvp("leetcode", ["leetcode"] + sys.argv[1:])
 
     problem_num = run_fzf_select()
