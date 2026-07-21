@@ -55,6 +55,8 @@ rgp() {
     rg --pretty "$@" | bat
 }
 
+alias rg_anything="rg --no-ignore --hidden"
+
 # Swap 2 filenames around, if they exist (from
 # http://tldp.org/LDP/abs/html/sample-bashrc.html).
 swap() {
