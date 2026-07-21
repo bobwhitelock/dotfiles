@@ -19,7 +19,13 @@ alias tfa='terraform init && terraform apply'
 alias tf_yolo='tf destroy -auto-approve && tf apply -auto-approve; pingme "$?"'
 alias pw='npx prettier -w'
 alias clear="clear -x"
+
 alias claude="claude --dangerously-skip-permissions" # YOLO
+alias opus="claude --model opus"
+alias fable="claude --model fable"
+q() {
+    claude "$*"
+}
 
 # From https://unix.stackexchange.com/a/102021/229081.
 alias trim="sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'"
