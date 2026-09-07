@@ -1,3 +1,15 @@
+# Vault-specific files.
+bookmarks.json
 graph.json
-workspace.json
+types.json
 workspace-mobile.json
+workspace.json
+
+# Exclude sensitive plugin settings.
+- /plugins/readwise-official/
+- /plugins/emoji-shortcodes/
+
+# Sync other plugin settings...
++ /plugins/*/data.json
+# ...but don't sync thousands of lines of other plugin code into this repo.
+- /plugins/*/*
