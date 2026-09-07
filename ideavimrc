@@ -5,5 +5,22 @@ source ~/.vim/plugged/vim-sensible/plugin/sensible.vim
 
 source ~/.vimrc
 
-" Enable `vim-surround` emulation.
+" Enable `ideavim` versions of common plugins.
 set surround
+set commentary
+set textobj-entire
+
+" File search
+" nmap <Leader>sf <action>(com.mituuz.fuzzier.search.Fuzzier)
+nmap <C-p> <action>(com.mituuz.fuzzier.search.FuzzierVCS)
+
+" Mover
+" nmap <Leader>fm <action>(com.mituuz.fuzzier.operation.FuzzyMover)
+
+" Grepping
+" nmap <Leader>ss <action>(com.mituuz.fuzzier.grep.FuzzyGrepCI)
+nmap <C-g> <action>(com.mituuz.fuzzier.grep.FuzzyGrep)
+" nmap <Leader>st <action>(com.mituuz.fuzzier.grep.FuzzyGrepOpenTabsCI)
+" nmap <Leader>sT <action>(com.mituuz.fuzzier.grep.FuzzyGrepOpenTabs)
+" nmap <Leader>sb <action>(com.mituuz.fuzzier.grep.FuzzyGrepCurrentBufferCI)
+" nmap <Leader>sB <action>(com.mituuz.fuzzier.grep.FuzzyGrepCurrentBuffer)
