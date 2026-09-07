@@ -1,13 +1,13 @@
 {
   "file-explorer": true,
-  "global-search": true,
+  "global-search": false,
   "switcher": true,
   "graph": true,
   "backlink": true,
   "canvas": true,
   "outgoing-link": true,
   "tag-pane": true,
-  "properties": false,
+  "properties": true,
   "page-preview": true,
   "daily-notes": true,
   "templates": true,
@@ -29,5 +29,5 @@
   "sync": true,
   "webviewer": false,
   "footnotes": false,
-  "bases": false
+  "bases": true
 }

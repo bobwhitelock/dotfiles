@@ -1,0 +1,8 @@
+{
+  "autoSync": true,
+  "defaultDepth": 2,
+  "defaultIncomingLinks": true,
+  "defaultOutgoingLinks": true,
+  "defaultNeighborLinks": false,
+  "defaultShowTags": true
+}

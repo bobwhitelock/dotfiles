@@ -48,14 +48,6 @@
       "key": "K"
     }
   ],
-  "editor:cycle-list-checklist": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "C"
-    }
-  ],
   "editor:toggle-checklist-status": [],
   "app:reload": [
     {
@@ -80,6 +72,56 @@
         "Alt"
       ],
       "key": "F"
+    }
+  ],
+  "omnisearch:show-modal": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "F"
+    }
+  ],
+  "editor:open-search": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "F"
+    }
+  ],
+  "editor:cycle-list-checklist": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Q"
+    }
+  ],
+  "editor:toggle-highlight": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "H"
+    }
+  ],
+  "editor:open-search-replace": [],
+  "tasknotes:create-new-task": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "Q"
+    }
+  ],
+  "tasknotes:open-tasks-view": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "T"
     }
   ]
 }

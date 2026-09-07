@@ -1,0 +1,19 @@
+/* Embedded bases: drop the view-picker dropdown */
+.bases-embed .bases-toolbar-views-menu {
+  display: none;
+}
+
+/* Optionally also hide the rest of the toolbar chrome */
+/*
+.bases-embed .bases-toolbar-result-count,
+.bases-embed .bases-search-row {
+  display: none;
+}
+*/
+
+/* Or hide the whole header (no search, sort, filter, properties either) */
+/*
+.bases-embed .bases-header {
+  display: none;
+}
+*/

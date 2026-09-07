@@ -1,6 +1,6 @@
 {
-  "snapToObjects": true,
-  "snapToGrid": true,
+  "snapToObjects": false,
+  "snapToGrid": false,
   "newFileLocation": "root",
   "zoomBreakpoint": 2.39
 }

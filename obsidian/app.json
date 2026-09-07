@@ -1,11 +1,43 @@
 {
   "promptDelete": false,
-  "showLineNumber": false,
+  "showLineNumber": true,
   "readableLineLength": true,
   "showUnsupportedFiles": true,
   "alwaysUpdateLinks": true,
   "newFileLocation": "folder",
   "newFileFolderPath": "0 - inbox",
   "attachmentFolderPath": "attachments/",
-  "vimMode": true
+  "vimMode": true,
+  "mobileToolbarCommands": [
+    "editor:toggle-highlight",
+    "editor:undo",
+    "editor:redo",
+    "editor:unindent-list",
+    "editor:indent-list",
+    "editor:swap-line-up",
+    "editor:swap-line-down",
+    "editor:toggle-bullet-list",
+    "editor:toggle-numbered-list",
+    "editor:toggle-checklist-status",
+    "note-composer:split-file",
+    "editor:fold-all",
+    "editor:unfold-all",
+    "editor:toggle-fold",
+    "editor:insert-embed",
+    "editor:attach-file",
+    "bujo-bullets:change-bullet-to->",
+    "bujo-bullets:change-bullet-to--",
+    "editor:configure-toolbar"
+  ],
+  "mobilePullAction": "switcher:open",
+  "pdfExportSettings": {
+    "includeName": false,
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "userIgnoreFilters": [
+    "4 - archives/"
+  ]
 }
