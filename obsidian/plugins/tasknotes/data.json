@@ -8,7 +8,7 @@
   "hideIdentifyingTagsMode": "all",
   "taskPropertyName": "",
   "taskPropertyValue": "",
-  "excludedFolders": "",
+  "excludedFolders": "someday-maybe/",
   "defaultTaskPriority": "normal",
   "defaultTaskStatus": "inbox",
   "taskOrgFiltersCollapsed": false,
@@ -476,7 +476,7 @@
   "enableDebugLogging": false,
   "lastSeenVersion": "4.12.4",
   "googleCalendarSyncQueue": [],
-  "lastNotifiedReleaseVersion": "4.12.5",
+  "lastNotifiedReleaseVersion": "4.15.0",
   "occurrenceFilenameTemplate": "",
   "occurrenceFilenameTemplateProperty": "occurrenceFilenameTemplate",
   "pomodoroState": {

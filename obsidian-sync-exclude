@@ -8,6 +8,7 @@ workspace.json
 # Exclude sensitive plugin settings.
 - /plugins/readwise-official/
 - /plugins/emoji-shortcodes/
+- /plugins/global-book-search/
 
 # Sync other plugin settings...
 + /plugins/*/data.json

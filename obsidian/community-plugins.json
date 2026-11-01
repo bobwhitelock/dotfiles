@@ -1,12 +1,9 @@
 [
-  "d2-obsidian",
   "folder-notes",
   "bujo-bullets",
-  "collapsible-code-blocks",
   "obsidian-vimrc-support",
   "vimium",
   "url-into-selection",
-  "code-files",
   "advanced-canvas",
   "readwise-official",
   "omnisearch",
@@ -17,5 +14,9 @@
   "sync-graph-settings",
   "tasknotes",
   "homepage",
-  "buttons"
+  "buttons",
+  "d2-obsidian",
+  "collapsible-code-blocks",
+  "code-files",
+  "global-book-search"
 ]
