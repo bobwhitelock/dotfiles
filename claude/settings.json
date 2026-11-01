@@ -101,6 +101,7 @@
     "enabledPlugins": {
         "gopls-lsp@claude-plugins-official": true
     },
+    "tui": "fullscreen",
     "skipDangerousModePermissionPrompt": true,
-    "tui": "fullscreen"
+    "agentPushNotifEnabled": true
 }
