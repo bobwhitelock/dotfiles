@@ -11,3 +11,4 @@ __pycache__
 .aider*
 .dmypy.json
 .claude
+.DS_Store
