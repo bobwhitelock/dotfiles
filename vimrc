@@ -824,6 +824,10 @@ nnoremap [f :cpfile<CR>
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.jsx,*.tsx,*.html.erb'
 let g:closetag_xhtml_filenames = '*.js,*.jsx,*.tsx'
 
+" Stop Vim's java syntax recursively loading markdown when embedded in a
+" markdown file loaded via liquid (e.g. with front matter).
+let g:java_ignore_markdown = 1
+
 let g:markdown_fenced_languages = [
     \ 'bash=sh',
     \ 'crontab',
