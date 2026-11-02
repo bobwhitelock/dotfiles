@@ -828,7 +828,6 @@ let g:markdown_fenced_languages = [
     \ 'bash=sh',
     \ 'crontab',
     \ 'css',
-    \ 'd2',
     \ 'diff',
     \ 'dot',
     \ 'elm',
