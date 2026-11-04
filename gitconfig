@@ -9,6 +9,7 @@
 
 [push]
 	default = current
+	autoSetupRemote = true
 [alias]
 	absorb = absorb
 	amend = commit --verbose --amend -C HEAD
